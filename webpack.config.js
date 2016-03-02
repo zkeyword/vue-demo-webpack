@@ -40,12 +40,13 @@ module.exports = {
     plugins: [ //编译的时候所执行的插件数组
         new ExtractTextPlugin('./style.css')
         //new HtmlWebpackPlugin('./html/[name].html')
-    ]
+    ],
+    vue: vueLoader
 }
 
 
 if (process.env.NODE_ENV === 'production') {
-    module.exports.vue.loaders = vueLoader;
+    //module.exports.vue.loaders = vueLoader;
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {
