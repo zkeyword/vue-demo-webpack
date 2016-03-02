@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "HN clone with Vue.js using HN API",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --no-info",
+    "dev": "gulp",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "devDependencies": {
@@ -16,7 +16,13 @@
 	"gulp": "*",
     "gulp-webpack": "*",
     "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.0",
+	"express": "*",
+    "mockjs": "*",
+	"gulp-nodemon": "*",
+	
+	"gulp-rev": "*",
+	"gulp-rev-collector": "*",
+    "gulp-cssurl": "*",
 	
     "cross-env": "^1.0.5",
 	
