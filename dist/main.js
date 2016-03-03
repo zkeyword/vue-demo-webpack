@@ -14504,27 +14504,30 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	// <template>
+	//
 	//     <div transition="page" class="page page-current">
 	//         <header class="bar bar-nav">
-	//             <a class="icon icon-left pull-left" @click=“redirect()”>返回</a>
-	//             <a class="icon icon-refresh pull-right">刷新</a>
+	//             <a class="icon icon-left pull-left" @click="back()">返回</a>
+	//             <a class="icon icon-refresh pull-right" @click="refresh()">刷新</a>
 	//             <h1 class="title">标题</h1>
 	//         </header>
-	// 		<p>当前路径: {{$route.path}}</p>
-	// 		<p>当前路由参数: {{$route.params | json}}</p>
-	// 	</div>
+	//         <p>当前路径: {{$route.path}}</p>
+	//         <p>当前路由参数: {{$route.params | json}}</p>
+	//     </div>
 	// </template>
-	//
 	// <script>
 	exports.default = {
-	  ready: function ready() {},
-	
-	  methods: {
-	    redirect: function redirect() {}
-	  }
+	    methods: {
+	        back: function back() {
+	            history.go(-1);
+	        },
+	        refresh: function refresh() {
+	            location.reload();
+	        }
+	    }
 	};
 	// </script>
 	//
@@ -14546,7 +14549,7 @@
 /* 59 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div transition=\"page\" class=\"page page-current\">\n        <header class=\"bar bar-nav\">\n            <a class=\"icon icon-left pull-left\" @click=“redirect()”>返回</a>\n            <a class=\"icon icon-refresh pull-right\">刷新</a>\n            <h1 class=\"title\">标题</h1>\n        </header>\n\t\t<p>当前路径: {{$route.path}}</p>\n\t\t<p>当前路由参数: {{$route.params | json}}</p>\n\t</div>\n";
+	module.exports = "\n\n<div transition=\"page\" class=\"page page-current\">\n    <header class=\"bar bar-nav\">\n        <a class=\"icon icon-left pull-left\" @click=\"back()\">返回</a>\n        <a class=\"icon icon-refresh pull-right\" @click=\"refresh()\">刷新</a>\n        <h1 class=\"title\">标题</h1>\n    </header>\n    <p>当前路径: {{$route.path}}</p>\n    <p>当前路由参数: {{$route.params | json}}</p>\n</div>\n";
 
 /***/ },
 /* 60 */
