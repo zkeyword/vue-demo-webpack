@@ -1,20 +1,4 @@
 <style lang="less">
-/* 必需 */
-.expand-transition {
-  transition: all .3s ease;
-  height: 30px;
-  padding: 10px;
-  background-color: #eee;
-  overflow: hidden;
-}
-
-/* .expand-enter 定义进入的开始状态 */
-/* .expand-leave 定义离开的结束状态 */
-.expand-enter, .expand-leave {
-  height: 0;
-  padding: 0 10px;
-  opacity: 0;
-}
 
 .page-enter {
 	z-index: 2002;
@@ -247,6 +231,7 @@
     }
 }
 
+@import 'less/style.less';
 
 </style>
 
@@ -254,17 +239,17 @@
 	<div id="wrapper">
 		<router-view keep-alive></router-view>
 		<nav class="bar bar-tab" v-if="isIndex" >
-			<a class="tab-item" external v-link="{ path: '/home', activeClass: 'cur'}">
+			<a class="tab-item" external v-link="{ path: '/home', activeClass: 'active'}">
 				<span class="icon icon-home"></span>
 				<span class="tab-label">首页</span>
 			</a>
-			<a class="tab-item" external  v-link="{ path: '/list', activeClass: 'cur' }">
-				<span class="icon icon-app"></span>
-				<span class="tab-label">C页</span>
+			<a class="tab-item" external  v-link="{ path: '/list', activeClass: 'active' }">
+				<span class="icon icon-message"></span>
+				<span class="tab-label">消息</span>
 			</a>
-			<a class="tab-item" external v-link="{ path: '/user', activeClass: 'cur' }">
+			<a class="tab-item" external v-link="{ path: '/user', activeClass: 'active' }">
 				<span class="icon icon-me"></span>
-				<span class="tab-label">D页</span>
+				<span class="tab-label">我的</span>
 			</a>
 		</nav>
 	</div>

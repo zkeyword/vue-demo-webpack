@@ -1,0 +1,205 @@
+/*阴影*/
+.box-shadow(@x: 0; @y: 0; @blur: 1px; @color: #ddd; @inset: default){
+	.color ( @a ) when( isnumber(@a) ){
+		@color:rgba(0, 0, 0, @a);
+	}
+	.inset (@a) when (@a = default) {
+		@inset:; //清空
+	}
+	.color(@color);
+	.inset(@inset);
+	box-shadow:@inset @x @y @blur @color;
+}
+
+/*圆角*/
+.border-radius(@size: 5, @radius: default){
+	.radius (@radius) when (@radius = default) {
+		.rem(border-radius, @size);
+	}
+	.radius (@radius) when (@radius = top) {
+		.rem(border-top-right-radius, @size);
+		.rem(border-top-left-radius, @size);
+	}
+	.radius (@radius) when (@radius = right) {
+		.rem(border-top-right-radius, @size);
+		.rem(border-bottom-right-radius, @size);
+	}
+	.radius (@radius) when (@radius = bottom) {
+		.rem(border-bottom-right-radius, @size);
+		.rem(border-bottom-left-radius, @size);
+	}
+	.radius (@radius) when (@radius = left) {
+		.rem(border-top-left-radius, @size);
+		.rem(border-bottom-left-radius, @size);
+	}
+    .radius(@radius);
+}
+
+/*三角*/
+.arrow(@color: #ddd; @pointer:up; @size: 20px){
+	width:0;
+    height:0;
+    border-width:@size;
+
+	.pointer(@pointer) when (@pointer = up){
+		border-style:dashed dashed solid dashed;
+		border-color:transparent transparent @color transparent;
+	}
+	.pointer(@pointer) when (@pointer = down){
+		border-style:solid dashed dashed dashed;
+		border-color: @color transparent transparent transparent;
+	}
+	.pointer(@pointer) when (@pointer = left){
+		border-style:dashed solid dashed dashed;
+		border-color:transparent @color transparent transparent;
+	}
+	.pointer(@pointer) when (@pointer = right){
+		border-style:dashed dashed dashed solid;
+		border-color:transparent transparent transparent @color;
+	}
+	.pointer(@pointer);
+}
+
+/*盒子*/
+.box-sizing(@boxmodel: border-box){
+	box-sizing: @boxmodel;
+}
+
+/*透明度*/
+.opacity(@opacity){
+  opacity: @opacity;
+}
+
+/* rem */
+@main-font-size: 16px;
+
+.x-rem (@property, @value) {
+  // This is a workaround, inspired by https://github.com/borodean/less-properties
+  @px-fallback: @value * @main-font-size;
+  -: ~`(function () { return ';@{property}: @{px-fallback}'; }())`;
+  -: ~`(function () { return ';@{property}: @{value}rem'; }())`;
+}
+
+.rem (@property, @value:default, @value2:default, @value3:default, @value4:default) {
+	@diff: 640/16;
+	
+	.mixin (@value, @value2, @value3, @value4) when ( isnumber(@value) ) {
+		@px-fallback: @value / @diff;
+		-: ~`(function () { return ';@{property}: @{px-fallback}rem'; }())`;
+	}
+	.mixin (@value, @value2, @value3, @value4) when (isnumber(@value2)) {
+		@px-fallback: @value / @diff;
+		@px-fallback2: @value2 / @diff;
+		-: ~`(function () { return ';@{property}: @{px-fallback}rem @{px-fallback2}rem'; }())`;
+	}
+	.mixin (@value, @value2, @value3, @value4) when (isnumber(@value3)) {
+		@px-fallback: @value / @diff;
+		@px-fallback2: @value2 / @diff;
+		@px-fallback3: @value3 / @diff;
+		-: ~`(function () { return ';@{property}: @{px-fallback}rem @{px-fallback2}rem @{px-fallback3}rem'; }())`;
+	}
+	.mixin (@value, @value2, @value3, @value4) when (isnumber(@value4)) {
+		@px-fallback: @value / @diff;
+		@px-fallback2: @value2 / @diff;
+		@px-fallback3: @value3 / @diff;
+		@px-fallback4: @value4 / @diff;
+		-: ~`(function () { return ';@{property}: @{px-fallback}rem @{px-fallback2}rem @{px-fallback3}rem @{px-fallback4}rem'; }())`;
+	}
+	.mixin(@value, @value2, @value3, @value4);
+}
+
+.unit(@value){
+	//@diff: 640/16;
+	//@px-fallback: @value / @diff;
+	//-: ~`(function () { return ';@{px-fallback}em'; }())`;
+}
+
+.rems (@property, @value:'', @value2:'', @value3:'', @value4:'') {
+	@diff: 640/16;
+	
+	.value ( @value ) when ( isnumber(@value) ){
+		@px-fallback: @value / @diff;
+		@unit: rem;
+	}
+	.value ( @value ) when ( isstring(@value) ) {
+		@px-fallback: @value;
+		@unit:;
+	}
+
+	.value2 ( @value2 ) when ( isnumber(@value2) ) {
+		@px-fallback2: @value2 / @diff;
+		@unit2: rem;
+	}
+	.value2 ( @value2 ) when ( isstring(@value2) ) {
+		@px-fallback2: @value2;
+		@unit2:;
+	}
+
+	.value3 ( @value3 ) when ( isnumber(@value3) ) {
+		@px-fallback3: @value3 / @diff;
+		@unit3: rem;
+	}
+	.value3 ( @value3 ) when ( isstring(@value3) ) {
+		@px-fallback3: @value3;
+		@unit3:;
+	}
+
+	.value4 ( @value4 ) when ( isnumber(@value4) ) {
+		@px-fallback4: @value4 / @diff;
+		@unit4: rem;
+	}
+	.value4 ( @value4 ) when ( isstring(@value4) ) {
+		@px-fallback4: @value4;
+		@unit4:;
+	}
+	
+	.mixin (@value, @value2, @value3, @value4) when ( isnumber(@value) ) {
+		.value ( @value );
+		-: ~`(function () { return ';@{property}: @{px-fallback}@{unit}'; }())`;
+	}
+	.mixin (@value, @value2, @value3, @value4) when ( isstring(@value) ) and ( @value > '' ) {
+		.value ( @value );
+		-: ~`(function () { return ';@{property}: @{px-fallback}@unit'; }())`;
+	}
+	
+	.mixin (@value, @value2, @value3, @value4) when ( isnumber(@value2) ) {
+		.value ( @value );
+		.value2 ( @value2 );
+		-: ~`(function () { return ';@{property}: @{px-fallback}@{unit} @{px-fallback2}@{unit2}'; }())`;
+	}
+	.mixin (@value, @value2, @value3, @value4) when ( isstring(@value2) ) and ( @value2 > '' ) {
+		.value ( @value );
+		.value2 ( @value2 );
+		-: ~`(function () { return ';@{property}: @{px-fallback}@{unit} @{px-fallback2}@{unit2}'; }())`;
+	}
+	
+	.mixin (@value, @value2, @value3, @value4) when ( isnumber(@value3) ) {
+		.value ( @value );
+		.value2 ( @value2 );
+		.value3 ( @value3 );
+		-: ~`(function () { return ';@{property}: @{px-fallback}@{unit} @{px-fallback2}@{unit2} @{px-fallback3}@{unit3}'; }())`;
+	}
+	.mixin (@value, @value2, @value3, @value4) when ( isstring(@value3) ) and ( @value3 > '' ) {
+		.value ( @value );
+		.value2 ( @value2 );
+		.value3 ( @value3 );
+		-: ~`(function () { return ';@{property}: @{px-fallback}@{unit} @{px-fallback2}@{unit2} @{px-fallback3}@{unit3}'; }())`;
+	}
+	
+	.mixin (@value, @value2, @value3, @value4) when ( isnumber(@value4) ) {
+		.value ( @value );
+		.value2 ( @value2 );
+		.value3 ( @value3 );
+		.value4 ( @value4 );
+		-: ~`(function () { return ';@{property}: @{px-fallback}@{unit} @{px-fallback2}@{unit2} @{px-fallback3}@{unit3} @{px-fallback4}@{unit4}'; }())`;
+	}
+	.mixin (@value, @value2, @value3, @value4) when ( isstring(@value4) ) and ( @value4 > '' ) {
+		.value ( @value );
+		.value2 ( @value2 );
+		.value3 ( @value3 );
+		.value4 ( @value4 );
+		-: ~`(function () { return ';@{property}: @{px-fallback}@{unit} @{px-fallback2}@{unit2} @{px-fallback3}@{unit3} @{px-fallback4}@{unit4}'; }())`;
+	}
+
+	.mixin(@value, @value2, @value3, @value4);
+}

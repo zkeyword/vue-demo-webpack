@@ -1,0 +1,618 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"pro",
+				"prop"
+			],
+			[
+				"gr",
+				"grid"
+			],
+			[
+				"gre",
+				"gridFree"
+			],
+			[
+				"grid",
+				"grid"
+			],
+			[
+				"ch",
+				"checked"
+			],
+			[
+				"sele",
+				"selectedData"
+			],
+			[
+				"_c",
+				"_cache"
+			],
+			[
+				"_",
+				"_core"
+			],
+			[
+				"b",
+				"before"
+			],
+			[
+				"af",
+				"after"
+			],
+			[
+				"se",
+				"selectedData"
+			],
+			[
+				"sel",
+				"selected"
+			],
+			[
+				"gi",
+				"gridFree"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"fun",
+				"function"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/zhujianxin/Documents/vue/vue-demo-webpack"
+	],
+	"file_history":
+	[
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/name.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/rules.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/ajax.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/api.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/rules.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/ajax.html",
+		"/Users/zhujianxin/Documents/nicUI/src/js/main.js",
+		"/Users/zhujianxin/Documents/nicUI/demo/dest/html/validator/ajax.html",
+		"/Users/zhujianxin/Documents/nicUI/package.json",
+		"/Users/zhujianxin/Documents/php/saogaUI/dev/less/core/l-tree_debug.less",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/ui/form.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/common/menu.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/index.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/index.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/ui/pagination.html",
+		"/Users/zhujianxin/Documents/nicUI/src/less/app/form.less",
+		"/Users/zhujianxin/Documents/nicUI/demo/dest/html/ui/form.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/btnSwitch/index.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/btnSwitch/index.html",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/btnSwitch.js",
+		"/Users/zhujianxin/Documents/nicUI/src/less/core/l-tree.less",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/less/styles.less",
+		"/Users/zhujianxin/Documents/nicUI/src/less/styles.less",
+		"/Users/zhujianxin/Documents/nicUI/src/less/core/ui-pagination.less",
+		"/Users/zhujianxin/Documents/nicUI/src/less/core/ui-forms.less",
+		"/Users/zhujianxin/Documents/nicUI/src/less/core/ui-icon.less",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/ui/progress.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/ui/pagination.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/dest/html/ui/pagination.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/dest/html/ui/progress.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/dest/html/ui/pagination.html",
+		"/Users/zhujianxin/Documents/nicUI/index.js",
+		"/Users/zhujianxin/Documents/nicUI/gulpfile.js",
+		"/Users/zhujianxin/Documents/nicUI/src/less/core/l-grid.less",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/concept.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/reload.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/less/app/layout.less",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/index.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/position.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/ajax.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tab/click.html",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/tab.js",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tab/click.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tip/title.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tip/html.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tip/render.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tab/auto.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tab/index.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tab/auto.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/suggestion/static.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/suggestion/static.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/suggestion/only.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/suggestion/only.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/suggestion/name.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/suggestion/name.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/suggestion/multi.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/suggestion/multi.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/suggestion/index.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/select/multiple-checkbox.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/select/multiple-refresh.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/select/multiple-selected.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/modifyWrap.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/modifyTitle.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/modifyBtns.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/html.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/api.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/ajax-inner.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/gridFree/api.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/ajaxData.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/checkbox.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/columns.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/detail.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/footer.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/dialog/alert.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/dialog/confirm.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/dialog/error.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/gridFree/templateRender.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/gridFree/index.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/gridFree/sort.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/gridFree/refresh.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/gridFree/checkbox.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/gridFree/data.html",
+		"/Users/zhujianxin/Documents/nicUI/src/less/lib/base.less",
+		"/Users/zhujianxin/Documents/nicUI/node_modules/gulp-less/node_modules/less/test/less-bom/variables.less",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tree/ajax.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tree/data.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tab/index.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tree/data.html",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/tree.js",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tip/html.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tip/render.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/tip/title.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/isPageCache.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/isPageCache.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/isMemory.html",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/tip.js",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/width.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/width.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/isMemory.md",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/grid.js",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/common/width.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/footer.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/columns.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/ajaxData.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/dialog/confirm.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/dialog/alert.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/dialog/error.md",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/dialog.js",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/modifyTitle.md",
+		"/Users/zhujianxin/Desktop/untitled.html",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/modifyWrap.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/api.md",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/pop.js",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/modifyBtns.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/ajax.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/pop/html.md",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/grid/checkbox.md",
+		"/Users/zhujianxin/Documents/nicUI/src/less/lib/color.less",
+		"/Users/zhujianxin/Documents/nicUI/src/less/core/l-pop.less",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/drag.js",
+		"/Users/zhujianxin/Documents/nicUI/demo/src/html/module/validator/api.md",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/validator.js",
+		"/Users/zhujianxin/Documents/nicUI/src/js/app/jquery.js",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/calendar.js",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/check.js",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/select.js",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/selectArea.js",
+		"/Users/zhujianxin/Documents/nicUI/src/js/core/upload.js"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"../",
+			"mainnav",
+			"@import \"",
+			"../images",
+			"on",
+			"markdown",
+			"						for( i in data){\n								args.push(i + '=' + data[i])\n							}",
+			"h2",
+			"5",
+			"loadFn",
+			"onloadFn",
+			"o.",
+			" o.",
+			"   * @param {Boolean} ",
+			"    * @param {Function} ",
+			"   * @param {String} ",
+			"   * @param {Number} ",
+			"    * @param {String} ",
+			"   * @param {Object} ",
+			"ajax",
+			"a",
+			"create",
+			"pageF",
+			"select",
+			".select",
+			"select",
+			"lang",
+			"label",
+			"getRowData",
+			"getRowSelected",
+			"pagesize",
+			"pa'ge",
+			"pa'ge'si'ze",
+			"after",
+			"p.before",
+			"p.after",
+			"p.before",
+			"createBody",
+			"con",
+			"before",
+			"getRowSelected",
+			"1",
+			"createBody",
+			"e.data",
+			"tmpData",
+			"createBody",
+			"createWrap",
+			"console",
+			"th",
+			"select",
+			"a点击我，动态创建一个表单",
+			"span",
+			"a",
+			"script",
+			"li",
+			"</li> ",
+			"</li>",
+			"li",
+			"<li>",
+			"contextmenu"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"/",
+			"nav",
+			"@import \"@url/",
+			"@import \"@url",
+			"../img",
+			"5",
+			"th"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/Users/zhujianxin/Documents/vue/vue-demo-webpack"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"men",
+				"demo/src/html/common/menu.html"
+			],
+			[
+				"ajax",
+				"demo/dest/html/validator/ajax.html"
+			],
+			[
+				"l-",
+				"src/less/core/l-tree.less"
+			],
+			[
+				"styl",
+				"demo/src/less/styles.less"
+			],
+			[
+				"styles",
+				"src/less/styles.less"
+			],
+			[
+				"main",
+				"src/js/main.js"
+			],
+			[
+				"menu",
+				"demo/src/html/common/menu.html"
+			],
+			[
+				"form.html",
+				"demo/src/html/module/ui/form.html"
+			],
+			[
+				"l-tr",
+				"src/less/core/l-tree.less"
+			],
+			[
+				"ui-p",
+				"src/less/core/ui-pagination.less"
+			],
+			[
+				"uif",
+				"src/less/core/ui-forms.less"
+			],
+			[
+				"ui",
+				"src/less/core/ui-icon.less"
+			],
+			[
+				"style",
+				"demo/src/less/styles.less"
+			],
+			[
+				"grid.less",
+				"src/less/core/l-grid.less"
+			],
+			[
+				"lay",
+				"demo/src/less/app/layout.less"
+			],
+			[
+				"tab",
+				"src/js/core/tab.js"
+			],
+			[
+				"base.less",
+				"src/less/lib/base.less"
+			],
+			[
+				"balse.less",
+				"node_modules/gulp-less/node_modules/less/test/less-bom/variables.less"
+			],
+			[
+				"styles.less",
+				"src/less/styles.less"
+			],
+			[
+				"tree",
+				"src/js/core/tree.js"
+			],
+			[
+				"tip",
+				"src/js/core/tip.js"
+			],
+			[
+				"gulp",
+				"gulpfile.js"
+			],
+			[
+				"grid",
+				"src/js/core/grid.js"
+			],
+			[
+				"gri",
+				"src/js/core/grid.js"
+			],
+			[
+				"dia",
+				"src/js/core/dialog.js"
+			],
+			[
+				"pop.js",
+				"src/js/core/pop.js"
+			],
+			[
+				"pop",
+				"src/js/core/pop.js"
+			],
+			[
+				"jquery",
+				"src/js/app/jquery.js"
+			],
+			[
+				"v",
+				"src/js/core/validator.js"
+			],
+			[
+				"base",
+				"src/less/lib/base.less"
+			],
+			[
+				"grid.",
+				"src/js/core/grid.js"
+			],
+			[
+				"templaterender",
+				"demo/src/html/module/gridFree/templateRender.html"
+			],
+			[
+				"temp",
+				"dest/js/lib/template.js"
+			],
+			[
+				"grid.js",
+				"src/js/core/grid.js"
+			],
+			[
+				"gridf",
+				"src/js/core/gridFree.js"
+			],
+			[
+				"valit",
+				"src/js/core/validator.js"
+			],
+			[
+				"index9742",
+				"cl/index9742.html"
+			],
+			[
+				"index3d42",
+				"cl/index3d42.html"
+			],
+			[
+				"index",
+				"events/SicBoBid/index.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"vali",
+				"Validator"
+			],
+			[
+				"v",
+				"Validator"
+			],
+			[
+				"va",
+				"validatorAll"
+			],
+			[
+				"temp",
+				"Temp"
+			],
+			[
+				"gridfree",
+				"GridFree"
+			],
+			[
+				"gridf",
+				"GridFree"
+			],
+			[
+				"inde",
+				"index"
+			]
+		],
+		"width": 494.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 278.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

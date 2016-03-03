@@ -46,23 +46,23 @@
 
 	'use strict';
 	
-	var _vue = __webpack_require__(1);
+	var _vue = __webpack_require__(10);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _vueRouter = __webpack_require__(3);
+	var _vueRouter = __webpack_require__(12);
 	
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 	
-	var _vueResource = __webpack_require__(4);
+	var _vueResource = __webpack_require__(13);
 	
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 	
-	var _routers = __webpack_require__(28);
+	var _routers = __webpack_require__(37);
 	
 	var _routers2 = _interopRequireDefault(_routers);
 	
-	var _App = __webpack_require__(51);
+	var _App = __webpack_require__(60);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
@@ -102,7 +102,16 @@
 	router.start(_App2.default, '#app');
 
 /***/ },
-/* 1 */
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {/*!
@@ -9796,10 +9805,10 @@
 	}
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(2)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(11)))
 
 /***/ },
-/* 2 */
+/* 11 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -9896,7 +9905,7 @@
 
 
 /***/ },
-/* 3 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -12550,7 +12559,7 @@
 	}));
 
 /***/ },
-/* 4 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12559,16 +12568,16 @@
 	
 	function install(Vue) {
 	
-	    var _ = __webpack_require__(5);
+	    var _ = __webpack_require__(14);
 	
 	    _.config = Vue.config;
 	    _.warning = Vue.util.warn;
 	    _.nextTick = Vue.util.nextTick;
 	
-	    Vue.url = __webpack_require__(6);
-	    Vue.http = __webpack_require__(12);
-	    Vue.resource = __webpack_require__(27);
-	    Vue.Promise = __webpack_require__(14);
+	    Vue.url = __webpack_require__(15);
+	    Vue.http = __webpack_require__(21);
+	    Vue.resource = __webpack_require__(36);
+	    Vue.Promise = __webpack_require__(23);
 	
 	    Object.defineProperties(Vue.prototype, {
 	
@@ -12609,7 +12618,7 @@
 
 
 /***/ },
-/* 5 */
+/* 14 */
 /***/ function(module, exports) {
 
 	/**
@@ -12737,14 +12746,14 @@
 
 
 /***/ },
-/* 6 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for URL templating.
 	 */
 	
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(14);
 	var ie = document.documentMode;
 	var el = document.createElement('a');
 	
@@ -12780,10 +12789,10 @@
 	 */
 	
 	Url.transforms = [
-	    __webpack_require__(7),
-	    __webpack_require__(9),
-	    __webpack_require__(10),
-	    __webpack_require__(11)
+	    __webpack_require__(16),
+	    __webpack_require__(18),
+	    __webpack_require__(19),
+	    __webpack_require__(20)
 	];
 	
 	/**
@@ -12873,14 +12882,14 @@
 
 
 /***/ },
-/* 7 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * URL Template (RFC 6570) Transform.
 	 */
 	
-	var UrlTemplate = __webpack_require__(8);
+	var UrlTemplate = __webpack_require__(17);
 	
 	module.exports = function (options) {
 	
@@ -12895,7 +12904,7 @@
 
 
 /***/ },
-/* 8 */
+/* 17 */
 /***/ function(module, exports) {
 
 	/**
@@ -13051,14 +13060,14 @@
 
 
 /***/ },
-/* 9 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Legacy Transform.
 	 */
 	
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(14);
 	
 	module.exports = function (options, next) {
 	
@@ -13103,14 +13112,14 @@
 
 
 /***/ },
-/* 10 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Query Parameter Transform.
 	 */
 	
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(14);
 	
 	module.exports = function (options, next) {
 	
@@ -13133,14 +13142,14 @@
 
 
 /***/ },
-/* 11 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Root Prefix Transform.
 	 */
 	
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(14);
 	
 	module.exports = function (options, next) {
 	
@@ -13155,17 +13164,17 @@
 
 
 /***/ },
-/* 12 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for sending network requests.
 	 */
 	
-	var _ = __webpack_require__(5);
-	var Client = __webpack_require__(13);
-	var Promise = __webpack_require__(14);
-	var interceptor = __webpack_require__(17);
+	var _ = __webpack_require__(14);
+	var Client = __webpack_require__(22);
+	var Promise = __webpack_require__(23);
+	var interceptor = __webpack_require__(26);
 	var jsonType = {'Content-Type': 'application/json'};
 	
 	function Http(url, options) {
@@ -13218,13 +13227,13 @@
 	};
 	
 	Http.interceptors = [
-	    __webpack_require__(18),
-	    __webpack_require__(19),
-	    __webpack_require__(20),
-	    __webpack_require__(22),
-	    __webpack_require__(23),
-	    __webpack_require__(24),
-	    __webpack_require__(25)
+	    __webpack_require__(27),
+	    __webpack_require__(28),
+	    __webpack_require__(29),
+	    __webpack_require__(31),
+	    __webpack_require__(32),
+	    __webpack_require__(33),
+	    __webpack_require__(34)
 	];
 	
 	Http.headers = {
@@ -13259,16 +13268,16 @@
 
 
 /***/ },
-/* 13 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Base client.
 	 */
 	
-	var _ = __webpack_require__(5);
-	var Promise = __webpack_require__(14);
-	var xhrClient = __webpack_require__(16);
+	var _ = __webpack_require__(14);
+	var Promise = __webpack_require__(23);
+	var xhrClient = __webpack_require__(25);
 	
 	module.exports = function (request) {
 	
@@ -13330,15 +13339,15 @@
 
 
 /***/ },
-/* 14 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promise adapter.
 	 */
 	
-	var _ = __webpack_require__(5);
-	var PromiseObj = window.Promise || __webpack_require__(15);
+	var _ = __webpack_require__(14);
+	var PromiseObj = window.Promise || __webpack_require__(24);
 	
 	function Promise(executor, context) {
 	
@@ -13445,14 +13454,14 @@
 
 
 /***/ },
-/* 15 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
 	 */
 	
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(14);
 	
 	var RESOLVED = 0;
 	var REJECTED = 1;
@@ -13630,15 +13639,15 @@
 
 
 /***/ },
-/* 16 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XMLHttp client.
 	 */
 	
-	var _ = __webpack_require__(5);
-	var Promise = __webpack_require__(14);
+	var _ = __webpack_require__(14);
+	var Promise = __webpack_require__(23);
 	
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -13686,15 +13695,15 @@
 
 
 /***/ },
-/* 17 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Interceptor factory.
 	 */
 	
-	var _ = __webpack_require__(5);
-	var Promise = __webpack_require__(14);
+	var _ = __webpack_require__(14);
+	var Promise = __webpack_require__(23);
 	
 	module.exports = function (handler, vm) {
 	
@@ -13737,14 +13746,14 @@
 
 
 /***/ },
-/* 18 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Before Interceptor.
 	 */
 	
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(14);
 	
 	module.exports = {
 	
@@ -13761,7 +13770,7 @@
 
 
 /***/ },
-/* 19 */
+/* 28 */
 /***/ function(module, exports) {
 
 	/**
@@ -13797,14 +13806,14 @@
 
 
 /***/ },
-/* 20 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP Interceptor.
 	 */
 	
-	var jsonpClient = __webpack_require__(21);
+	var jsonpClient = __webpack_require__(30);
 	
 	module.exports = {
 	
@@ -13821,15 +13830,15 @@
 
 
 /***/ },
-/* 21 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP client.
 	 */
 	
-	var _ = __webpack_require__(5);
-	var Promise = __webpack_require__(14);
+	var _ = __webpack_require__(14);
+	var Promise = __webpack_require__(23);
 	
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -13875,7 +13884,7 @@
 
 
 /***/ },
-/* 22 */
+/* 31 */
 /***/ function(module, exports) {
 
 	/**
@@ -13898,14 +13907,14 @@
 
 
 /***/ },
-/* 23 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Mime Interceptor.
 	 */
 	
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(14);
 	
 	module.exports = {
 	
@@ -13940,14 +13949,14 @@
 
 
 /***/ },
-/* 24 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Header Interceptor.
 	 */
 	
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(14);
 	
 	module.exports = {
 	
@@ -13972,15 +13981,15 @@
 
 
 /***/ },
-/* 25 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * CORS Interceptor.
 	 */
 	
-	var _ = __webpack_require__(5);
-	var xdrClient = __webpack_require__(26);
+	var _ = __webpack_require__(14);
+	var xdrClient = __webpack_require__(35);
 	var xhrCors = 'withCredentials' in new XMLHttpRequest();
 	var originUrl = _.url.parse(location.href);
 	
@@ -14015,15 +14024,15 @@
 
 
 /***/ },
-/* 26 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XDomain client (Internet Explorer).
 	 */
 	
-	var _ = __webpack_require__(5);
-	var Promise = __webpack_require__(14);
+	var _ = __webpack_require__(14);
+	var Promise = __webpack_require__(23);
 	
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -14058,14 +14067,14 @@
 
 
 /***/ },
-/* 27 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for interacting with RESTful services.
 	 */
 	
-	var _ = __webpack_require__(5);
+	var _ = __webpack_require__(14);
 	
 	function Resource(url, params, actions, options) {
 	
@@ -14174,7 +14183,7 @@
 
 
 /***/ },
-/* 28 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14187,22 +14196,22 @@
 		router.map({
 			'/': {
 				name: 'home',
-				component: __webpack_require__(29)
+				component: __webpack_require__(38)
 			},
 			'*': {
-				component: __webpack_require__(29)
+				component: __webpack_require__(38)
 			},
 			'/list': {
 				name: 'list',
-				component: __webpack_require__(36)
+				component: __webpack_require__(45)
 			},
 			'/user': {
 				name: 'user',
-				component: __webpack_require__(41),
+				component: __webpack_require__(50),
 				subRoutes: {
 					'/edit/:userId': {
 						name: 'userEdit',
-						component: __webpack_require__(46)
+						component: __webpack_require__(55)
 					}
 				}
 			}
@@ -14210,17 +14219,17 @@
 	};
 
 /***/ },
-/* 29 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(30)
-	__vue_script__ = __webpack_require__(34)
+	__webpack_require__(39)
+	__vue_script__ = __webpack_require__(43)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\home.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(35)
+	  console.warn("[vue-loader] src/views/home.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(44)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14230,7 +14239,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\home.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14239,16 +14248,16 @@
 	})()}
 
 /***/ },
-/* 30 */
+/* 39 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14282,23 +14291,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 35 */
+/* 44 */
 /***/ function(module, exports) {
 
 	module.exports = "\n首页\n";
 
 /***/ },
-/* 36 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(37)
-	__vue_script__ = __webpack_require__(39)
+	__webpack_require__(46)
+	__vue_script__ = __webpack_require__(48)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\list.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(40)
+	  console.warn("[vue-loader] src/views/list.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(49)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14308,7 +14317,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\list.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/list.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14317,14 +14326,14 @@
 	})()}
 
 /***/ },
-/* 37 */
+/* 46 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 38 */,
-/* 39 */
+/* 47 */,
+/* 48 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14362,23 +14371,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 40 */
+/* 49 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div>\n\t\tlist\n\t</div>\n";
 
 /***/ },
-/* 41 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(42)
-	__vue_script__ = __webpack_require__(44)
+	__webpack_require__(51)
+	__vue_script__ = __webpack_require__(53)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(45)
+	  console.warn("[vue-loader] src/views/user.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(54)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14388,7 +14397,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14397,14 +14406,14 @@
 	})()}
 
 /***/ },
-/* 42 */
+/* 51 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 43 */,
-/* 44 */
+/* 52 */,
+/* 53 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14447,23 +14456,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 45 */
+/* 54 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    user \n\t<a external v-link=\"{ name: 'userEdit', params: { userId: 123 } }\">edit</a>\n\t<router-view></router-view>\n";
 
 /***/ },
-/* 46 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(47)
-	__vue_script__ = __webpack_require__(49)
+	__webpack_require__(56)
+	__vue_script__ = __webpack_require__(58)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\edit.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(50)
+	  console.warn("[vue-loader] src/views/user/edit.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(59)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14473,7 +14482,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user\\edit.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/edit.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14482,23 +14491,28 @@
 	})()}
 
 /***/ },
-/* 47 */
+/* 56 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 48 */,
-/* 49 */
+/* 57 */,
+/* 58 */
 /***/ function(module, exports) {
 
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	// <template>
 	//     <div transition="page" class="page page-current">
+	//         <header class="bar bar-nav">
+	//             <a class="icon icon-left pull-left" @click=“redirect()”>返回</a>
+	//             <a class="icon icon-refresh pull-right">刷新</a>
+	//             <h1 class="title">标题</h1>
+	//         </header>
 	// 		<p>当前路径: {{$route.path}}</p>
 	// 		<p>当前路由参数: {{$route.params | json}}</p>
 	// 	</div>
@@ -14506,11 +14520,11 @@
 	//
 	// <script>
 	exports.default = {
-	    ready: function ready() {
-	        //setTimeout(() => {
-	        //   this.$route.router.go({ name: 'list'});
-	        //},2000);
-	    }
+	  ready: function ready() {},
+	
+	  methods: {
+	    redirect: function redirect() {}
+	  }
 	};
 	// </script>
 	//
@@ -14529,23 +14543,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 50 */
+/* 59 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div transition=\"page\" class=\"page page-current\">\n\t\t<p>当前路径: {{$route.path}}</p>\n\t\t<p>当前路由参数: {{$route.params | json}}</p>\n\t</div>\n";
+	module.exports = "\n    <div transition=\"page\" class=\"page page-current\">\n        <header class=\"bar bar-nav\">\n            <a class=\"icon icon-left pull-left\" @click=“redirect()”>返回</a>\n            <a class=\"icon icon-refresh pull-right\">刷新</a>\n            <h1 class=\"title\">标题</h1>\n        </header>\n\t\t<p>当前路径: {{$route.path}}</p>\n\t\t<p>当前路由参数: {{$route.params | json}}</p>\n\t</div>\n";
 
 /***/ },
-/* 51 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(52)
-	__vue_script__ = __webpack_require__(54)
+	__webpack_require__(61)
+	__vue_script__ = __webpack_require__(63)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(55)
+	  console.warn("[vue-loader] src/App.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(64)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14555,7 +14569,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\App.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/App.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14564,35 +14578,19 @@
 	})()}
 
 /***/ },
-/* 52 */
+/* 61 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 53 */,
-/* 54 */
+/* 62 */,
+/* 63 */
 /***/ function(module, exports) {
 
 	"use strict";
 	
 	// <style lang="less">
-	// /* 必需 */
-	// .expand-transition {
-	//   transition: all .3s ease;
-	//   height: 30px;
-	//   padding: 10px;
-	//   background-color: #eee;
-	//   overflow: hidden;
-	// }
-	//
-	// /* .expand-enter 定义进入的开始状态 */
-	// /* .expand-leave 定义离开的结束状态 */
-	// .expand-enter, .expand-leave {
-	//   height: 0;
-	//   padding: 0 10px;
-	//   opacity: 0;
-	// }
 	//
 	// .page-enter {
 	// 	z-index: 2002;
@@ -14825,6 +14823,7 @@
 	//     }
 	// }
 	//
+	// @import 'less/style.less';
 	//
 	// </style>
 	//
@@ -14832,17 +14831,17 @@
 	// 	<div id="wrapper">
 	// 		<router-view keep-alive></router-view>
 	// 		<nav class="bar bar-tab" v-if="isIndex" >
-	// 			<a class="tab-item" external v-link="{ path: '/home', activeClass: 'cur'}">
+	// 			<a class="tab-item" external v-link="{ path: '/home', activeClass: 'active'}">
 	// 				<span class="icon icon-home"></span>
 	// 				<span class="tab-label">首页</span>
 	// 			</a>
-	// 			<a class="tab-item" external  v-link="{ path: '/list', activeClass: 'cur' }">
-	// 				<span class="icon icon-app"></span>
-	// 				<span class="tab-label">C页</span>
+	// 			<a class="tab-item" external  v-link="{ path: '/list', activeClass: 'active' }">
+	// 				<span class="icon icon-message"></span>
+	// 				<span class="tab-label">消息</span>
 	// 			</a>
-	// 			<a class="tab-item" external v-link="{ path: '/user', activeClass: 'cur' }">
+	// 			<a class="tab-item" external v-link="{ path: '/user', activeClass: 'active' }">
 	// 				<span class="icon icon-me"></span>
-	// 				<span class="tab-label">D页</span>
+	// 				<span class="tab-label">我的</span>
 	// 			</a>
 	// 		</nav>
 	// 	</div>
@@ -14864,10 +14863,10 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 55 */
+/* 64 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"wrapper\">\n\t<router-view keep-alive></router-view>\n\t<nav class=\"bar bar-tab\" v-if=\"isIndex\" >\n\t\t<a class=\"tab-item\" external v-link=\"{ path: '/home', activeClass: 'cur'}\">\n\t\t\t<span class=\"icon icon-home\"></span>\n\t\t\t<span class=\"tab-label\">首页</span>\n\t\t</a>\n\t\t<a class=\"tab-item\" external  v-link=\"{ path: '/list', activeClass: 'cur' }\">\n\t\t\t<span class=\"icon icon-app\"></span>\n\t\t\t<span class=\"tab-label\">C页</span>\n\t\t</a>\n\t\t<a class=\"tab-item\" external v-link=\"{ path: '/user', activeClass: 'cur' }\">\n\t\t\t<span class=\"icon icon-me\"></span>\n\t\t\t<span class=\"tab-label\">D页</span>\n\t\t</a>\n\t</nav>\n</div>\n";
+	module.exports = "\n<div id=\"wrapper\">\n\t<router-view keep-alive></router-view>\n\t<nav class=\"bar bar-tab\" v-if=\"isIndex\" >\n\t\t<a class=\"tab-item\" external v-link=\"{ path: '/home', activeClass: 'active'}\">\n\t\t\t<span class=\"icon icon-home\"></span>\n\t\t\t<span class=\"tab-label\">首页</span>\n\t\t</a>\n\t\t<a class=\"tab-item\" external  v-link=\"{ path: '/list', activeClass: 'active' }\">\n\t\t\t<span class=\"icon icon-message\"></span>\n\t\t\t<span class=\"tab-label\">消息</span>\n\t\t</a>\n\t\t<a class=\"tab-item\" external v-link=\"{ path: '/user', activeClass: 'active' }\">\n\t\t\t<span class=\"icon icon-me\"></span>\n\t\t\t<span class=\"tab-label\">我的</span>\n\t\t</a>\n\t</nav>\n</div>\n";
 
 /***/ }
 /******/ ]);
