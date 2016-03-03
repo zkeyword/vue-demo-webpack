@@ -1,6 +1,5 @@
 <template>
-    <!-- 全局header -->
-    sssssssssssssss
+    首页
 </template>
 
 <script>

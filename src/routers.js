@@ -1,19 +1,27 @@
 'use strict'
 
-import home from './components/NewsView.vue'
-import Counter from './components/Counter.vue'
-
 export default function(router){
 	router.map({
 		'/': {
 			name: 'home',
-			component: home
+			component: require('./views/home')
 		},
 		'*': {
-            component: home
+            component: require('./views/home')
         },
-		'/counter': {
-			component: Counter
+		'/list': {
+			name: 'list',
+			component: require('./views/list')
+		},
+		'/user': {
+			name: 'user',
+			component: require('./views/user'),
+			subRoutes: {
+				'/edit/:userId': {
+					name:'userEdit',
+					component: require('./views/user/edit')
+				}
+			}
 		}
 	})
 }

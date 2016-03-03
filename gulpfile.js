@@ -20,7 +20,6 @@ gulp.task('js', function () {
 
 //mock数据
 gulp.task('server', function(){
-	//require('./index')
 	nodemon({
 		script: 'index.js'
 	});
@@ -29,6 +28,6 @@ gulp.task('server', function(){
 //默认任务
 gulp.task('default', ['js', 'server'], function(){
 
-    gulp.watch(path.dev+'/**', ['js']);
+    gulp.watch(path.dev+'/**/*', ['js']);
 	
 });
