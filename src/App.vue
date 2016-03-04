@@ -1,5 +1,238 @@
 <style lang="less">
+
+.page-enter {
+	z-index: 2002;
+	-webkit-animation: pageFromRightToCenter 400ms forwards;
+	-o-animation: pageFromRightToCenter 400ms forwards;
+	animation: pageFromRightToCenter 400ms forward
+}
+.page-leave {
+	z-index: 2002;
+	-webkit-animation: pageFromCenterToRight 400ms forwards;
+	-o-animation: pageFromCenterToRight 400ms forwards;
+	animation: pageFromCenterToRight 400ms forwards
+}
+
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: #efeff4
+}
+
+.page.page-current,.page.page-from-center-to-left,.page.page-from-center-to-right,.page.page-from-left-to-center,.page.page-from-right-to-center {
+    display: block
+}
+
+.page-left {
+    opacity: .5;
+    -webkit-transform: translate3d(-20%);
+    transform: translate3d(-20%)
+}
+
+.page-right {
+    -webkit-transform: translate3d(100%);
+    transform: translate3d(100%)
+}
+
+.page-transitioning,.page-transitioning .swipeback-page-shadow {
+    -webkit-transition: 400ms;
+    -o-transition: 400ms;
+    transition: 400ms
+}
+
+.page-from-right-to-center {
+    z-index: 2002;
+    -webkit-animation: pageFromRightToCenter 400ms forwards;
+    -o-animation: pageFromRightToCenter 400ms forwards;
+    animation: pageFromRightToCenter 400ms forwards
+}
+
+.page-from-center-to-right {
+    z-index: 2002;
+    -webkit-animation: pageFromCenterToRight 400ms forwards;
+    -o-animation: pageFromCenterToRight 400ms forwards;
+    animation: pageFromCenterToRight 400ms forwards
+}
+
+@-webkit-keyframes pageFromRightToCenter {
+    from {
+        opacity: .9;
+        -webkit-transform: translate3d(100%,0,0);
+        transform: translate3d(100%,0,0)
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+}
+
+@-o-keyframes pageFromRightToCenter {
+    from {
+        opacity: .9;
+        transform: translate3d(100%,0,0)
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0,0,0)
+    }
+}
+
+@keyframes pageFromRightToCenter {
+    from {
+        opacity: .9;
+        -webkit-transform: translate3d(100%,0,0);
+        transform: translate3d(100%,0,0)
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+}
+
+@-webkit-keyframes pageFromCenterToRight {
+    from {
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+
+    to {
+        opacity: .9;
+        -webkit-transform: translate3d(100%,0,0);
+        transform: translate3d(100%,0,0)
+    }
+}
+
+@-o-keyframes pageFromCenterToRight {
+    from {
+        opacity: 1;
+        transform: translate3d(0,0,0)
+    }
+
+    to {
+        opacity: .9;
+        transform: translate3d(100%,0,0)
+    }
+}
+
+@keyframes pageFromCenterToRight {
+    from {
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+
+    to {
+        opacity: .9;
+        -webkit-transform: translate3d(100%,0,0);
+        transform: translate3d(100%,0,0)
+    }
+}
+
+.page-from-center-to-left {
+    -webkit-animation: pageFromCenterToLeft 400ms forwards;
+    -o-animation: pageFromCenterToLeft 400ms forwards;
+    animation: pageFromCenterToLeft 400ms forwards
+}
+
+.page-from-left-to-center {
+    -webkit-animation: pageFromLeftToCenter 400ms forwards;
+    -o-animation: pageFromLeftToCenter 400ms forwards;
+    animation: pageFromLeftToCenter 400ms forwards
+}
+
+@-webkit-keyframes pageFromCenterToLeft {
+    from {
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+
+    to {
+        opacity: .5;
+        -webkit-transform: translate3d(-20%,0,0);
+        transform: translate3d(-20%,0,0)
+    }
+}
+
+@-o-keyframes pageFromCenterToLeft {
+    from {
+        opacity: 1;
+        transform: translate3d(0,0,0)
+    }
+
+    to {
+        opacity: .5;
+        transform: translate3d(-20%,0,0)
+    }
+}
+
+@keyframes pageFromCenterToLeft {
+    from {
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+
+    to {
+        opacity: .5;
+        -webkit-transform: translate3d(-20%,0,0);
+        transform: translate3d(-20%,0,0)
+    }
+}
+
+@-webkit-keyframes pageFromLeftToCenter {
+    from {
+        opacity: .5;
+        -webkit-transform: translate3d(-20%,0,0);
+        transform: translate3d(-20%,0,0)
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+}
+
+@-o-keyframes pageFromLeftToCenter {
+    from {
+        opacity: .5;
+        transform: translate3d(-20%,0,0)
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0,0,0)
+    }
+}
+
+@keyframes pageFromLeftToCenter {
+    from {
+        opacity: .5;
+        -webkit-transform: translate3d(-20%,0,0);
+        transform: translate3d(-20%,0,0)
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0)
+    }
+}
+
 @import 'less/style.less';
+
 </style>
 
 <template>
@@ -29,10 +262,7 @@ module.exports = {
             authenticating: false,
             isIndex: true
         }
-    },
-	ready (){
-		console.log(Vue)
-	}
+    }
 }
 </script>
 

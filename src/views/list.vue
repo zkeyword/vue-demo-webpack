@@ -7,43 +7,53 @@
 </style>
 
 <template>
-	{{title}}
-	<ul v-if="rows.length">
-		<li v-for="item in rows" track-by="$index">
-			{{ item.id }} - {{ $index }} - {{ item.name }}
-			<img :src="item.photo" />
-		</li>
-	</ul>
-	<div v-else>
-		没有数据
+<<<<<<< HEAD
+    {{title}}
+    <ul v-if="rows.length">
+        <li v-for="item in rows" track-by="$index">
+            {{ item.id }} - {{ $index }} - {{ item.name }}
+            <img :src="item.photo" />
+        </li>
+    </ul>
+    <div v-else>
+        没有数据
+    </div>
+=======
+    <div>
+		list
 	</div>
+>>>>>>> parent of 4874b43... 添加svg
 </template>
 
 <script>
     export default {
-		data (){
+<<<<<<< HEAD
+        data (){
             return {
                 rows:[],
-				title: '列表'
+                title: '列表'
             }
         },
         ready (){
             
         },
-		route: {
-			data (transition){
-				this.getRows();
-			}
-		},
-		methods: {
-			getRows(){
-				$.getJSON('/grid', (data)=>{
-					this.rows = data.rows;
-				});
-			}
-		}
+        route: {
+            data (transition){
+                this.getRows();
+            }
+        },
+        methods: {
+            getRows(){
+                $.getJSON('/grid', (data)=>{
+                    this.rows = data.rows;
+                });
+            }
+=======
+        ready (){
+            //setTimeout(() => {
+            //   this.$route.router.go({ name: 'list'});
+            //},2000);
+>>>>>>> parent of 4874b43... 添加svg
+        }
     }
 </script>
-
-
-

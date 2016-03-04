@@ -23,8 +23,7 @@ app.get('/grid', function (req, res) {
 				'time': '@datetime',
 				'tel': '@integer(13000000000, 13900000000)',
 				'type': '@integer(1, 5)',
-				'sex': '@integer(0, 1)',
-				'photo': Random.image('160x200')
+				'sex': '@integer(0, 1)'
 			}],
 			'total': 50
 		});

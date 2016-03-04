@@ -29,7 +29,6 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "css-loader": "*",
     "less-loader": "*",
-	"autoprefixer-loader": "*",
     "stylus-loader": "^1.4.0",
 	
     "vue-hot-reload-api": "^1.2.0",

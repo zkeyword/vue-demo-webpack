@@ -1,5 +1,4 @@
 <template>
-
     <div transition="page" class="page page-current">
         <header class="bar bar-nav">
             <a class="icon icon-left pull-left" @click="back()">返回</a>

@@ -1,7 +1,8 @@
 'use strict'
 
 var webpack           = require('webpack'),
-	ExtractTextPlugin = require("extract-text-webpack-plugin");
+	ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    isProduction      = process.env.NODE_ENV === 'production' ? true : true;
 
 module.exports = {
 	entry : __dirname  + '/src/main.js',
@@ -31,8 +32,8 @@ module.exports = {
     vue:{
         loaders:{
             js: 'babel',
-            css:ExtractTextPlugin.extract("vue-style-loader", "css-loader!autoprefixer"),
-            less:ExtractTextPlugin.extract("vue-style-loader", "css-loader!autoprefixer!less-loader")
+            css:ExtractTextPlugin.extract("vue-style-loader", "css-loader"),
+            less:ExtractTextPlugin.extract("vue-style-loader", "css-loader!less-loader")
         }
     },
 	//处理js
@@ -46,7 +47,7 @@ module.exports = {
     ]
 };
 
-if (process.env.NODE_ENV === 'production') {
+if( isProduction ){
 	module.exports.plugins = (module.exports.plugins).concat([
         new webpack.DefinePlugin({
             'process.env': {
