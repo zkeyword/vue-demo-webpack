@@ -7,18 +7,41 @@
 </style>
 
 <template>
-    <div>
-		list
+	{{title}}
+	<ul v-if="rows.length">
+		<li v-for="item in rows" track-by="$index">
+			{{ item.id }} - {{ $index }} - {{ item.name }}
+			<img :src="item.photo" />
+		</li>
+	</ul>
+	<div v-else>
+		没有数据
 	</div>
 </template>
 
 <script>
     export default {
+		data (){
+            return {
+                rows:[],
+				title: '列表'
+            }
+        },
         ready (){
-            //setTimeout(() => {
-            //   this.$route.router.go({ name: 'list'});
-            //},2000);
-        }
+            
+        },
+		route: {
+			data (transition){
+				this.getRows();
+			}
+		},
+		methods: {
+			getRows(){
+				$.getJSON('/grid', (data)=>{
+					this.rows = data.rows;
+				});
+			}
+		}
     }
 </script>
 

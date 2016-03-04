@@ -46,23 +46,23 @@
 
 	'use strict';
 	
-	var _vue = __webpack_require__(10);
+	var _vue = __webpack_require__(11);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _vueRouter = __webpack_require__(12);
+	var _vueRouter = __webpack_require__(13);
 	
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 	
-	var _vueResource = __webpack_require__(13);
+	var _vueResource = __webpack_require__(14);
 	
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 	
-	var _routers = __webpack_require__(37);
+	var _routers = __webpack_require__(38);
 	
 	var _routers2 = _interopRequireDefault(_routers);
 	
-	var _App = __webpack_require__(60);
+	var _App = __webpack_require__(61);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
@@ -111,7 +111,8 @@
 /* 7 */,
 /* 8 */,
 /* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {/*!
@@ -9805,10 +9806,10 @@
 	}
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(11)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(12)))
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -9905,7 +9906,7 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -12559,7 +12560,7 @@
 	}));
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -12568,16 +12569,16 @@
 	
 	function install(Vue) {
 	
-	    var _ = __webpack_require__(14);
+	    var _ = __webpack_require__(15);
 	
 	    _.config = Vue.config;
 	    _.warning = Vue.util.warn;
 	    _.nextTick = Vue.util.nextTick;
 	
-	    Vue.url = __webpack_require__(15);
-	    Vue.http = __webpack_require__(21);
-	    Vue.resource = __webpack_require__(36);
-	    Vue.Promise = __webpack_require__(23);
+	    Vue.url = __webpack_require__(16);
+	    Vue.http = __webpack_require__(22);
+	    Vue.resource = __webpack_require__(37);
+	    Vue.Promise = __webpack_require__(24);
 	
 	    Object.defineProperties(Vue.prototype, {
 	
@@ -12618,7 +12619,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	/**
@@ -12746,14 +12747,14 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for URL templating.
 	 */
 	
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(15);
 	var ie = document.documentMode;
 	var el = document.createElement('a');
 	
@@ -12789,10 +12790,10 @@
 	 */
 	
 	Url.transforms = [
-	    __webpack_require__(16),
-	    __webpack_require__(18),
+	    __webpack_require__(17),
 	    __webpack_require__(19),
-	    __webpack_require__(20)
+	    __webpack_require__(20),
+	    __webpack_require__(21)
 	];
 	
 	/**
@@ -12882,14 +12883,14 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * URL Template (RFC 6570) Transform.
 	 */
 	
-	var UrlTemplate = __webpack_require__(17);
+	var UrlTemplate = __webpack_require__(18);
 	
 	module.exports = function (options) {
 	
@@ -12904,7 +12905,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
@@ -13060,14 +13061,14 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Legacy Transform.
 	 */
 	
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(15);
 	
 	module.exports = function (options, next) {
 	
@@ -13112,14 +13113,14 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Query Parameter Transform.
 	 */
 	
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(15);
 	
 	module.exports = function (options, next) {
 	
@@ -13142,14 +13143,14 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Root Prefix Transform.
 	 */
 	
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(15);
 	
 	module.exports = function (options, next) {
 	
@@ -13164,17 +13165,17 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for sending network requests.
 	 */
 	
-	var _ = __webpack_require__(14);
-	var Client = __webpack_require__(22);
-	var Promise = __webpack_require__(23);
-	var interceptor = __webpack_require__(26);
+	var _ = __webpack_require__(15);
+	var Client = __webpack_require__(23);
+	var Promise = __webpack_require__(24);
+	var interceptor = __webpack_require__(27);
 	var jsonType = {'Content-Type': 'application/json'};
 	
 	function Http(url, options) {
@@ -13227,13 +13228,13 @@
 	};
 	
 	Http.interceptors = [
-	    __webpack_require__(27),
 	    __webpack_require__(28),
 	    __webpack_require__(29),
-	    __webpack_require__(31),
+	    __webpack_require__(30),
 	    __webpack_require__(32),
 	    __webpack_require__(33),
-	    __webpack_require__(34)
+	    __webpack_require__(34),
+	    __webpack_require__(35)
 	];
 	
 	Http.headers = {
@@ -13268,16 +13269,16 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Base client.
 	 */
 	
-	var _ = __webpack_require__(14);
-	var Promise = __webpack_require__(23);
-	var xhrClient = __webpack_require__(25);
+	var _ = __webpack_require__(15);
+	var Promise = __webpack_require__(24);
+	var xhrClient = __webpack_require__(26);
 	
 	module.exports = function (request) {
 	
@@ -13339,15 +13340,15 @@
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promise adapter.
 	 */
 	
-	var _ = __webpack_require__(14);
-	var PromiseObj = window.Promise || __webpack_require__(24);
+	var _ = __webpack_require__(15);
+	var PromiseObj = window.Promise || __webpack_require__(25);
 	
 	function Promise(executor, context) {
 	
@@ -13454,14 +13455,14 @@
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Promises/A+ polyfill v1.1.4 (https://github.com/bramstein/promis)
 	 */
 	
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(15);
 	
 	var RESOLVED = 0;
 	var REJECTED = 1;
@@ -13639,15 +13640,15 @@
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XMLHttp client.
 	 */
 	
-	var _ = __webpack_require__(14);
-	var Promise = __webpack_require__(23);
+	var _ = __webpack_require__(15);
+	var Promise = __webpack_require__(24);
 	
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -13695,15 +13696,15 @@
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Interceptor factory.
 	 */
 	
-	var _ = __webpack_require__(14);
-	var Promise = __webpack_require__(23);
+	var _ = __webpack_require__(15);
+	var Promise = __webpack_require__(24);
 	
 	module.exports = function (handler, vm) {
 	
@@ -13746,14 +13747,14 @@
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Before Interceptor.
 	 */
 	
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(15);
 	
 	module.exports = {
 	
@@ -13770,7 +13771,7 @@
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	/**
@@ -13806,14 +13807,14 @@
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP Interceptor.
 	 */
 	
-	var jsonpClient = __webpack_require__(30);
+	var jsonpClient = __webpack_require__(31);
 	
 	module.exports = {
 	
@@ -13830,15 +13831,15 @@
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * JSONP client.
 	 */
 	
-	var _ = __webpack_require__(14);
-	var Promise = __webpack_require__(23);
+	var _ = __webpack_require__(15);
+	var Promise = __webpack_require__(24);
 	
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -13884,7 +13885,7 @@
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	/**
@@ -13907,14 +13908,14 @@
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Mime Interceptor.
 	 */
 	
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(15);
 	
 	module.exports = {
 	
@@ -13949,14 +13950,14 @@
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Header Interceptor.
 	 */
 	
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(15);
 	
 	module.exports = {
 	
@@ -13981,15 +13982,15 @@
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * CORS Interceptor.
 	 */
 	
-	var _ = __webpack_require__(14);
-	var xdrClient = __webpack_require__(35);
+	var _ = __webpack_require__(15);
+	var xdrClient = __webpack_require__(36);
 	var xhrCors = 'withCredentials' in new XMLHttpRequest();
 	var originUrl = _.url.parse(location.href);
 	
@@ -14024,15 +14025,15 @@
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * XDomain client (Internet Explorer).
 	 */
 	
-	var _ = __webpack_require__(14);
-	var Promise = __webpack_require__(23);
+	var _ = __webpack_require__(15);
+	var Promise = __webpack_require__(24);
 	
 	module.exports = function (request) {
 	    return new Promise(function (resolve) {
@@ -14067,14 +14068,14 @@
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Service for interacting with RESTful services.
 	 */
 	
-	var _ = __webpack_require__(14);
+	var _ = __webpack_require__(15);
 	
 	function Resource(url, params, actions, options) {
 	
@@ -14183,7 +14184,7 @@
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14196,22 +14197,22 @@
 		router.map({
 			'/': {
 				name: 'home',
-				component: __webpack_require__(38)
+				component: __webpack_require__(39)
 			},
 			'*': {
-				component: __webpack_require__(38)
+				component: __webpack_require__(39)
 			},
 			'/list': {
 				name: 'list',
-				component: __webpack_require__(45)
+				component: __webpack_require__(46)
 			},
 			'/user': {
 				name: 'user',
-				component: __webpack_require__(50),
+				component: __webpack_require__(51),
 				subRoutes: {
 					'/edit/:userId': {
 						name: 'userEdit',
-						component: __webpack_require__(55)
+						component: __webpack_require__(56)
 					}
 				}
 			}
@@ -14219,17 +14220,17 @@
 	};
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(39)
-	__vue_script__ = __webpack_require__(43)
+	__webpack_require__(40)
+	__vue_script__ = __webpack_require__(44)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/home.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(44)
+	  console.warn("[vue-loader] src\\views\\home.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(45)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14239,7 +14240,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/home.vue"
+	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14248,16 +14249,16 @@
 	})()}
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 40 */,
 /* 41 */,
 /* 42 */,
-/* 43 */
+/* 43 */,
+/* 44 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14291,23 +14292,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports) {
 
 	module.exports = "\n首页\n";
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(46)
-	__vue_script__ = __webpack_require__(48)
+	__webpack_require__(47)
+	__vue_script__ = __webpack_require__(49)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/list.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(49)
+	  console.warn("[vue-loader] src\\views\\list.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(50)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14317,7 +14318,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/list.vue"
+	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\list.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14326,20 +14327,20 @@
 	})()}
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 47 */,
-/* 48 */
+/* 48 */,
+/* 49 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+		value: true
 	});
 	// <style lang="less">
 	//     .index2{
@@ -14350,18 +14351,42 @@
 	// </style>
 	//
 	// <template>
-	//     <div>
-	// 		list
+	// 	{{title}}
+	// 	<ul v-if="rows.length">
+	// 		<li v-for="item in rows" track-by="$index">
+	// 			{{ item.id }} - {{ $index }} - {{ item.name }}
+	// 			<img :src="item.photo" />
+	// 		</li>
+	// 	</ul>
+	// 	<div v-else>
+	// 		没有数据
 	// 	</div>
 	// </template>
 	//
 	// <script>
 	exports.default = {
-	    ready: function ready() {
-	        //setTimeout(() => {
-	        //   this.$route.router.go({ name: 'list'});
-	        //},2000);
-	    }
+		data: function data() {
+			return {
+				rows: [],
+				title: '列表'
+			};
+		},
+		ready: function ready() {},
+	
+		route: {
+			data: function data(transition) {
+				this.getRows();
+			}
+		},
+		methods: {
+			getRows: function getRows() {
+				var _this = this;
+	
+				$.getJSON('/grid', function (data) {
+					_this.rows = data.rows;
+				});
+			}
+		}
 	};
 	// </script>
 	//
@@ -14371,23 +14396,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div>\n\t\tlist\n\t</div>\n";
+	module.exports = "\n{{title}}\n<ul v-if=\"rows.length\">\n\t<li v-for=\"item in rows\" track-by=\"$index\">\n\t\t{{ item.id }} - {{ $index }} - {{ item.name }}\n\t\t<img :src=\"item.photo\" />\n\t</li>\n</ul>\n<div v-else>\n\t没有数据\n</div>\n";
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(51)
-	__vue_script__ = __webpack_require__(53)
+	__webpack_require__(52)
+	__vue_script__ = __webpack_require__(54)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(54)
+	  console.warn("[vue-loader] src\\views\\user.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(55)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14397,7 +14422,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user.vue"
+	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14406,14 +14431,14 @@
 	})()}
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 52 */,
-/* 53 */
+/* 53 */,
+/* 54 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14456,23 +14481,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    user \n\t<a external v-link=\"{ name: 'userEdit', params: { userId: 123 } }\">edit</a>\n\t<router-view></router-view>\n";
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(56)
-	__vue_script__ = __webpack_require__(58)
+	__webpack_require__(57)
+	__vue_script__ = __webpack_require__(59)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/edit.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(59)
+	  console.warn("[vue-loader] src\\views\\user\\edit.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(60)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14482,7 +14507,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/edit.vue"
+	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user\\edit.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14491,14 +14516,14 @@
 	})()}
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 57 */,
-/* 58 */
+/* 58 */,
+/* 59 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14546,23 +14571,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n<div transition=\"page\" class=\"page page-current\">\n    <header class=\"bar bar-nav\">\n        <a class=\"icon icon-left pull-left\" @click=\"back()\">返回</a>\n        <a class=\"icon icon-refresh pull-right\" @click=\"refresh()\">刷新</a>\n        <h1 class=\"title\">标题</h1>\n    </header>\n    <p>当前路径: {{$route.path}}</p>\n    <p>当前路由参数: {{$route.params | json}}</p>\n</div>\n";
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(61)
-	__vue_script__ = __webpack_require__(63)
+	__webpack_require__(62)
+	__vue_script__ = __webpack_require__(64)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(64)
+	  console.warn("[vue-loader] src\\App.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(65)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14572,7 +14597,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/App.vue"
+	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\App.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14581,253 +14606,20 @@
 	})()}
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 62 */,
-/* 63 */
+/* 63 */,
+/* 64 */
 /***/ function(module, exports) {
 
 	"use strict";
 	
 	// <style lang="less">
-	//
-	// .page-enter {
-	// 	z-index: 2002;
-	// 	-webkit-animation: pageFromRightToCenter 400ms forwards;
-	// 	-o-animation: pageFromRightToCenter 400ms forwards;
-	// 	animation: pageFromRightToCenter 400ms forward
-	// }
-	// .page-leave {
-	// 	z-index: 2002;
-	// 	-webkit-animation: pageFromCenterToRight 400ms forwards;
-	// 	-o-animation: pageFromCenterToRight 400ms forwards;
-	// 	animation: pageFromCenterToRight 400ms forwards
-	// }
-	//
-	// .page {
-	//     position: absolute;
-	//     top: 0;
-	//     left: 0;
-	//     display: none;
-	//     width: 100%;
-	//     height: 100%;
-	//     box-sizing: border-box;
-	//     background: #efeff4
-	// }
-	//
-	// .page.page-current,.page.page-from-center-to-left,.page.page-from-center-to-right,.page.page-from-left-to-center,.page.page-from-right-to-center {
-	//     display: block
-	// }
-	//
-	// .page-left {
-	//     opacity: .5;
-	//     -webkit-transform: translate3d(-20%);
-	//     transform: translate3d(-20%)
-	// }
-	//
-	// .page-right {
-	//     -webkit-transform: translate3d(100%);
-	//     transform: translate3d(100%)
-	// }
-	//
-	// .page-transitioning,.page-transitioning .swipeback-page-shadow {
-	//     -webkit-transition: 400ms;
-	//     -o-transition: 400ms;
-	//     transition: 400ms
-	// }
-	//
-	// .page-from-right-to-center {
-	//     z-index: 2002;
-	//     -webkit-animation: pageFromRightToCenter 400ms forwards;
-	//     -o-animation: pageFromRightToCenter 400ms forwards;
-	//     animation: pageFromRightToCenter 400ms forwards
-	// }
-	//
-	// .page-from-center-to-right {
-	//     z-index: 2002;
-	//     -webkit-animation: pageFromCenterToRight 400ms forwards;
-	//     -o-animation: pageFromCenterToRight 400ms forwards;
-	//     animation: pageFromCenterToRight 400ms forwards
-	// }
-	//
-	// @-webkit-keyframes pageFromRightToCenter {
-	//     from {
-	//         opacity: .9;
-	//         -webkit-transform: translate3d(100%,0,0);
-	//         transform: translate3d(100%,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: 1;
-	//         -webkit-transform: translate3d(0,0,0);
-	//         transform: translate3d(0,0,0)
-	//     }
-	// }
-	//
-	// @-o-keyframes pageFromRightToCenter {
-	//     from {
-	//         opacity: .9;
-	//         transform: translate3d(100%,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: 1;
-	//         transform: translate3d(0,0,0)
-	//     }
-	// }
-	//
-	// @keyframes pageFromRightToCenter {
-	//     from {
-	//         opacity: .9;
-	//         -webkit-transform: translate3d(100%,0,0);
-	//         transform: translate3d(100%,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: 1;
-	//         -webkit-transform: translate3d(0,0,0);
-	//         transform: translate3d(0,0,0)
-	//     }
-	// }
-	//
-	// @-webkit-keyframes pageFromCenterToRight {
-	//     from {
-	//         opacity: 1;
-	//         -webkit-transform: translate3d(0,0,0);
-	//         transform: translate3d(0,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: .9;
-	//         -webkit-transform: translate3d(100%,0,0);
-	//         transform: translate3d(100%,0,0)
-	//     }
-	// }
-	//
-	// @-o-keyframes pageFromCenterToRight {
-	//     from {
-	//         opacity: 1;
-	//         transform: translate3d(0,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: .9;
-	//         transform: translate3d(100%,0,0)
-	//     }
-	// }
-	//
-	// @keyframes pageFromCenterToRight {
-	//     from {
-	//         opacity: 1;
-	//         -webkit-transform: translate3d(0,0,0);
-	//         transform: translate3d(0,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: .9;
-	//         -webkit-transform: translate3d(100%,0,0);
-	//         transform: translate3d(100%,0,0)
-	//     }
-	// }
-	//
-	// .page-from-center-to-left {
-	//     -webkit-animation: pageFromCenterToLeft 400ms forwards;
-	//     -o-animation: pageFromCenterToLeft 400ms forwards;
-	//     animation: pageFromCenterToLeft 400ms forwards
-	// }
-	//
-	// .page-from-left-to-center {
-	//     -webkit-animation: pageFromLeftToCenter 400ms forwards;
-	//     -o-animation: pageFromLeftToCenter 400ms forwards;
-	//     animation: pageFromLeftToCenter 400ms forwards
-	// }
-	//
-	// @-webkit-keyframes pageFromCenterToLeft {
-	//     from {
-	//         opacity: 1;
-	//         -webkit-transform: translate3d(0,0,0);
-	//         transform: translate3d(0,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: .5;
-	//         -webkit-transform: translate3d(-20%,0,0);
-	//         transform: translate3d(-20%,0,0)
-	//     }
-	// }
-	//
-	// @-o-keyframes pageFromCenterToLeft {
-	//     from {
-	//         opacity: 1;
-	//         transform: translate3d(0,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: .5;
-	//         transform: translate3d(-20%,0,0)
-	//     }
-	// }
-	//
-	// @keyframes pageFromCenterToLeft {
-	//     from {
-	//         opacity: 1;
-	//         -webkit-transform: translate3d(0,0,0);
-	//         transform: translate3d(0,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: .5;
-	//         -webkit-transform: translate3d(-20%,0,0);
-	//         transform: translate3d(-20%,0,0)
-	//     }
-	// }
-	//
-	// @-webkit-keyframes pageFromLeftToCenter {
-	//     from {
-	//         opacity: .5;
-	//         -webkit-transform: translate3d(-20%,0,0);
-	//         transform: translate3d(-20%,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: 1;
-	//         -webkit-transform: translate3d(0,0,0);
-	//         transform: translate3d(0,0,0)
-	//     }
-	// }
-	//
-	// @-o-keyframes pageFromLeftToCenter {
-	//     from {
-	//         opacity: .5;
-	//         transform: translate3d(-20%,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: 1;
-	//         transform: translate3d(0,0,0)
-	//     }
-	// }
-	//
-	// @keyframes pageFromLeftToCenter {
-	//     from {
-	//         opacity: .5;
-	//         -webkit-transform: translate3d(-20%,0,0);
-	//         transform: translate3d(-20%,0,0)
-	//     }
-	//
-	//     to {
-	//         opacity: 1;
-	//         -webkit-transform: translate3d(0,0,0);
-	//         transform: translate3d(0,0,0)
-	//     }
-	// }
-	//
 	// @import 'less/style.less';
-	//
 	// </style>
 	//
 	// <template>
@@ -14857,6 +14649,9 @@
 	            authenticating: false,
 	            isIndex: true
 	        };
+	    },
+	    ready: function ready() {
+	        console.log(Vue);
 	    }
 	};
 	// </script>
@@ -14866,7 +14661,7 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div id=\"wrapper\">\n\t<router-view keep-alive></router-view>\n\t<nav class=\"bar bar-tab\" v-if=\"isIndex\" >\n\t\t<a class=\"tab-item\" external v-link=\"{ path: '/home', activeClass: 'active'}\">\n\t\t\t<span class=\"icon icon-home\"></span>\n\t\t\t<span class=\"tab-label\">首页</span>\n\t\t</a>\n\t\t<a class=\"tab-item\" external  v-link=\"{ path: '/list', activeClass: 'active' }\">\n\t\t\t<span class=\"icon icon-message\"></span>\n\t\t\t<span class=\"tab-label\">消息</span>\n\t\t</a>\n\t\t<a class=\"tab-item\" external v-link=\"{ path: '/user', activeClass: 'active' }\">\n\t\t\t<span class=\"icon icon-me\"></span>\n\t\t\t<span class=\"tab-label\">我的</span>\n\t\t</a>\n\t</nav>\n</div>\n";

@@ -31,8 +31,8 @@ module.exports = {
     vue:{
         loaders:{
             js: 'babel',
-            css:ExtractTextPlugin.extract("vue-style-loader", "css-loader"),
-            less:ExtractTextPlugin.extract("vue-style-loader", "css-loader!less-loader")
+            css:ExtractTextPlugin.extract("vue-style-loader", "css-loader!autoprefixer"),
+            less:ExtractTextPlugin.extract("vue-style-loader", "css-loader!autoprefixer!less-loader")
         }
     },
 	//处理js

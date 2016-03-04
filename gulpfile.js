@@ -18,6 +18,12 @@ gulp.task('js', function () {
     .pipe(gulp.dest(path.dist));
 });
 
+gulp.task('copy', function(){
+	gulp
+		.src(path.dev+'lib/*')
+		.pipe(gulp.dest(path.dist+'lib/'))
+});
+
 //mock数据
 gulp.task('server', function(){
 	nodemon({
@@ -26,7 +32,7 @@ gulp.task('server', function(){
 });
 
 //默认任务
-gulp.task('default', ['js', 'server'], function(){
+gulp.task('default', ['copy', 'js', 'server'], function(){
 
     gulp.watch(path.dev+'/**/*', ['js']);
 	
