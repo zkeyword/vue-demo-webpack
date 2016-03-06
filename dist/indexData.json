@@ -1,0 +1,2864 @@
+var indexData = {
+    "areaList": [
+        {
+            "city_name": "北海市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 450500
+        },
+        {
+            "city_name": "重庆市",
+            "full_name": "",
+            "parent_id": 500000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 500100
+        },
+        {
+            "city_name": "成都市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 510100
+        },
+        {
+            "city_name": "自贡市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 510300
+        },
+        {
+            "city_name": "攀枝花市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 510400
+        },
+        {
+            "city_name": "泸州市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 510500
+        },
+        {
+            "city_name": "德阳市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 510600
+        },
+        {
+            "city_name": "绵阳市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 510700
+        },
+        {
+            "city_name": "广元市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 510800
+        },
+        {
+            "city_name": "遂宁市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 510900
+        },
+        {
+            "city_name": "三亚市",
+            "full_name": "",
+            "parent_id": 460000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 460200
+        },
+        {
+            "city_name": "海口市",
+            "full_name": "",
+            "parent_id": 460000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 460100
+        },
+        {
+            "city_name": "防城港市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 450600
+        },
+        {
+            "city_name": "钦州市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 450700
+        },
+        {
+            "city_name": "贵港市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 450800
+        },
+        {
+            "city_name": "玉林市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 450900
+        },
+        {
+            "city_name": "百色市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 451000
+        },
+        {
+            "city_name": "贺州市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 451100
+        },
+        {
+            "city_name": "河池市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 451200
+        },
+        {
+            "city_name": "来宾市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 451300
+        },
+        {
+            "city_name": "崇左市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 451400
+        },
+        {
+            "city_name": "内江市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 511000
+        },
+        {
+            "city_name": "乐山市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 511100
+        },
+        {
+            "city_name": "贵阳市",
+            "full_name": "",
+            "parent_id": 520000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 520100
+        },
+        {
+            "city_name": "六盘水市",
+            "full_name": "",
+            "parent_id": 520000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 520200
+        },
+        {
+            "city_name": "遵义市",
+            "full_name": "",
+            "parent_id": 520000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 520300
+        },
+        {
+            "city_name": "安顺市",
+            "full_name": "",
+            "parent_id": 520000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 520400
+        },
+        {
+            "city_name": "铜仁地区",
+            "full_name": "",
+            "parent_id": 520000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 522200
+        },
+        {
+            "city_name": "黔西南布依族苗族自治州",
+            "full_name": "",
+            "parent_id": 520000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 522300
+        },
+        {
+            "city_name": "毕节地区",
+            "full_name": "",
+            "parent_id": 520000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 522400
+        },
+        {
+            "city_name": "黔东南苗族侗族自治州",
+            "full_name": "",
+            "parent_id": 520000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 522600
+        },
+        {
+            "city_name": "黔南布依族苗族自治州",
+            "full_name": "",
+            "parent_id": 520000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 522700
+        },
+        {
+            "city_name": "凉山彝族自治州",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 513400
+        },
+        {
+            "city_name": "甘孜藏族自治州",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 513300
+        },
+        {
+            "city_name": "南充市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 511300
+        },
+        {
+            "city_name": "眉山市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 511400
+        },
+        {
+            "city_name": "宜宾市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 511500
+        },
+        {
+            "city_name": "广安市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 511600
+        },
+        {
+            "city_name": "达州市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 511700
+        },
+        {
+            "city_name": "雅安市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 511800
+        },
+        {
+            "city_name": "巴中市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 511900
+        },
+        {
+            "city_name": "资阳市",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 512000
+        },
+        {
+            "city_name": "阿坝藏族羌族自治州",
+            "full_name": "",
+            "parent_id": 510000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 513200
+        },
+        {
+            "city_name": "昆明市",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 530100
+        },
+        {
+            "city_name": "荆州市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 421000
+        },
+        {
+            "city_name": "张家界市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 430800
+        },
+        {
+            "city_name": "益阳市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 430900
+        },
+        {
+            "city_name": "郴州市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 431000
+        },
+        {
+            "city_name": "永州市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 431100
+        },
+        {
+            "city_name": "怀化市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 431200
+        },
+        {
+            "city_name": "娄底市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 431300
+        },
+        {
+            "city_name": "湘西土家族苗族自治州",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 433100
+        },
+        {
+            "city_name": "广州市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 440100
+        },
+        {
+            "city_name": "韶关市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 440200
+        },
+        {
+            "city_name": "常德市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 430700
+        },
+        {
+            "city_name": "岳阳市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 430600
+        },
+        {
+            "city_name": "黄冈市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 421100
+        },
+        {
+            "city_name": "咸宁市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 421200
+        },
+        {
+            "city_name": "随州市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 421300
+        },
+        {
+            "city_name": "恩施土家族苗族自治州",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 422800
+        },
+        {
+            "city_name": "长沙市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 430100
+        },
+        {
+            "city_name": "株洲市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 430200
+        },
+        {
+            "city_name": "湘潭市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 430300
+        },
+        {
+            "city_name": "衡阳市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 430400
+        },
+        {
+            "city_name": "邵阳市",
+            "full_name": "",
+            "parent_id": 430000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 430500
+        },
+        {
+            "city_name": "深圳市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 440300
+        },
+        {
+            "city_name": "珠海市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 440400
+        },
+        {
+            "city_name": "清远市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 441800
+        },
+        {
+            "city_name": "东莞市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 441900
+        },
+        {
+            "city_name": "中山市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 442000
+        },
+        {
+            "city_name": "潮州市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 445100
+        },
+        {
+            "city_name": "揭阳市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 445200
+        },
+        {
+            "city_name": "云浮市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 445300
+        },
+        {
+            "city_name": "南宁市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 450100
+        },
+        {
+            "city_name": "柳州市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 450200
+        },
+        {
+            "city_name": "桂林市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 450300
+        },
+        {
+            "city_name": "阳江市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 441700
+        },
+        {
+            "city_name": "河源市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 441600
+        },
+        {
+            "city_name": "汕头市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 440500
+        },
+        {
+            "city_name": "佛山市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 440600
+        },
+        {
+            "city_name": "江门市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 440700
+        },
+        {
+            "city_name": "湛江市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 440800
+        },
+        {
+            "city_name": "茂名市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 440900
+        },
+        {
+            "city_name": "肇庆市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 441200
+        },
+        {
+            "city_name": "惠州市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 441300
+        },
+        {
+            "city_name": "梅州市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 441400
+        },
+        {
+            "city_name": "汕尾市",
+            "full_name": "",
+            "parent_id": 440000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 441500
+        },
+        {
+            "city_name": "梧州市",
+            "full_name": "",
+            "parent_id": 450000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 450400
+        },
+        {
+            "city_name": "临夏回族自治州",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 622900
+        },
+        {
+            "city_name": "吴忠市",
+            "full_name": "",
+            "parent_id": 640000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 640300
+        },
+        {
+            "city_name": "固原市",
+            "full_name": "",
+            "parent_id": 640000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 640400
+        },
+        {
+            "city_name": "中卫市",
+            "full_name": "",
+            "parent_id": 640000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 640500
+        },
+        {
+            "city_name": "乌鲁木齐市",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 650100
+        },
+        {
+            "city_name": "克拉玛依市",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 650200
+        },
+        {
+            "city_name": "吐鲁番地区",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 652100
+        },
+        {
+            "city_name": "哈密地区",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 652200
+        },
+        {
+            "city_name": "昌吉回族自治州",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 652300
+        },
+        {
+            "city_name": "博尔塔拉蒙古自治州",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 652700
+        },
+        {
+            "city_name": "石嘴山市",
+            "full_name": "",
+            "parent_id": 640000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 640200
+        },
+        {
+            "city_name": "银川市",
+            "full_name": "",
+            "parent_id": 640000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 640100
+        },
+        {
+            "city_name": "甘南藏族自治州",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 623000
+        },
+        {
+            "city_name": "西宁市",
+            "full_name": "",
+            "parent_id": 630000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 630100
+        },
+        {
+            "city_name": "海东地区",
+            "full_name": "",
+            "parent_id": 630000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 632100
+        },
+        {
+            "city_name": "海北藏族自治州",
+            "full_name": "",
+            "parent_id": 630000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 632200
+        },
+        {
+            "city_name": "黄南藏族自治州",
+            "full_name": "",
+            "parent_id": 630000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 632300
+        },
+        {
+            "city_name": "海南藏族自治州",
+            "full_name": "",
+            "parent_id": 630000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 632500
+        },
+        {
+            "city_name": "果洛藏族自治州",
+            "full_name": "",
+            "parent_id": 630000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 632600
+        },
+        {
+            "city_name": "玉树藏族自治州",
+            "full_name": "",
+            "parent_id": 630000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 632700
+        },
+        {
+            "city_name": "海西蒙古族藏族自治州",
+            "full_name": "",
+            "parent_id": 630000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 632800
+        },
+        {
+            "city_name": "巴音郭楞蒙古自治州",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 652800
+        },
+        {
+            "city_name": "阿克苏地区",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 652900
+        },
+        {
+            "city_name": "南投县",
+            "full_name": "",
+            "parent_id": 710000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 710600
+        },
+        {
+            "city_name": "基隆市",
+            "full_name": "",
+            "parent_id": 710000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 710700
+        },
+        {
+            "city_name": "新竹市",
+            "full_name": "",
+            "parent_id": 710000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 710800
+        },
+        {
+            "city_name": "嘉义市",
+            "full_name": "",
+            "parent_id": 710000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 710900
+        },
+        {
+            "city_name": "香港岛",
+            "full_name": "",
+            "parent_id": 810000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 810100
+        },
+        {
+            "city_name": "九龙",
+            "full_name": "",
+            "parent_id": 810000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 810200
+        },
+        {
+            "city_name": "新界",
+            "full_name": "",
+            "parent_id": 810000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 810300
+        },
+        {
+            "city_name": "澳门半岛",
+            "full_name": "",
+            "parent_id": 820000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 820100
+        },
+        {
+            "city_name": "离岛",
+            "full_name": "",
+            "parent_id": 820000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 820200
+        },
+        {
+            "city_name": "金门县",
+            "full_name": "",
+            "parent_id": 710000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 710500
+        },
+        {
+            "city_name": "台中市",
+            "full_name": "",
+            "parent_id": 710000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 710400
+        },
+        {
+            "city_name": "克孜勒苏柯尔克孜自治州",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 653000
+        },
+        {
+            "city_name": "喀什地区",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 653100
+        },
+        {
+            "city_name": "和田地区",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 653200
+        },
+        {
+            "city_name": "伊犁哈萨克自治州",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 654000
+        },
+        {
+            "city_name": "塔城地区",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 654200
+        },
+        {
+            "city_name": "阿勒泰地区",
+            "full_name": "",
+            "parent_id": 650000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 654300
+        },
+        {
+            "city_name": "台北市",
+            "full_name": "",
+            "parent_id": 710000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 710100
+        },
+        {
+            "city_name": "高雄市",
+            "full_name": "",
+            "parent_id": 710000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 710200
+        },
+        {
+            "city_name": "台南市",
+            "full_name": "",
+            "parent_id": 710000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 710300
+        },
+        {
+            "city_name": "海外",
+            "full_name": "",
+            "parent_id": 990000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 990100
+        },
+        {
+            "city_name": "曲靖市",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 530300
+        },
+        {
+            "city_name": "德宏傣族景颇族自治州",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 533100
+        },
+        {
+            "city_name": "怒江傈僳族自治州",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 533300
+        },
+        {
+            "city_name": "迪庆藏族自治州",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 533400
+        },
+        {
+            "city_name": "拉萨市",
+            "full_name": "",
+            "parent_id": 540000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 540100
+        },
+        {
+            "city_name": "昌都地区",
+            "full_name": "",
+            "parent_id": 540000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 542100
+        },
+        {
+            "city_name": "山南地区",
+            "full_name": "",
+            "parent_id": 540000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 542200
+        },
+        {
+            "city_name": "日喀则地区",
+            "full_name": "",
+            "parent_id": 540000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 542300
+        },
+        {
+            "city_name": "那曲地区",
+            "full_name": "",
+            "parent_id": 540000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 542400
+        },
+        {
+            "city_name": "阿里地区",
+            "full_name": "",
+            "parent_id": 540000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 542500
+        },
+        {
+            "city_name": "大理白族自治州",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 532900
+        },
+        {
+            "city_name": "西双版纳傣族自治州",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 532800
+        },
+        {
+            "city_name": "玉溪市",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 530400
+        },
+        {
+            "city_name": "保山市",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 530500
+        },
+        {
+            "city_name": "昭通市",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 530600
+        },
+        {
+            "city_name": "丽江市",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 530700
+        },
+        {
+            "city_name": "普洱市",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 530800
+        },
+        {
+            "city_name": "临沧市",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 530900
+        },
+        {
+            "city_name": "楚雄彝族自治州",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 532300
+        },
+        {
+            "city_name": "红河哈尼族彝族自治州",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 532500
+        },
+        {
+            "city_name": "文山壮族苗族自治州",
+            "full_name": "",
+            "parent_id": 530000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 532600
+        },
+        {
+            "city_name": "林芝地区",
+            "full_name": "",
+            "parent_id": 540000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 542600
+        },
+        {
+            "city_name": "西安市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 610100
+        },
+        {
+            "city_name": "金昌市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 620300
+        },
+        {
+            "city_name": "白银市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 620400
+        },
+        {
+            "city_name": "天水市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 620500
+        },
+        {
+            "city_name": "武威市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 620600
+        },
+        {
+            "city_name": "张掖市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 620700
+        },
+        {
+            "city_name": "平凉市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 620800
+        },
+        {
+            "city_name": "酒泉市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 620900
+        },
+        {
+            "city_name": "庆阳市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 621000
+        },
+        {
+            "city_name": "定西市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 621100
+        },
+        {
+            "city_name": "嘉峪关市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 620200
+        },
+        {
+            "city_name": "兰州市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 620100
+        },
+        {
+            "city_name": "铜川市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 610200
+        },
+        {
+            "city_name": "宝鸡市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 610300
+        },
+        {
+            "city_name": "咸阳市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 610400
+        },
+        {
+            "city_name": "渭南市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 610500
+        },
+        {
+            "city_name": "延安市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 610600
+        },
+        {
+            "city_name": "汉中市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 610700
+        },
+        {
+            "city_name": "榆林市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 610800
+        },
+        {
+            "city_name": "安康市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 610900
+        },
+        {
+            "city_name": "商洛市",
+            "full_name": "",
+            "parent_id": 610000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 611000
+        },
+        {
+            "city_name": "陇南市",
+            "full_name": "",
+            "parent_id": 620000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 621200
+        },
+        {
+            "city_name": "阜新市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 210900
+        },
+        {
+            "city_name": "松原市",
+            "full_name": "",
+            "parent_id": 220000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 220700
+        },
+        {
+            "city_name": "白城市",
+            "full_name": "",
+            "parent_id": 220000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 220800
+        },
+        {
+            "city_name": "延边朝鲜族自治州",
+            "full_name": "",
+            "parent_id": 220000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 222400
+        },
+        {
+            "city_name": "哈尔滨市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 230100
+        },
+        {
+            "city_name": "齐齐哈尔市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 230200
+        },
+        {
+            "city_name": "鸡西市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 230300
+        },
+        {
+            "city_name": "鹤岗市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 230400
+        },
+        {
+            "city_name": "双鸭山市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 230500
+        },
+        {
+            "city_name": "大庆市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 230600
+        },
+        {
+            "city_name": "白山市",
+            "full_name": "",
+            "parent_id": 220000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 220600
+        },
+        {
+            "city_name": "通化市",
+            "full_name": "",
+            "parent_id": 220000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 220500
+        },
+        {
+            "city_name": "辽阳市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 211000
+        },
+        {
+            "city_name": "盘锦市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 211100
+        },
+        {
+            "city_name": "铁岭市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 211200
+        },
+        {
+            "city_name": "朝阳市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 211300
+        },
+        {
+            "city_name": "葫芦岛市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 211400
+        },
+        {
+            "city_name": "长春市",
+            "full_name": "",
+            "parent_id": 220000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 220100
+        },
+        {
+            "city_name": "吉林市",
+            "full_name": "",
+            "parent_id": 220000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 220200
+        },
+        {
+            "city_name": "四平市",
+            "full_name": "",
+            "parent_id": 220000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 220300
+        },
+        {
+            "city_name": "辽源市",
+            "full_name": "",
+            "parent_id": 220000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 220400
+        },
+        {
+            "city_name": "伊春市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 230700
+        },
+        {
+            "city_name": "佳木斯市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 230800
+        },
+        {
+            "city_name": "南通市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 320600
+        },
+        {
+            "city_name": "连云港市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 320700
+        },
+        {
+            "city_name": "淮安市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 320800
+        },
+        {
+            "city_name": "盐城市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 320900
+        },
+        {
+            "city_name": "扬州市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 321000
+        },
+        {
+            "city_name": "镇江市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 321100
+        },
+        {
+            "city_name": "泰州市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 321200
+        },
+        {
+            "city_name": "宿迁市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 321300
+        },
+        {
+            "city_name": "杭州市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 330100
+        },
+        {
+            "city_name": "苏州市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 320500
+        },
+        {
+            "city_name": "常州市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 320400
+        },
+        {
+            "city_name": "七台河市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 230900
+        },
+        {
+            "city_name": "牡丹江市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 231000
+        },
+        {
+            "city_name": "黑河市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 231100
+        },
+        {
+            "city_name": "绥化市",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 231200
+        },
+        {
+            "city_name": "大兴安岭地区",
+            "full_name": "",
+            "parent_id": 230000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 232700
+        },
+        {
+            "city_name": "上海市",
+            "full_name": "",
+            "parent_id": 310000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 310100
+        },
+        {
+            "city_name": "南京市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 320100
+        },
+        {
+            "city_name": "无锡市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 320200
+        },
+        {
+            "city_name": "徐州市",
+            "full_name": "",
+            "parent_id": 320000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 320300
+        },
+        {
+            "city_name": "宁波市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 330200
+        },
+        {
+            "city_name": "北京市",
+            "full_name": "",
+            "parent_id": 110000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 110100
+        },
+        {
+            "city_name": "衡水市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 131100
+        },
+        {
+            "city_name": "太原市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 140100
+        },
+        {
+            "city_name": "大同市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 140200
+        },
+        {
+            "city_name": "阳泉市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 140300
+        },
+        {
+            "city_name": "长治市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 140400
+        },
+        {
+            "city_name": "晋城市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 140500
+        },
+        {
+            "city_name": "朔州市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 140600
+        },
+        {
+            "city_name": "晋中市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 140700
+        },
+        {
+            "city_name": "运城市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 140800
+        },
+        {
+            "city_name": "廊坊市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 131000
+        },
+        {
+            "city_name": "沧州市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 130900
+        },
+        {
+            "city_name": "天津市",
+            "full_name": "",
+            "parent_id": 120000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 120100
+        },
+        {
+            "city_name": "石家庄市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 130100
+        },
+        {
+            "city_name": "唐山市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 130200
+        },
+        {
+            "city_name": "秦皇岛市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 130300
+        },
+        {
+            "city_name": "邯郸市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 130400
+        },
+        {
+            "city_name": "邢台市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 130500
+        },
+        {
+            "city_name": "保定市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 130600
+        },
+        {
+            "city_name": "张家口市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 130700
+        },
+        {
+            "city_name": "承德市",
+            "full_name": "",
+            "parent_id": 130000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 130800
+        },
+        {
+            "city_name": "忻州市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 140900
+        },
+        {
+            "city_name": "临汾市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 141000
+        },
+        {
+            "city_name": "锡林郭勒盟",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 152500
+        },
+        {
+            "city_name": "阿拉善盟",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 152900
+        },
+        {
+            "city_name": "沈阳市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 210100
+        },
+        {
+            "city_name": "大连市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 210200
+        },
+        {
+            "city_name": "鞍山市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 210300
+        },
+        {
+            "city_name": "抚顺市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 210400
+        },
+        {
+            "city_name": "本溪市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 210500
+        },
+        {
+            "city_name": "丹东市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 210600
+        },
+        {
+            "city_name": "锦州市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 210700
+        },
+        {
+            "city_name": "兴安盟",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 152200
+        },
+        {
+            "city_name": "乌兰察布市",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 150900
+        },
+        {
+            "city_name": "吕梁市",
+            "full_name": "",
+            "parent_id": 140000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 141100
+        },
+        {
+            "city_name": "呼和浩特市",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 150100
+        },
+        {
+            "city_name": "包头市",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 150200
+        },
+        {
+            "city_name": "乌海市",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 150300
+        },
+        {
+            "city_name": "赤峰市",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 150400
+        },
+        {
+            "city_name": "通辽市",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 150500
+        },
+        {
+            "city_name": "鄂尔多斯市",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 150600
+        },
+        {
+            "city_name": "呼伦贝尔市",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 150700
+        },
+        {
+            "city_name": "巴彦淖尔市",
+            "full_name": "",
+            "parent_id": 150000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 150800
+        },
+        {
+            "city_name": "营口市",
+            "full_name": "",
+            "parent_id": 210000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 210800
+        },
+        {
+            "city_name": "抚州市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 361000
+        },
+        {
+            "city_name": "日照市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 371100
+        },
+        {
+            "city_name": "莱芜市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 371200
+        },
+        {
+            "city_name": "临沂市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 371300
+        },
+        {
+            "city_name": "德州市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 371400
+        },
+        {
+            "city_name": "聊城市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 371500
+        },
+        {
+            "city_name": "滨州市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 371600
+        },
+        {
+            "city_name": "菏泽市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 371700
+        },
+        {
+            "city_name": "郑州市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 410100
+        },
+        {
+            "city_name": "开封市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 410200
+        },
+        {
+            "city_name": "威海市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 371000
+        },
+        {
+            "city_name": "泰安市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 370900
+        },
+        {
+            "city_name": "上饶市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 361100
+        },
+        {
+            "city_name": "济南市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 370100
+        },
+        {
+            "city_name": "青岛市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 370200
+        },
+        {
+            "city_name": "淄博市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 370300
+        },
+        {
+            "city_name": "枣庄市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 370400
+        },
+        {
+            "city_name": "东营市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 370500
+        },
+        {
+            "city_name": "烟台市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 370600
+        },
+        {
+            "city_name": "潍坊市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 370700
+        },
+        {
+            "city_name": "济宁市",
+            "full_name": "",
+            "parent_id": 370000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 370800
+        },
+        {
+            "city_name": "洛阳市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 410300
+        },
+        {
+            "city_name": "平顶山市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 410400
+        },
+        {
+            "city_name": "周口市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 411600
+        },
+        {
+            "city_name": "驻马店市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 411700
+        },
+        {
+            "city_name": "武汉市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 420100
+        },
+        {
+            "city_name": "黄石市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 420200
+        },
+        {
+            "city_name": "十堰市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 420300
+        },
+        {
+            "city_name": "宜昌市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 420500
+        },
+        {
+            "city_name": "襄阳市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 420600
+        },
+        {
+            "city_name": "鄂州市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 420700
+        },
+        {
+            "city_name": "荆门市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 420800
+        },
+        {
+            "city_name": "信阳市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 411500
+        },
+        {
+            "city_name": "商丘市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 411400
+        },
+        {
+            "city_name": "安阳市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 410500
+        },
+        {
+            "city_name": "鹤壁市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 410600
+        },
+        {
+            "city_name": "新乡市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 410700
+        },
+        {
+            "city_name": "焦作市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 410800
+        },
+        {
+            "city_name": "濮阳市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 410900
+        },
+        {
+            "city_name": "许昌市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 411000
+        },
+        {
+            "city_name": "漯河市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 411100
+        },
+        {
+            "city_name": "三门峡市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 411200
+        },
+        {
+            "city_name": "南阳市",
+            "full_name": "",
+            "parent_id": 410000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 411300
+        },
+        {
+            "city_name": "孝感市",
+            "full_name": "",
+            "parent_id": 420000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 420900
+        },
+        {
+            "city_name": "温州市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 330300
+        },
+        {
+            "city_name": "淮南市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 340400
+        },
+        {
+            "city_name": "马鞍山市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 340500
+        },
+        {
+            "city_name": "淮北市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 340600
+        },
+        {
+            "city_name": "铜陵市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 340700
+        },
+        {
+            "city_name": "安庆市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 340800
+        },
+        {
+            "city_name": "黄山市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 341000
+        },
+        {
+            "city_name": "滁州市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 341100
+        },
+        {
+            "city_name": "阜阳市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 341200
+        },
+        {
+            "city_name": "宿州市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 341300
+        },
+        {
+            "city_name": "蚌埠市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 340300
+        },
+        {
+            "city_name": "芜湖市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 340200
+        },
+        {
+            "city_name": "嘉兴市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 330400
+        },
+        {
+            "city_name": "湖州市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 330500
+        },
+        {
+            "city_name": "绍兴市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 330600
+        },
+        {
+            "city_name": "金华市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 330700
+        },
+        {
+            "city_name": "衢州市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 330800
+        },
+        {
+            "city_name": "舟山市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 330900
+        },
+        {
+            "city_name": "台州市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 331000
+        },
+        {
+            "city_name": "丽水市",
+            "full_name": "",
+            "parent_id": 330000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 331100
+        },
+        {
+            "city_name": "合肥市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 340100
+        },
+        {
+            "city_name": "巢湖市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 341400
+        },
+        {
+            "city_name": "六安市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 341500
+        },
+        {
+            "city_name": "宁德市",
+            "full_name": "",
+            "parent_id": 350000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 350900
+        },
+        {
+            "city_name": "南昌市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 360100
+        },
+        {
+            "city_name": "景德镇市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 360200
+        },
+        {
+            "city_name": "萍乡市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 360300
+        },
+        {
+            "city_name": "九江市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 360400
+        },
+        {
+            "city_name": "新余市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 360500
+        },
+        {
+            "city_name": "鹰潭市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 360600
+        },
+        {
+            "city_name": "赣州市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 360700
+        },
+        {
+            "city_name": "吉安市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 360800
+        },
+        {
+            "city_name": "龙岩市",
+            "full_name": "",
+            "parent_id": 350000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 350800
+        },
+        {
+            "city_name": "南平市",
+            "full_name": "",
+            "parent_id": 350000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 350700
+        },
+        {
+            "city_name": "亳州市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 341600
+        },
+        {
+            "city_name": "池州市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 341700
+        },
+        {
+            "city_name": "宣城市",
+            "full_name": "",
+            "parent_id": 340000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 341800
+        },
+        {
+            "city_name": "福州市",
+            "full_name": "",
+            "parent_id": 350000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 350100
+        },
+        {
+            "city_name": "厦门市",
+            "full_name": "",
+            "parent_id": 350000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 350200
+        },
+        {
+            "city_name": "莆田市",
+            "full_name": "",
+            "parent_id": 350000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 350300
+        },
+        {
+            "city_name": "三明市",
+            "full_name": "",
+            "parent_id": 350000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 350400
+        },
+        {
+            "city_name": "泉州市",
+            "full_name": "",
+            "parent_id": 350000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 350500
+        },
+        {
+            "city_name": "漳州市",
+            "full_name": "",
+            "parent_id": 350000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 350600
+        },
+        {
+            "city_name": "宜春市",
+            "full_name": "",
+            "parent_id": 360000,
+            "short_name": "",
+            "first_name": "",
+            "city_id": 360900
+        }
+    ],
+    "sceneList": [
+        {
+            "scene_id": 200001,
+            "id": 1,
+            "scene_name": "地推",
+            "status": 1
+        },
+        {
+            "scene_id": 200002,
+            "id": 2,
+            "scene_name": "家教",
+            "status": 1
+        },
+        {
+            "scene_id": 200003,
+            "id": 3,
+            "scene_name": "促销员",
+            "status": 1
+        },
+        {
+            "scene_id": 200004,
+            "id": 4,
+            "scene_name": "配送员",
+            "status": 1
+        },
+        {
+            "scene_id": 200005,
+            "id": 5,
+            "scene_name": "服务员",
+            "status": 1
+        },
+        {
+            "scene_id": 200006,
+            "id": 6,
+            "scene_name": "话务员",
+            "status": 1
+        },
+        {
+            "scene_id": 200007,
+            "id": 7,
+            "scene_name": "礼仪",
+            "status": 1
+        }
+    ]
+}

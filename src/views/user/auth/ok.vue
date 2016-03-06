@@ -2,21 +2,6 @@
     <header class="bar bar-nav">
         <h1 class="title">我的</h1>
     </header>
-            名字
-        名字
-        名字
-        名字
-        名字
-        名字
-        名字
-        名字
-        名字
-        名字
-        名字
-        名字
-        名字
-        名字
-
 	<a external v-link="{ name: 'userEdit', params: { userId: 123 } }">edit</a>
 
 
@@ -88,14 +73,13 @@
 </template>
 
 <script>
-module.exports = {
-    data: function() {
-        return {
-            authenticating: false,
-            isIndex: false
+    export default {
+        ready (){
+            //setTimeout(() => {
+            //   this.$route.router.go({ name: 'list'});
+            //},2000);
         }
     }
-}
 </script>
 
 <style lang="less">

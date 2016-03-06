@@ -23,7 +23,8 @@ app.get('/grid', function (req, res) {
 				'time': '@datetime',
 				'tel': '@integer(13000000000, 13900000000)',
 				'type': '@integer(1, 5)',
-				'sex': '@integer(0, 1)'
+				'sex': '@integer(0, 1)',
+				'photo': Random.image('160x200')
 			}],
 			'total': 50
 		});
@@ -31,19 +32,15 @@ app.get('/grid', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
-app.get('/common/search_travelagency', function (req, res) {
+app.post('/soytime/data/loadSchool', function (req, res) {
 	var Random = Mock.Random,
-		data   = [],
-		dataFn = function(){
-			return Mock.mock({
-				'id': '@integer(60, 1000)',
-				'name': '@cname'
-			});
-		}
-		
-	for(var i = 0; i<20; i++){
-		data.push( dataFn() );
-	}
+		data   = Mock.mock({
+			'result|10': [{
+				'school_id': '@integer(60, 1000)',
+				'school_name': '@cname'
+			}],
+			'success': '@integer(0, 1)'
+		});
 		
 	res.send( JSON.stringify(data, null, 4) );
 });

@@ -2,7 +2,7 @@
 
 var webpack           = require('webpack'),
 	ExtractTextPlugin = require("extract-text-webpack-plugin"),
-    isProduction      = process.env.NODE_ENV === 'production' ? true : true;
+    isProduction      = process.env.NODE_ENV === 'production' ? true : false;
 
 module.exports = {
 	entry : __dirname  + '/src/main.js',
