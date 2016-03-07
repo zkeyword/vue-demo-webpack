@@ -43,18 +43,31 @@
   -: ;padding: 0rem 0.4rem;
 }
 .page-selectCity {
+  /*阴影*/
+  /*圆角*/
+  /*三角*/
+  /*盒子*/
+  /*透明度*/
+  /* rem */
   height: 100%;
+  background: #fff;
 }
-.page-selectCity ul {
-  margin: 0;
-  padding: 0;
+.page-selectCity .bar {
+  background: #fff;
+  /*
+        &:after{
+            background:none;
+        }
+        */
 }
-.page-selectCity li {
-  list-style: none;
-}
-.page-selectCity .content {
-  box-sizing: border-box;
-  padding: 2.5rem 0.5rem 0.5rem;
+.page-selectCity .list li {
+  border-bottom: 1px solid #dedede;
+  -: ;font-size: 0.6rem;
+  -: ;height: 1.7rem;
+  -: ;line-height: 1.7rem;
+  -: ;padding: 0rem;
+  -: ;padding: 0rem 0.65rem;
+  -: ;border-bottom-width: 0.05rem;
 }
 .page-selectCity #abc {
   position: absolute;
@@ -143,6 +156,13 @@ body,
   background: #fafafa;
   color: #333;
 }
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
 /* 过渡 */
 .page-enter {
   z-index: 2002;
@@ -190,6 +210,7 @@ body,
 /* 有标题栏页面 */
 .inside {
   padding-top: 2.5rem;
+  box-sizing: border-box;
 }
 /* 标题栏 */
 .bar-nav {
@@ -197,6 +218,13 @@ body,
 }
 .bar-nav .title {
   color: #fff;
+}
+/* 搜索栏 */
+.bar .searchbar {
+  background: none;
+}
+.bar .searchbar .search-input input {
+  border: 1px solid #b4b4b4;
 }
 /* 按钮 */
 .ui-btn {

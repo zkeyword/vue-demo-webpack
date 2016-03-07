@@ -13796,14 +13796,27 @@
 	
 	// <style lang="less">
 	// .page-selectCity{
+	//     @import '../../../less/lib/mixins.less';
 	//     height:100%;
-	//     ul{
-	//         margin:0;padding: 0;
+	//     background:#fff;
+	//     .bar{
+	//         background:#fff;
+	//         /*
+	//         &:after{
+	//             background:none;
+	//         }
+	//         */
 	//     }
-	//     li{
-	//         list-style:none;
+	//     .list{
+	//         li{
+	//             border-bottom:1px solid #dedede;
+	//             .rem(font-size, 24);
+	//             .rem(height, 68);
+	//             .rem(line-height, 68);
+	//             .rem(padding, 0, 26);
+	//             .rem(border-bottom-width, 2);
+	//         }
 	//     }
-	//     .content{box-sizing: border-box;padding:2.5rem 0.5rem 0.5rem;}
 	//     #abc{
 	//         position:absolute;
 	//         bottom:0.2rem;
@@ -13815,7 +13828,7 @@
 	// </style>
 	//
 	// <template>
-	//     <div id="area" transition="page" >
+	//     <div class="page-selectCity" transition="page" >
 	//
 	//         <div class="bar">
 	//             <div class="searchbar">
@@ -13828,12 +13841,12 @@
 	//         </div>
 	//
 	//         <div class="content inside">
-	//             <ul v-if="!tmpData.length">
+	//             <ul class="list" v-if="!tmpData.length">
 	// 				<li v-for="item in indexData.areaList" @click="goAuth(item)">
 	//                     {{item.city_name}}
 	//                 </li>
 	//             </ul>
-	//             <ul v-else="tmpData.length">
+	//             <ul class="list" v-else="tmpData.length">
 	//                 <li v-for="item in tmpData" @click="goAuth(item)">
 	//                     {{item.city_name}}
 	//                 </li>
@@ -13942,7 +13955,7 @@
 /* 36 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div id=\"area\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"search\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content inside\">\n            <ul v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in indexData.areaList\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n            <ul v-else=\"tmpData.length\">\n                <li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n        </div>\n    </div>\n\n";
+	module.exports = "\n    <div class=\"page-selectCity\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"search\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content inside\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in indexData.areaList\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n                <li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n        </div>\n    </div>\n\n";
 
 /***/ },
 /* 37 */
@@ -14863,7 +14876,7 @@
 /* 63 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div>\n    <header class=\"bar bar-nav\">\n        <h1 class=\"title\">我的</h1>\n    </header>\n\t<a external v-link=\"{ name: 'userEdit', params: { userId: 123 } }\">edit</a>\n\n\n    <div class=\"card-header\">\n        <img src=\"xxxHTMLLINKxxx0.49107837816700340.2517458200454712xxx\">\n        名字\n\n        未认证，点此认证！\n        \n        好评   1\n        中评\n        差评   1\n        收藏\n    </div>\n\n    <div class=\"list-block\">\n        <ul>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">我的余额</div>\n                </div>\n            </li>\n        </ul>\n    </div>\n    <div class=\"list-block\">\n        <ul>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">设置</div>\n                </div>\n            </li>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">发布服务</div>\n                </div>\n            </li>\n        </ul>\n    </div>\n    <div class=\"list-block\">\n        <ul>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">发单任务</div>\n                </div>\n            </li>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">接单任务</div>\n                </div>\n            </li>\n        </ul>\n    </div>\n    <div class=\"list-block\">\n        <ul>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">在线客服</div>\n                </div>\n            </li>\n        </ul>\n    </div>\n\t<router-view></router-view>\n</div>\n";
+	module.exports = "\n<div>\n    <header class=\"bar bar-nav\">\n        <h1 class=\"title\">我的</h1>\n    </header>\n\t<a external v-link=\"{ name: 'userEdit', params: { userId: 123 } }\">edit</a>\n\n\n    <div class=\"card-header\">\n        <img src=\"xxxHTMLLINKxxx0.498341110767796640.022042605793103576xxx\">\n        名字\n\n        未认证，点此认证！\n        \n        好评   1\n        中评\n        差评   1\n        收藏\n    </div>\n\n    <div class=\"list-block\">\n        <ul>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">我的余额</div>\n                </div>\n            </li>\n        </ul>\n    </div>\n    <div class=\"list-block\">\n        <ul>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">设置</div>\n                </div>\n            </li>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">发布服务</div>\n                </div>\n            </li>\n        </ul>\n    </div>\n    <div class=\"list-block\">\n        <ul>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">发单任务</div>\n                </div>\n            </li>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">接单任务</div>\n                </div>\n            </li>\n        </ul>\n    </div>\n    <div class=\"list-block\">\n        <ul>\n            <li class=\"item-content item-link\">\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                <div class=\"item-inner\">\n                    <div class=\"item-title\">在线客服</div>\n                </div>\n            </li>\n        </ul>\n    </div>\n\t<router-view></router-view>\n</div>\n";
 
 /***/ },
 /* 64 */

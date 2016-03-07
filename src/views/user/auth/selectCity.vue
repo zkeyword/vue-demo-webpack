@@ -1,13 +1,26 @@
 <style lang="less">
 .page-selectCity{
+    @import '../../../less/lib/mixins.less';
     height:100%;
-    ul{
-        margin:0;padding: 0;
+    background:#fff;
+    .bar{
+        background:#fff;
+        /*
+        &:after{
+            background:none;
+        }
+        */
     }
-    li{
-        list-style:none;
+    .list{
+        li{
+            border-bottom:1px solid #dedede;
+            .rem(font-size, 24);
+            .rem(height, 68);
+            .rem(line-height, 68);
+            .rem(padding, 0, 26);
+            .rem(border-bottom-width, 2);
+        }
     }
-    .content{box-sizing: border-box;padding:2.5rem 0.5rem 0.5rem;}
     #abc{
         position:absolute;
         bottom:0.2rem;
@@ -19,7 +32,7 @@
 </style>
 
 <template>
-    <div id="area" transition="page" >
+    <div class="page-selectCity" transition="page" >
 
         <div class="bar">
             <div class="searchbar">
@@ -32,12 +45,12 @@
         </div>
 
         <div class="content inside">
-            <ul v-if="!tmpData.length">
+            <ul class="list" v-if="!tmpData.length">
 				<li v-for="item in indexData.areaList" @click="goAuth(item)">
                     {{item.city_name}}
                 </li>
             </ul>
-            <ul v-else="tmpData.length">
+            <ul class="list" v-else="tmpData.length">
                 <li v-for="item in tmpData" @click="goAuth(item)">
                     {{item.city_name}}
                 </li>
