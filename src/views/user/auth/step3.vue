@@ -45,7 +45,8 @@
 						<span v-if="item == 1 && subItem == 0">下午</span>
 						<span v-if="item == 2 && subItem == 0">晚上</span>
 						<span v-if="subItem != 0" @click="setAccount( subItem +''+ (item+1) )">
-							<span v-for="( index, time ) in tmpAccountData" :class="{'selected': time == subItem +''+ (item+1)}" v-if="time == subItem +''+ (item+1)">{{time}}</span>
+							<span v-for="( index, time ) in tmpAccountData" track-by="$index" :class="{'selected': time == subItem +''+ (item+1)}" v-if="time == subItem +''+ (item+1)">{{time}}</span>
+							x
 						</span>
 					</td>
 				</tr>
@@ -111,8 +112,10 @@
 				this.tmpSceneArr.push(id);
 			},
 			setAccount(id){
-				console.log(id)
-				this.tmpAccount.push(id);
+				let self = this;
+				self.tmpAccount.push(id);
+				self.tmpAccountData.push(id);
+				self.tmpAccountData = self.unique( self.tmpAccountData );
 			},
 			getMap(){
 				let self = this;
