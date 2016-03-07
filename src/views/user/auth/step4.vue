@@ -1,4 +1,9 @@
+<style lang="less">
+
+</style>
+
 <template>
+<div>
     <header class="bar bar-nav">
         <h1 class="title">我的</h1>
     </header>
@@ -70,6 +75,7 @@
         </ul>
     </div>
 	<router-view></router-view>
+</div>
 </template>
 
 <script>

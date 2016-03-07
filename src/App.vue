@@ -1,23 +1,5 @@
 <style lang="less">
-.bar-nav{
-    background:#54c5ff;
-    .title{color:#fff}
-}
-.inside{
-    padding-top: 2.5rem;
-}
- .page-enter {
-    z-index: 2002;
-    -webkit-animation: pageFromRightToCenter 400ms forwards;
-    -o-animation: pageFromRightToCenter 400ms forwards;
-    animation: pageFromRightToCenter 400ms forward
-}
-.page-leave {
-    z-index: 2002;
-    -webkit-animation: pageFromCenterToRight 400ms forwards;
-    -o-animation: pageFromCenterToRight 400ms forwards;
-    animation: pageFromCenterToRight 400ms forwards;
-}
+@import 'less/style.less';
 </style>
 
 <template>

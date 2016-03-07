@@ -1,0 +1,104 @@
+/* 基本布局 */
+body,.page{background: #fafafa;color:#333}
+
+/* 过渡 */
+.page-enter {
+    z-index: 2002;
+    -webkit-animation: pageFromRightToCenter 400ms forwards;
+    -o-animation: pageFromRightToCenter 400ms forwards;
+    animation: pageFromRightToCenter 400ms forward
+}
+.page-leave {
+    z-index: 2002;
+    -webkit-animation: pageFromCenterToRight 400ms forwards;
+    -o-animation: pageFromCenterToRight 400ms forwards;
+    animation: pageFromCenterToRight 400ms forwards;
+}
+
+/* 步骤/进度条 */
+.progress{
+    .item{
+        position: relative;
+        display: table-cell;
+        width: 1%;
+        text-align: center;
+        vertical-align: middle;
+        color: #b2b2b2;
+        
+        .rem(font-size, 20);
+        .rem(line-height, 50);
+        
+        span{
+            background: #b2b2b2;
+            color:#fff;
+            display: inline-block;
+            
+            .rem(height, 50);
+            .rem(width, 50);
+            .rem(line-height, 50);
+            .rem(margin, 0, 10, 0, 0);
+            .border-radius(50);
+        }
+        
+        &.cur{
+            color: #333;
+            span{
+                background: #54c5ff;
+
+            }
+        }
+        
+        &:first-child{
+            width: 1.6%;
+        }
+    }
+}
+
+/* 有标题栏页面 */
+.inside{
+    padding-top: 2.5rem;
+}
+
+/* 标题栏 */
+.bar-nav{
+    background: #54c5ff;
+    .title{
+        color: #fff;
+    }
+}
+
+/* 按钮 */
+.ui-btn{
+    border: 1px solid #0894ec;
+    color: #0894ec;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    line-height: 1.25rem;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    padding: 0 .5rem;
+    margin: 0;
+    height: 1.35rem;
+    white-space: nowrap;
+    position: relative;
+    text-overflow: ellipsis;
+    font-size: .7rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+.ui-btn-big{
+    border: 1px solid #ff946e;
+    background: #ff946e;
+    color: #fff;
+    font-size: .85rem;
+    height: 2.4rem;
+    line-height: 2.3rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}

@@ -1,35 +1,70 @@
+<style lang="less">
+    @import '../../../less/lib/mixins.less';
+    .page-authStep1{
+        .rem(padding, 0, 26);
+        .stepTitle{
+            text-align:center;
+            .rem(font-size, 29);
+        }
+        .stepText{
+            text-align:center;
+            color:#b2b2b2;
+            .rem(font-size, 17);
+            .rem(margin, 16, 0, 0);
+        }
+        .progress{
+            .rem(margin, 64, 0, 26);
+        }
+        .params{
+            .item{
+                background:#fff;
+                border:1px solid #f6f6f6;
+                .border-radius(8);
+                .rem(margin-bottom, 16);
+                .rem(font-size, 16);
+                .rem(height, 68);
+                .rem(line-height, 68);
+                .rem(border-width, 2); 
+                .rem(padding, 0, 16);
+            }
+        }
+    }
+</style>
+
 <template>
-    <header class="bar bar-nav">
-        <h1 class="title">认证</h1>
-    </header>
-    <div class="inside auth-step1">
-    	<div class="stepTitle">申请认证</div>
-        <div class="iconWrap"></div>
-        <div class="stepText">将在一个工作日内审核完成!</div>
-        <div class="progress">
-            <span class="item cur"><span>1</span>请填写基本信息</span>
-            <span class="item"><span>2</span>上传证照</span>
-            <span class="item"><span>3</span>服务设置</span>
-        </div>
-        <div class="params">
-            <div class="item" @click="selectCity">
-                <span class="fn-left">您的城市</span>
-                <span class="fn-right">{{formData.city}}</span>
+    <div class="page-authStep1">
+        <header class="bar bar-nav">
+            <h1 class="title">认证</h1>
+        </header>
+        <div class="inside">
+            <div class="stepTitle">申请认证</div>
+            <div class="iconWrap"></div>
+            <div class="stepText">将在一个工作日内审核完成!</div>
+            <div class="progress">
+                <span class="item cur"><span>1</span>请填写基本信息</span>
+                <span class="item"><span>2</span>上传证照</span>
+                <span class="item"><span>3</span>服务设置</span>
             </div>
-            <div class="item" @click="selectSchool" v-if="formData.city_id">
-                <span class="fn-left">您的学校</span>
-                <span class="fn-right">{{formData.school}}</span>
+            <div class="params">
+                <div class="item" @click="selectCity">
+                    <span class="pull-left">您的城市</span>
+                    <span class="pull-right">{{formData.city}}</span>
+                </div>
+                <div class="item" @click="selectSchool" v-if="formData.city_id">
+                    <span class="pull-left">您的学校</span>
+                    <span class="pull-right">{{formData.school}}</span>
+                </div>
             </div>
+            
         </div>
-        
+        <a 
+            class="ui-btn ui-btn-big"
+            v-if="formData.city_id && formData.school_id" 
+            v-link="{ path: '/auth/step2?city_id='+ formData.city_id +'&school_id=' + formData.school_id }"
+        >
+            下一步
+        </a>
     </div>
-    <a 
-        class="button button-big"
-        v-if="formData.city_id && formData.school_id" 
-        v-link="{ path: '/auth/step2?city_id='+ formData.city_id +'&school_id=' + formData.school_id }"
-    >
-        下一步
-    </a>
 </template>
 
 <script>
@@ -54,16 +89,6 @@
             }
         },
         methods: {
-            // goNextStep(){
-            //     let self = this;
-            //     this.$route.router.go({
-            //         name:'authStep2',
-            //         params: {
-            //             city_id: self.formData.city_id,
-            //             school_id: self.formData.school_id
-            //         }
-            //     });
-            // },
             selectCity(){
                 this.$route.router.go({name:'selectCity'});
             },
@@ -81,20 +106,6 @@
         }
     }
 </script>
-
-<style lang="less">
-    .auth-step1{}
-    .progress .item{
-        position: relative;
-        display: table-cell;
-        width: 1%;
-        height: 2.5rem;
-        color: #929292;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 0.5rem;
-    }
-</style>
 
 
 

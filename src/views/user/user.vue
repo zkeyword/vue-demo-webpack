@@ -83,11 +83,7 @@
 </script>
 
 <style lang="less">
-    .index2{
-        width: 100%;
-        background-color: #fff;
-        margin-top: 40%;
-    }
+
 </style>
 
 

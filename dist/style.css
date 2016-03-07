@@ -3,51 +3,147 @@
     background: #fff;
 }
 
-.progress .item {
-  position: relative;
-  display: table-cell;
-  width: 1%;
-  height: 2.5rem;
-  color: #929292;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 0.5rem;
+/*阴影*/
+/*圆角*/
+/*三角*/
+/*盒子*/
+/*透明度*/
+/* rem */
+.page-authStep1 {
+  -: ;padding: 0rem;
+  -: ;padding: 0rem 0.65rem;
 }
-#area {
+.page-authStep1 .stepTitle {
+  text-align: center;
+  -: ;font-size: 0.725rem;
+}
+.page-authStep1 .stepText {
+  text-align: center;
+  color: #b2b2b2;
+  -: ;font-size: 0.425rem;
+  -: ;margin: 0.4rem;
+  -: ;margin: 0.4rem 0rem;
+  -: ;margin: 0.4rem 0rem 0rem;
+}
+.page-authStep1 .progress {
+  -: ;margin: 1.6rem;
+  -: ;margin: 1.6rem 0rem;
+  -: ;margin: 1.6rem 0rem 0.65rem;
+}
+.page-authStep1 .params .item {
+  background: #fff;
+  border: 1px solid #f6f6f6;
+  -: ;border-radius: 0.2rem;
+  -: ;margin-bottom: 0.4rem;
+  -: ;font-size: 0.4rem;
+  -: ;height: 1.7rem;
+  -: ;line-height: 1.7rem;
+  -: ;border-width: 0.05rem;
+  -: ;padding: 0rem;
+  -: ;padding: 0rem 0.4rem;
+}
+.page-selectCity {
   height: 100%;
 }
-#area ul {
+.page-selectCity ul {
   margin: 0;
   padding: 0;
 }
-#area li {
+.page-selectCity li {
   list-style: none;
 }
-#area .content {
+.page-selectCity .content {
   box-sizing: border-box;
   padding: 2.5rem 0.5rem 0.5rem;
 }
-#area #abc {
+.page-selectCity #abc {
   position: absolute;
   bottom: 0.2rem;
   right: 0.2rem;
   line-height: 0.8rem;
   font-size: 0.5rem;
 }
+.page-selectMap .amap-toolbar {
+  bottom: 180px !important;
+}
+.page-selectMap .mapBtn {
+  color: #fff;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  background: #54C5FF;
+  padding: 5px 20px;
+  z-index: 500;
+}
+.page-selectMap #panel {
+  position: fixed;
+  background-color: white;
+  max-height: 90%;
+  overflow-y: auto;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-bottom: solid 1px silver;
+  z-index: 200;
+}
+.page-selectMap .poi-more {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.page-selectMap .poi-addr {
+  padding-right: 100px;
+}
+.page-selectMap .amap_lib_placeSearch_page {
+  display: none;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.page-selectMap .amap-geo {
+  position: absolute;
+  left: 0;
+  bottom: 90px;
+}
 .index2 {
   width: 100%;
   background-color: #fff;
   margin-top: 40%;
 }
-.bar-nav {
-  background: #54c5ff;
+/*
+@baseWidth: 375px;
+@baseFont: 20px;
+
+html {
+  font-size: @baseFont;  //默认当做320px宽度的屏幕来处理
 }
-.bar-nav .title {
-  color: #fff;
+
+@bps: 400px, 414px, 480px; 
+
+.loop(@i: 1) when (@i <= length(@bps)) {  //注意less数组是从1开始的
+  @bp: extract(@bps, @i);
+  @font: @bp/@baseWidth*@baseFont;  
+  @media only screen and (min-width: @bp){
+    html {
+      font-size: @font !important;
+    }
+  }
+  .loop((@i + 1));
+};
+.loop;
+*/
+/*阴影*/
+/*圆角*/
+/*三角*/
+/*盒子*/
+/*透明度*/
+/* rem */
+/* 基本布局 */
+body,
+.page {
+  background: #fafafa;
+  color: #333;
 }
-.inside {
-  padding-top: 2.5rem;
-}
+/* 过渡 */
 .page-enter {
   z-index: 2002;
   -webkit-animation: pageFromRightToCenter 400ms forwards;
@@ -57,6 +153,85 @@
   z-index: 2002;
   -webkit-animation: pageFromCenterToRight 400ms forwards;
   animation: pageFromCenterToRight 400ms forwards;
+}
+/* 步骤/进度条 */
+.progress .item {
+  position: relative;
+  display: table-cell;
+  width: 1%;
+  text-align: center;
+  vertical-align: middle;
+  color: #b2b2b2;
+  -: ;font-size: 0.5rem;
+  -: ;line-height: 1.25rem;
+}
+.progress .item span {
+  background: #b2b2b2;
+  color: #fff;
+  display: inline-block;
+  -: ;height: 1.25rem;
+  -: ;width: 1.25rem;
+  -: ;line-height: 1.25rem;
+  -: ;margin: 0rem;
+  -: ;margin: 0rem 0.25rem;
+  -: ;margin: 0rem 0.25rem 0rem;
+  -: ;margin: 0rem 0.25rem 0rem 0rem;
+  -: ;border-radius: 1.25rem;
+}
+.progress .item.cur {
+  color: #333;
+}
+.progress .item.cur span {
+  background: #54c5ff;
+}
+.progress .item:first-child {
+  width: 1.6%;
+}
+/* 有标题栏页面 */
+.inside {
+  padding-top: 2.5rem;
+}
+/* 标题栏 */
+.bar-nav {
+  background: #54c5ff;
+}
+.bar-nav .title {
+  color: #fff;
+}
+/* 按钮 */
+.ui-btn {
+  border: 1px solid #0894ec;
+  color: #0894ec;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  line-height: 1.25rem;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  padding: 0 .5rem;
+  margin: 0;
+  height: 1.35rem;
+  white-space: nowrap;
+  position: relative;
+  text-overflow: ellipsis;
+  font-size: .7rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+.ui-btn-big {
+  border: 1px solid #ff946e;
+  background: #ff946e;
+  color: #fff;
+  font-size: .85rem;
+  height: 2.4rem;
+  line-height: 2.3rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map*/

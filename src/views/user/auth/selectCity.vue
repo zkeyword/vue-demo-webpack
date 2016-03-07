@@ -1,3 +1,23 @@
+<style lang="less">
+.page-selectCity{
+    height:100%;
+    ul{
+        margin:0;padding: 0;
+    }
+    li{
+        list-style:none;
+    }
+    .content{box-sizing: border-box;padding:2.5rem 0.5rem 0.5rem;}
+    #abc{
+        position:absolute;
+        bottom:0.2rem;
+        right:0.2rem;
+        line-height: 0.8rem;
+        font-size: 0.5rem;
+    }
+}
+</style>
+
 <template>
     <div id="area" transition="page" >
 
@@ -11,24 +31,25 @@
             </div>
         </div>
 
-        <div class="content">
+        <div class="content inside">
             <ul v-if="!tmpData.length">
-                <li v-for="area in areaList">
-                    <a v-link="{ path: '/auth?city_id='+ area.city_id +'&city_name='+ area.city_name}">
-                        {{area.city_name}}
-                    </a>
+				<li v-for="item in indexData.areaList" @click="goAuth(item)">
+                    {{item.city_name}}
                 </li>
             </ul>
             <ul v-else="tmpData.length">
-                <li v-for="area in tmpData">
-                    <a v-link="{ path: '/auth?city_id='+ area.city_id +'&city_name='+ area.city_name}">
-                        {{area.city_name}}
-                    </a>
+                <li v-for="item in tmpData" @click="goAuth(item)">
+                    {{item.city_name}}
                 </li>
             </ul>
         </div>
-    
-        <ul id="abc">
+    </div>
+
+</template>
+
+<script>
+/*
+<ul id="abc">
             <li>A</li>
             <li>B</li>
             <li>C</li>
@@ -57,38 +78,49 @@
             <li>Z</li>
         </ul>
 
-    </div>
-
-</template>
-
-<script>
-    let tmpData       = [];
-    indexData.keyword = '';
-    indexData.tmpData = [];
+*/
 
     module.exports = {
         data (){
-            return indexData;
+            return {
+				keyword: '',
+				tmpData: [],
+				indexData: indexData,
+				formData: {
+					city_id: null,
+					city_name: null
+				}
+			};
         },
         destroy (){
             this.keyword = null;
-            console.log(111)
         },
         watch: {
             keyword (){
-                this.tmpData = this.filteData( this.keyword );
+                let self = this;
+                self.tmpData = self.filteData( self.keyword );
+                console.log( this.tmpData )
             }
         },
         methods: {
+			goAuth(item){
+				let self = this;
+				self.formData.city_id   = item.city_id;
+				self.formData.city_name = item.city_name;
+				self.$route.router.go('/auth?' + $.param( self.formData ) );
+			},
             filteData (keyword) {
-                let allData = indexData.areaList,
+                let self    = this,
+					allData = self.indexData.areaList,
                     len     = allData.length,
                     data    = [];
 
                 for(let i = 0; i<len; i++){
-                    let item = allData[i];
-                    let str  = item.first_name + item.city_name + item.short_name + 'ç' + item.first_name;
-                    if( str.indexOf(keyword) !== -1 ){
+                    let item = allData[i],
+                        reg  = new RegExp(keyword),
+                        str  = item.first_name + item.city_name + item.short_name + 'ç' + item.first_name;
+
+                    if( reg.test(str) ){
                         data.push(item);
                     }
                 }
@@ -98,26 +130,6 @@
         }
     }
 </script>
-
-<style lang="less">
-#area{
-    height:100%;
-    ul{
-        margin:0;padding: 0;
-    }
-    li{
-        list-style:none;
-    }
-    .content{box-sizing: border-box;padding:2.5rem 0.5rem 0.5rem;}
-    #abc{
-        position:absolute;
-        bottom:0.2rem;
-        right:0.2rem;
-        line-height: 0.8rem;
-        font-size: 0.5rem;
-    }
-}
-</style>
 
 
 
