@@ -13,25 +13,13 @@
 
         <div class="content">
             <ul v-if="!tmpData.length">
-                <li v-for="item in schoolList">
-                    <a v-link="{ path: '/auth?city_id='+ city.city_id 
-                        +'&city_name=' + city.city_name 
-                        +'&school_id=' + item.school_id
-                        +'&school_name=' + item.school_name
-                    }">
-                        {{item.school_name}}
-                    </a>
+				<li v-for="item in schoolList" @click="goAuth(item)">
+                    {{item.school_name}}
                 </li>
             </ul>
             <ul v-else="tmpData.length">
-                <li v-for="item in tmpData">
-                    <a v-link="{ path: '/auth?city_id='+ city.city_id 
-                        +'&city_name=' + city.city_name 
-                        +'&school_id=' + item.school_id
-                        +'&school_name=' + item.school_name
-                    }">
-                        {{item.school_name}}
-                    </a>
+				<li v-for="item in tmpData" @click="goAuth(item)">
+                    {{item.school_name}}
                 </li>
             </ul>
         </div>
@@ -40,18 +28,20 @@
 </template>
 
 <script>
-    let tmpData          = [];
-    indexData.keyword    = '';
-    indexData.tmpData    = [];
-    indexData.city       = {
-        city_id: null,
-        city_name: null
-    }
-    indexData.schoolList = null;
-
     module.exports = {
         data (){
-            return indexData;
+            return {
+				keyword:'',
+				tmpData: [],
+				schoolList: null,
+				indexData: indexData,
+				formData: {
+					city_id: null,
+					city_name: null,
+					school_id: null,
+					school_name: null
+				}
+			}
         },
         watch: {
             keyword (){
@@ -60,9 +50,10 @@
         },
         route: {
             data (transition){
-                let query = transition.from.query;
-                this.city.city_id   = query.city_id ? query.city_id : null;
-                this.city.city_name = query.city_name ? query.city_name : null;
+                let self  = this,
+					query = transition.from.query;
+                self.formData.city_id   = query.city_id ? query.city_id : null;
+                self.formData.city_name = query.city_name ? query.city_name : null;
             }
         },
         ready(){
@@ -71,15 +62,22 @@
                 url: "/soytime/data/loadSchool",
                 type:'POST',
                 dataType: 'json',
-                data: self.city,
+                data: self.formData,
                 success: ((data)=>{
-                    indexData.schoolList = data.result;
+                    self.schoolList = data.result;
                 })
             });
         },
         methods: {
+			goAuth(item){
+				let self = this;
+				self.formData.school_id   = item.school_id;
+				self.formData.school_name = item.school_name;
+				self.$route.router.go('/auth?' + $.param( self.formData ) );
+			},
             filteData (keyword) {
-                let allData = indexData.schoolList,
+                let self    = this,
+					allData = indexData.schoolList,
                     len     = allData.length,
                     data    = [];
 

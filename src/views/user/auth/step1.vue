@@ -54,16 +54,6 @@
             }
         },
         methods: {
-            // goNextStep(){
-            //     let self = this;
-            //     this.$route.router.go({
-            //         name:'authStep2',
-            //         params: {
-            //             city_id: self.formData.city_id,
-            //             school_id: self.formData.school_id
-            //         }
-            //     });
-            // },
             selectCity(){
                 this.$route.router.go({name:'selectCity'});
             },

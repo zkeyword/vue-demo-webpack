@@ -15,38 +15,37 @@
     <div class="params">
         <div class="item" @click="getPersionPic">
             <span class="fn-left">个人照片</span>
-            <span class="fn-right" v-if="formData.authHead">
-                <img :src="formData.authHeadUrl" />
+            <span class="fn-right" v-if="formData.auth_head">
+                <img :src="auth_head_url" />
             </span>
         </div>
         <div class="item" @click="getStudentPic">
             <span class="fn-left">学生证</span>
-            <span class="fn-right" v-if="formData.authStudentCard">
-                <img :src="formData.authStudentCardUrl" />
+            <span class="fn-right" v-if="formData.auth_student_card">
+                <img :src="auth_student_card_url" />
             </span>
         </div>
     </div>
-    <a 
+    <span 
         class="button button-big"
         v-if="formData.city_id && formData.school_id" 
-        v-link="{ path: '/auth/step3?city_id='+ formData.city_id +'&school_id=' + formData.school_id }"
+        @click="goAuth"
     >
         下一步
-    </a>
-    <a href="#" class="button button-big" v-if="formData.serverId && formData.picType">下一步</a>
+    </span>
 </template>
 
 <script>
     export default {
         data() {
             return {
+				auth_head_url: null,
+				auth_student_card_url: null,
                 formData: {
                     city_id: null,
                     school_id: null,
-                    authHead: null,
-                    authHeadUrl: null,
-                    authStudentCard: null,
-                    authStudentCardUrl: null,
+                    auth_head: null,
+                    auth_student_card: null
                 }
             }
         },
@@ -58,18 +57,22 @@
             }
         },
         methods: {
+			goAuth(){
+				let self = this;
+				self.$route.router.go('/auth/step3?' + $.param( self.formData ) );
+			},
             getPersionPic(){
                 let self = this;
-                uploadimg('auth_head_url', (data)=>{
-                    self.formData.authHead     = data.authHead;
-                    self.formData.authHeadUrl = '/soytime/file/renzheng?guid=' + data.authHead;
+                uploadimg(1, (data)=>{
+                    self.formData.auth_head     = data.auth_head;
+                    self.formData.auth_head_url = '/soytime/file/renzheng?guid=' + data.auth_head;
                 })
             },
             getStudentPic(){
                 let self = this;
-                uploadimg('auth_student_card_url', (data)=>{
-                    self.formData.authStudentCard    = data.authStudentCard;
-                    self.formData.authStudentCardUrl = '/soytime/file/renzheng?guid=' + data.authStudentCard;
+                uploadimg(2, (data)=>{
+                    self.formData.auth_student_card    = data.auth_student_card;
+                    self.formData.auth_student_card_url = '/soytime/file/renzheng?guid=' + data.auth_student_card;
                 })
             }
         }

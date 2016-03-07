@@ -13,22 +13,23 @@
 
         <div class="content">
             <ul v-if="!tmpData.length">
-                <li v-for="area in areaList">
-                    <a v-link="{ path: '/auth?city_id='+ area.city_id +'&city_name='+ area.city_name}">
-                        {{area.city_name}}
-                    </a>
+				<li v-for="item in indexData.areaList" @click="goAuth(item)">
+                    {{item.city_name}}
                 </li>
             </ul>
             <ul v-else="tmpData.length">
-                <li v-for="area in tmpData">
-                    <a v-link="{ path: '/auth?city_id='+ area.city_id +'&city_name='+ area.city_name}">
-                        {{area.city_name}}
-                    </a>
+                <li v-for="item in tmpData"  @click="goAuth(item)">
+                    {{item.city_name}}
                 </li>
             </ul>
         </div>
-    
-        <ul id="abc">
+    </div>
+
+</template>
+
+<script>
+/*
+<ul id="abc">
             <li>A</li>
             <li>B</li>
             <li>C</li>
@@ -57,22 +58,22 @@
             <li>Z</li>
         </ul>
 
-    </div>
-
-</template>
-
-<script>
-    let tmpData       = [];
-    indexData.keyword = '';
-    indexData.tmpData = [];
+*/
 
     module.exports = {
         data (){
-            return indexData;
+            return {
+				keyword: '',
+				tmpData: [],
+				indexData: indexData,
+				formData: {
+					city_id: null,
+					city_name: null
+				}
+			};
         },
         destroy (){
             this.keyword = null;
-            console.log(111)
         },
         watch: {
             keyword (){
@@ -80,8 +81,15 @@
             }
         },
         methods: {
+			goAuth(item){
+				let self = this;
+				self.formData.city_id   = item.city_id;
+				self.formData.city_name = item.city_name;
+				self.$route.router.go('/auth?' + $.param( self.formData ) );
+			},
             filteData (keyword) {
-                let allData = indexData.areaList,
+                let self    = this,
+					allData = self.indexData.areaList,
                     len     = allData.length,
                     data    = [];
 

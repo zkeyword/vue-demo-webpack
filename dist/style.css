@@ -34,6 +34,47 @@
   line-height: 0.8rem;
   font-size: 0.5rem;
 }
+.amap-toolbar {
+  bottom: 180px !important;
+}
+.mapBtn {
+  color: #fff;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  background: #54C5FF;
+  padding: 5px 20px;
+  z-index: 500;
+}
+#panel {
+  position: fixed;
+  background-color: white;
+  max-height: 90%;
+  overflow-y: auto;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-bottom: solid 1px silver;
+  z-index: 200;
+}
+.poi-more {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.poi-addr {
+  padding-right: 100px;
+}
+.amap_lib_placeSearch_page {
+  display: none;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.amap-geo {
+  position: absolute;
+  left: 0;
+  bottom: 90px;
+}
 .index2 {
   width: 100%;
   background-color: #fff;
