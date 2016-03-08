@@ -6,8 +6,9 @@
 
 //375屏幕为 20px，以此为基础计算出每一种宽度的字体大小
 //375以下不变，375以上等比放大
-/*
-@baseWidth: 375px;
+
+//@baseWidth: 375px;
+@baseWidth: 320px;
 @baseFont: 20px;
 
 html {
@@ -27,7 +28,7 @@ html {
   .loop((@i + 1));
 };
 .loop;
-*/
 
+@import "css/sprite.less";
 @import "lib/mixins.less";
 @import "app/layout.less";

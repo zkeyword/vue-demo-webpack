@@ -28,6 +28,12 @@
                 .rem(padding, 0, 16);
             }
         }
+		
+		.icon-anquanbaozhang-size{
+			.rem(height, 52);
+			.rem(width, 52);
+			.rem(background-size, 416, 416)
+		}
     }
 </style>
 
@@ -38,7 +44,10 @@
         </header>
         <div class="inside">
             <div class="stepTitle">申请认证</div>
-            <div class="iconWrap"></div>
+            <div class="iconWrap">
+				<i class="icon icon-anquanbaozhang icon-anquanbaozhang-size"></i>
+				<i class="icon icon-anquanbaozhang2 icon-anquanbaozhang2-size"></i>
+			</div>
             <div class="stepText">将在一个工作日内审核完成!</div>
             <div class="progress">
                 <span class="item cur"><span>1</span>请填写基本信息</span>
@@ -55,7 +64,6 @@
                     <span class="pull-right">{{formData.school}}</span>
                 </div>
             </div>
-            
         </div>
         <a 
             class="ui-btn ui-btn-big"

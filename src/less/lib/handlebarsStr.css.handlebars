@@ -1,0 +1,29 @@
+{{#sprites}}
+
+.iconSprite(){
+	background-image: url({{{escaped_image}}});
+	.rem(background-size, {{total_width}}, {{total_height}});
+}
+.icon-{{name}}(@isHover: false){
+
+	.hover (@a) when (@a = false) {
+		.iconSprite();
+		.rem(width, {{width}});
+		.rem(height, {{height}});
+	}
+	.hover(@isHover);
+	
+	.rem(background-position, {{offset_x}}, {{offset_y}});
+}
+
+[class^="icon-"],
+[class*=" icon-"]{
+	.iconSprite();
+}
+.icon-{{name}}{
+	.rem(background-position, {{offset_x}}, {{offset_y}});
+	.rem(width, {{width}});
+	.rem(height, {{height}});
+}
+
+{{/sprites}}

@@ -25,7 +25,11 @@ module.exports = {
                 //处理vue
                 test: /\.vue$/,
                 loader: 'vue'
-            }
+            },
+			{ 
+				test: /\.svg$/, 
+				loader: "file-loader?prefix=font/"
+			}
         ]
     },
     //处理VUE
