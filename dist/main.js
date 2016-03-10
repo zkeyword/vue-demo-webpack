@@ -46,27 +46,31 @@
 
 	'use strict';
 	
-	var _vue = __webpack_require__(5);
+	var _keys = __webpack_require__(5);
+	
+	var _keys2 = _interopRequireDefault(_keys);
+	
+	var _vue = __webpack_require__(17);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _Vuex = __webpack_require__(7);
+	var _Vuex = __webpack_require__(19);
 	
 	var _Vuex2 = _interopRequireDefault(_Vuex);
 	
-	var _vueRouter = __webpack_require__(8);
+	var _vueRouter = __webpack_require__(20);
 	
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 	
-	var _routers = __webpack_require__(9);
+	var _routers = __webpack_require__(21);
 	
 	var _routers2 = _interopRequireDefault(_routers);
 	
-	var _App = __webpack_require__(67);
+	var _App = __webpack_require__(84);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _filters = __webpack_require__(72);
+	var _filters = __webpack_require__(89);
 	
 	var _filters2 = _interopRequireDefault(_filters);
 	
@@ -76,9 +80,11 @@
 	_vue2.default.use(_vueRouter2.default);
 	
 	//添加过滤
-	//Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
+	(0, _keys2.default)(_filters2.default).forEach(function (k) {
+	    return _vue2.default.filter(k, _filters2.default[k]);
+	});
 	
-	_vue2.default.filter('sceneCur', _filters2.default['sceneCur']);
+	//Vue.filter('sceneCur', filters['sceneCur'])
 	
 	// routing
 	var router = new _vueRouter2.default({
@@ -119,6 +125,180 @@
 /* 3 */,
 /* 4 */,
 /* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(6), __esModule: true };
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(7);
+	module.exports = __webpack_require__(13).Object.keys;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 Object.keys(O)
+	var toObject = __webpack_require__(8);
+	
+	__webpack_require__(10)('keys', function($keys){
+	  return function keys(it){
+	    return $keys(toObject(it));
+	  };
+	});
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.13 ToObject(argument)
+	var defined = __webpack_require__(9);
+	module.exports = function(it){
+	  return Object(defined(it));
+	};
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	// 7.2.1 RequireObjectCoercible(argument)
+	module.exports = function(it){
+	  if(it == undefined)throw TypeError("Can't call method on  " + it);
+	  return it;
+	};
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// most Object methods by ES6 should accept primitives
+	var $export = __webpack_require__(11)
+	  , core    = __webpack_require__(13)
+	  , fails   = __webpack_require__(16);
+	module.exports = function(KEY, exec){
+	  var fn  = (core.Object || {})[KEY] || Object[KEY]
+	    , exp = {};
+	  exp[KEY] = exec(fn);
+	  $export($export.S + $export.F * fails(function(){ fn(1); }), 'Object', exp);
+	};
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(12)
+	  , core      = __webpack_require__(13)
+	  , ctx       = __webpack_require__(14)
+	  , PROTOTYPE = 'prototype';
+	
+	var $export = function(type, name, source){
+	  var IS_FORCED = type & $export.F
+	    , IS_GLOBAL = type & $export.G
+	    , IS_STATIC = type & $export.S
+	    , IS_PROTO  = type & $export.P
+	    , IS_BIND   = type & $export.B
+	    , IS_WRAP   = type & $export.W
+	    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+	    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
+	    , key, own, out;
+	  if(IS_GLOBAL)source = name;
+	  for(key in source){
+	    // contains in native
+	    own = !IS_FORCED && target && key in target;
+	    if(own && key in exports)continue;
+	    // export native or passed
+	    out = own ? target[key] : source[key];
+	    // prevent global pollution for namespaces
+	    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+	    // bind timers to global for call from export context
+	    : IS_BIND && own ? ctx(out, global)
+	    // wrap global constructors for prevent change them in library
+	    : IS_WRAP && target[key] == out ? (function(C){
+	      var F = function(param){
+	        return this instanceof C ? new C(param) : C(param);
+	      };
+	      F[PROTOTYPE] = C[PROTOTYPE];
+	      return F;
+	    // make static versions for prototype methods
+	    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+	    if(IS_PROTO)(exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+	  }
+	};
+	// type bitmap
+	$export.F = 1;  // forced
+	$export.G = 2;  // global
+	$export.S = 4;  // static
+	$export.P = 8;  // proto
+	$export.B = 16; // bind
+	$export.W = 32; // wrap
+	module.exports = $export;
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+	var global = module.exports = typeof window != 'undefined' && window.Math == Math
+	  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '1.2.6'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// optional / simple context binding
+	var aFunction = __webpack_require__(15);
+	module.exports = function(fn, that, length){
+	  aFunction(fn);
+	  if(that === undefined)return fn;
+	  switch(length){
+	    case 1: return function(a){
+	      return fn.call(that, a);
+	    };
+	    case 2: return function(a, b){
+	      return fn.call(that, a, b);
+	    };
+	    case 3: return function(a, b, c){
+	      return fn.call(that, a, b, c);
+	    };
+	  }
+	  return function(/* ...args */){
+	    return fn.apply(that, arguments);
+	  };
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+	  return it;
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = function(exec){
+	  try {
+	    return !!exec();
+	  } catch(e){
+	    return true;
+	  }
+	};
+
+/***/ },
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {/*!
@@ -9812,10 +9992,10 @@
 	}
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(6)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(18)))
 
 /***/ },
-/* 6 */
+/* 18 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -9912,7 +10092,7 @@
 
 
 /***/ },
-/* 7 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -10389,7 +10569,7 @@
 	}));
 
 /***/ },
-/* 8 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
@@ -13043,7 +13223,7 @@
 	}));
 
 /***/ },
-/* 9 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13055,70 +13235,70 @@
 	exports.default = function (router) {
 					router.map({
 									'*': {
-													component: __webpack_require__(10)
+													component: __webpack_require__(22)
 									},
 									'/': {
 													name: 'home',
-													component: __webpack_require__(10)
+													component: __webpack_require__(22)
 									},
 									'/msg': {
 													name: 'name',
-													component: __webpack_require__(17),
+													component: __webpack_require__(34),
 													//子路由
 													subRoutes: {
 																	'detail/:giftId': {
 																					name: 'detail', //具名路由
-																					component: __webpack_require__(20)
+																					component: __webpack_require__(37)
 																	}
 													}
 									},
 									'/user': {
 													name: 'user',
-													component: __webpack_require__(25)
+													component: __webpack_require__(42)
 									},
 									'/auth': {
 													name: 'auth',
-													component: __webpack_require__(28)
+													component: __webpack_require__(45)
 									},
 									'/auth/selectCity': {
 													name: 'selectCity',
-													component: __webpack_require__(35)
+													component: __webpack_require__(52)
 									},
 									'/auth/selectSchool': {
 													name: 'selectSchool',
-													component: __webpack_require__(40)
+													component: __webpack_require__(57)
 									},
 									'/auth/selectMap': {
 													name: 'selectMap',
-													component: __webpack_require__(45)
+													component: __webpack_require__(62)
 									},
 									'/auth/step2': {
 													name: 'authStep2',
-													component: __webpack_require__(50)
+													component: __webpack_require__(67)
 									},
 									'/auth/step3': {
 													name: 'authStep3',
-													component: __webpack_require__(56)
+													component: __webpack_require__(73)
 									},
 									'/auth/step4': {
 													name: 'authStep4',
-													component: __webpack_require__(62)
+													component: __webpack_require__(79)
 									}
 					});
 	};
 
 /***/ },
-/* 10 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(11)
-	__vue_script__ = __webpack_require__(15)
+	__webpack_require__(23)
+	__vue_script__ = __webpack_require__(32)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\home.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(16)
+	  console.warn("[vue-loader] src/views/home.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(33)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13128,7 +13308,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\home.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13137,41 +13317,127 @@
 	})()}
 
 /***/ },
-/* 11 */
+/* 23 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */
 /***/ function(module, exports) {
 
 	"use strict";
 	
-	// <style>
-	//     .body {
-	//         background: #fff;
+	// <style lang="less">
+	//     @import '../less/lib/mixins.less';
+	//     .page-home{
+	//         /* 幻灯片 */
+	//         .swiper-container{
+	//             padding:0;
+	//         }
+	//         .swiper-pagination-bullet{
+	//             background:#fff;
+	//             opacity:0.4;
+	//             &.swiper-pagination-bullet-active {
+	//                 opacity: .6;
+	//             }
+	//         }
+	//
+	//         /* 场景 */
+	//         .sceneWrap{
+	//             .rem(padding, 40, 20, 0);
+	//         }
+	//
+	//         .sceneItem{
+	//             width:50%;
+	//             float:left;
+	//             .rem(padding, 0, 10, 16);
+	//             .rem(height, 180);
+	//
+	//             a{
+	//                 background:#54c5ff;
+	//                 display:inline-block;
+	//                 width:100%;
+	//                 height:100%;
+	//                 color:#fff;
+	//                 position:relative;
+	//                 .rem(padding,48,0,48,120);
+	//                 .border-radius(8);
+	//             }
+	//             &.red a{
+	//                 background:#ff946e;
+	//             }
+	//
+	//             span{
+	//                 display:block;
+	//                 &.first{
+	//                     .rem(font-size, 30);
+	//                 }
+	//                 &.last{
+	//                     .rem(font-size, 20);
+	//                 }
+	//             }
+	//         }
+	//
+	//         .icon{
+	//             .rem(background-size, 80, 80) !important;
+	//             .rem(width,80);
+	//             .rem(height,80);
+	//             .rem(top, 50);
+	//             .rem(left, 20);
+	//             position:absolute;
+	//         }
+	//         .icon-home1{
+	//             background:url(../img/home1.svg) no-repeat;
+	//         }
+	//         .icon-home2{
+	//             background:url(../img/home2.svg) no-repeat;
+	//         }
+	//         .icon-home3{
+	//             //background:url(../img/home3.svg) no-repeat;
+	//         }
+	//         .icon-home4{
+	//             background:url(../img/home4.svg) no-repeat;
+	//         }
+	//         .icon-home5{
+	//             background:url(../img/home5.svg) no-repeat;
+	//         }
+	//         .icon-home6{
+	//             background:url(../img/home6.svg) no-repeat;
+	//         }
+	//         .icon-home7{
+	//             //background:url(../img/home7.svg) no-repeat;
+	//         }
 	//     }
 	// </style>
 	//
 	// <template>
-	//     <div id="home" class="content">
+	//     <div class="page-home content">
 	//         <div class="swiper-container" data-space-between="10" data-pagination=".swiper-pagination">
 	//             <div class="swiper-wrapper">
-	//                 <div v-for="slide in slides" class="swiper-slide"><img :src="{{slide.img}}" alt="" style="width: 100%"></div>
+	//                 <div v-for="slide in slides" class="swiper-slide">
+	//                     <a href="{{slide.url}}"><img :src="slide.img" alt="" style="width: 100%"></a>
+	//                 </div>
 	//             </div>
 	//             <div class="swiper-pagination"></div>
 	//         </div>
-	//
-	//         <div v-for="type in sceneList">
-	//             <a external v-link="{ name: 'user', params: { id: type.scene_id } }">
-	//                 {{type.scene_name}}
-	//             </a>
+	//         <div class="sceneWrap">
+	//             <div class="sceneItem" :class="{'red': index % 4 == 2 || index % 4 == 1 }" v-for="(index, scene) in sceneList">
+	//                 <a external v-link="{ name: 'user', params: { id: scene.scene_id } }">
+	//                    <i class="icon icon-home{{scene.id}}"></i>
+	//                    <span class="first">{{scene.scene_name}}</span>
+	//                    <span class="last">{{scene.scene_detail}}</span>
+	//                 </a>
+	//             </div>
 	//         </div>
-	//
 	//     </div>
 	// </template>
 	//
@@ -13189,22 +13455,22 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 16 */
+/* 33 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div id=\"home\" class=\"content\">\n    <div class=\"swiper-container\" data-space-between=\"10\" data-pagination=\".swiper-pagination\">\n        <div class=\"swiper-wrapper\">\n            <div v-for=\"slide in slides\" class=\"swiper-slide\"><img :src=\"{{slide.img}}\" alt=\"\" style=\"width: 100%\"></div>\n        </div>\n        <div class=\"swiper-pagination\"></div>\n    </div>\n\n    <div v-for=\"type in sceneList\">\n        <a external v-link=\"{ name: 'user', params: { id: type.scene_id } }\">\n            {{type.scene_name}}\n        </a>\n    </div>\n\n</div>\n";
+	module.exports = "\n<div class=\"page-home content\">\n    <div class=\"swiper-container\" data-space-between=\"10\" data-pagination=\".swiper-pagination\">\n        <div class=\"swiper-wrapper\">\n            <div v-for=\"slide in slides\" class=\"swiper-slide\">\n                <a href=\"{{slide.url}}\"><img :src=\"slide.img\" alt=\"\" style=\"width: 100%\"></a>\n            </div>\n        </div>\n        <div class=\"swiper-pagination\"></div>\n    </div>\n    <div class=\"sceneWrap\">\n        <div class=\"sceneItem\" :class=\"{'red': index % 4 == 2 || index % 4 == 1 }\" v-for=\"(index, scene) in sceneList\">\n            <a external v-link=\"{ name: 'user', params: { id: scene.scene_id } }\">\n               <i class=\"icon icon-home{{scene.id}}\"></i>\n               <span class=\"first\">{{scene.scene_name}}</span>\n               <span class=\"last\">{{scene.scene_detail}}</span>\n            </a>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 17 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(18)
+	__vue_script__ = __webpack_require__(35)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\list.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(19)
+	  console.warn("[vue-loader] src/views/list.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(36)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13214,7 +13480,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\list.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/list.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13223,7 +13489,7 @@
 	})()}
 
 /***/ },
-/* 18 */
+/* 35 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13264,23 +13530,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 19 */
+/* 36 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div id=\"gift\" class=\"content\">\n    <div class=\"row no-gutter\">\n        <a v-for=\"record in records\"  class=\"col-50\" v-link=\"{ name: 'detail', params: { recordId: record.id }}\" v-bind:class=\"{'list-item__left':($index%2==0?true:false),'list-item__right':($index%2==0?false:true)}\">\n            <div class=\"content-padded list-item__info\">\n                <p class=\"mod_state\"><span>{{record.supplier}}</span><span vs-if=\"!record.isHave\" class=\"state state_grey\">干啥</span></p>\n                <p>{{record.title}}</p>\n                <p>{{record.per_count}}<span class=\"per_count\"></span></p>\n            </div>\n            <div class=\"no-gutter\">\n                <img class=\"mod_img\" src={{record.pic}} alt=\"\">\n            </div>\n        </a>\n    </div>\n</div>\n<router-view>\n</router-view>\n";
 
 /***/ },
-/* 20 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(21)
-	__vue_script__ = __webpack_require__(23)
+	__webpack_require__(38)
+	__vue_script__ = __webpack_require__(40)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\detail.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(24)
+	  console.warn("[vue-loader] src/views/detail.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(41)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13290,7 +13556,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\detail.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/detail.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13299,14 +13565,14 @@
 	})()}
 
 /***/ },
-/* 21 */
+/* 38 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 22 */,
-/* 23 */
+/* 39 */,
+/* 40 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13392,22 +13658,22 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 24 */
+/* 41 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page page-current\" >\n    <div class=\"content detail_content\">\n        <div class=\"row no-gutter\">\n            <div class=\"col-100 img_head\">\n                <img class=\"gift-cover\" src=\"{{gift.bigPic}}\">\n                <div class=\"gradients\">\n                    <p id=\"merchant_name\">{{gift.merchant_name}}</p>\n                    <p id=\"name\">{{gift.name}}</p>\n                </div>\n            </div>\n        </div>\n        <div class=\"row no-gutter describe\" v-bind:class=\"{fixTop:isFixDesc}\">\n            <div class=\"col-50 \">\n                <span id=\"goods_count\">{{gift.pre_count}}</span>\n            </div>\n            <div class=\"col-50 \">\n                <a v-if=\"!isGet\" href=\"javascript:void(0)\" v-on:click=\"pay(gift.id)\" class=\"btn-org\">立即兑换</a>\n                <div v-if=\"isGet\" class=\"btn-gray\">已兑换</div>\n            </div>\n        </div>\n        <div class=\"main\" id=\"main\">\n            <div v-html=\"gift.content\"></div>\n        </div>\n        <div class=\"row no-gutter\">\n            <div class=\"col-100\" style=\"background-color: #ffffff\">\n                <div class=\"border\">\n                    <div class=\"declare\">\n                        <p>重要说明</p>\n                        <div class=\"declare_cont\" id=\"declare\">\n                            <div>商品兑换流程请仔细参照商品详情页的“兑换流程”、“注意事项”与“使用时间”，除商品本身不能正常兑换外，商品一经兑换，一律不退还积分。（如商品过期、兑换流程操作失误、仅限新用户兑换）</div>\n                            <div>活动由提供，与设备生产商Apple Inc.公司无关</div></div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n\n    </div>\n</div>\n\n";
 
 /***/ },
-/* 25 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(26)
+	__vue_script__ = __webpack_require__(43)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\tab.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(27)
+	  console.warn("[vue-loader] src/views/tab.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(44)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13417,7 +13683,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\tab.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/tab.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13426,7 +13692,7 @@
 	})()}
 
 /***/ },
-/* 26 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -13586,23 +13852,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 27 */
+/* 44 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div  class=\"content\">\n    <div class=\"content-block task\">\n        <div class=\"buttons-tab\">\n            <a href=\"#tab1\" class=\"tab-link active button\">A状态</a>\n            <a href=\"#tab2\" class=\"tab-link button\">B状态</a>\n            <a href=\"#tab3\" class=\"tab-link button\">C状态</a>\n        </div>\n        <div class=\"content-block\">\n            <div class=\"tabs\">\n                <!-- A-->\n                <div id=\"tab1\" class=\"tab active\">\n                    <div class=\"content-block\">\n                        <div v-for=\"record in records\" v-show=\"!record.isFinish&&record.isDraw\" class=\"card\">\n                            <div class=\"card-content task_isFinish\">\n                                <div class=\"task_flag task_unfin\"></div>\n                                <div class=\"card-content-inner\">\n                                    <div class=\"list-block\">\n                                        <ul>\n                                            <li>\n                                                <div class=\"item-content\">\n                                                    <div class=\"item-inner\">\n                                                        <div class=\"item-title\">\n                                                            <span>{{record.title}}</span>\n                                                        <span class=\"right_span\">\n                                                            <a v-on:click=\"handleMission(record,$event)\" external class=\"button\">点我</a>\n                                                        </span>\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                            </li>\n                                        </ul>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <!-- B-->\n                <div id=\"tab2\" class=\"tab\">\n                    <div class=\"content-block\">\n                        <div class=\"content-block\">\n                            <div v-for=\"record in records\" v-show=\"!record.isFinish&&!record.isDraw\"  class=\"card\">\n                                <div class=\"card-content\">\n                                    <div class=\"task_flag task_can\"></div>\n                                    <div class=\"card-content-inner\">\n                                        <div class=\"list-block\">\n                                            <ul>\n                                                <li>\n                                                    <div class=\"item-content\">\n                                                        <div class=\"item-inner\">\n                                                            <div class=\"item-title\">\n                                                                <span>{{record.title}}</span>\n                                                        <span class=\"right_span\">\n                                                            <a href=\"#\" class=\"button button-danger\">别点</a>\n                                                        </span>\n                                                            </div>\n                                                        </div>\n                                                    </div>\n                                                </li>\n                                            </ul>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <!-- C-->\n                <div id=\"tab3\" class=\"tab\">\n                    <div class=\"content-block\">\n                        <div class=\"content-block\">\n                            <div v-for=\"record in records\"  class=\"card\">\n                                <div class=\"card-content\">\n                                    <div class=\"task_flag\"\n                                         v-bind:class=\"{'task_can':!record.isFinish&&!record.isDraw,'task_unfin':!record.isFinish&&record.isDraw,'task_fin':record.isFinish&&record.isDraw}\">\n                                    </div>\n                                    <div class=\"card-content-inner\">\n                                        <div class=\"list-block\">\n                                            <ul>\n                                                <li>\n                                                    <div class=\"item-content\">\n                                                        <div class=\"item-inner\">\n                                                            <div class=\"item-title\">\n                                                                <span>{{record.title}}</span>\n                                                        <span class=\"right_span\">\n                                                            <a v-show=\"!record.isFinish&&record.isDraw\" href=\"#\" class=\"button\">别点</a>\n                                                            <a v-show=\"!record.isFinish&&!record.isDraw\" href=\"#\" class=\"button button-danger\">别点</a>\n                                                        </span>\n                                                            </div>\n                                                        </div>\n                                                    </div>\n                                                </li>\n                                            </ul>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 28 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(29)
-	__vue_script__ = __webpack_require__(33)
+	__webpack_require__(46)
+	__vue_script__ = __webpack_require__(50)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\step1.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(34)
+	  console.warn("[vue-loader] src/views/user/auth/step1.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(51)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13612,7 +13878,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\step1.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step1.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13621,16 +13887,16 @@
 	})()}
 
 /***/ },
-/* 29 */
+/* 46 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -13811,23 +14077,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 34 */
+/* 51 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div class=\"page-authStep1\">\n        <header class=\"bar bar-nav\">\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div class=\"inside\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item cur\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item clearfix\" @click=\"selectCity\">\n                    <span class=\"pull-left\">您的城市</span>\n                    <span class=\"pull-right\">{{formData.city_name}}</span>\n                </div>\n                <div class=\"item clearfix\" @click=\"selectSchool\" v-if=\"formData.city_id\">\n                    <span class=\"pull-left\">您的学校</span>\n                    <span class=\"pull-right\">{{formData.school_name}}</span>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"formData.city_id && formData.school_id\" \n            @click=\"goAuth\"\n        >\n            下一步\n        </span>\n    </div>\n";
 
 /***/ },
-/* 35 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(36)
-	__vue_script__ = __webpack_require__(38)
+	__webpack_require__(53)
+	__vue_script__ = __webpack_require__(55)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\selectCity.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(39)
+	  console.warn("[vue-loader] src/views/user/auth/selectCity.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(56)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13837,7 +14103,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\selectCity.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectCity.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13846,14 +14112,14 @@
 	})()}
 
 /***/ },
-/* 36 */
+/* 53 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 37 */,
-/* 38 */
+/* 54 */,
+/* 55 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14020,23 +14286,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 39 */
+/* 56 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div class=\"page-selectCity\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"text\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content inside\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in indexData.areaList\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n                <li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n        </div>\n    </div>\n\n";
 
 /***/ },
-/* 40 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(41)
-	__vue_script__ = __webpack_require__(43)
+	__webpack_require__(58)
+	__vue_script__ = __webpack_require__(60)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\selectSchool.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(44)
+	  console.warn("[vue-loader] src/views/user/auth/selectSchool.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(61)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14046,7 +14312,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\selectSchool.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectSchool.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14055,14 +14321,14 @@
 	})()}
 
 /***/ },
-/* 41 */
+/* 58 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 42 */,
-/* 43 */
+/* 59 */,
+/* 60 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14171,23 +14437,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 44 */
+/* 61 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div id=\"area\" class=\"page-selectCity page-selectSchool\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"text\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content inside\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in schoolList\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n\t\t\t\t<li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n        </div>\n\n    </div>\n";
 
 /***/ },
-/* 45 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(46)
-	__vue_script__ = __webpack_require__(48)
+	__webpack_require__(63)
+	__vue_script__ = __webpack_require__(65)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\selectMap.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(49)
+	  console.warn("[vue-loader] src/views/user/auth/selectMap.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(66)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14197,7 +14463,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\selectMap.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectMap.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14206,14 +14472,14 @@
 	})()}
 
 /***/ },
-/* 46 */
+/* 63 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 47 */,
-/* 48 */
+/* 64 */,
+/* 65 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14420,23 +14686,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 49 */
+/* 66 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div transition=\"page\" class=\"page page-selectMap page-current\">\n        <header class=\"bar bar-nav\">\n            <a class=\"icon icon-left pull-left\"></a>\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div id=\"amapWrap\" class=\"content\"></div>\n\t\t<div id=\"panel\"></div>\n    </div>\n";
 
 /***/ },
-/* 50 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(51)
-	__vue_script__ = __webpack_require__(54)
+	__webpack_require__(68)
+	__vue_script__ = __webpack_require__(71)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\step2.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(55)
+	  console.warn("[vue-loader] src/views/user/auth/step2.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(72)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14446,7 +14712,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\step2.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step2.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14455,15 +14721,15 @@
 	})()}
 
 /***/ },
-/* 51 */
+/* 68 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 52 */,
-/* 53 */,
-/* 54 */
+/* 69 */,
+/* 70 */,
+/* 71 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14599,23 +14865,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 55 */
+/* 72 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div class=\"page-authStep1 page-authStep2\">\n        <header class=\"bar bar-nav\">\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div class=\"inside\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item\"><span>1</span>请填写基本信息</span>\n                <span class=\"item cur\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item clearfix\" @click=\"getPersionPic\">\n                    <span class=\"pull-left\">个人照片</span>\n                    <span class=\"pull-right\" v-if=\"tmpUrlData.auth_head_url\">\n                        <img :src=\"tmpUrlData.auth_head_url\" />\n                    </span>\n                    <span class=\"pull-right addPhoto\" v-else=\"!tmpUrlData.auth_head_url\">\n                        <i class=\"icon icon-anonymous2\"></i>\n                    </span>\n                </div>\n                <div class=\"item clearfix\" @click=\"getStudentPic\">\n                    <span class=\"pull-left\">学生证</span>\n                    <span class=\"pull-right\" v-if=\"tmpUrlData.auth_student_card_url\">\n                        <img :src=\"tmpUrlData.auth_student_card_url\" />\n                    </span>\n                    <span class=\"pull-right addPhoto\" v-else=\"!tmpUrlData.auth_student_card_url\">\n                        <i class=\"icon icon-anonymous2\"></i>\n                    </span>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"tmpUrlData.auth_head_url && tmpUrlData.auth_student_card_url\" \n            @click=\"goAuth\"\n        >\n            下一步\n        </span>\n    </div>\n";
 
 /***/ },
-/* 56 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(57)
-	__vue_script__ = __webpack_require__(60)
+	__webpack_require__(74)
+	__vue_script__ = __webpack_require__(77)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\step3.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(61)
+	  console.warn("[vue-loader] src/views/user/auth/step3.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(78)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14625,7 +14891,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\step3.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step3.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14634,15 +14900,15 @@
 	})()}
 
 /***/ },
-/* 57 */
+/* 74 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 58 */,
-/* 59 */,
-/* 60 */
+/* 75 */,
+/* 76 */,
+/* 77 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14733,17 +14999,11 @@
 	//                     <div class="itemTitle">请选择工作类别(可多选 ）</div>
 	//                     <ul class="type clearfix">
 	//                         <li v-for="item in indexData.sceneList" @click="setScene(item.scene_id)">
-	//                             <span
-	//                                 v-for="(sceneIndex, scene) in tmpSceneArr"
-	//                                 v-if="scene == item.scene_id"
-	//                                 class="cur"
-	//                             >
+	//
+	//                             <span class="cur" v-if="item | sceneCur tmpSceneArr">
 	//                                 {{item.scene_name}}
 	//                             </span>
-	//                             <span
-	//                                 v-for="(sceneIndex, scene) in tmpSceneArr"
-	//                                 v-if="sceneIndex === 0"
-	//                             >
+	//                             <span v-else>
 	//                                 {{item.scene_name}}
 	//                             </span>
 	//
@@ -14770,19 +15030,12 @@
 	//                             <td>日</td>
 	//                         </tr>
 	//                         <tr v-for="item of 3">
-	//                             <td v-for="subItem of 8">
+	//                             <td v-for="subItem of 8" @click="setAccount( subItem +''+ (item+1) )">
 	//                                 <span v-if="item == 0 && subItem == 0">上午</span>
 	//                                 <span v-if="item == 1 && subItem == 0">下午</span>
 	//                                 <span v-if="item == 2 && subItem == 0">晚上</span>
-	//                                 <span class="icon iconWrap" v-if="subItem != 0" @click="setAccount( subItem +''+ (item+1) )">
-	//                                     <i
-	//                                         class="icon icon-xuanzhong"
-	//                                         v-for="( index, time ) in tmpAccountArr"
-	//                                         track-by="$index"
-	//                                         :class="{'selected': time == subItem +''+ (item+1)}"
-	//                                         v-if="time == subItem +''+ (item+1)"
-	//                                     >
-	//                                     </i>
+	//                                 <span class="icon iconWrap" v-if="subItem != 0">
+	//                                     <i class="icon icon-xuanzhong" v-if="item | timerCur subItem tmpAccountArr"></i>
 	//                                 </span>
 	//                             </td>
 	//                         </tr>
@@ -14808,7 +15061,6 @@
 	            tmpSceneArr: [],
 	            tmpAccount: [],
 	            indexData: indexData,
-	            isSumbit: false,
 	            formData: {
 	                sceneIds: null,
 	                timeConf: null,
@@ -14864,20 +15116,23 @@
 	        },
 	        submit: function submit() {
 	            var self = this;
-	            if (!self.isSumbit) {
-	                $.ajax({
-	                    url: "/soytime/ca/save",
-	                    type: 'POST',
-	                    dataType: 'json',
-	                    data: self.formData,
-	                    success: function success(data) {
-	                        if (data.success) {
-	                            self.isSumbit = false;
-	                        }
+	            $.showPreloader('正在努力提交...');
+	            $.ajax({
+	                url: "/soytime/ca/save",
+	                type: 'POST',
+	                dataType: 'json',
+	                data: self.formData,
+	                success: function success(data) {
+	                    if (data.success) {
+	                        $.hidePreloader();
+	                        self.$route.router.go('/auth/step4');
 	                    }
-	                });
-	                self.isSumbit = true;
-	            }
+	                },
+	                error: function error() {
+	                    $.hidePreloader();
+	                    $.toast('网络不给力，请尝试重新提交！');
+	                }
+	            });
 	        },
 	        remove: function remove(arr, val) {
 	            var index = this.indexOf(arr, val);
@@ -14910,23 +15165,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 61 */
+/* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"page-authStep1 page-authStep3\">\n        <header class=\"bar bar-nav\">\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div class=\"content inside\" :class=\"{showPadding: (formData.sceneIds && formData.timeConf && formData.longitude)}\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item cur\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item\">\n                    <div class=\"itemTitle\">请选择工作类别(可多选 ）</div>\n                    <ul class=\"type clearfix\">\n                        <li v-for=\"item in indexData.sceneList\" @click=\"setScene(item.scene_id)\">\n                            <span \n                                v-for=\"(sceneIndex, scene) in tmpSceneArr\" \n                                v-if=\"scene == item.scene_id\" \n                                class=\"cur\"\n                            >\n                                {{item.scene_name}}\n                            </span>\n                            <span \n                                v-for=\"(sceneIndex, scene) in tmpSceneArr\" \n                                v-if=\"sceneIndex === 0\" \n                            >\n                                {{item.scene_name}}\n                            </span>\n                           \n                        </li>\n                    </ul>\n                </div>\n                <div class=\"item clearfix\" @click=\"getMap\">\n                    <span class=\"pull-left\">\n                        工作区域(选择)\n                    </span>\n                    <span class=\"pull-right\">{{formData.workplace}}</span>\n                </div>\n                <div class=\"item\">\n                    <div class=\"itemTitle\">工作时间(可多选 ）</div>\n                    <table>\n                        <tr>\n                            <td>星期</td>\n                            <td>一</td>\n                            <td>二</td>\n                            <td>三</td>\n                            <td>四</td>\n                            <td>五</td>\n                            <td>六</td>\n                            <td>日</td>\n                        </tr>\n                        <tr v-for=\"item of 3\">\n                            <td v-for=\"subItem of 8\">\n                                <span v-if=\"item == 0 && subItem == 0\">上午</span>\n                                <span v-if=\"item == 1 && subItem == 0\">下午</span>\n                                <span v-if=\"item == 2 && subItem == 0\">晚上</span>\n                                <span class=\"icon iconWrap\" v-if=\"subItem != 0\" @click=\"setAccount( subItem +''+ (item+1) )\">\n                                    <i \n                                        class=\"icon icon-xuanzhong\"\n                                        v-for=\"( index, time ) in tmpAccountArr\" \n                                        track-by=\"$index\" \n                                        :class=\"{'selected': time == subItem +''+ (item+1)}\" \n                                        v-if=\"time == subItem +''+ (item+1)\"\n                                    >\n                                    </i>\n                                </span>\n                            </td>\n                        </tr>\n                    </table>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"(formData.sceneIds && formData.timeConf && formData.longitude)\"\n            @click=\"submit\"\n        >\n            下一步\n        </span>\n    </div>\n";
+	module.exports = "\n    <div class=\"page-authStep1 page-authStep3\">\n        <header class=\"bar bar-nav\">\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div class=\"content inside\" :class=\"{showPadding: (formData.sceneIds && formData.timeConf && formData.longitude)}\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item cur\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item\">\n                    <div class=\"itemTitle\">请选择工作类别(可多选 ）</div>\n                    <ul class=\"type clearfix\">\n                        <li v-for=\"item in indexData.sceneList\" @click=\"setScene(item.scene_id)\">\n\n                            <span class=\"cur\" v-if=\"item | sceneCur tmpSceneArr\">\n                                {{item.scene_name}}\n                            </span>\n                            <span v-else>\n                                {{item.scene_name}}\n                            </span>\n                           \n                        </li>\n                    </ul>\n                </div>\n                <div class=\"item clearfix\" @click=\"getMap\">\n                    <span class=\"pull-left\">\n                        工作区域(选择)\n                    </span>\n                    <span class=\"pull-right\">{{formData.workplace}}</span>\n                </div>\n                <div class=\"item\">\n                    <div class=\"itemTitle\">工作时间(可多选 ）</div>\n                    <table>\n                        <tr>\n                            <td>星期</td>\n                            <td>一</td>\n                            <td>二</td>\n                            <td>三</td>\n                            <td>四</td>\n                            <td>五</td>\n                            <td>六</td>\n                            <td>日</td>\n                        </tr>\n                        <tr v-for=\"item of 3\">\n                            <td v-for=\"subItem of 8\" @click=\"setAccount( subItem +''+ (item+1) )\">\n                                <span v-if=\"item == 0 && subItem == 0\">上午</span>\n                                <span v-if=\"item == 1 && subItem == 0\">下午</span>\n                                <span v-if=\"item == 2 && subItem == 0\">晚上</span>\n                                <span class=\"icon iconWrap\" v-if=\"subItem != 0\">\n                                    <i class=\"icon icon-xuanzhong\" v-if=\"item | timerCur subItem tmpAccountArr\"></i>\n                                </span>\n                            </td>\n                        </tr>\n                    </table>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"(formData.sceneIds && formData.timeConf && formData.longitude)\"\n            @click=\"submit\"\n        >\n            下一步\n        </span>\n    </div>\n";
 
 /***/ },
-/* 62 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(63)
-	__vue_script__ = __webpack_require__(65)
+	__webpack_require__(80)
+	__vue_script__ = __webpack_require__(82)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\step4.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(66)
+	  console.warn("[vue-loader] src/views/user/auth/step4.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(83)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14936,7 +15191,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\step4.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step4.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14945,14 +15200,14 @@
 	})()}
 
 /***/ },
-/* 63 */
+/* 80 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 64 */,
-/* 65 */
+/* 81 */,
+/* 82 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14997,23 +15252,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 66 */
+/* 83 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-authStep4\">\n    <div class=\"inside\">\n        <h2>认证中...</h2>\n        <div>\n            <p>酱油已收到您的认证信息！</p>\n            将在一个工作日内帮您完成认证。</p>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 67 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(68)
-	__vue_script__ = __webpack_require__(70)
+	__webpack_require__(85)
+	__vue_script__ = __webpack_require__(87)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(71)
+	  console.warn("[vue-loader] src/App.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(88)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -15023,7 +15278,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\work\\vue-demo-webpack\\src\\App.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/App.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15032,14 +15287,14 @@
 	})()}
 
 /***/ },
-/* 68 */
+/* 85 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 69 */,
-/* 70 */
+/* 86 */,
+/* 87 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -15084,26 +15339,30 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 71 */
+/* 88 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page page-current\">\n\n    <nav class=\"bar bar-tab\" v-if=\"isIndex\" >\n        <a class=\"tab-item\" external v-link=\"{ path: '/home', activeClass: 'active'}\">\n            <span class=\"icon icon-home\"></span>\n            <span class=\"tab-label\">首页</span>\n        </a>\n        <a class=\"tab-item\" external  v-link=\"{ path: '/msg', activeClass: 'active' }\">\n            <span class=\"icon icon-message\"></span>\n            <span class=\"tab-label\">消息</span>\n        </a>\n        <a class=\"tab-item\" external v-link=\"{ path: '/user', activeClass: 'active' }\">\n            <span class=\"icon icon-me\"></span>\n            <span class=\"tab-label\">我的</span>\n        </a>\n    </nav>\n\n    <router-view keep-alive></router-view>\n</div>\n";
 
 /***/ },
-/* 72 */
+/* 89 */
 /***/ function(module, exports) {
 
 	"use strict";
 	
-	exports.sceneCur = function () {
-		var id = arguments[1],
-		    arr = arguments[2];
-	
-		return true;
-	
+	exports.sceneCur = function (obj, arr) {
+		var sceneId = obj.scene_id;
 		for (var i = 0, len = arr.length; i < len; i++) {
-			if (id == arr[i]) {
-				console.log(arr[i]);
+			if (sceneId == arr[i]) {
+				return true;
+			}
+		}
+	};
+	
+	exports.timerCur = function (item, subItem, arr) {
+		var timer = subItem + '' + (item + 1);
+		for (var i = 0, len = arr.length; i < len; i++) {
+			if (timer == arr[i]) {
 				return true;
 			}
 		}

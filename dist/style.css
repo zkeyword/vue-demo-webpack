@@ -1,6 +1,84 @@
-
-.body {
-    background: #fff;
+/*阴影*/
+/*圆角*/
+/*三角*/
+/*盒子*/
+/*透明度*/
+/* rem */
+.page-home {
+  /* 幻灯片 */
+  /* 场景 */
+}
+.page-home .swiper-container {
+  padding: 0;
+}
+.page-home .swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.4;
+}
+.page-home .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  opacity: .6;
+}
+.page-home .sceneWrap {
+  -: ;padding: 1rem;
+  -: ;padding: 1rem 0.5rem;
+  -: ;padding: 1rem 0.5rem 0rem;
+}
+.page-home .sceneItem {
+  width: 50%;
+  float: left;
+  -: ;padding: 0rem;
+  -: ;padding: 0rem 0.25rem;
+  -: ;padding: 0rem 0.25rem 0.4rem;
+  -: ;height: 4.5rem;
+}
+.page-home .sceneItem a {
+  background: #54c5ff;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  position: relative;
+  -: ;padding: 1.2rem;
+  -: ;padding: 1.2rem 0rem;
+  -: ;padding: 1.2rem 0rem 1.2rem;
+  -: ;padding: 1.2rem 0rem 1.2rem 3rem;
+  -: ;border-radius: 0.2rem;
+}
+.page-home .sceneItem.red a {
+  background: #ff946e;
+}
+.page-home .sceneItem span {
+  display: block;
+}
+.page-home .sceneItem span.first {
+  -: ;font-size: 0.75rem;
+}
+.page-home .sceneItem span.last {
+  -: ;font-size: 0.5rem;
+}
+.page-home .icon {
+  -: ;background-size: 2rem !important;
+  -: ;background-size: 2rem 2rem !important;
+  -: ;width: 2rem;
+  -: ;height: 2rem;
+  -: ;top: 1.25rem;
+  -: ;left: 0.5rem;
+  position: absolute;
+}
+.page-home .icon-home1 {
+  background: url(img/21a58403.home1.svg?v=1457614000367) no-repeat;
+}
+.page-home .icon-home2 {
+  background: url(img/d4d5b1d0.home2.svg?v=1457614000367) no-repeat;
+}
+.page-home .icon-home4 {
+  background: url(img/f4a087e3.home4.svg?v=1457614000367) no-repeat;
+}
+.page-home .icon-home5 {
+  background: url(img/6f6c431d.home5.svg?v=1457614000367) no-repeat;
+}
+.page-home .icon-home6 {
+  background: url(img/292082fa.home6.svg?v=1457614000367) no-repeat;
 }
 
 /*阴影*/
@@ -64,14 +142,14 @@
   -: ;width: 0.8rem;
 }
 .page-authStep1 .icon-anquanbaozhang {
-  background: url(img/307f8e36.anquanbaozhang.svg?v=1457601664230) no-repeat;
+  background: url(img/b210427f.anquanbaozhang.svg?v=1457614000367) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .page-authStep1 .icon-anquanbaozhang2 {
-  background: url(img/d615d32f.anquanbaozhang2.svg?v=1457601664230) no-repeat;
+  background: url(img/698ccc0c.anquanbaozhang2.svg?v=1457614000367) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
 }
@@ -161,7 +239,7 @@
   -: ;line-height: 3.55rem;
 }
 .page-authStep2 .icon-anonymous2 {
-  background: url(img/a6769de3.anonymous2.svg?v=1457601664230) no-repeat;
+  background: url(img/4dfb9e1a.anonymous2.svg?v=1457614000367) no-repeat;
   -: ;background-size: 2.05rem;
   -: ;background-size: 2.05rem 2.05rem;
   -: ;height: 2.05rem;
@@ -232,7 +310,7 @@
   -: ;width: 0.95rem;
 }
 .page-authStep3 table td .icon-xuanzhong {
-  background: url(img/925972fb.xuanzhong.svg?v=1457601664230) no-repeat;
+  background: url(img/b818dd37.xuanzhong.svg?v=1457614000367) no-repeat;
   -: ;background-size: 0.95rem;
   -: ;background-size: 0.95rem 0.85rem;
   -: ;height: 0.85rem;
@@ -259,17 +337,17 @@ html {
 }
 @media only screen and (min-width: 400px) {
   html {
-    font-size: 25px !important;
+    font-size: 21.33333333px !important;
   }
 }
 @media only screen and (min-width: 414px) {
   html {
-    font-size: 25.875px !important;
+    font-size: 22.08px !important;
   }
 }
 @media only screen and (min-width: 480px) {
   html {
-    font-size: 30px !important;
+    font-size: 25.6px !important;
   }
 }
 /*阴影*/
@@ -301,6 +379,9 @@ html {
   margin: 0 5px;
 }
 /* 基本布局 */
+body {
+  background: #fff;
+}
 body,
 .page {
   background: #fafafa;

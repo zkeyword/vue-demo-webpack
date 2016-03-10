@@ -81,17 +81,11 @@
                     <div class="itemTitle">请选择工作类别(可多选 ）</div>
                     <ul class="type clearfix">
                         <li v-for="item in indexData.sceneList" @click="setScene(item.scene_id)">
-                            <span 
-                                v-for="(sceneIndex, scene) in tmpSceneArr" 
-                                v-if="scene == item.scene_id" 
-                                class="cur"
-                            >
+
+                            <span class="cur" v-if="item | sceneCur tmpSceneArr">
                                 {{item.scene_name}}
                             </span>
-                            <span 
-                                v-for="(sceneIndex, scene) in tmpSceneArr" 
-                                v-if="sceneIndex === 0" 
-                            >
+                            <span v-else>
                                 {{item.scene_name}}
                             </span>
                            
@@ -118,19 +112,12 @@
                             <td>日</td>
                         </tr>
                         <tr v-for="item of 3">
-                            <td v-for="subItem of 8">
+                            <td v-for="subItem of 8" @click="setAccount( subItem +''+ (item+1) )">
                                 <span v-if="item == 0 && subItem == 0">上午</span>
                                 <span v-if="item == 1 && subItem == 0">下午</span>
                                 <span v-if="item == 2 && subItem == 0">晚上</span>
-                                <span class="icon iconWrap" v-if="subItem != 0" @click="setAccount( subItem +''+ (item+1) )">
-                                    <i 
-                                        class="icon icon-xuanzhong"
-                                        v-for="( index, time ) in tmpAccountArr" 
-                                        track-by="$index" 
-                                        :class="{'selected': time == subItem +''+ (item+1)}" 
-                                        v-if="time == subItem +''+ (item+1)"
-                                    >
-                                    </i>
+                                <span class="icon iconWrap" v-if="subItem != 0">
+                                    <i class="icon icon-xuanzhong" v-if="item | timerCur subItem tmpAccountArr"></i>
                                 </span>
                             </td>
                         </tr>
@@ -156,7 +143,6 @@
 				tmpSceneArr: [],
 				tmpAccount: [],
 				indexData: indexData,
-                isSumbit: false,
                 formData: {
                     sceneIds: null,
                     timeConf: null,
@@ -174,6 +160,7 @@
                 self.tmpSceneArr   = query.sceneIds.split('-');
              
                 $.extend(self.formData, query);
+                
             }
         },
         watch:{
@@ -211,20 +198,23 @@
 			},
 			submit(){
 				let self = this;
-                if( !self.isSumbit ) {
-                    $.ajax({
-                        url: "/soytime/ca/save",
-                        type:'POST',
-                        dataType: 'json',
-                        data: self.formData,
-                        success: ((data)=>{
-                            if( data.success ){
-                                self.isSumbit = false;
-                            }
-                        })
-                    });
-                    self.isSumbit = true;
-                }
+                $.showPreloader('正在努力提交...')
+                $.ajax({
+                    url: "/soytime/ca/save",
+                    type:'POST',
+                    dataType: 'json',
+                    data: self.formData,
+                    success: ((data)=>{
+                        if( data.success ){
+                            $.hidePreloader();
+                            self.$route.router.go('/auth/step4');
+                        }
+                    }),
+                    error: ()=>{
+                        $.hidePreloader();
+                        $.toast('网络不给力，请尝试重新提交！');
+                    }
+                });
 			},
             remove(arr, val){
                 var index = this.indexOf(arr, val);

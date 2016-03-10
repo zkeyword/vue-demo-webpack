@@ -2822,6 +2822,7 @@ var indexData = {
             "scene_id": 200001,
             "id": 1,
             "scene_name": "地推",
+            "scene_detail":"地推地推地推地推",
             "status": 1
         },
         {
@@ -2859,6 +2860,20 @@ var indexData = {
             "id": 7,
             "scene_name": "礼仪",
             "status": 1
+        }
+    ],
+    "slides": [
+        {
+            "url":'auth',
+            "img": "/dist/img/1.jpg"
+        },
+        {
+            "url":'auth/step2',
+            "img": "/dist/img/12.jpg"
+        },
+        {
+            "url":'auth/step2',
+            "img": "/dist/img/13.jpg"
         }
     ]
 }

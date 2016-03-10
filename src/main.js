@@ -9,11 +9,9 @@ Vue.use(Vuex);
 Vue.use(VueRouter);
 
 //添加过滤
-//Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
+Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
 
-Vue.filter('sceneCur', filters['sceneCur'])
-
-
+//Vue.filter('sceneCur', filters['sceneCur'])
 
 // routing
 let router = new VueRouter({
