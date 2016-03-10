@@ -62,7 +62,7 @@
 	
 	var _routers2 = _interopRequireDefault(_routers);
 	
-	var _App = __webpack_require__(65);
+	var _App = __webpack_require__(67);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
@@ -13073,27 +13073,27 @@
 									},
 									'/auth/selectCity': {
 													name: 'selectCity',
-													component: __webpack_require__(33)
+													component: __webpack_require__(35)
 									},
 									'/auth/selectSchool': {
 													name: 'selectSchool',
-													component: __webpack_require__(38)
+													component: __webpack_require__(40)
 									},
 									'/auth/selectMap': {
 													name: 'selectMap',
-													component: __webpack_require__(43)
+													component: __webpack_require__(45)
 									},
 									'/auth/step2': {
 													name: 'authStep2',
-													component: __webpack_require__(48)
+													component: __webpack_require__(50)
 									},
 									'/auth/step3': {
 													name: 'authStep3',
-													component: __webpack_require__(53)
+													component: __webpack_require__(56)
 									},
 									'/auth/step4': {
 													name: 'authStep4',
-													component: __webpack_require__(58)
+													component: __webpack_require__(62)
 									}
 					});
 	};
@@ -13108,7 +13108,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\home.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/views/home.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(16)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -13119,7 +13119,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\home.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13194,7 +13194,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\list.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/views/list.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(19)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -13205,7 +13205,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\list.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/list.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13270,7 +13270,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\detail.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/views/detail.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(24)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -13281,7 +13281,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\detail.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/detail.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13397,7 +13397,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\tab.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/views/tab.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(27)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -13408,7 +13408,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\tab.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/tab.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13588,12 +13588,12 @@
 
 	var __vue_script__, __vue_template__
 	__webpack_require__(29)
-	__vue_script__ = __webpack_require__(31)
+	__vue_script__ = __webpack_require__(33)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\step1.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(32)
+	  console.warn("[vue-loader] src/views/user/auth/step1.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(34)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13603,7 +13603,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user\\auth\\step1.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step1.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13619,7 +13619,9 @@
 
 /***/ },
 /* 30 */,
-/* 31 */
+/* 31 */,
+/* 32 */,
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -13633,12 +13635,12 @@
 	//         .rem(padding, 0, 26);
 	//         .stepTitle{
 	//             text-align:center;
-	//             .rem(font-size, 29);
+	//             .rem(font-size, 30);
 	//         }
 	//         .stepText{
 	//             text-align:center;
 	//             color:#b2b2b2;
-	//             .rem(font-size, 17);
+	//             .rem(font-size, 20);
 	//             .rem(margin, 16, 0, 0);
 	//         }
 	//         .progress{
@@ -13648,21 +13650,46 @@
 	//             .item{
 	//                 background:#fff;
 	//                 border:1px solid #f6f6f6;
+	//                 vertical-align:middle;
 	//                 .border-radius(8);
 	//                 .rem(margin-bottom, 16);
-	//                 .rem(font-size, 16);
-	//                 .rem(height, 68);
-	//                 .rem(line-height, 68);
+	//                 .rem(font-size, 24);
 	//                 .rem(border-width, 2);
-	//                 .rem(padding, 0, 16);
+	//                 .rem(padding, 26, 16);
 	//             }
 	//         }
+	//         .ui-floatCenter{
+	//             .rem(height, 32);
+	//             .rem(margin-top, 18);
+	//         }
+	//         .ui-floatCenter-item{
+	//             .rem(margin, 0, 5);
 	//
-	// 		.icon-anquanbaozhang-size{
-	// 			.rem(height, 52);
-	// 			.rem(width, 52);
-	// 			.rem(background-size, 416, 416)
-	// 		}
+	//             &.link{
+	//                 position:relative;
+	//                 .rem(height, 32);
+	//                 .rem(width, 34);
+	//                 &:before{
+	//                     content:' ';
+	//                     display: inline-block;
+	//                     position:absolute;
+	//                     background:#b2b2b2;
+	//                     .rem(top, 14);
+	//                     .rem(height, 2);
+	//                     .rem(width, 32);
+	//                 }
+	//             }
+	//         }
+	//         .icon-anquanbaozhang{
+	//             background:url(../../../img/anquanbaozhang.svg) no-repeat;
+	//             .rem(background-size, 32, 32);
+	//             .rem(height, 32);
+	//             .rem(width, 32);
+	//         }
+	//         .icon-anquanbaozhang2{
+	//             background:url(../../../img/anquanbaozhang2.svg) no-repeat;
+	//             .rem(background-size, 32, 32);
+	//         }
 	//     }
 	// </style>
 	//
@@ -13673,9 +13700,12 @@
 	//         </header>
 	//         <div class="inside">
 	//             <div class="stepTitle">申请认证</div>
-	//             <div class="iconWrap">
-	// 				<i class="icon icon-anquanbaozhang icon-anquanbaozhang-size"></i>
-	// 				<i class="icon icon-anquanbaozhang2 icon-anquanbaozhang2-size"></i>
+	//             <div class="ui-floatCenter">
+	//                 <div class="ui-sl-floatCenter">
+	//                     <i class="ui-floatCenter-item icon icon-anquanbaozhang"></i>
+	//                     <i class="ui-floatCenter-item icon link"></i>
+	//                     <i class="ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2"></i>
+	//                 </div>
 	// 			</div>
 	//             <div class="stepText">将在一个工作日内审核完成!</div>
 	//             <div class="progress">
@@ -13684,23 +13714,23 @@
 	//                 <span class="item"><span>3</span>服务设置</span>
 	//             </div>
 	//             <div class="params">
-	//                 <div class="item" @click="selectCity">
+	//                 <div class="item clearfix" @click="selectCity">
 	//                     <span class="pull-left">您的城市</span>
-	//                     <span class="pull-right">{{formData.city}}</span>
+	//                     <span class="pull-right">{{formData.city_name}}</span>
 	//                 </div>
-	//                 <div class="item" @click="selectSchool" v-if="formData.city_id">
+	//                 <div class="item clearfix" @click="selectSchool" v-if="formData.city_id">
 	//                     <span class="pull-left">您的学校</span>
-	//                     <span class="pull-right">{{formData.school}}</span>
+	//                     <span class="pull-right">{{formData.school_name}}</span>
 	//                 </div>
 	//             </div>
 	//         </div>
-	//         <a
+	//         <span
 	//             class="ui-btn ui-btn-big"
 	//             v-if="formData.city_id && formData.school_id"
-	//             v-link="{ path: '/auth/step2?city_id='+ formData.city_id +'&school_id=' + formData.school_id }"
+	//             @click="goAuth"
 	//         >
 	//             下一步
-	//         </a>
+	//         </span>
 	//     </div>
 	// </template>
 	//
@@ -13709,37 +13739,53 @@
 	    data: function data() {
 	        return {
 	            formData: {
-	                city: null,
+	                city_name: null,
 	                city_id: null,
 	                school_id: null,
-	                school: null
+	                school_name: null
 	            }
 	        };
 	    },
 	
 	    route: {
 	        data: function data(transition) {
-	            var query = transition.to.query;
-	            this.formData.city_id = query.city_id ? query.city_id : null;
-	            this.formData.city = query.city_name ? query.city_name : null;
-	            this.formData.school_id = query.school_id ? query.school_id : null;
-	            this.formData.school = query.school_name ? query.school_name : null;
+	            var self = this,
+	                query = transition.to.query;
+	
+	            if (query.city_id) {
+	                self.formData.city_id = query.city_id ? query.city_id : self.formData.city_id;
+	                self.formData.city_name = query.city_name ? query.city_name : self.formData.city_name;
+	                self.formData.school_id = query.school_id ? query.school_id : self.formData.school_id;
+	                self.formData.school_name = query.school_name ? query.school_name : self.formData.school_name;
+	            } else {
+	                $.ajax({
+	                    url: "/soytime/ca/caInfo",
+	                    type: 'POST',
+	                    dataType: 'json',
+	                    success: function success(data) {
+	                        $.extend(self.formData, data.result);
+	                    }
+	                });
+	            }
+	        }
+	    },
+	    watch: {
+	        'formData': function formData() {
+	            console.log(self.formData);
 	        }
 	    },
 	    methods: {
+	        goAuth: function goAuth() {
+	            var self = this;
+	            self.$route.router.go('/auth/step2?' + $.param(self.formData));
+	        },
 	        selectCity: function selectCity() {
-	            this.$route.router.go({ name: 'selectCity' });
+	            var self = this;
+	            self.$route.router.go('/auth/selectCity?' + $.param(self.formData));
 	        },
 	        selectSchool: function selectSchool() {
-	            this.$route.router.go({ name: 'selectSchool' });
-	            return;
-	            this.$route.router.go({
-	                name: 'selectSchool',
-	                params: {
-	                    city_id: this.formData.city_id,
-	                    city_name: this.formData.city
-	                }
-	            });
+	            var self = this;
+	            self.$route.router.go('/auth/selectSchool?' + $.param(self.formData));
 	        }
 	    }
 	};
@@ -13756,23 +13802,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"page-authStep1\">\n        <header class=\"bar bar-nav\">\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div class=\"inside\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"iconWrap\">\n\t\t\t\t<i class=\"icon icon-anquanbaozhang icon-anquanbaozhang-size\"></i>\n\t\t\t\t<i class=\"icon icon-anquanbaozhang2 icon-anquanbaozhang2-size\"></i>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item cur\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item\" @click=\"selectCity\">\n                    <span class=\"pull-left\">您的城市</span>\n                    <span class=\"pull-right\">{{formData.city}}</span>\n                </div>\n                <div class=\"item\" @click=\"selectSchool\" v-if=\"formData.city_id\">\n                    <span class=\"pull-left\">您的学校</span>\n                    <span class=\"pull-right\">{{formData.school}}</span>\n                </div>\n            </div>\n        </div>\n        <a \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"formData.city_id && formData.school_id\" \n            v-link=\"{ path: '/auth/step2?city_id='+ formData.city_id +'&school_id=' + formData.school_id }\"\n        >\n            下一步\n        </a>\n    </div>\n";
+	module.exports = "\n    <div class=\"page-authStep1\">\n        <header class=\"bar bar-nav\">\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div class=\"inside\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item cur\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item clearfix\" @click=\"selectCity\">\n                    <span class=\"pull-left\">您的城市</span>\n                    <span class=\"pull-right\">{{formData.city_name}}</span>\n                </div>\n                <div class=\"item clearfix\" @click=\"selectSchool\" v-if=\"formData.city_id\">\n                    <span class=\"pull-left\">您的学校</span>\n                    <span class=\"pull-right\">{{formData.school_name}}</span>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"formData.city_id && formData.school_id\" \n            @click=\"goAuth\"\n        >\n            下一步\n        </span>\n    </div>\n";
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(34)
-	__vue_script__ = __webpack_require__(36)
+	__webpack_require__(36)
+	__vue_script__ = __webpack_require__(38)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\selectCity.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(37)
+	  console.warn("[vue-loader] src/views/user/auth/selectCity.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(39)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13782,7 +13828,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user\\auth\\selectCity.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectCity.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13791,14 +13837,14 @@
 	})()}
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 35 */,
-/* 36 */
+/* 37 */,
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -13910,15 +13956,19 @@
 	            }
 	        };
 	    },
-	    destroy: function destroy() {
-	        this.keyword = null;
-	    },
 	
+	    route: {
+	        data: function data(transition) {
+	            var self = this,
+	                query = transition.to.query;
+	
+	            $.extend(self.formData, query);
+	        }
+	    },
 	    watch: {
 	        keyword: function keyword() {
 	            var self = this;
 	            self.tmpData = self.filteData(self.keyword);
-	            console.log(this.tmpData);
 	        }
 	    },
 	    methods: {
@@ -13961,23 +14011,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 37 */
+/* 39 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div class=\"page-selectCity\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"search\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content inside\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in indexData.areaList\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n                <li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n        </div>\n    </div>\n\n";
 
 /***/ },
-/* 38 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(39)
-	__vue_script__ = __webpack_require__(41)
+	__webpack_require__(41)
+	__vue_script__ = __webpack_require__(43)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\selectSchool.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(42)
+	  console.warn("[vue-loader] src/views/user/auth/selectSchool.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(44)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13987,7 +14037,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user\\auth\\selectSchool.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectSchool.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13996,14 +14046,14 @@
 	})()}
 
 /***/ },
-/* 39 */
+/* 41 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 40 */,
-/* 41 */
+/* 42 */,
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14025,13 +14075,13 @@
 	//             </div>
 	//         </div>
 	//
-	//         <div class="content">
-	//             <ul v-if="!tmpData.length">
+	//         <div class="content inside">
+	//             <ul class="list" v-if="!tmpData.length">
 	// 				<li v-for="item in schoolList" @click="goAuth(item)">
 	//                     {{item.school_name}}
 	//                 </li>
 	//             </ul>
-	//             <ul v-else="tmpData.length">
+	//             <ul class="list" v-else="tmpData.length">
 	// 				<li v-for="item in tmpData" @click="goAuth(item)">
 	//                     {{item.school_name}}
 	//                 </li>
@@ -14067,23 +14117,22 @@
 	        data: function data(transition) {
 	            var self = this,
 	                query = transition.from.query;
-	            self.formData.city_id = query.city_id ? query.city_id : null;
-	            self.formData.city_name = query.city_name ? query.city_name : null;
+	
+	            $.extend(self.formData, query);
+	
+	            $.ajax({
+	                url: "/soytime/data/loadSchool",
+	                type: 'POST',
+	                dataType: 'json',
+	                data: self.formData,
+	                success: function success(data) {
+	                    self.schoolList = data.result;
+	                }
+	            });
+	
+	            transition.next();
 	        }
 	    },
-	    ready: function ready() {
-	        var self = this;
-	        $.ajax({
-	            url: "/soytime/data/loadSchool",
-	            type: 'POST',
-	            dataType: 'json',
-	            data: self.formData,
-	            success: function success(data) {
-	                self.schoolList = data.result;
-	            }
-	        });
-	    },
-	
 	    methods: {
 	        goAuth: function goAuth(item) {
 	            var self = this;
@@ -14113,23 +14162,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 42 */
+/* 44 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div id=\"area\" class=\"page-selectCity page-selectSchool\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"search\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content\">\n            <ul v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in schoolList\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n            <ul v-else=\"tmpData.length\">\n\t\t\t\t<li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n        </div>\n\n    </div>\n";
+	module.exports = "\n    <div id=\"area\" class=\"page-selectCity page-selectSchool\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"search\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content inside\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in schoolList\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n\t\t\t\t<li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n        </div>\n\n    </div>\n";
 
 /***/ },
-/* 43 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(44)
-	__vue_script__ = __webpack_require__(46)
+	__webpack_require__(46)
+	__vue_script__ = __webpack_require__(48)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\selectMap.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(47)
+	  console.warn("[vue-loader] src/views/user/auth/selectMap.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(49)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14139,7 +14188,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user\\auth\\selectMap.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectMap.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14148,14 +14197,14 @@
 	})()}
 
 /***/ },
-/* 44 */
+/* 46 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 45 */,
-/* 46 */
+/* 47 */,
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14226,7 +14275,7 @@
 			return {
 				formData: {
 					latitude: '',
-					workPlace: '',
+					workplace: '',
 					position: [],
 					city_id: '',
 					school_id: ''
@@ -14236,9 +14285,10 @@
 	
 		route: {
 			data: function data(transition) {
-				var query = transition.to.query;
-				this.formData.city_id = query.city_id ? query.city_id : null;
-				this.formData.school_id = query.school_id ? query.school_id : null;
+				var self = this,
+				    query = transition.to.query;
+	
+				$.extend(self.formData, query);
 			}
 		},
 		ready: function ready() {
@@ -14246,7 +14296,7 @@
 			if (!window.AMap) {
 				setTimeout(function () {
 					location.reload();
-				}, 3000);
+				}, 15000);
 				return;
 			}
 	
@@ -14327,8 +14377,9 @@
 								    ads = box.find('.poi-addr').html();
 	
 								panel.on('click', '.mapBtn', function (e) {
-									self.formData.ads = ads.replace(/地址：/, '');
-									self.formData.position = position.join(',');
+									self.formData.workplace = ads.replace(/地址：/, '');
+									self.formData.longitude = position[0];
+									self.formData.latitude = position[1];
 									self.$route.router.go('/auth/step3?' + $.param(self.formData));
 									return false;
 								});
@@ -14352,7 +14403,7 @@
 			} else {
 				setTimeout(function () {
 					location.reload();
-				}, 3000);
+				}, 15000);
 			}
 		}
 	};
@@ -14360,23 +14411,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 47 */
+/* 49 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div transition=\"page\" class=\"page page-selectMap page-current\">\n        <header class=\"bar bar-nav\">\n            <a class=\"icon icon-left pull-left\"></a>\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div id=\"amapWrap\" class=\"content\"></div>\n\t\t<div id=\"panel\"></div>\n    </div>\n";
 
 /***/ },
-/* 48 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(49)
-	__vue_script__ = __webpack_require__(51)
+	__webpack_require__(51)
+	__vue_script__ = __webpack_require__(54)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\step2.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(52)
+	  console.warn("[vue-loader] src/views/user/auth/step2.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(55)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14386,7 +14437,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user\\auth\\step2.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step2.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14395,14 +14446,15 @@
 	})()}
 
 /***/ },
-/* 49 */
+/* 51 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 50 */,
-/* 51 */
+/* 52 */,
+/* 53 */,
+/* 54 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14411,41 +14463,78 @@
 	    value: true
 	});
 	// <style lang="less">
+	// @import '../../../less/lib/mixins.less';
+	// .page-authStep2{
+	//     .item{
+	//         .pull-left{
+	//             .rem(height, 142);
+	//             .rem(line-height, 142);
+	//         }
+	//     }
+	//     .icon-anonymous2{
+	//         background:url(../../../img/anonymous2.svg) no-repeat;
+	//         .rem(background-size, 82, 82);
+	//         .rem(height, 82);
+	//         .rem(width, 82);
 	//
+	//     }
+	//     .addPhoto{
+	//         border:1px dotted #68ccff;
+	//         .rem(padding, 28);
+	//         .rem(border-width, 2);
+	//     }
+	//     img{
+	//         display:inline-block;
+	//         .rem(width, 142);
+	//         .rem(height, 142);
+	//     }
+	// }
 	// </style>
 	//
 	// <template>
-	//     <div class="page-authStep2">
+	//     <div class="page-authStep1 page-authStep2">
 	//         <header class="bar bar-nav">
 	//             <h1 class="title">认证</h1>
 	//         </header>
-	//         <div class="inside auth-step2">
+	//         <div class="inside">
 	//             <div class="stepTitle">申请认证</div>
-	//             <div class="iconWrap"></div>
+	//             <div class="ui-floatCenter">
+	//                 <div class="ui-sl-floatCenter">
+	//                     <i class="ui-floatCenter-item icon icon-anquanbaozhang"></i>
+	//                     <i class="ui-floatCenter-item icon link"></i>
+	//                     <i class="ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2"></i>
+	//                 </div>
+	// 			</div>
 	//             <div class="stepText">将在一个工作日内审核完成!</div>
 	//             <div class="progress">
 	//                 <span class="item"><span>1</span>请填写基本信息</span>
 	//                 <span class="item cur"><span>2</span>上传证照</span>
 	//                 <span class="item"><span>3</span>服务设置</span>
 	//             </div>
-	//         </div>
-	//         <div class="params">
-	//             <div class="item" @click="getPersionPic">
-	//                 <span class="fn-left">个人照片</span>
-	//                 <span class="fn-right" v-if="formData.auth_head">
-	//                     <img :src="auth_head_url" />
-	//                 </span>
-	//             </div>
-	//             <div class="item" @click="getStudentPic">
-	//                 <span class="fn-left">学生证</span>
-	//                 <span class="fn-right" v-if="formData.auth_student_card">
-	//                     <img :src="auth_student_card_url" />
-	//                 </span>
+	//             <div class="params">
+	//                 <div class="item clearfix" @click="getPersionPic">
+	//                     <span class="pull-left">个人照片</span>
+	//                     <span class="pull-right" v-if="tmpUrlData.auth_head_url">
+	//                         <img :src="tmpUrlData.auth_head_url" />
+	//                     </span>
+	//                     <span class="pull-right addPhoto" v-else="!tmpUrlData.auth_head_url">
+	//                         <i class="icon icon-anonymous2"></i>
+	//                     </span>
+	//                 </div>
+	//                 <div class="item clearfix" @click="getStudentPic">
+	//                     <span class="pull-left">学生证</span>
+	//                     <span class="pull-right" v-if="tmpUrlData.auth_student_card_url">
+	//                         <img :src="tmpUrlData.auth_student_card_url" />
+	//                     </span>
+	//                     <span class="pull-right addPhoto" v-else="!tmpUrlData.auth_student_card_url">
+	//                         <i class="icon icon-anonymous2"></i>
+	//                     </span>
+	//                 </div>
 	//             </div>
 	//         </div>
 	//         <span
-	//             class="button button-big"
-	//             v-if="formData.city_id && formData.school_id"
+	//             class="ui-btn ui-btn-big"
+	//             v-if="tmpUrlData.auth_head_url && tmpUrlData.auth_student_card_url"
 	//             @click="goAuth"
 	//         >
 	//             下一步
@@ -14457,22 +14546,22 @@
 	exports.default = {
 	    data: function data() {
 	        return {
-	            auth_head_url: null,
-	            auth_student_card_url: null,
-	            formData: {
-	                city_id: null,
-	                school_id: null,
-	                auth_head: null,
-	                auth_student_card: null
-	            }
+	            formData: {},
+	            tmpUrlData: {}
 	        };
 	    },
 	
 	    route: {
 	        data: function data(transition) {
-	            var query = transition.to.query;
-	            this.formData.city_id = query.city_id ? query.city_id : null;
-	            this.formData.school_id = query.school_id ? query.school_id : null;
+	            var self = this,
+	                query = transition.to.query;
+	
+	            self.tmpUrlData = {
+	                auth_head_url: query.auth_head_url ? '/soytime/file/renzheng/' + query.auth_head_url : null,
+	                auth_student_card_url: query.auth_student_card_url ? '/soytime/file/renzheng/' + query.auth_student_card_url : null
+	            };
+	
+	            $.extend(self.formData, query);
 	        }
 	    },
 	    methods: {
@@ -14483,15 +14572,15 @@
 	        getPersionPic: function getPersionPic() {
 	            var self = this;
 	            uploadimg(1, function (data) {
-	                self.formData.auth_head = data.auth_head;
-	                self.formData.auth_head_url = '/soytime/file/renzheng?guid=' + data.auth_head;
+	                self.formData.auth_head = data;
+	                self.formData.auth_head_url = '/soytime/file/renzheng/' + data;
 	            });
 	        },
 	        getStudentPic: function getStudentPic() {
 	            var self = this;
 	            uploadimg(2, function (data) {
-	                self.formData.auth_student_card = data.auth_student_card;
-	                self.formData.auth_student_card_url = '/soytime/file/renzheng?guid=' + data.auth_student_card;
+	                self.formData.auth_student_card = data;
+	                self.formData.auth_student_card_url = '/soytime/file/renzheng/' + data;
 	            });
 	        }
 	    }
@@ -14501,23 +14590,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 52 */
+/* 55 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-authStep2\">\n    <header class=\"bar bar-nav\">\n        <h1 class=\"title\">认证</h1>\n    </header>\n    <div class=\"inside auth-step2\">\n        <div class=\"stepTitle\">申请认证</div>\n        <div class=\"iconWrap\"></div>\n        <div class=\"stepText\">将在一个工作日内审核完成!</div>\n        <div class=\"progress\">\n            <span class=\"item\"><span>1</span>请填写基本信息</span>\n            <span class=\"item cur\"><span>2</span>上传证照</span>\n            <span class=\"item\"><span>3</span>服务设置</span>\n        </div>\n    </div>\n    <div class=\"params\">\n        <div class=\"item\" @click=\"getPersionPic\">\n            <span class=\"fn-left\">个人照片</span>\n            <span class=\"fn-right\" v-if=\"formData.auth_head\">\n                <img :src=\"auth_head_url\" />\n            </span>\n        </div>\n        <div class=\"item\" @click=\"getStudentPic\">\n            <span class=\"fn-left\">学生证</span>\n            <span class=\"fn-right\" v-if=\"formData.auth_student_card\">\n                <img :src=\"auth_student_card_url\" />\n            </span>\n        </div>\n    </div>\n    <span \n        class=\"button button-big\"\n        v-if=\"formData.city_id && formData.school_id\" \n        @click=\"goAuth\"\n    >\n        下一步\n    </span>\n</div>\n";
+	module.exports = "\n    <div class=\"page-authStep1 page-authStep2\">\n        <header class=\"bar bar-nav\">\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div class=\"inside\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item\"><span>1</span>请填写基本信息</span>\n                <span class=\"item cur\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item clearfix\" @click=\"getPersionPic\">\n                    <span class=\"pull-left\">个人照片</span>\n                    <span class=\"pull-right\" v-if=\"tmpUrlData.auth_head_url\">\n                        <img :src=\"tmpUrlData.auth_head_url\" />\n                    </span>\n                    <span class=\"pull-right addPhoto\" v-else=\"!tmpUrlData.auth_head_url\">\n                        <i class=\"icon icon-anonymous2\"></i>\n                    </span>\n                </div>\n                <div class=\"item clearfix\" @click=\"getStudentPic\">\n                    <span class=\"pull-left\">学生证</span>\n                    <span class=\"pull-right\" v-if=\"tmpUrlData.auth_student_card_url\">\n                        <img :src=\"tmpUrlData.auth_student_card_url\" />\n                    </span>\n                    <span class=\"pull-right addPhoto\" v-else=\"!tmpUrlData.auth_student_card_url\">\n                        <i class=\"icon icon-anonymous2\"></i>\n                    </span>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"tmpUrlData.auth_head_url && tmpUrlData.auth_student_card_url\" \n            @click=\"goAuth\"\n        >\n            下一步\n        </span>\n    </div>\n";
 
 /***/ },
-/* 53 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(54)
-	__vue_script__ = __webpack_require__(56)
+	__webpack_require__(57)
+	__vue_script__ = __webpack_require__(60)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\step3.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(57)
+	  console.warn("[vue-loader] src/views/user/auth/step3.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(61)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14527,7 +14616,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user\\auth\\step3.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step3.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14536,203 +14625,299 @@
 	})()}
 
 /***/ },
-/* 54 */
+/* 57 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 55 */,
-/* 56 */
+/* 58 */,
+/* 59 */,
+/* 60 */
 /***/ function(module, exports) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 	// <style lang="less">
-	//
+	//     @import '../../../less/lib/mixins.less';
+	//     .page-authStep3{
+	//         .showPadding{
+	//             .rem(padding-bottom, 98)
+	//         }
+	//         .itemTitle{
+	//             border-bottom:1px solid #b2b2b2;
+	//             .rem(border-bottom-width, 2);
+	//             .rem(padding, 0, 0, 26);
+	//             .rem(margin-bottom, 10);
+	//         }
+	//         .type{
+	//             li{
+	//                 float:left;
+	//                 color:#fff;
+	//                 text-align:center;
+	//                 overflow:hidden;
+	//                 .rem(width, 122);
+	//                 .rem(height, 58);
+	//                 .rem(line-height, 58);
+	//                 .rem(margin, 16, 8, 0);
+	//                 .border-radius(8);
+	//                 span{
+	//                     display:block;
+	//                     background:#b2b2b2;
+	//                     .rem(width, 122);
+	//                     .rem(height, 58);
+	//                     .rem(line-height, 58);
+	//                     &.cur{
+	//                         background:#ff946e
+	//                     }
+	//                 }
+	//             }
+	//         }
+	//         table{
+	//             width:100%;
+	//             .rem(margin-top, 20);
+	//             td{
+	//                 text-align:center;
+	//                 border:1px solid #b2b2b2;
+	//                 .rem(border-width, 2);
+	//                 .rem(padding, 6);
+	//                 .iconWrap{
+	//                     .rem(height, 34);
+	//                     .rem(width, 38);
+	//                 }
+	//                 .icon-xuanzhong{
+	//                     background:url(../../../img/xuanzhong.svg) no-repeat;
+	//                     .rem(background-size, 38, 34);
+	//                     .rem(height, 34);
+	//                     .rem(width, 38);
+	//                 }
+	//             }
+	//         }
+	//     }
 	// </style>
 	//
 	// <template>
-	//     <div class="page-authStep3">
+	//     <div class="page-authStep1 page-authStep3">
 	//         <header class="bar bar-nav">
 	//             <h1 class="title">认证</h1>
 	//         </header>
-	//         <div class="inside auth-step2">
+	//         <div class="content inside" :class="{showPadding: (formData.sceneIds && formData.timeConf && formData.longitude)}">
 	//             <div class="stepTitle">申请认证</div>
-	//             <div class="iconWrap"></div>
+	//             <div class="ui-floatCenter">
+	//                 <div class="ui-sl-floatCenter">
+	//                     <i class="ui-floatCenter-item icon icon-anquanbaozhang"></i>
+	//                     <i class="ui-floatCenter-item icon link"></i>
+	//                     <i class="ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2"></i>
+	//                 </div>
+	// 			</div>
 	//             <div class="stepText">将在一个工作日内审核完成!</div>
 	//             <div class="progress">
 	//                 <span class="item"><span>1</span>请填写基本信息</span>
 	//                 <span class="item"><span>2</span>上传证照</span>
 	//                 <span class="item cur"><span>3</span>服务设置</span>
 	//             </div>
-	//         </div>
-	//         <div class="params">
-	//             <div class="item">
-	//                 请选择工作类别(可多选 ）
-	//                 <ul>
-	//                     <li v-for="item in indexData.sceneList" @click="setScene(item.scene_id)">
-	//                         {{item.scene_name}}
-	//                     </li>
-	//                 </ul>
-	//             </div>
-	//             <div class="item">
-	//                 <span @click="getMap">
-	//                     工作区域(选择)
-	//                 </a>
-	//             </div>
-	//             <div class="item">
-	//                 工作时间(可多选 ）
-	//                 <table>
-	//                     <tr>
-	//                         <td>星期</td>
-	//                         <td>一</td>
-	//                         <td>二</td>
-	//                         <td>三</td>
-	//                         <td>四</td>
-	//                         <td>五</td>
-	//                         <td>六</td>
-	//                         <td>日</td>
-	//                     </tr>
-	//                     <tr v-for="item of 3">
-	//                         <td v-for="subItem of 8">
-	//                             <span v-if="item == 0 && subItem == 0">上午</span>
-	//                             <span v-if="item == 1 && subItem == 0">下午</span>
-	//                             <span v-if="item == 2 && subItem == 0">晚上</span>
-	//                             <span v-if="subItem != 0" @click="setAccount( subItem +''+ (item+1) )">
-	//                                 <span v-for="( index, time ) in tmpAccountData" track-by="$index" :class="{'selected': time == subItem +''+ (item+1)}" v-if="time == subItem +''+ (item+1)">{{time}}</span>
-	//                                 x
+	//             <div class="params">
+	//                 <div class="item">
+	//                     <div class="itemTitle">请选择工作类别(可多选 ）</div>
+	//                     <ul class="type clearfix">
+	//                         <li v-for="item in indexData.sceneList" @click="setScene(item.scene_id)">
+	//                             <span
+	//                                 v-for="(sceneIndex, scene) in tmpSceneArr"
+	//                                 v-if="scene == item.scene_id"
+	//                                 class="cur"
+	//                             >
+	//                                 {{item.scene_name}}
 	//                             </span>
-	//                         </td>
-	//                     </tr>
-	//                 </table>
+	//                             <span
+	//                                 v-for="(sceneIndex, scene) in tmpSceneArr"
+	//                                 v-if="sceneIndex === 0"
+	//                             >
+	//                                 {{item.scene_name}}
+	//                             </span>
+	//
+	//                         </li>
+	//                     </ul>
+	//                 </div>
+	//                 <div class="item clearfix" @click="getMap">
+	//                     <span class="pull-left">
+	//                         工作区域(选择)
+	//                     </span>
+	//                     <span class="pull-right">{{formData.workplace}}</span>
+	//                 </div>
+	//                 <div class="item">
+	//                     <div class="itemTitle">工作时间(可多选 ）</div>
+	//                     <table>
+	//                         <tr>
+	//                             <td>星期</td>
+	//                             <td>一</td>
+	//                             <td>二</td>
+	//                             <td>三</td>
+	//                             <td>四</td>
+	//                             <td>五</td>
+	//                             <td>六</td>
+	//                             <td>日</td>
+	//                         </tr>
+	//                         <tr v-for="item of 3">
+	//                             <td v-for="subItem of 8">
+	//                                 <span v-if="item == 0 && subItem == 0">上午</span>
+	//                                 <span v-if="item == 1 && subItem == 0">下午</span>
+	//                                 <span v-if="item == 2 && subItem == 0">晚上</span>
+	//                                 <span class="icon iconWrap" v-if="subItem != 0" @click="setAccount( subItem +''+ (item+1) )">
+	//                                     <i
+	//                                         class="icon icon-xuanzhong"
+	//                                         v-for="( index, time ) in tmpAccountArr"
+	//                                         track-by="$index"
+	//                                         :class="{'selected': time == subItem +''+ (item+1)}"
+	//                                         v-if="time == subItem +''+ (item+1)"
+	//                                     >
+	//                                     </i>
+	//                                 </span>
+	//                             </td>
+	//                         </tr>
+	//                     </table>
+	//                 </div>
 	//             </div>
 	//         </div>
-	//         <span class="button button-big" @click="submit">下一步</span>
-	//         <span class="button button-big" v-if="formData.serverId && formData.picType" @click="submit">下一步</span>
+	//         <span
+	//             class="ui-btn ui-btn-big"
+	//             v-if="(formData.sceneIds && formData.timeConf && formData.longitude)"
+	//             @click="submit"
+	//         >
+	//             下一步
+	//         </span>
 	//     </div>
 	// </template>
 	//
 	// <script>
 	exports.default = {
-		data: function data() {
-			return {
-				tmpAccountData: [],
-				tmpSceneArr: [],
-				tmpAccount: [],
-				indexData: indexData,
-				formData: {
-					city_id: null,
-					school_id: null,
-					auth_head: null,
-					auth_student_card: null,
-					workplace: null,
-					longitude: null,
-					latitude: null,
-					scene_ids: null,
-					account_time_confs: null
-				}
-			};
-		},
+	    data: function data() {
+	        return {
+	            tmpAccountArr: [],
+	            tmpSceneArr: [],
+	            tmpAccount: [],
+	            indexData: indexData,
+	            isSumbit: false,
+	            formData: {
+	                sceneIds: null,
+	                timeConf: null,
+	                longitude: null,
+	                workplace: null
+	            }
+	        };
+	    },
 	
-		route: {
-			data: function data(transition) {
-				var formData = this.formData,
-				    query = transition.to.query;
+	    route: {
+	        data: function data(transition) {
+	            var self = this,
+	                query = transition.to.query;
 	
-				formData.city_id = query.city_id ? query.city_id : null;
-				formData.school_id = query.school_id ? query.school_id : null;
-				formData.auth_head = query.auth_head ? query.auth_head : null;
-				formData.auth_student_card = query.auth_student_card ? query.auth_student_card : null;
-				formData.workplace = query.workplace ? query.workplace : null;
-				formData.longitude = query.longitude ? query.longitude : null;
-				formData.latitude = query.latitude ? query.latitude : null;
+	            self.tmpAccountArr = query.timeConf.split('-');
+	            self.tmpSceneArr = query.sceneIds.split('-');
 	
-				this.tmpAccountData = '12-13-21-52'.split('-');
-				console.log(this.tmpAccountData);
-			}
-		},
-		ready: function ready() {
-			return;
-			$.ajax({
-				url: "/soytime/data/loadSchool",
-				type: 'POST',
-				dataType: 'json',
-				success: function success(data) {
-					self.tmpAccountData = data.result.timeConf.split('-');
-				}
-			});
-		},
+	            $.extend(self.formData, query);
+	        }
+	    },
+	    watch: {
+	        'formData': function formData() {
+	            console.log(111);
+	        }
+	    },
+	    methods: {
+	        setScene: function setScene(id) {
+	            var self = this;
 	
-		methods: {
-			setScene: function setScene(id) {
-				this.tmpSceneArr.push(id);
-			},
-			setAccount: function setAccount(id) {
-				var self = this;
-				self.tmpAccount.push(id);
-				self.tmpAccountData.push(id);
-				self.tmpAccountData = self.unique(self.tmpAccountData);
-			},
-			getMap: function getMap() {
-				var self = this;
-				self.$route.router.go('/auth/selectMap?' + $.param(self.formData));
-			},
-			submit: function submit() {
-				var self = this,
-				    sceneArr = self.unique(self.tmpSceneArr),
-				    accountArr = self.unique(self.tmpAccount);
+	            if (self.indexOf(self.tmpSceneArr, id) > -1) {
+	                self.tmpSceneArr = self.remove(self.tmpSceneArr, id);
+	            } else {
+	                self.tmpSceneArr.push(id);
+	            }
 	
-				self.formData.scene_ids = sceneArr.join('-');
-				self.formData.account_time_confs = accountArr.join('-');
+	            self.formData.sceneIds = self.tmpSceneArr.join('-');
+	        },
+	        setAccount: function setAccount(id) {
+	            var self = this;
+	            if (self.indexOf(self.tmpAccount, id) > -1) {
+	                self.tmpAccount = self.remove(self.tmpAccount, id);
+	                self.tmpAccountArr = self.remove(self.tmpAccountArr, id);
+	            } else {
+	                self.tmpAccount.push(id);
+	                self.tmpAccountArr.push(id);
+	            }
 	
-				$.ajax({
-					url: "/soytime/ca/save",
-					type: 'POST',
-					dataType: 'json',
-					data: self.formData,
-					success: function success(data) {}
-				});
-			},
-			unique: function unique(arr) {
-				var re = null;
-				arr.sort();
-				re = [arr[0]];
-				for (var i = 1; i < arr.length; i++) {
-					if (arr[i] !== re[re.length - 1]) {
-						re.push(arr[i]);
-					}
-				}
-				return re;
-			}
-		}
+	            self.formData.timeConf = self.tmpAccount.join('-');
+	        },
+	        getMap: function getMap() {
+	            var self = this;
+	            self.$route.router.go('/auth/selectMap?' + $.param(self.formData));
+	        },
+	        submit: function submit() {
+	            var self = this;
+	            if (!self.isSumbit) {
+	                $.ajax({
+	                    url: "/soytime/ca/save",
+	                    type: 'POST',
+	                    dataType: 'json',
+	                    data: self.formData,
+	                    success: function success(data) {
+	                        if (data.success) {
+	                            self.isSumbit = false;
+	                        }
+	                    }
+	                });
+	                self.isSumbit = true;
+	            }
+	        },
+	        remove: function remove(arr, val) {
+	            var index = this.indexOf(arr, val);
+	            if (index > -1) {
+	                arr.splice(index, 1);
+	            }
+	            return arr;
+	        },
+	        indexOf: function indexOf(arr, val) {
+	            for (var i = 0; i < arr.length; i++) {
+	                if (arr[i] == val) return i;
+	            }
+	            return -1;
+	        },
+	        unique: function unique(arr) {
+	            var re = null;
+	            arr.sort();
+	            re = [arr[0]];
+	            for (var i = 1; i < arr.length; i++) {
+	                if (arr[i] !== re[re.length - 1]) {
+	                    re.push(arr[i]);
+	                }
+	            }
+	            return re;
+	        }
+	    }
 	};
 	// </script>
 
 	/* generated by vue-loader */
 
 /***/ },
-/* 57 */
+/* 61 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-authStep3\">\n    <header class=\"bar bar-nav\">\n        <h1 class=\"title\">认证</h1>\n    </header>\n    <div class=\"inside auth-step2\">\n        <div class=\"stepTitle\">申请认证</div>\n        <div class=\"iconWrap\"></div>\n        <div class=\"stepText\">将在一个工作日内审核完成!</div>\n        <div class=\"progress\">\n            <span class=\"item\"><span>1</span>请填写基本信息</span>\n            <span class=\"item\"><span>2</span>上传证照</span>\n            <span class=\"item cur\"><span>3</span>服务设置</span>\n        </div>\n    </div>\n    <div class=\"params\">\n        <div class=\"item\">\n            请选择工作类别(可多选 ）\n            <ul>\n                <li v-for=\"item in indexData.sceneList\" @click=\"setScene(item.scene_id)\">\n                    {{item.scene_name}}\n                </li>\n            </ul>\n        </div>\n        <div class=\"item\">\n            <span @click=\"getMap\">\n                工作区域(选择)\n            </a>\n        </div>\n        <div class=\"item\">\n            工作时间(可多选 ）\n            <table>\n                <tr>\n                    <td>星期</td>\n                    <td>一</td>\n                    <td>二</td>\n                    <td>三</td>\n                    <td>四</td>\n                    <td>五</td>\n                    <td>六</td>\n                    <td>日</td>\n                </tr>\n                <tr v-for=\"item of 3\">\n                    <td v-for=\"subItem of 8\">\n                        <span v-if=\"item == 0 && subItem == 0\">上午</span>\n                        <span v-if=\"item == 1 && subItem == 0\">下午</span>\n                        <span v-if=\"item == 2 && subItem == 0\">晚上</span>\n                        <span v-if=\"subItem != 0\" @click=\"setAccount( subItem +''+ (item+1) )\">\n                            <span v-for=\"( index, time ) in tmpAccountData\" track-by=\"$index\" :class=\"{'selected': time == subItem +''+ (item+1)}\" v-if=\"time == subItem +''+ (item+1)\">{{time}}</span>\n                            x\n                        </span>\n                    </td>\n                </tr>\n            </table>\n        </div>\n    </div>\n    <span class=\"button button-big\" @click=\"submit\">下一步</span>\n    <span class=\"button button-big\" v-if=\"formData.serverId && formData.picType\" @click=\"submit\">下一步</span>\n</div>\n";
+	module.exports = "\n    <div class=\"page-authStep1 page-authStep3\">\n        <header class=\"bar bar-nav\">\n            <h1 class=\"title\">认证</h1>\n        </header>\n        <div class=\"content inside\" :class=\"{showPadding: (formData.sceneIds && formData.timeConf && formData.longitude)}\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item cur\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item\">\n                    <div class=\"itemTitle\">请选择工作类别(可多选 ）</div>\n                    <ul class=\"type clearfix\">\n                        <li v-for=\"item in indexData.sceneList\" @click=\"setScene(item.scene_id)\">\n                            <span \n                                v-for=\"(sceneIndex, scene) in tmpSceneArr\" \n                                v-if=\"scene == item.scene_id\" \n                                class=\"cur\"\n                            >\n                                {{item.scene_name}}\n                            </span>\n                            <span \n                                v-for=\"(sceneIndex, scene) in tmpSceneArr\" \n                                v-if=\"sceneIndex === 0\" \n                            >\n                                {{item.scene_name}}\n                            </span>\n                           \n                        </li>\n                    </ul>\n                </div>\n                <div class=\"item clearfix\" @click=\"getMap\">\n                    <span class=\"pull-left\">\n                        工作区域(选择)\n                    </span>\n                    <span class=\"pull-right\">{{formData.workplace}}</span>\n                </div>\n                <div class=\"item\">\n                    <div class=\"itemTitle\">工作时间(可多选 ）</div>\n                    <table>\n                        <tr>\n                            <td>星期</td>\n                            <td>一</td>\n                            <td>二</td>\n                            <td>三</td>\n                            <td>四</td>\n                            <td>五</td>\n                            <td>六</td>\n                            <td>日</td>\n                        </tr>\n                        <tr v-for=\"item of 3\">\n                            <td v-for=\"subItem of 8\">\n                                <span v-if=\"item == 0 && subItem == 0\">上午</span>\n                                <span v-if=\"item == 1 && subItem == 0\">下午</span>\n                                <span v-if=\"item == 2 && subItem == 0\">晚上</span>\n                                <span class=\"icon iconWrap\" v-if=\"subItem != 0\" @click=\"setAccount( subItem +''+ (item+1) )\">\n                                    <i \n                                        class=\"icon icon-xuanzhong\"\n                                        v-for=\"( index, time ) in tmpAccountArr\" \n                                        track-by=\"$index\" \n                                        :class=\"{'selected': time == subItem +''+ (item+1)}\" \n                                        v-if=\"time == subItem +''+ (item+1)\"\n                                    >\n                                    </i>\n                                </span>\n                            </td>\n                        </tr>\n                    </table>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"(formData.sceneIds && formData.timeConf && formData.longitude)\"\n            @click=\"submit\"\n        >\n            下一步\n        </span>\n    </div>\n";
 
 /***/ },
-/* 58 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(59)
-	__webpack_require__(61)
-	__vue_script__ = __webpack_require__(63)
+	__webpack_require__(63)
+	__vue_script__ = __webpack_require__(65)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\views\\user\\auth\\step4.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(64)
+	  console.warn("[vue-loader] src/views/user/auth/step4.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(66)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14742,7 +14927,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\views\\user\\auth\\step4.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step4.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14751,21 +14936,14 @@
 	})()}
 
 /***/ },
-/* 59 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 60 */,
-/* 61 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 62 */,
 /* 63 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 64 */,
+/* 65 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14774,131 +14952,59 @@
 	    value: true
 	});
 	// <style lang="less">
+	// @import '../../../less/lib/mixins.less';
+	// .page-authStep4{
+	//     text-align:center;
 	//
+	//     h2{
+	//         .rem(font-size, 60);
+	//     }
+	//
+	//     p{
+	//         color:#5e5e5e;
+	//         .rem(font-size, 30)
+	//     }
+	// }
 	// </style>
 	//
 	// <template>
-	// <div>
-	//     <header class="bar bar-nav">
-	//         <h1 class="title">我的</h1>
-	//     </header>
-	// 	<a external v-link="{ name: 'userEdit', params: { userId: 123 } }">edit</a>
-	//
-	//
-	//     <div class="card-header">
-	//         <img src="">
-	//         名字
-	//
-	//         未认证，点此认证！
-	//
-	//         好评   1
-	//         中评
-	//         差评   1
-	//         收藏
+	//     <div class="page-authStep4">
+	//         <div class="inside">
+	//             <h2>认证中...</h2>
+	//             <div>
+	//                 <p>酱油已收到您的认证信息！</p>
+	//                 将在一个工作日内帮您完成认证。</p>
+	//             </div>
+	//         </div>
 	//     </div>
-	//
-	//     <div class="list-block">
-	//         <ul>
-	//             <li class="item-content item-link">
-	//                 <div class="item-media"><i class="icon icon-f7"></i></div>
-	//                 <div class="item-inner">
-	//                     <div class="item-title">我的余额</div>
-	//                 </div>
-	//             </li>
-	//         </ul>
-	//     </div>
-	//     <div class="list-block">
-	//         <ul>
-	//             <li class="item-content item-link">
-	//                 <div class="item-media"><i class="icon icon-f7"></i></div>
-	//                 <div class="item-inner">
-	//                     <div class="item-title">设置</div>
-	//                 </div>
-	//             </li>
-	//             <li class="item-content item-link">
-	//                 <div class="item-media"><i class="icon icon-f7"></i></div>
-	//                 <div class="item-inner">
-	//                     <div class="item-title">发布服务</div>
-	//                 </div>
-	//             </li>
-	//         </ul>
-	//     </div>
-	//     <div class="list-block">
-	//         <ul>
-	//             <li class="item-content item-link">
-	//                 <div class="item-media"><i class="icon icon-f7"></i></div>
-	//                 <div class="item-inner">
-	//                     <div class="item-title">发单任务</div>
-	//                 </div>
-	//             </li>
-	//             <li class="item-content item-link">
-	//                 <div class="item-media"><i class="icon icon-f7"></i></div>
-	//                 <div class="item-inner">
-	//                     <div class="item-title">接单任务</div>
-	//                 </div>
-	//             </li>
-	//         </ul>
-	//     </div>
-	//     <div class="list-block">
-	//         <ul>
-	//             <li class="item-content item-link">
-	//                 <div class="item-media"><i class="icon icon-f7"></i></div>
-	//                 <div class="item-inner">
-	//                     <div class="item-title">在线客服</div>
-	//                 </div>
-	//             </li>
-	//         </ul>
-	//     </div>
-	// 	<router-view></router-view>
-	// </div>
 	// </template>
 	//
 	// <script>
 	exports.default = {
-	    ready: function ready() {
-	        //setTimeout(() => {
-	        //   this.$route.router.go({ name: 'list'});
-	        //},2000);
-	    }
+	    data: function data() {}
 	};
 	// </script>
-	//
-	// <style lang="less">
-	//     .index2{
-	//         width: 100%;
-	//         background-color: #fff;
-	//         margin-top: 40%;
-	//     }
-	// </style>
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
 
 	/* generated by vue-loader */
 
 /***/ },
-/* 64 */
+/* 66 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n<div>\r\n    <header class=\"bar bar-nav\">\r\n        <h1 class=\"title\">我的</h1>\r\n    </header>\r\n\t<a external v-link=\"{ name: 'userEdit', params: { userId: 123 } }\">edit</a>\r\n\r\n\r\n    <div class=\"card-header\">\r\n        <img src=\"xxxHTMLLINKxxx0.290242883376777170.04581524548120797xxx\">\r\n        名字\r\n\r\n        未认证，点此认证！\r\n        \r\n        好评   1\r\n        中评\r\n        差评   1\r\n        收藏\r\n    </div>\r\n\r\n    <div class=\"list-block\">\r\n        <ul>\r\n            <li class=\"item-content item-link\">\r\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\r\n                <div class=\"item-inner\">\r\n                    <div class=\"item-title\">我的余额</div>\r\n                </div>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n    <div class=\"list-block\">\r\n        <ul>\r\n            <li class=\"item-content item-link\">\r\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\r\n                <div class=\"item-inner\">\r\n                    <div class=\"item-title\">设置</div>\r\n                </div>\r\n            </li>\r\n            <li class=\"item-content item-link\">\r\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\r\n                <div class=\"item-inner\">\r\n                    <div class=\"item-title\">发布服务</div>\r\n                </div>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n    <div class=\"list-block\">\r\n        <ul>\r\n            <li class=\"item-content item-link\">\r\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\r\n                <div class=\"item-inner\">\r\n                    <div class=\"item-title\">发单任务</div>\r\n                </div>\r\n            </li>\r\n            <li class=\"item-content item-link\">\r\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\r\n                <div class=\"item-inner\">\r\n                    <div class=\"item-title\">接单任务</div>\r\n                </div>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n    <div class=\"list-block\">\r\n        <ul>\r\n            <li class=\"item-content item-link\">\r\n                <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\r\n                <div class=\"item-inner\">\r\n                    <div class=\"item-title\">在线客服</div>\r\n                </div>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n\t<router-view></router-view>\r\n</div>\r\n";
+	module.exports = "\n<div class=\"page-authStep4\">\n    <div class=\"inside\">\n        <h2>认证中...</h2>\n        <div>\n            <p>酱油已收到您的认证信息！</p>\n            将在一个工作日内帮您完成认证。</p>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 65 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(66)
-	__vue_script__ = __webpack_require__(69)
+	__webpack_require__(68)
+	__vue_script__ = __webpack_require__(70)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(70)
+	  console.warn("[vue-loader] src/App.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(71)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14908,7 +15014,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "G:\\PHPnow-1.5.6\\htdocs\\vue-demo-webpack\\src\\App.vue"
+	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/App.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14917,15 +15023,14 @@
 	})()}
 
 /***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 67 */,
-/* 68 */,
-/* 69 */
+/* 69 */,
+/* 70 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14970,7 +15075,7 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page page-current\">\n\n    <nav class=\"bar bar-tab\" v-if=\"isIndex\" >\n        <a class=\"tab-item\" external v-link=\"{ path: '/home', activeClass: 'active'}\">\n            <span class=\"icon icon-home\"></span>\n            <span class=\"tab-label\">首页</span>\n        </a>\n        <a class=\"tab-item\" external  v-link=\"{ path: '/msg', activeClass: 'active' }\">\n            <span class=\"icon icon-message\"></span>\n            <span class=\"tab-label\">消息</span>\n        </a>\n        <a class=\"tab-item\" external v-link=\"{ path: '/user', activeClass: 'active' }\">\n            <span class=\"icon icon-me\"></span>\n            <span class=\"tab-label\">我的</span>\n        </a>\n    </nav>\n\n    <router-view keep-alive></router-view>\n</div>\n";

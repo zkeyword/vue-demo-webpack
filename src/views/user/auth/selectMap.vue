@@ -61,18 +61,19 @@
 			return {
                 formData: {
 					latitude: '',
-					workPlace: '',
+					workplace: '',
 					position: [],
 					city_id: '',
 					school_id: ''
 				}
 			}
 		},
-		route: {
+        route: {
             data (transition){
-                let query = transition.to.query;
-                this.formData.city_id   = query.city_id ? query.city_id : null;
-                this.formData.school_id = query.school_id ? query.school_id : null;
+                let self     = this,
+					query    = transition.to.query;
+					
+                $.extend(self.formData, query);
             }
         },
         ready(){
@@ -80,7 +81,7 @@
             if( !window.AMap ){
                 setTimeout(()=>{
                     location.reload(); 
-                }, 3000);
+                }, 15000);
                 return;
             }
             
@@ -162,8 +163,9 @@
 										ads   = box.find('.poi-addr').html();
 										
 									panel.on('click', '.mapBtn', function(e){
-										self.formData.ads      = ads.replace(/地址：/, '');
-										self.formData.position = position.join(',');
+										self.formData.workplace = ads.replace(/地址：/, '');
+										self.formData.longitude = position[0];
+										self.formData.latitude  = position[1];
 										self.$route.router.go('/auth/step3?' + $.param( self.formData ) );
 										return false;
 									});
@@ -187,7 +189,7 @@
             }else{
                 setTimeout(()=>{
                     location.reload(); 
-                }, 3000);
+                }, 15000);
             }
         }
     }

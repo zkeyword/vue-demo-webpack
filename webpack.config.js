@@ -1,8 +1,9 @@
 'use strict'
 
 var webpack           = require('webpack'),
-	ExtractTextPlugin = require("extract-text-webpack-plugin"),
-    isProduction      = process.env.NODE_ENV === 'production' ? true : false;
+	ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    isProduction      = process.env.NODE_ENV === 'production' ? true : false,
+    version           = '?v=' + ( new Date().getTime() );
 
 module.exports = {
 	entry : __dirname  + '/src/main.js',
@@ -26,9 +27,10 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue'
             },
-			{ 
-				test: /\.svg$/, 
-				loader: "file-loader?prefix=font/"
+			{
+                //剥离图片
+				test: /\.svg$|\.png$|\.jpg$|\.gif$/, 
+				loader: 'file-loader?name=img/[hash:8].[name].[ext]' + version
 			}
         ]
     },
@@ -36,8 +38,8 @@ module.exports = {
     vue:{
         loaders:{
             js: 'babel',
-            css:ExtractTextPlugin.extract("vue-style-loader", "css-loader"),
-            less:ExtractTextPlugin.extract("vue-style-loader", "css-loader!less-loader")
+            css:ExtractTextPlugin.extract('vue-style-loader', 'css-loader'),
+            less:ExtractTextPlugin.extract('vue-style-loader', 'css-loader!less-loader')
         }
     },
 	//处理js
@@ -47,7 +49,7 @@ module.exports = {
     },
 	//剥离css
     plugins: [
-        new ExtractTextPlugin("style.css")
+        new ExtractTextPlugin('style.css')
     ]
 };
 

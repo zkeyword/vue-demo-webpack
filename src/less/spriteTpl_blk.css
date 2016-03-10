@@ -1,0 +1,23 @@
+{#common}.{common} {
+    font-size: {baseSize}px;
+}
+
+.{common}:before {
+    content:' ';
+    vertical-align:middle;
+    display: inline-block;
+    background-image: url({svgPath});
+    background-repeat: no-repeat;
+    .rem(background-size, {relWidth}, {relHeight});
+}
+
+.no-svg .{common}:before {
+    background-image: url({pngPath});
+}{/common}
+{#svg}
+{#common}.{common}{/common}.{name}:before {
+    .rem(background-position, {relWidth}, {relHeight});
+    .rem(width, relWidth);
+    .rem(height, relHeight);
+}
+{/svg}

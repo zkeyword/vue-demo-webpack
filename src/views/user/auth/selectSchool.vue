@@ -15,13 +15,13 @@
             </div>
         </div>
 
-        <div class="content">
-            <ul v-if="!tmpData.length">
+        <div class="content inside">
+            <ul class="list" v-if="!tmpData.length">
 				<li v-for="item in schoolList" @click="goAuth(item)">
                     {{item.school_name}}
                 </li>
             </ul>
-            <ul v-else="tmpData.length">
+            <ul class="list" v-else="tmpData.length">
 				<li v-for="item in tmpData" @click="goAuth(item)">
                     {{item.school_name}}
                 </li>
@@ -56,21 +56,21 @@
             data (transition){
                 let self  = this,
 					query = transition.from.query;
-                self.formData.city_id   = query.city_id ? query.city_id : null;
-                self.formData.city_name = query.city_name ? query.city_name : null;
+                    
+                $.extend(self.formData, query); 
+                
+                $.ajax({
+                    url: "/soytime/data/loadSchool",
+                    type:'POST',
+                    dataType: 'json',
+                    data: self.formData,
+                    success: ((data)=>{
+                        self.schoolList = data.result;
+                    })
+                });
+                
+                transition.next();
             }
-        },
-        ready(){
-            let self = this;
-            $.ajax({
-                url: "/soytime/data/loadSchool",
-                type:'POST',
-                dataType: 'json',
-                data: self.formData,
-                success: ((data)=>{
-                    self.schoolList = data.result;
-                })
-            });
         },
         methods: {
 			goAuth(item){

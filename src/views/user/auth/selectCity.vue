@@ -105,14 +105,18 @@
 				}
 			};
         },
-        destroy (){
-            this.keyword = null;
+        route: {
+            data (transition){
+                let self    = this,
+                    query   = transition.to.query;
+                    
+                $.extend(self.formData, query);     
+            }
         },
         watch: {
             keyword (){
                 let self = this;
                 self.tmpData = self.filteData( self.keyword );
-                console.log( this.tmpData )
             }
         },
         methods: {

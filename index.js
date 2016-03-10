@@ -45,12 +45,25 @@ app.post('/soytime/data/loadSchool', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
-app.put('/put', function (req, res) {
-	res.send( JSON.stringify([], null, 4) );
-});
-
-app.del('/del', function (req, res) {
-	res.send( JSON.stringify([], null, 4) );
+app.post('/soytime/ca/caInfo', function (req, res) {
+	var Random = Mock.Random,
+		data   = Mock.mock({
+            success: '1',
+            result:{
+                timeConf: '',
+                sceneIds: '',
+                city_id: '',
+                city_name: '',
+                school_id:'',
+                school_name: '',
+                auth_head_url: '1',
+                auth_student_card_url: '1',
+                sutdent_auth: '@integer(0, 3)',	
+                explain	: '@cname'
+            }			
+		});
+	
+	res.send( JSON.stringify(data, null, 4) );
 });
 
 var server = app.listen(3000, function () {
