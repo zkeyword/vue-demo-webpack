@@ -1,11 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'Vuex'
 import VueRouter from 'vue-router'
-import routerMap from './routers'
+import RouterMap from './routers'
 import App from './App'
+import filters from './filters'
 
 Vue.use(Vuex);
 Vue.use(VueRouter);
+
+//添加过滤
+//Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
+
+Vue.filter('sceneCur', filters['sceneCur'])
+
+
 
 // routing
 let router = new VueRouter({
@@ -15,7 +23,7 @@ let router = new VueRouter({
     transitionOnLoad: true
 });
 
-routerMap(router);
+RouterMap(router);
 
 //注册路由切换前
 //使底部菜单栏在一级路由切换时一直保持显示

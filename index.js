@@ -50,8 +50,8 @@ app.post('/soytime/ca/caInfo', function (req, res) {
 		data   = Mock.mock({
             success: '1',
             result:{
-                timeConf: '',
-                sceneIds: '',
+                timeConf: '20',
+                sceneIds: '200007',
                 city_id: '',
                 city_name: '',
                 school_id:'',
