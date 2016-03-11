@@ -141,7 +141,6 @@
             return {
 				tmpAccountArr: [],
 				tmpSceneArr: [],
-				tmpAccount: [],
 				indexData: indexData,
                 formData: {
                     sceneIds: null,
@@ -163,17 +162,17 @@
                 
             }
         },
-        watch:{
-            'formData': function(){
-                console.log(111)
-            }
-        },
+        //watch:{
+            //'formData': function(){
+              //  console.log(111)
+           // }
+        //},
         methods: {
 			setScene(id){
                 let self   = this;
                   
                 if( self.indexOf( self.tmpSceneArr, id ) > -1 ){
-                    self.tmpSceneArr    = self.remove( self.tmpSceneArr, id );
+                    self.tmpSceneArr = self.remove( self.tmpSceneArr, id );
                 }else{
                     self.tmpSceneArr.push(id);
                 }
@@ -182,15 +181,12 @@
 			},
 			setAccount(id){
 				let self = this;
-                if( self.indexOf( self.tmpAccount, id ) > -1 ){
-                    self.tmpAccount    = self.remove( self.tmpAccount, id );
+                if( self.indexOf( self.tmpAccountArr, id ) > -1 ){
                     self.tmpAccountArr = self.remove( self.tmpAccountArr, id );
                 }else{
-                    self.tmpAccount.push(id);
                     self.tmpAccountArr.push(id);
                 }
-
-                self.formData.timeConf = self.tmpAccount.join('-');
+                self.formData.timeConf = self.tmpAccountArr.join('-');
 			},
 			getMap(){
 				let self = this;
@@ -204,12 +200,12 @@
                     type:'POST',
                     dataType: 'json',
                     data: self.formData,
-                    success: ((data)=>{
+                    success: (data)=>{
                         if( data.success ){
                             $.hidePreloader();
-                            self.$route.router.go('/auth/step4');
+                            self.$route.router.go('/auth/checking');
                         }
-                    }),
+                    },
                     error: ()=>{
                         $.hidePreloader();
                         $.toast('网络不给力，请尝试重新提交！');

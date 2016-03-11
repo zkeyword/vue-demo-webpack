@@ -61,8 +61,8 @@
 			return {
                 formData: {
 					latitude: '',
+                    longitude: '',
 					workplace: '',
-					position: [],
 					city_id: '',
 					school_id: ''
 				}

@@ -48,9 +48,13 @@ export default function(router){
             name: 'authStep3',
             component: require('./views/user/auth/step3')
         },
-        '/auth/step4': {
-            name: 'authStep4',
-            component: require('./views/user/auth/step4')
+        '/auth/checking': {
+            name: 'authChecking',
+            component: require('./views/user/auth/checking')
+        },
+        '/auth/success': {
+            name: 'authSuccess',
+            component: require('./views/user/auth/success')
         }
 	})
 }

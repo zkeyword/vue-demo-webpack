@@ -107,15 +107,15 @@
             getPersionPic(){
                 let self = this;
                 uploadimg(1, (data)=>{
-                    self.formData.auth_head     = data;
-                    self.formData.auth_head_url = '/soytime/file/renzheng/' + data;
+                    self.formData.auth_head_url   = data;
+                    self.tmpUrlData.auth_head_url = '/soytime/file/renzheng/' + data;
                 })
             },
             getStudentPic(){
                 let self = this;
                 uploadimg(2, (data)=>{
-                    self.formData.auth_student_card    = data;
-                    self.formData.auth_student_card_url = '/soytime/file/renzheng/' + data;
+                    self.formData.auth_student_card_url   = data;
+                    self.tmpUrlData.auth_student_card_url = '/soytime/file/renzheng/' + data;
                 })
             }
         }
