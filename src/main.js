@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import Vuex from 'Vuex'
+//import Vuex from 'Vuex'
 import VueRouter from 'vue-router'
 import RouterMap from './routers'
 import App from './App'
 import filters from './filters'
 
-Vue.use(Vuex);
+//Vue.use(Vuex);
 Vue.use(VueRouter);
 
 //添加过滤
@@ -29,9 +29,9 @@ RouterMap(router);
 router.beforeEach(function (transition) {
     var toPath = transition.to.path;
     if( toPath.replace(/[^/]/g,"").length > 1 || /auth/.test(toPath) ){
-        router.app.isIndex = false;
+        router.app.isShowTab = false;
     }else{
-        router.app.isIndex = true;
+        router.app.isShowTab = true;
     }
     transition.next();
 });

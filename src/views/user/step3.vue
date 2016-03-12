@@ -15,7 +15,9 @@
 
 <template>
     <div class="page-authStep1 page-authStep3">
-        <header-bar :title="title"></header-bar>
+        <header class="bar bar-nav">
+            <h1 class="title">认证</h1>
+        </header>
         <div class="content inside" :class="{showPadding: (formData.sceneIds && formData.timeConf && formData.longitude)}">
             <div class="stepTitle">申请认证</div>
             <div class="ui-floatCenter">
@@ -33,11 +35,8 @@
             </div>
             <div class="params">
                 <div class="item">
-                    <div class="itemTitle">请选择工作类别(可多选)</div>
-                    <scene-type 
-                        :scene-list="indexData.sceneList"
-                        :scene-ids.sync="formData.sceneIds"
-                    ></scene-type>
+                    <div class="itemTitle">请选择工作类别(可多选 ）</div>
+                    <scene-type :timer.sync="formData.sceneIds"></scene-type>
                 </div>
                 <div class="item clearfix" @click="getMap">
                     <span class="pull-left">
@@ -66,7 +65,6 @@
         data() {
             return {
 				indexData: indexData,
-                title: '认证',
                 formData: {
                     sceneIds: null,
                     timeConf: null,
@@ -85,8 +83,7 @@
         },
         components: {
             'timeConf': require('../../../components/timeConf.vue'),
-            'sceneType': require('../../../components/sceneType.vue'),
-            'headerBar': require('../../../components/header.vue')
+            'sceneType': require('../../../components/sceneType.vue')
         },
         methods: {
 			getMap(){
@@ -95,7 +92,6 @@
 			},
 			submit(){
 				let self = this;
-                console.log(self.formData)
                 $.showPreloader('正在努力提交...')
                 $.ajax({
                     url: "/soytime/ca/save",

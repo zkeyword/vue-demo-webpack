@@ -5,7 +5,7 @@
 <template>
     <div class="page page-current">
         <router-view keep-alive></router-view>
-        <nv-footer isShow="true"></nv-footer>
+        <vn-footer v-if="isShowTab"></vn-footer>
     </div>
 </template>
 
@@ -13,12 +13,12 @@
 module.exports = {
     data() {
         return {
-            authenticating: false,
-            isIndex:true
+            isShowTab: true
         }
     },
     components:{
-        'nvFooter': require('./components/footer.vue')
+        'vnFooter': require('./components/footer.vue'),
+        'vnHeader': require('./components/header.vue')
     }
 }
 </script>

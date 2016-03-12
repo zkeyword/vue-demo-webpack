@@ -11,6 +11,7 @@ exports.sceneCur = function(obj, arr){
 
 exports.timerCur = function(item, subItem, arr){
     let timer = subItem +''+ (item+1);
+    if( !arr ) return;
     for(let i = 0,len = arr.length; i<len; i++){
 		if( timer == arr[i] ) {
 			return true;

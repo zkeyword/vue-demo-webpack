@@ -10,20 +10,33 @@ export default function(router){
 	        component: require('./views/home')
 	    },
 	    '/msg': {
-	    	name: 'name',
-	        component: require('./views/list'),
+	    	name: 'msg',
+	        component: require('./views/msg')
 	        //子路由
-	        subRoutes:{
-	            'detail/:giftId': {
-	                name: 'detail', //具名路由
-	                component: require('./views/detail')
-	            }
-	        }
+	        //subRoutes:{
+	         //   'detail/:giftId': {
+	        //        name: 'detail', //具名路由
+	        //        component: require('./views/detail')
+	         //   }
+	       // }
 	    },
+        /* 场景部分 */
+        '/scene': {
+	    	name: 'scene',
+	        component: require('./views/scene')
+	    },
+        
+        /* 用户部分 */
 	    '/user': {
 	    	name: 'user',
-	        component: require('./views/tab')
+	        component: require('./views/user')
 	    },
+        '/user/setting': {
+	    	name: 'userSetting',
+	        component: require('./views/user/setting')
+	    },
+        
+        /* 认证部分 */
 	    '/auth': {
 	    	name: 'auth',
 	        component: require('./views/user/auth/step1')

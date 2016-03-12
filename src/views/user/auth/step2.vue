@@ -29,9 +29,7 @@
 
 <template>
     <div class="page-authStep1 page-authStep2">
-        <header class="bar bar-nav">
-            <h1 class="title">认证</h1>
-        </header>
+        <header-bar :title="title"></header-bar>
         <div class="inside">
             <div class="stepTitle">申请认证</div>
             <div class="ui-floatCenter">
@@ -82,6 +80,7 @@
     export default {
         data() {
             return {
+                title: '认证',
                 formData: {},
                 tmpUrlData:{}
             }
@@ -98,6 +97,9 @@
                 
                 $.extend(self.formData, query);  
             }
+        },
+        components: {
+            'headerBar': require('../../../components/header.vue')
         },
         methods: {
 			goAuth(){

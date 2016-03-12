@@ -64,9 +64,7 @@
 
 <template>
     <div class="page-authStep1">
-        <header class="bar bar-nav">
-            <h1 class="title">认证</h1>
-        </header>
+        <header-bar :title="title"></header-bar>
         <div class="inside">
             <div class="stepTitle">申请认证</div>
             <div class="ui-floatCenter">
@@ -107,6 +105,7 @@
     export default {
         data() {
             return {
+                title: '认证',
                 formData: {
                     city_name: null,
                     city_id: null,
@@ -121,10 +120,11 @@
                     query    = transition.to.query;
                 
                 if( query.city_id ){
-                    self.formData.city_id     = query.city_id ? query.city_id : self.formData.city_id;
-                    self.formData.city_name   = query.city_name ? query.city_name : self.formData.city_name;
-                    self.formData.school_id   = query.school_id ? query.school_id : self.formData.school_id;
-                    self.formData.school_name = query.school_name ? query.school_name : self.formData.school_name;
+                    $.extend(self.formData, query);
+                    //self.formData.city_id     = query.city_id ? query.city_id : self.formData.city_id;
+                    //self.formData.city_name   = query.city_name ? query.city_name : self.formData.city_name;
+                    //self.formData.school_id   = query.school_id ? query.school_id : self.formData.school_id;
+                    //self.formData.school_name = query.school_name ? query.school_name : self.formData.school_name;
                 }else{
                     $.showPreloader('正在努力提交...');
                     $.ajax({
@@ -160,16 +160,9 @@
                 
             }
         },
-        /*
-        watch:{
-            'formData': function(){
-                console.log(self.formData)
-            }
+        components: {
+            'headerBar': require('../../../components/header.vue')
         },
-        destroyed(){
-            console.log(1)
-        },
-        */
         methods: {
             goAuth(){
 				let self = this;

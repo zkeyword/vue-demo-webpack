@@ -56,9 +56,9 @@ app.post('/soytime/ca/caInfo', function (req, res) {
                 city_name: '',
                 school_id:'',
                 school_name: '',
-                auth_head_url: '1',
-                auth_student_card_url: '1',
-                sutdent_auth: '@integer(0, 3)',	
+                auth_head_url: '1zzz',
+                auth_student_card_url: '1zz',
+                sutdent_auth: '0',	
                 explain	: '@cname'
             }			
 		});
@@ -66,7 +66,7 @@ app.post('/soytime/ca/caInfo', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(4000, function () {
 	var host = server.address().address;
 	var port = server.address().port;
 

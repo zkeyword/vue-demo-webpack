@@ -1,6 +1,18 @@
 <style lang="less">
     @import '../less/lib/mixins.less';
-    .page-home{        
+    .page-home{
+        /* 幻灯片 */
+        .swiper-container{
+            padding:0;
+        }
+        .swiper-pagination-bullet{
+            background:#fff;
+            opacity:0.4;
+            &.swiper-pagination-bullet-active {
+                opacity: .6;
+            }
+        }
+        
         /* 场景 */
         .sceneWrap{
             .rem(padding, 40, 20, 0);
@@ -71,7 +83,14 @@
 
 <template>
     <div class="page-home content">
-        <vn-swiper :slides="slides"></vn-swiper>
+        <div class="swiper-container" data-space-between="10" data-pagination=".swiper-pagination">
+            <div class="swiper-wrapper">
+                <div v-for="slide in slides" class="swiper-slide">
+                    <a href="{{slide.url}}"><img :src="slide.img" alt="" style="width: 100%"></a>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
         <div class="sceneWrap">
             <div class="sceneItem" :class="{'red': index % 4 == 2 || index % 4 == 1 }" v-for="(index, scene) in sceneList">
                 <a external v-link="{ name: 'user', params: { id: scene.scene_id } }">
@@ -91,9 +110,6 @@
         },
         ready: function () {
             $(".swiper-container").swiper();
-        },
-        components:{
-            'vnSwiper': require('../components/swiper.vue')
         }
     }
 </script>
