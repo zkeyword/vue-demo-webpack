@@ -64,8 +64,8 @@
 
 <template>
     <div class="page-authStep1">
-        <header-bar :title="title"></header-bar>
-        <div class="inside">
+        <header-bar :title="title" :back="true"></header-bar>
+        <div class="content showHeader">
             <div class="stepTitle">申请认证</div>
             <div class="ui-floatCenter">
                 <div class="ui-sl-floatCenter">
@@ -102,82 +102,81 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                title: '认证',
-                formData: {
-                    city_name: null,
-                    city_id: null,
-                    school_id: null,
-                    school_name: null
-                }
-            }
-        },
-        route: {
-            data (transition){
-                let self     = this,
-                    query    = transition.to.query;
-                
-                if( query.city_id ){
-                    $.extend(self.formData, query);
-                    //self.formData.city_id     = query.city_id ? query.city_id : self.formData.city_id;
-                    //self.formData.city_name   = query.city_name ? query.city_name : self.formData.city_name;
-                    //self.formData.school_id   = query.school_id ? query.school_id : self.formData.school_id;
-                    //self.formData.school_name = query.school_name ? query.school_name : self.formData.school_name;
-                }else{
-                    $.showPreloader('正在努力提交...');
-                    $.ajax({
-                        url: "/soytime/ca/caInfo",
-                        type:'POST',
-                        dataType: 'json',
-                        success: (data)=>{
-                            let result = data.result,
-                                status = result.sutdent_auth;
-                                
-                            $.hidePreloader();
-                            
-                            // 0：未认证，1：已认证，2：认证中，3：认证失败
-                            if( status == 1 ){
-                                self.$route.router.go('/auth/success');
-                                 return;
-                            }else if( status == 2 ){
-                                self.$route.router.go('/auth/checking');
-                                 return;
-                            }else if( status == 3 ){
-                                $.alert('认证失败');
-                                return;
-                            }
-
-                            $.extend(self.formData, result);
-                        },
-                        error: ()=>{
-                            $.hidePreloader();
-                            $.toast('网络不给力，请重新尝试！');
-                        }
-                    });
-                }
-                
-            }
-        },
-        components: {
-            'headerBar': require('../../../components/header.vue')
-        },
-        methods: {
-            goAuth(){
-				let self = this;
-				self.$route.router.go('/auth/step2?' + $.param( self.formData ) );
-			},
-            selectCity(){
-                let self = this;
-				self.$route.router.go('/auth/selectCity?' + $.param( self.formData ) );
-            },
-            selectSchool(){
-                let self = this;
-				self.$route.router.go('/auth/selectSchool?' + $.param( self.formData ) );
+export default {
+    data() {
+        return {
+            title: '认证',
+            formData: {
+                city_name: null,
+                city_id: null,
+                school_id: null,
+                school_name: null
             }
         }
+    },
+    route: {
+        data (transition){
+            let self     = this,
+                query    = transition.to.query;
+            
+            if( query.city_id ){
+                $.extend(self.formData, query);
+                //self.formData.city_id     = query.city_id ? query.city_id : self.formData.city_id;
+                //self.formData.city_name   = query.city_name ? query.city_name : self.formData.city_name;
+                //self.formData.school_id   = query.school_id ? query.school_id : self.formData.school_id;
+                //self.formData.school_name = query.school_name ? query.school_name : self.formData.school_name;
+            }else{
+                $.showPreloader('正在努力提交...');
+                $.ajax({
+                    url: "/soytime/ca/caInfo",
+                    type:'POST',
+                    dataType: 'json',
+                    success: (data)=>{
+                        let result = data.result,
+                            status = result.sutdent_auth;
+                            
+                        $.hidePreloader();
+                        
+                        // 0：未认证，1：已认证，2：认证中，3：认证失败
+                        if( status == 1 ){
+                            self.$route.router.go('/auth/success');
+                                return;
+                        }else if( status == 2 ){
+                            self.$route.router.go('/auth/checking');
+                                return;
+                        }else if( status == 3 ){
+                            $.alert('您的身份核对有误！请您重新填写认证信息。','认证失败');
+                        }
+
+                        $.extend(self.formData, result);
+                    },
+                    error: ()=>{
+                        $.hidePreloader();
+                        $.toast('网络不给力，请重新尝试！');
+                    }
+                });
+            }
+            
+        }
+    },
+    components: {
+        'headerBar': require('../../../components/header.vue')
+    },
+    methods: {
+        goAuth(){
+            let self = this;
+            self.$route.router.go('/auth/step2?' + $.param( self.formData ) );
+        },
+        selectCity(){
+            let self = this;
+            self.$route.router.go('/auth/selectCity?' + $.param( self.formData ) );
+        },
+        selectSchool(){
+            let self = this;
+            self.$route.router.go('/auth/selectSchool?' + $.param( self.formData ) );
+        }
     }
+}
 </script>
 
 

@@ -1,6 +1,6 @@
 'use strict'
 
-export default function(router){
+export default (router)=>{
 	router.map({
 	    '*': {
 	        component: require('./views/home')
@@ -21,7 +21,7 @@ export default function(router){
 	       // }
 	    },
         /* 场景部分 */
-        '/scene': {
+        '/scene/': {
 	    	name: 'scene',
 	        component: require('./views/scene')
 	    },

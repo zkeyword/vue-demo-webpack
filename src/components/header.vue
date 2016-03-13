@@ -15,7 +15,7 @@
         props: ['title', 'back'],
         methods:{
             goBack(){
-                location.go(-1)
+                history.go(-1)
             }
         }
     }

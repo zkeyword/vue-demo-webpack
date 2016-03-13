@@ -1,27 +1,30 @@
 <style lang="less">
 @import '../../../less/lib/mixins.less';
-.page-authStep4{
+.page-checking{
+    background:#54c5ff;
     text-align:center;
+    height:100%;
     
     h2{
+        .rem(padding, 60, 30);
         .rem(font-size, 60);
+        .rem(padding-bottom, 20);
     }
     
     p{
-        color:#5e5e5e;
-        .rem(font-size, 30)
+        color:#fff;
+        .rem(font-size, 30);
+        margin:0;
     }
 }
 </style>
 
 <template>
-    <div class="page-authStep4">
-        <div class="inside">
-            <h2>认证中...</h2>
-            <div>
-                <p>酱油已收到您的认证信息！</p>
-                将在一个工作日内帮您完成认证。</p>
-            </div>
+    <div class="page-checking">
+        <h2>等待是</h2>
+        <div>
+            <p>酱油已收到您的认证信息！</p>
+            <p>将在一个工作日内帮您完成认证。</p>
         </div>
     </div>
 </template>

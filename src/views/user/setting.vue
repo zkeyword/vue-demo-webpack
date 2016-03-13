@@ -6,7 +6,7 @@
     <div class="page-user page-user-setting">
         <header-bar :title="title" back="true"></header-bar>
         
-        <div class="content inside showPadding">
+        <div class="content showHeader showFooter">
 
             <div class="card-header">
                 头像

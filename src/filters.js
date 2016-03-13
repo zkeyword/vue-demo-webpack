@@ -1,6 +1,6 @@
 "use strict"
 
-exports.sceneCur = function(obj, arr){
+exports.sceneCur = (obj, arr) => {
     let sceneId = obj.scene_id
 	for(let i = 0,len = arr.length; i<len; i++){
 		if( sceneId == arr[i] ) {
@@ -9,7 +9,7 @@ exports.sceneCur = function(obj, arr){
 	}
 }
 
-exports.timerCur = function(item, subItem, arr){
+exports.timerCur = (item, subItem, arr) => {
     let timer = subItem +''+ (item+1);
     if( !arr ) return;
     for(let i = 0,len = arr.length; i<len; i++){
@@ -18,11 +18,6 @@ exports.timerCur = function(item, subItem, arr){
 		}
 	}
 }
-
-exports.getTabStr = (tab, good, top) => {
-   
-}
-
 
 
 

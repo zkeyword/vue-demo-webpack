@@ -18,7 +18,12 @@
 首先，请先安装node环境，然后在安装依赖的工具：
 
 	npm install
-	
+    
+    /* 国内npm可能会被墙，目前淘宝有提供npm镜像 */
+    npm install -g cnpm --registry=https://registry.npm.taobao.org
+    
+    之后就可以用淘宝的 cnpm install 进行安装
+ 
 运行：
 	
 	gulp

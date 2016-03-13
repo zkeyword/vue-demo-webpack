@@ -52,13 +52,13 @@ app.post('/soytime/ca/caInfo', function (req, res) {
             result:{
                 timeConf: '21',
                 sceneIds: '200001-200003-200007',
-                city_id: '',
-                city_name: '',
-                school_id:'',
-                school_name: '',
+                city_id: 'asd',
+                city_name: 'as',
+                school_id:'as',
+                school_name: 'asd',
                 auth_head_url: '1zzz',
                 auth_student_card_url: '1zz',
-                sutdent_auth: '0',	
+                sutdent_auth: '3',	
                 explain	: '@cname'
             }			
 		});

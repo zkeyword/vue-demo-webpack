@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div class="content inside">
+        <div class="content showHeader">
             <ul class="list" v-if="!tmpData.length">
 				<li v-for="item in indexData.areaList" @click="goAuth(item)">
                     {{item.city_name}}
@@ -93,59 +93,59 @@
 
 */
 
-    module.exports = {
-        data (){
-            return {
-				keyword: '',
-				tmpData: [],
-				indexData: indexData,
-				formData: {
-					city_id: null,
-					city_name: null
-				}
-			};
-        },
-        route: {
-            data (transition){
-                let self    = this,
-                    query   = transition.to.query;
-                    
-                $.extend(self.formData, query);     
+export default {
+    data(){
+        return {
+            keyword: '',
+            tmpData: [],
+            indexData: indexData,
+            formData: {
+                city_id: null,
+                city_name: null
             }
+        };
+    },
+    route: {
+        data (transition){
+            let self    = this,
+                query   = transition.to.query;
+                
+            $.extend(self.formData, query);     
+        }
+    },
+    watch: {
+        keyword (){
+            let self = this;
+            self.tmpData = self.filteData( self.keyword );
+        }
+    },
+    methods: {
+        goAuth(item){
+            let self = this;
+            self.formData.city_id   = item.city_id;
+            self.formData.city_name = item.city_name;
+            self.$route.router.go('/auth?' + $.param( self.formData ) );
         },
-        watch: {
-            keyword (){
-                let self = this;
-                self.tmpData = self.filteData( self.keyword );
-            }
-        },
-        methods: {
-			goAuth(item){
-				let self = this;
-				self.formData.city_id   = item.city_id;
-				self.formData.city_name = item.city_name;
-				self.$route.router.go('/auth?' + $.param( self.formData ) );
-			},
-            filteData (keyword) {
-                let self    = this,
-					allData = self.indexData.areaList,
-                    len     = allData.length,
-                    data    = [];
+        filteData (keyword) {
+            let self    = this,
+                allData = self.indexData.areaList,
+                len     = allData.length,
+                data    = [];
 
-                for(let i = 0; i<len; i++){
-                    let item = allData[i],
-                        reg  = new RegExp(keyword),
-                        str  = item.first_name + item.city_name + item.short_name + 'ç' + item.first_name;
+            for(let i = 0; i<len; i++){
+                let item = allData[i],
+                    reg  = new RegExp(keyword),
+                    str  = item.first_name + item.city_name + item.short_name + 'ç' + item.first_name;
 
-                    if( reg.test(str) ){
-                        data.push(item);
-                    }
+                if( reg.test(str) ){
+                    data.push(item);
                 }
-
-                return data;
             }
+
+            return data;
         }
     }
+}
 </script>
 
 

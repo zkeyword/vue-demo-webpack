@@ -1,6 +1,29 @@
 <style lang="less">
     @import '../less/lib/mixins.less';
-    .page-home{        
+    .page-home{
+        background:#fff;
+        
+        .systemMsg{
+            border-bottom:1px solid #dedede;
+            position:relative;
+            .rem(height, 80);
+            .rem(line-height, 80);
+            .rem(font-size, 24);
+            .rem(padding, 0, 20, 0, 70);
+            .rem(border-bottom-width, 2);
+        }
+        
+        .icon-xiaolaba{
+            position:absolute;
+            background:url(../img/xiaolaba.svg) no-repeat;
+            .rem(background-size, 40, 40) !important;
+            .rem(width,40);
+            
+            .rem(height,40);
+            .rem(top, 20);
+            .rem(left, 20);
+        }
+           
         /* 场景 */
         .sceneWrap{
             .rem(padding, 40, 20, 0);
@@ -36,8 +59,8 @@
                 }
             }
         }
-        
-        .icon{
+
+        .sceneIcon{
             .rem(background-size, 80, 80) !important;
             .rem(width,80);
             .rem(height,80);
@@ -70,12 +93,18 @@
 </style>
 
 <template>
-    <div class="page-home content">
+    <div class="page-home content showFooter">
         <vn-swiper :slides="slides"></vn-swiper>
+        <div class="systemMsg">
+            <i class="icon icon-xiaolaba"></i>
+            <marquee direction="left" scrollamount="3">
+                {{systemMsg}}
+            </marquee>
+        </div>
         <div class="sceneWrap">
             <div class="sceneItem" :class="{'red': index % 4 == 2 || index % 4 == 1 }" v-for="(index, scene) in sceneList">
-                <a external v-link="{ name: 'user', params: { id: scene.scene_id } }">
-                   <i class="icon icon-home{{scene.id}}"></i>
+                <a external v-link="{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name} }">
+                   <i class="icon sceneIcon icon-home{{scene.id}}"></i>
                    <span class="first">{{scene.scene_name}}</span>
                    <span class="last">{{scene.scene_detail}}</span>
                 </a>
@@ -85,15 +114,15 @@
 </template>
 
 <script>
-    module.exports = {
-        data: function(){
-            return indexData;
-        },
-        ready: function () {
-            $(".swiper-container").swiper();
-        },
-        components:{
-            'vnSwiper': require('../components/swiper.vue')
-        }
+export default {
+    data(){
+        return indexData;
+    },
+    ready(){
+        $(".swiper-container").swiper();
+    },
+    components:{
+        'vnSwiper': require('../components/swiper.vue')
     }
+}
 </script>

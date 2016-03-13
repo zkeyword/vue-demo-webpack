@@ -6,7 +6,7 @@
     <div class="page-user">
         <header-bar :title="title"></header-bar>
         
-        <div class="content inside showPadding">
+        <div class="content showHeader showFooter">
             <a external v-link="">edit</a>
 
 

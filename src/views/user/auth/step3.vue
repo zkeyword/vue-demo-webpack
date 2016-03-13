@@ -1,9 +1,6 @@
 <style lang="less">
     @import '../../../less/lib/mixins.less';
     .page-authStep3{
-        .showPadding{
-            .rem(padding-bottom, 98)
-        }
         .itemTitle{
             border-bottom:1px solid #b2b2b2;
             .rem(border-bottom-width, 2);
@@ -15,8 +12,8 @@
 
 <template>
     <div class="page-authStep1 page-authStep3">
-        <header-bar :title="title"></header-bar>
-        <div class="content inside" :class="{showPadding: (formData.sceneIds && formData.timeConf && formData.longitude)}">
+        <header-bar :title="title" :back="true"></header-bar>
+        <div class="content showHeader" :class="{showFooter: (formData.sceneIds && formData.timeConf && formData.longitude)}">
             <div class="stepTitle">申请认证</div>
             <div class="ui-floatCenter">
                 <div class="ui-sl-floatCenter">
@@ -62,58 +59,58 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-				indexData: indexData,
-                title: '认证',
-                formData: {
-                    sceneIds: null,
-                    timeConf: null,
-                    longitude: null,
-                    workplace: null
-                }
+export default {
+    data() {
+        return {
+            indexData: indexData,
+            title: '认证',
+            formData: {
+                sceneIds: null,
+                timeConf: null,
+                longitude: null,
+                workplace: null
             }
+        }
+    },
+    route: {
+        data (transition){
+            let self     = this,
+                query    = transition.to.query;
+                
+            $.extend(self.formData, query);
+        }
+    },
+    components: {
+        'timeConf': require('../../../components/timeConf.vue'),
+        'sceneType': require('../../../components/sceneType.vue'),
+        'headerBar': require('../../../components/header.vue')
+    },
+    methods: {
+        getMap(){
+            let self = this;
+            self.$route.router.go('/auth/selectMap?' + $.param( self.formData ) );
         },
-        route: {
-            data (transition){
-                let self     = this,
-					query    = transition.to.query;
-                    
-                $.extend(self.formData, query);
-            }
-        },
-        components: {
-            'timeConf': require('../../../components/timeConf.vue'),
-            'sceneType': require('../../../components/sceneType.vue'),
-            'headerBar': require('../../../components/header.vue')
-        },
-        methods: {
-			getMap(){
-				let self = this;
-				self.$route.router.go('/auth/selectMap?' + $.param( self.formData ) );
-			},
-			submit(){
-				let self = this;
-                console.log(self.formData)
-                $.showPreloader('正在努力提交...')
-                $.ajax({
-                    url: "/soytime/ca/save",
-                    type:'POST',
-                    dataType: 'json',
-                    data: self.formData,
-                    success: (data)=>{
-                        if( data.success ){
-                            $.hidePreloader();
-                            self.$route.router.go('/auth/checking');
-                        }
-                    },
-                    error: ()=>{
+        submit(){
+            let self = this;
+            console.log(self.formData)
+            $.showPreloader('正在努力提交...')
+            $.ajax({
+                url: "/soytime/ca/save",
+                type:'POST',
+                dataType: 'json',
+                data: self.formData,
+                success: (data)=>{
+                    if( data.success ){
                         $.hidePreloader();
-                        $.toast('网络不给力，请尝试重新提交！');
+                        self.$route.router.go('/auth/checking');
                     }
-                });
-			}
+                },
+                error: ()=>{
+                    $.hidePreloader();
+                    $.toast('网络不给力，请尝试重新提交！');
+                }
+            });
         }
     }
+}
 </script>

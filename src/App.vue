@@ -3,14 +3,14 @@
 </style>
 
 <template>
-    <div class="page page-current">
-        <router-view keep-alive></router-view>
-        <vn-footer v-if="isShowTab"></vn-footer>
-    </div>
+
+    <router-view keep-alive></router-view>
+    <vn-footer v-if="isShowTab"></vn-footer>
+
 </template>
 
 <script>
-module.exports = {
+export default {
     data() {
         return {
             isShowTab: true

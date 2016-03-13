@@ -1,10 +1,15 @@
 <style lang="less">
-
+@import '../less/lib/mixins.less';
+.bar-tab{
+    background:#fff;
+    border-top: 1px solid #b2b2b2;
+    .rem(border-top-width, 2);
+}
 </style>
 
 <template>
     <nav class="bar bar-tab">
-        <a class="tab-item" external v-link="{ path: '/home', activeClass: 'active'}">
+        <a class="tab-item" external v-link="{ path: '/', activeClass: 'active'}">
             <span class="icon icon-home"></span>
             <span class="tab-label">首页</span>
         </a>

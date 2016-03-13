@@ -29,8 +29,8 @@
 
 <template>
     <div class="page-authStep1 page-authStep2">
-        <header-bar :title="title"></header-bar>
-        <div class="inside">
+        <header-bar :title="title" :back="true"></header-bar>
+        <div class="content showHeader">
             <div class="stepTitle">申请认证</div>
             <div class="ui-floatCenter">
                 <div class="ui-sl-floatCenter">
@@ -77,49 +77,49 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                title: '认证',
-                formData: {},
-                tmpUrlData:{}
-            }
-        },
-        route: {
-            data (transition){
-                let self    = this,
-                    query   = transition.to.query;
-                    
-                self.tmpUrlData = {
-                    auth_head_url: (query.auth_head_url ? ('/soytime/file/renzheng/' + query.auth_head_url) : null),
-                    auth_student_card_url: (query.auth_student_card_url ? ('/soytime/file/renzheng/' + query.auth_student_card_url) : null)
-                };
+export default {
+    data() {
+        return {
+            title: '认证',
+            formData: {},
+            tmpUrlData:{}
+        }
+    },
+    route: {
+        data (transition){
+            let self    = this,
+                query   = transition.to.query;
                 
-                $.extend(self.formData, query);  
-            }
+            self.tmpUrlData = {
+                auth_head_url: (query.auth_head_url ? ('/soytime/file/renzheng/' + query.auth_head_url) : null),
+                auth_student_card_url: (query.auth_student_card_url ? ('/soytime/file/renzheng/' + query.auth_student_card_url) : null)
+            };
+            
+            $.extend(self.formData, query);  
+        }
+    },
+    components: {
+        'headerBar': require('../../../components/header.vue')
+    },
+    methods: {
+        goAuth(){
+            let self = this;
+            self.$route.router.go('/auth/step3?' + $.param( self.formData ) );
         },
-        components: {
-            'headerBar': require('../../../components/header.vue')
+        getPersionPic(){
+            let self = this;
+            uploadimg(1, (data)=>{
+                self.formData.auth_head_url   = data;
+                self.tmpUrlData.auth_head_url = '/soytime/file/renzheng/' + data;
+            })
         },
-        methods: {
-			goAuth(){
-				let self = this;
-				self.$route.router.go('/auth/step3?' + $.param( self.formData ) );
-			},
-            getPersionPic(){
-                let self = this;
-                uploadimg(1, (data)=>{
-                    self.formData.auth_head_url   = data;
-                    self.tmpUrlData.auth_head_url = '/soytime/file/renzheng/' + data;
-                })
-            },
-            getStudentPic(){
-                let self = this;
-                uploadimg(2, (data)=>{
-                    self.formData.auth_student_card_url   = data;
-                    self.tmpUrlData.auth_student_card_url = '/soytime/file/renzheng/' + data;
-                })
-            }
+        getStudentPic(){
+            let self = this;
+            uploadimg(2, (data)=>{
+                self.formData.auth_student_card_url   = data;
+                self.tmpUrlData.auth_student_card_url = '/soytime/file/renzheng/' + data;
+            })
         }
     }
+}
 </script>

@@ -2,7 +2,7 @@
 
 var webpack           = require('webpack'),
 	ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    isProduction      = process.env.NODE_ENV === 'production' ? true : false,
+    isProduction      = process.env.NODE_ENV === 'production' ? true : true,
     version           = '?v=' + ( new Date().getTime() );
 
 module.exports = {
