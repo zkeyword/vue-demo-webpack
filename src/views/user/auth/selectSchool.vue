@@ -55,9 +55,9 @@ export default {
     route: {
         data (transition){
             let self  = this,
-                query = transition.from.query;
+                query = transition.to.query;
                 
-            $.extend(self.formData, query); 
+            $.extend(self.formData, query);
             
             $.ajax({
                 url: "/soytime/data/loadSchool",

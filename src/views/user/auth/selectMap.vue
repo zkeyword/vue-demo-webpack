@@ -16,18 +16,16 @@
         z-index:200;
         
         div{
-            padding:20px 100px 20px 20px;
+            width:80%;
+            padding:10px;
             font-size:20px;
         }
         
         .mapBtn{
+            width:20%;
+            padding:10px;            
             color:#fff;
-            position:absolute;
-            right:15px;
-            top:10px;
             background:#54C5FF;
-            padding:5px 20px;
-            z-index:500;
             font-size:20px;
         }
     }
@@ -44,7 +42,7 @@
     <div transition="page" class="page page-selectMap page-current">
         <header-bar :title="title" :back="true"></header-bar>
         <div id="amapWrap" class="content"></div>
-		<div id="panel"></div>
+		<div id="panel" clas="clearfix"></div>
     </div>
 </template>
 <script>
