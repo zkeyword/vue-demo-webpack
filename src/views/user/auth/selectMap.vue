@@ -21,17 +21,18 @@
         span{
             display: table-cell;
             vertical-align: middle;
-            padding:10px;
-            .rem(padding, 10);
+            .rem(padding, 20);
             .rem(font-size, 24);
         }
         
         .mapText{
             width:80%;
+			background:#fff;
         }
         .mapBtn{
             width:20%;
             text-align:center;
+			color:#fff;
         }
     }
 
