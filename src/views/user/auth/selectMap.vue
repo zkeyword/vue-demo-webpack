@@ -1,4 +1,5 @@
 <style lang="less">
+@import '../../../less/lib/mixins.less';
 .page-selectMap{
     .amap-toolbar{
         bottom:180px !important;
@@ -14,19 +15,23 @@
         width: 100%;
         border-bottom: solid 1px silver;
         z-index:200;
+        display:table;
+        background:#54C5FF;
         
-        div{
-            width:80%;
+        span{
+            display: table-cell;
+            vertical-align: middle;
             padding:10px;
-            font-size:20px;
+            .rem(padding, 10);
+            .rem(font-size, 24);
         }
         
+        .mapText{
+            width:80%;
+        }
         .mapBtn{
             width:20%;
-            padding:10px;            
-            color:#fff;
-            background:#54C5FF;
-            font-size:20px;
+            text-align:center;
         }
     }
 
@@ -42,7 +47,7 @@
     <div transition="page" class="page page-selectMap page-current">
         <header-bar :title="title" :back="true"></header-bar>
         <div id="amapWrap" class="content"></div>
-		<div id="panel" clas="clearfix"></div>
+		<div id="panel"></div>
     </div>
 </template>
 <script>
@@ -89,7 +94,7 @@ export default  {
                 geocoder.getAddress(lnglatXY, function(status, result) {
                     if (status === 'complete' && result.info === 'OK') {
                         let ads   = result.regeocode.formattedAddress,
-                            panel = $('#panel').html('<div>'+ ads +'</div><span class="mapBtn">确定</span>');
+                            panel = $('#panel').html('<span class="mapText">'+ ads +'</span><span class="mapBtn">确定</span>');
                                     
                         panel.on('click', '.mapBtn', function(e){
                             self.formData.workplace = ads;

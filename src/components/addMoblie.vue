@@ -9,15 +9,15 @@
 
 <template>
     <nav class="bar bar-tab">
-        <a class="tab-item" external v-link="{ name: 'home', activeClass: 'active'}">
+        <a class="tab-item" external v-link="{ path: '/home', activeClass: 'active'}">
             <span class="icon icon-home"></span>
             <span class="tab-label">首页</span>
         </a>
-        <a class="tab-item" external  v-link="{ name: 'msg', activeClass: 'active' }">
+        <a class="tab-item" external  v-link="{ path: '/msg', activeClass: 'active' }">
             <span class="icon icon-message"></span>
             <span class="tab-label">消息</span>
         </a>
-        <a class="tab-item" external v-link="{ name: 'user', activeClass: 'active' }">
+        <a class="tab-item" external v-link="{ path: '/user', activeClass: 'active' }">
             <span class="icon icon-me"></span>
             <span class="tab-label">我的{{currentView}}</span>
         </a>

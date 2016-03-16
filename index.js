@@ -66,6 +66,19 @@ app.post('/soytime/ca/caInfo', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
+app.get('/soytime/user/info', function (req, res) {
+	var Random = Mock.Random,
+		data   = Mock.mock({
+            success: '1',
+            result:{
+                'photo': Random.image('160x200'),
+                'name': '@cname'
+            }			
+		});
+	
+	res.send( JSON.stringify(data, null, 4) );
+});
+
 var server = app.listen(4000, function () {
 	var host = server.address().address;
 	var port = server.address().port;

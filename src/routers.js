@@ -5,7 +5,7 @@ export default (router)=>{
 	    '*': {
 	        component: require('./views/home')
         },
-		'/': {
+		'/home': {
 			name: 'home',
 	        component: require('./views/home')
 	    },
@@ -34,6 +34,28 @@ export default (router)=>{
         '/user/setting': {
 	    	name: 'userSetting',
 	        component: require('./views/user/setting')
+	    },
+        '/user/money': {
+	    	name: 'userMoney',
+	        component: require('./views/user/money')
+	    },
+        '/user/work/server': {
+	    	name: 'userWorkServer',
+	        component: require('./views/user/work/server')
+	    },
+        '/user/work/publish': {
+	    	name: 'userWorkPublish',
+	        component: require('./views/user/work/publish')
+	    },
+        '/user/work/accept': {
+	    	name: 'userWorkAccept',
+	        component: require('./views/user/work/accept')
+	    },
+        
+        /* 客服 */
+        '/service/': {
+	    	name: 'service',
+	        component: require('./views/service')
 	    },
         
         /* 认证部分 */

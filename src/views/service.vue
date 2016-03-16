@@ -1,37 +1,5 @@
 <style lang="less">
-    @import '../less/lib/mixins.less';
-    .page-user{
-        .userHeader{
-            background:#fff;
-            .userWrap{
-                .rem(width, 420);
-                .pull-left{
-                    .rem(width, 120);
-                    .rem(height, 120);
-                    .border-radius(50);
-                }
-                .pull-right{
-                    .rem(width, 280);
-                    .name{
-                        .rem(font-size, 30);
-                    }
-                    .auth{
-                        color:#b2b2b2;
-                        .rem(font-size, 24);
-                        .rem(height, 32);
-                        .rem(line-height, 32);
-                        .rem(padding-top, 20);
-                    }
-                }
-            }
-            
-            .userScore{
-                li{
-                    float:left
-                }
-            }
-        }
-    }
+
 </style>
 
 <template>
@@ -39,26 +7,19 @@
         <header-bar :title="title"></header-bar>
         
         <div class="content showHeader showFooter">
-        
-            <div class="userHeader clearfix">
-                <div class="userWrap clearfix">
-                    <div class="pull-left">
-                        <img src="{{userInfo.photo}}">
-                    </div>
-                    <div class="pull-right">
-                        <div class="name">名字</div>
-                        <div class="auth">
-                            <i class="icon icon-anquanbaozhang"></i>
-                            <a external v-link="{name: 'auth'}">未认证，点此认证！</a>
-                        </div>
-                    </div>
-                </div>
-                <ul class="userScore clearfix">
-                    <li><i class="icon icon-anquanbaozhang"></i>好评</li>
-                    <li><i class="icon icon-anquanbaozhang"></i>中评</li>
-                    <li><i class="icon icon-anquanbaozhang"></i>差评</li>
-                    <li><i class="icon icon-anquanbaozhang"></i>收藏</li>
-                </ul>
+            <a external v-link="">edit</a>
+
+
+            <div class="card-header">
+                <img src="">
+                名字
+
+                未认证，点此认证！
+                
+                好评   1
+                中评
+                差评   1
+                收藏
             </div>
 
             <div class="list-block">
@@ -134,27 +95,7 @@
     export default {
         data() {
             return {
-                title: '我的',
-                userInfo: {},
-                formData: {}
-            }
-        },
-        route: {
-            data (transition){
-                let self     = this,
-                    query    = transition.to.query;
-                    
-                $.extend(self.formData, query);
-                
-                $.ajax({
-                    url: "/soytime/user/info",
-                    type:'GET',
-                    dataType: 'json',
-                    data: self.formData,
-                    success: ((data)=>{
-                        self.userInfo = data.result;
-                    })
-                });
+                title: '我的'
             }
         },
         ready (){
