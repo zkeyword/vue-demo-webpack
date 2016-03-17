@@ -66,6 +66,28 @@ app.post('/soytime/ca/caInfo', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
+
+app.get('/soytime/message/getMobileCode', function (req, res) {
+	var Random = Mock.Random,
+		data   = Mock.mock({
+            success: '1',
+            result: '@integer(60, 1000)'		
+		});
+	
+	res.send( JSON.stringify(data, null, 4) );
+});
+
+app.get('/soytime/account/saveMobile', function (req, res) {
+	var Random = Mock.Random,
+		data   = Mock.mock({
+            success: '1',
+            result: '@integer(60, 1000)'		
+		});
+	
+	res.send( JSON.stringify(data, null, 4) );
+});
+
+
 app.get('/soytime/user/info', function (req, res) {
 	var Random = Mock.Random,
 		data   = Mock.mock({
