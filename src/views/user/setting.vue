@@ -16,6 +16,12 @@
             
         </div>
     </div>
+	<script type="text/html" id="moblieWrap">
+		手机：<input type="text" />
+		验证码：<input type="text" />
+		
+		获取验证码
+	</script>
 </template>
 
 <script>
@@ -27,6 +33,11 @@
                 formData: {}
             }
         },
+		route: {
+			data (transition){
+				
+			}
+		},
         ready (){
             //setTimeout(() => {
             //   this.$route.router.go({ name: 'list'});
@@ -34,7 +45,23 @@
         },
         methods:{
             showMoblie(){
-                this.isShowPopMoblie = true;
+                $.modal({
+					text : $('#moblieWrap').html(),
+					buttons : [
+						{
+							text : '取消',
+							onClick : function () {
+								$.alert('You clicked second button!')
+							}
+						},{
+							text : '确定',
+							close: false,
+							onClick : function () {
+								$.closeModal()
+							}
+						}
+					]
+				});
             }
         },
         components: {

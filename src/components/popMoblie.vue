@@ -1,15 +1,15 @@
 <style lang="less">
 @import '../less/lib/mixins.less';
 .actions-modal.actions-top{
-    
+	z-index:11000;
+	background:#fff;
+	top:2.2rem;
+	.rem(height, 200);
 }
 </style>
 
 <template>
-    <div class="actions-modal actions-top">
-        
-    </div>
-    <div class="modal-overlay modal-overlay-visible"></div>
+	dfg
 </template>
 
 <script>
@@ -17,7 +17,7 @@
         replace:true,
         props: ['isShow'],
         ready: function () {
-            //console.log(this.isShow)
+			
         }
     }
 </script>
