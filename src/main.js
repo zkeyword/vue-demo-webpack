@@ -1,17 +1,14 @@
 import Vue from 'vue'
-//import Vuex from 'Vuex'
 import VueRouter from 'vue-router'
+import Store from './store/store'
 import RouterMap from './routers'
 import App from './App'
-import filters from './filters'
+import Filters from './filters'
 
-//Vue.use(Vuex);
 Vue.use(VueRouter);
 
 //添加过滤
-Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
-
-//Vue.filter('sceneCur', filters['sceneCur'])
+Object.keys(Filters).forEach(k => Vue.filter(k, Filters[k]));
 
 // routing
 let router = new VueRouter({
@@ -40,6 +37,8 @@ router.beforeEach(function (transition) {
 router.afterEach(function (transition) {
     $.refreshScroller();
 })
+
+App.store = Store;
 
 router.start(App, '#app');
 

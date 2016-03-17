@@ -8,7 +8,12 @@
                 .pull-left{
                     .rem(width, 120);
                     .rem(height, 120);
-                    .border-radius(50);
+                    .border-radius(120);
+					img{
+					    width:100%;
+						height:100%;
+					    .border-radius(120);
+					}
                 }
                 .pull-right{
                     .rem(width, 280);
@@ -131,39 +136,59 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                title: '我的',
-                userInfo: {},
-                formData: {}
-            }
-        },
-        route: {
-            data (transition){
-                let self     = this,
-                    query    = transition.to.query;
-                    
-                $.extend(self.formData, query);
-                
-                $.ajax({
-                    url: "/soytime/user/info",
-                    type:'GET',
-                    dataType: 'json',
-                    data: self.formData,
-                    success: ((data)=>{
-                        self.userInfo = data.result;
-                    })
-                });
-            }
-        },
-        ready (){
-            //setTimeout(() => {
-            //   this.$route.router.go({ name: 'list'});
-            //},2000);
-        },
-        components: {
-            'headerBar': require('../components/header.vue')
-        }
-    }
+export default {
+	data() {
+		return {
+			title: '我的',
+			userInfo: {},
+			formData: {}
+		}
+	},
+	vuex:{
+		getters: {
+			todos(){
+				console.log(11)
+			}
+		}
+		/*
+		getters: {
+			todos: state => state.todo.todos
+		},
+		actions: {
+			addTodo,
+			toggleAll,
+			clearCompleted
+		}
+		*/
+	},
+	route: {
+		data (transition){
+			let self     = this,
+				query    = transition.to.query;
+				
+			$.extend(self.formData, query);
+			
+			$.ajax({
+				url: "/soytime/user/info",
+				type:'GET',
+				dataType: 'json',
+				data: self.formData,
+				success: ((data)=>{
+					self.userInfo = data.result;
+				})
+			});
+			
+			console.log(this.$store.state.namexx, this)
+			//console.log( store.state );
+		}
+	},
+	ready (){
+		//setTimeout(() => {
+		//   this.$route.router.go({ name: 'list'});
+		//},2000);
+	},
+	components: {
+		'headerBar': require('../components/header.vue')
+	}
+}
 </script>
