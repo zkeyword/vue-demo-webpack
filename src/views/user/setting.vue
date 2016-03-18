@@ -232,6 +232,7 @@
                                         clearInterval(timer);
                                         that.removeClass('disable');
                                         getCodeTime.html('');
+										getCodeText.html('获取验证码');
                                     };
                                 }, 1000)
                             }else{

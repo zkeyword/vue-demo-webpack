@@ -32,7 +32,8 @@
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^8.0.0",
     "vue-style-loader": "^1.0.0",
-    "webpack": "^1.12.2"
+    "webpack": "^1.12.2",
+	"browsersync":"*"
   },
   "dependencies": {
     "es6-promise": "^3.0.2",

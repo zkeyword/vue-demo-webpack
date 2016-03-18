@@ -11,27 +11,6 @@ app.get('/', function (req, res) {
 
 app.use('/dist', express.static('dist'));
 
-
-app.get('/grid', function (req, res) {
-	var Random = Mock.Random,
-		data   = Mock.mock({
-			'rows|10': [{
-				'id': '@integer(60, 1000)',
-				'name': '@cname',
-				'email': '@email',
-				'address': '@region',
-				'time': '@datetime',
-				'tel': '@integer(13000000000, 13900000000)',
-				'type': '@integer(1, 5)',
-				'sex': '@integer(0, 1)',
-				'photo': Random.image('160x200')
-			}],
-			'total': 50
-		});
-	
-	res.send( JSON.stringify(data, null, 4) );
-});
-
 app.post('/soytime/data/loadSchool', function (req, res) {
 	var Random = Mock.Random,
 		data   = Mock.mock({
@@ -58,7 +37,7 @@ app.post('/soytime/ca/caInfo', function (req, res) {
                 school_name: 'asd',
                 auth_head_url: '1zzz',
                 auth_student_card_url: '1zz',
-                sutdent_auth: '3',	
+                sutdent_auth: '1',	
                 explain	: '@cname'
             }			
 		});

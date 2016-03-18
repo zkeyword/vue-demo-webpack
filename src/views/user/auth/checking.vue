@@ -6,9 +6,10 @@
     height:100%;
     
     h2{
-        .rem(padding, 60, 30);
+        .rem(padding, 120, 30);
         .rem(font-size, 60);
-        .rem(padding-bottom, 20);
+        .rem(padding-bottom, 60);
+		margin:0;
     }
     
     p{
