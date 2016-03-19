@@ -1,11 +1,23 @@
 <style lang="less">
     @import '../less/lib/mixins.less';
     .page-user{
+        .list-block{
+            .rem(margin, 20, 0);
+            ul{
+                .border-radius(8);
+            }
+            .item-inner{
+                .rem(margin-right, 20);
+                .rem(font-size, 30);
+            }
+        }
         .userHeader{
             background:#fff;
+            .border-radius(8);
+            .rem(padding, 20);
             .userWrap{
                 .rem(width, 420);
-                .pull-left{
+                .photoWrap{
                     .rem(width, 120);
                     .rem(height, 120);
                     .border-radius(120);
@@ -15,7 +27,7 @@
 					    .border-radius(120);
 					}
                 }
-                .pull-right{
+                .nameWrap{
                     .rem(width, 280);
                     .name{
                         .rem(font-size, 30);
@@ -25,14 +37,30 @@
                         .rem(font-size, 24);
                         .rem(height, 32);
                         .rem(line-height, 32);
-                        .rem(padding-top, 20);
+                        .rem(margin-top, 20);
                     }
                 }
             }
             
             .userScore{
+                .rem(padding, 20, 0, 0);
+                .rem(margin, 20, 0, 0);
+                border-top:2px solid #dedede;
+                .rem(border-top-width, 2);
                 li{
-                    float:left
+                    float:left;
+                    width:25%;
+                    .rem(font-size, 30);
+                    .rem(line-height, 30);
+                    em{
+                        font-style:normal;
+                    }
+                    span{
+                        .rem(margin, 0, 8);
+                    }
+                    i{
+                        
+                    }
                 }
             }
         }
@@ -47,86 +75,84 @@
         
             <div class="userHeader clearfix">
                 <div class="userWrap clearfix">
-                    <div class="pull-left">
-                        <img src="{{userInfo.photo}}">
+                    <div class="pull-left photoWrap">
+                        <img :src="{{userInfo.photo}}">
                     </div>
-                    <div class="pull-right">
+                    <div class="pull-right nameWrap">
                         <div class="name">名字</div>
-                        <div class="auth">
-                            <i class="icon icon-anquanbaozhang"></i>
-                            <a external v-link="{name: 'auth'}">未认证，点此认证！</a>
+                        <div class="auth clearfix" v-link="{name: 'auth'}">
+                            <i class="icon icon-anquanbaozhang pull-left"></i>
+                            <span class="pull-left">未认证，点此认证！</span>
                         </div>
                     </div>
                 </div>
                 <ul class="userScore clearfix">
-                    <li><i class="icon icon-anquanbaozhang"></i>好评</li>
-                    <li><i class="icon icon-anquanbaozhang"></i>中评</li>
-                    <li><i class="icon icon-anquanbaozhang"></i>差评</li>
-                    <li><i class="icon icon-anquanbaozhang"></i>收藏</li>
+                    <li>
+                        <i class="icon icon-xiaolian pull-left"></i>
+                        <span class="pull-left">好评</span>
+                        <em class="pull-left">1</em>
+                    </li>
+                    <li>
+                        <i class="icon icon-cry pull-left"></i>
+                        <span class="pull-left">中评</span>
+                        <em class="pull-left">1</em>
+                    </li>
+                    <li>
+                        <i class="icon icon-kulian pull-left"></i>
+                        <span class="pull-left">差评</span>
+                        <em class="pull-left">1</em>
+                    </li>
+                    <li>
+                        <i class="icon icon-aixin pull-left"></i>
+                        <span class="pull-left">收藏</span>
+                        <em class="pull-left">1</em>
+                    </li>
                 </ul>
             </div>
 
             <div class="list-block">
                 <ul>
-                    <li class="item-content item-link">
-                        <a external v-link="{name: 'userMoney'}">
-                            <div class="item-media"><i class="icon icon-f7"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title">我的余额</div>
-                            </div>
-                        </a>
+                    <li class="item-content item-link" v-link="{name: 'userMoney'}">
+                        <div class="item-inner">
+                            <div class="item-title">我的余额</div>
+                        </div>
                     </li>
                 </ul>
             </div>
             <div class="list-block">
                 <ul>
-                    <li class="item-content item-link">
-                        <a external v-link="{name: 'userSetting'}">
-                            <div class="item-media"><i class="icon icon-f7"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title">设置</div>
-                            </div>
-                        </a>
+                    <li class="item-content item-link" v-link="{name: 'userSetting'}">
+                        <div class="item-inner">
+                            <div class="item-title">设置</div>
+                        </div>
                     </li>
-                    <li class="item-content item-link">
-                        <a external v-link="{name: 'userWorkServer'}">
-                            <div class="item-media"><i class="icon icon-f7"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title">发布服务</div>
-                            </div>
-                        </a>
+                    <li class="item-content item-link" v-link="{name: 'userWorkServer'}">
+                        <div class="item-inner">
+                            <div class="item-title">发布服务</div>
+                        </div>
                     </li>
                 </ul>
             </div>
             <div class="list-block">
                 <ul>
-                    <li class="item-content item-link">
-                        <a external v-link="{name: 'userWorkPublish'}">
-                            <div class="item-media"><i class="icon icon-f7"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title">发单任务</div>
-                            </div>
-                        </a>
+                    <li class="item-content item-link" v-link="{name: 'userWorkPublish'}">
+                        <div class="item-inner">
+                            <div class="item-title">发单任务</div>
+                        </div>
                     </li>
-                    <li class="item-content item-link">
-                        <a external v-link="{name: 'userWorkAccept'}">
-                            <div class="item-media"><i class="icon icon-f7"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title">接单任务</div>
-                            </div>
-                        </a>
+                    <li class="item-content item-link" v-link="{name: 'userWorkAccept'}">
+                        <div class="item-inner">
+                            <div class="item-title">接单任务</div>
+                        </div>
                     </li>
                 </ul>
             </div>
             <div class="list-block">
                 <ul>
-                    <li class="item-content item-link">
-                        <a external v-link="{name: 'service'}">
-                            <div class="item-media"><i class="icon icon-f7"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title">在线客服</div>
-                            </div>
-                        </a>
+                    <li class="item-content item-link" v-link="{name: 'service'}">
+                        <div class="item-inner">
+                            <div class="item-title">在线客服</div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -178,8 +204,8 @@ export default {
 				})
 			});
 			
-			console.log(this.$store.state.namexx, this)
-			//console.log( store.state );
+			//console.log(this.$store.state.namexx, this)
+			console.log( this.todos );
 		}
 	},
 	ready (){
