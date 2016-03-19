@@ -90,7 +90,7 @@
         </ul>
         <div class="content showHeader showFooter">
             <div class="item">
-                <header class="clearfix">
+                <header class="clearfix" v-link="{name: 'sceneDetail'}">
                     <div class="pull-left photoWrap">
                         <img :src="{{userInfo.photo}}">
                     </div>

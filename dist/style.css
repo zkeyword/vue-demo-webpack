@@ -22,7 +22,7 @@
 }
 .page-home .icon-xiaolaba {
   position: absolute;
-  background: url(img/2165dfa7.xiaolaba.svg?v=1458365884962) no-repeat;
+  background: url(img/2165dfa7.xiaolaba.svg?v=1458403591282) no-repeat;
   -: ;background-size: 1rem !important;
   -: ;background-size: 1rem 1rem !important;
   -: ;width: 1rem;
@@ -78,19 +78,19 @@
   position: absolute;
 }
 .page-home .icon-home1 {
-  background: url(img/21a58403.home1.svg?v=1458365884962) no-repeat;
+  background: url(img/21a58403.home1.svg?v=1458403591282) no-repeat;
 }
 .page-home .icon-home2 {
-  background: url(img/d4d5b1d0.home2.svg?v=1458365884962) no-repeat;
+  background: url(img/d4d5b1d0.home2.svg?v=1458403591282) no-repeat;
 }
 .page-home .icon-home4 {
-  background: url(img/f4a087e3.home4.svg?v=1458365884962) no-repeat;
+  background: url(img/f4a087e3.home4.svg?v=1458403591282) no-repeat;
 }
 .page-home .icon-home5 {
-  background: url(img/6f6c431d.home5.svg?v=1458365884962) no-repeat;
+  background: url(img/6f6c431d.home5.svg?v=1458403591282) no-repeat;
 }
 .page-home .icon-home6 {
-  background: url(img/292082fa.home6.svg?v=1458365884962) no-repeat;
+  background: url(img/292082fa.home6.svg?v=1458403591282) no-repeat;
 }
 /*阴影*/
 /*圆角*/
@@ -130,7 +130,7 @@
   -: ;width: 0.95rem;
 }
 .timeConf table td .icon-xuanzhong {
-  background: url(img/b818dd37.xuanzhong.svg?v=1458365884962) no-repeat;
+  background: url(img/b818dd37.xuanzhong.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.95rem;
   -: ;background-size: 0.95rem 0.85rem;
   -: ;height: 0.85rem;
@@ -209,6 +209,18 @@
   border-top: 2px solid #dedede;
   -: ;border-top-width: 0.05rem;
 }
+/*阴影*/
+/*圆角*/
+/*三角*/
+/*盒子*/
+/*透明度*/
+/* rem */
+/*阴影*/
+/*圆角*/
+/*三角*/
+/*盒子*/
+/*透明度*/
+/* rem */
 /*阴影*/
 /*圆角*/
 /*三角*/
@@ -354,7 +366,7 @@
 /* rem */
 .page-user-money .moneyHeader {
   -: ;height: 10rem;
-  background: url(img/b2a22900.moneyBg.jpg?v=1458365884962) no-repeat;
+  background: url(img/b2a22900.moneyBg.jpg?v=1458403591282) no-repeat;
   background-size: 100% 100%;
   position: relative;
 }
@@ -757,7 +769,7 @@
   -: ;line-height: 3.55rem;
 }
 .page-authStep2 .icon-anonymous2 {
-  background: url(img/4dfb9e1a.anonymous2.svg?v=1458365884962) no-repeat;
+  background: url(img/4dfb9e1a.anonymous2.svg?v=1458403591282) no-repeat;
   -: ;background-size: 2.05rem;
   -: ;background-size: 2.05rem 2.05rem;
   -: ;height: 2.05rem;
@@ -880,91 +892,91 @@ html {
   margin: 0 5px;
 }
 .icon-anquanbaozhang {
-  background: url(img/b210427f.anquanbaozhang.svg?v=1458365884962) no-repeat;
+  background: url(img/b210427f.anquanbaozhang.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-anquanbaozhang2 {
-  background: url(img/698ccc0c.anquanbaozhang2.svg?v=1458365884962) no-repeat;
+  background: url(img/698ccc0c.anquanbaozhang2.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-xiaolian {
-  background: url(img/62813799.xiaolian.svg?v=1458365884962) no-repeat;
+  background: url(img/62813799.xiaolian.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-cry {
-  background: url(img/9008c7b1.cry.svg?v=1458365884962) no-repeat;
+  background: url(img/9008c7b1.cry.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-kulian {
-  background: url(img/e26dd789.kulian.svg?v=1458365884962) no-repeat;
+  background: url(img/e26dd789.kulian.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-aixin {
-  background: url(img/7cfb1304.aixin.svg?v=1458365884962) no-repeat;
+  background: url(img/7cfb1304.aixin.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-down {
-  background: url(img/c346d4f6.down.svg?v=1458365884962) no-repeat;
+  background: url(img/c346d4f6.down.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-up {
-  background: url(img/3d6ab238.up.svg?v=1458365884962) no-repeat;
+  background: url(img/3d6ab238.up.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-jiantouyou {
-  background: url(img/aea09d4c.jiantouyou.svg?v=1458365884962) no-repeat;
+  background: url(img/aea09d4c.jiantouyou.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-xingbienv {
-  background: url(img/264f5c96.xingbienv.svg?v=1458365884962) no-repeat;
+  background: url(img/264f5c96.xingbienv.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-xingbienv2 {
-  background: url(img/dee5a0c4.xingbienv2.svg?v=1458365884962) no-repeat;
+  background: url(img/dee5a0c4.xingbienv2.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-xingbienan {
-  background: url(img/4669f192.xingbienan.svg?v=1458365884962) no-repeat;
+  background: url(img/4669f192.xingbienan.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;
   -: ;width: 0.8rem;
 }
 .icon-xingbienan2 {
-  background: url(img/77a582dc.xingbienan2.svg?v=1458365884962) no-repeat;
+  background: url(img/77a582dc.xingbienan2.svg?v=1458403591282) no-repeat;
   -: ;background-size: 0.8rem;
   -: ;background-size: 0.8rem 0.8rem;
   -: ;height: 0.8rem;

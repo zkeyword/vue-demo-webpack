@@ -29,6 +29,10 @@ export default (router)=>{
 	    	name: 'sceneDetail',
 	        component: require('./views/scene/detail')
 	    },
+        '/scene/reserve': {
+	    	name: 'sceneReserve',
+	        component: require('./views/scene/reserve')
+	    },
         
         /* 用户部分 */
 	    '/user': {
