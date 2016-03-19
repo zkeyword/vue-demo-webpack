@@ -1,90 +1,157 @@
-<template>
-    <header class="bar bar-nav">
-        <h1 class="title">我的</h1>
-    </header>
-	<a external v-link="{ name: 'userEdit', params: { userId: 123 } }">edit</a>
-
-
-    <div class="card-header">
-        <img src="">
-        名字
-
-        未认证，点此认证！
+<style lang="less">
+@import '../../less/lib/mixins.less';
+.page-user-money{
+    .moneyHeader{
+        .rem(height, 400);
+        background:url(../../img/moneyBg.jpg) no-repeat;
+        background-size:100% 100%;
+        position:relative;
         
-        好评   1
-        中评
-        差评   1
-        收藏
-    </div>
+        header{
+            text-align:center;
+            color:#fff;
+            .rem(padding, 110, 0, 0);
+            span{
+                position:relative;
+                .rem(font-size, 70);
+            }
+            i{
+                position:absolute;
+                left:0;
+                font-style: normal;
+                .rem(top, -30);
+                .rem(font-size, 20);
+            }
+        }
+        
+        footer{
+            position:absolute;
+            bottom:0;
+            left:0;
+            width:100%;
 
-    <div class="list-block">
-        <ul>
-            <li class="item-content item-link">
-                <div class="item-media"><i class="icon icon-f7"></i></div>
-                <div class="item-inner">
-                    <div class="item-title">我的余额</div>
-                </div>
-            </li>
-        </ul>
+            span{
+                position:relative;
+                z-index:1;
+                float:left;
+                width:50%;
+                text-align:center;
+                .rem(padding, 30);
+                .rem(font-size, 34);
+                .rem(margin, 20, 0);
+                &:last-child{
+                    border-left:1px solid #dedede;
+                }
+                &:first-child{
+                    border-right:1px solid #dedede;
+                }
+            }
+            
+            div{
+                background:#fff;
+                position:absolute;
+                left:0;
+                top:0;
+                height:100%;
+                width:100%;
+                .opacity(0.5);
+                z-index:0;
+            }
+        }
+    }
+    .moneyList{
+        background:#fff;
+        
+        header{
+            background:#fafafa;
+            border-bottom:2px solid #f1f1f1;
+            .rem(border-bottom-width, 2);
+            .rem(height, 64);
+            .rem(line-height, 64);
+            .rem(font-size, 30);
+            .rem(padding, 0, 30);
+        }
+        
+        ul{
+            .rem(margin, 0, 30);
+            color:#888;
+        }
+        
+        li{
+            border-bottom:2px solid #dedede;
+            .rem(border-bottom-width, 2);
+            .rem(padding, 15, 0);
+        }
+        
+        footer{
+            color:#b2b2b2;
+            text-align:center;
+            .rem(padding, 30);
+            .rem(font-size, 24);            
+        }
+    }
+}
+</style>
+
+<template>
+    <div class="page-user page-user-money" transition="page">
+        <header-bar :title="title" back="true"></header-bar>
+        <div class="content showHeaderNopading">
+            <div class="moneyHeader">
+                <header>
+                    <span><i>账户余额</i>121212.00</span>
+                </header>
+                <footer class="clearfix">
+                    <div></div>
+                    <span>转入</span>
+                    <span>转出</span>
+                </footer>
+            </div>
+            <div class="moneyList">
+                <header>交易记录</header>
+                <ul>
+                    <li class="clearfix">
+                        2313 khjh
+                    </li>
+                    <li class="clearfix">
+                        2313 khjh
+                    </li>
+                </ul>
+                <footer>点击更多...</footer>
+            </div>
+        </div>
     </div>
-    <div class="list-block">
-        <ul>
-            <li class="item-content item-link">
-                <div class="item-media"><i class="icon icon-f7"></i></div>
-                <div class="item-inner">
-                    <div class="item-title">设置</div>
-                </div>
-            </li>
-            <li class="item-content item-link">
-                <div class="item-media"><i class="icon icon-f7"></i></div>
-                <div class="item-inner">
-                    <div class="item-title">发布服务</div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="list-block">
-        <ul>
-            <li class="item-content item-link">
-                <div class="item-media"><i class="icon icon-f7"></i></div>
-                <div class="item-inner">
-                    <div class="item-title">发单任务</div>
-                </div>
-            </li>
-            <li class="item-content item-link">
-                <div class="item-media"><i class="icon icon-f7"></i></div>
-                <div class="item-inner">
-                    <div class="item-title">接单任务</div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="list-block">
-        <ul>
-            <li class="item-content item-link">
-                <div class="item-media"><i class="icon icon-f7"></i></div>
-                <div class="item-inner">
-                    <div class="item-title">在线客服</div>
-                </div>
-            </li>
-        </ul>
-    </div>
-	<router-view></router-view>
 </template>
 
 <script>
-    export default {
-        ready (){
-            //setTimeout(() => {
-            //   this.$route.router.go({ name: 'list'});
-            //},2000);
-        }
-    }
+export default {
+	data() {
+		return {
+			title: '我的余额',
+			userInfo: {},
+			formData: {}
+		}
+	},
+	route: {
+		data (transition){
+			let self     = this,
+				query    = transition.to.query;
+				
+			$.extend(self.formData, query);
+			
+		}
+	},
+	ready (){
+		//setTimeout(() => {
+		//   this.$route.router.go({ name: 'list'});
+		//},2000);
+	},
+	components: {
+        'headerBar': require('../../components/header.vue'),
+	}
+}
 </script>
 
-<style lang="less">
-
-</style>
 
 
 
