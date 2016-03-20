@@ -34,8 +34,66 @@
     }
     
     .item{
+        position:relative;
         background:#fff;
         .border-radius(8);
+        
+        header{
+            border-bottom:2px solid #b2b2b2;
+            .rem(border-bottom-width, 2);
+            
+            .photoWrap{
+                .rem(margin, 80, 20, 0, 0);
+                .rem(width, 90);
+                .rem(height, 90);
+                .border-radius(90);
+                img{
+                    width:100%;
+                    height:100%;
+                    .border-radius(120);
+                }
+            }
+            
+            .textWrap{
+                .rem(width, 470);
+                .rem(padding, 10);
+            }
+                .header{
+                    position:relative;
+                    .rem(font-size, 30);
+                    span{
+                        position:absolute;
+                        right: 0;
+                        top:0
+                    }
+                }
+                .text{
+                    .rem(font-size, 30);
+                }
+        }
+        
+        footer{
+            .unit{}
+            .time{}
+            .position{}
+        }
+        
+        .tag{
+            position:absolute;
+            top:0;
+            left:0;
+            background:#11cd6e;
+            color:#fff;
+            transform:rotate(-30deg);
+            -webkit-transform:rotate(-30deg);
+            .border-radius(8);
+            .rem(padding, 10, 20);
+            .rem(font-size, 24);
+            
+            &.over{
+                background:#b2b2b2
+            }
+        }
     }
 }
 </style>
@@ -53,11 +111,26 @@
         </ul>
         <div class="content showHeader showTab showFooter">
             <div class="item">
-                麻花科技需要传单员1月20日
-                今天去厦大发传单。今天去厦大发传单。还有什么昵？还有么昵？还有什么昵？随便写写。随便写写随便写写随便写写...
-                报酬：15元/小时
-                时间：1月22日  10：00-12：00  13：00-15：00
-                任务位置：厦门大学
+                <span class="tag">发传单</span>
+                <header class="clearfix">
+                    <div class="pull-left photoWrap">
+                        <img :src="{{userInfo.photo}}">
+                    </div>
+                    <div class="pull-left textWrap">
+                        <div class="header">
+                            麻花科技需要传单员
+                            <span>1月20日</span>
+                        </div>
+                        <div class="text">
+                            今天去厦大发传单。今天去厦大发传单。还有什么昵？还有么昵？还有什么昵？随便写写。随便写写随便写写随便写写...
+                        </div>
+                    </div>
+                </header>
+                <footer>
+                    <div class="unit">报酬：15元/小时</div>
+                    <div class="time">时间：<span>1月22日  10：00-12：00  13：00-15：00</span></div>
+                    <div class="position">任务位置：<span>厦门大学</span></div>
+                </footer>
             </div>
         </div>
     </div>

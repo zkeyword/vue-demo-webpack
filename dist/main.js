@@ -13724,8 +13724,66 @@
 	//     }
 	//
 	//     .item{
+	//         position:relative;
 	//         background:#fff;
 	//         .border-radius(8);
+	//
+	//         header{
+	//             border-bottom:2px solid #b2b2b2;
+	//             .rem(border-bottom-width, 2);
+	//
+	//             .photoWrap{
+	//                 .rem(margin, 80, 20, 0, 0);
+	//                 .rem(width, 90);
+	//                 .rem(height, 90);
+	//                 .border-radius(90);
+	//                 img{
+	//                     width:100%;
+	//                     height:100%;
+	//                     .border-radius(120);
+	//                 }
+	//             }
+	//
+	//             .textWrap{
+	//                 .rem(width, 470);
+	//                 .rem(padding, 10);
+	//             }
+	//                 .header{
+	//                     position:relative;
+	//                     .rem(font-size, 30);
+	//                     span{
+	//                         position:absolute;
+	//                         right: 0;
+	//                         top:0
+	//                     }
+	//                 }
+	//                 .text{
+	//                     .rem(font-size, 30);
+	//                 }
+	//         }
+	//
+	//         footer{
+	//             .unit{}
+	//             .time{}
+	//             .position{}
+	//         }
+	//
+	//         .tag{
+	//             position:absolute;
+	//             top:0;
+	//             left:0;
+	//             background:#11cd6e;
+	//             color:#fff;
+	//             transform:rotate(-30deg);
+	//             -webkit-transform:rotate(-30deg);
+	//             .border-radius(8);
+	//             .rem(padding, 10, 20);
+	//             .rem(font-size, 24);
+	//
+	//             &.over{
+	//                 background:#b2b2b2
+	//             }
+	//         }
 	//     }
 	// }
 	// </style>
@@ -13743,11 +13801,26 @@
 	//         </ul>
 	//         <div class="content showHeader showTab showFooter">
 	//             <div class="item">
-	//                 麻花科技需要传单员1月20日
-	//                 今天去厦大发传单。今天去厦大发传单。还有什么昵？还有么昵？还有什么昵？随便写写。随便写写随便写写随便写写...
-	//                 报酬：15元/小时
-	//                 时间：1月22日  10：00-12：00  13：00-15：00
-	//                 任务位置：厦门大学
+	//                 <span class="tag">发传单</span>
+	//                 <header class="clearfix">
+	//                     <div class="pull-left photoWrap">
+	//                         <img :src="{{userInfo.photo}}">
+	//                     </div>
+	//                     <div class="pull-left textWrap">
+	//                         <div class="header">
+	//                             麻花科技需要传单员
+	//                             <span>1月20日</span>
+	//                         </div>
+	//                         <div class="text">
+	//                             今天去厦大发传单。今天去厦大发传单。还有什么昵？还有么昵？还有什么昵？随便写写。随便写写随便写写随便写写...
+	//                         </div>
+	//                     </div>
+	//                 </header>
+	//                 <footer>
+	//                     <div class="unit">报酬：15元/小时</div>
+	//                     <div class="time">时间：<span>1月22日  10：00-12：00  13：00-15：00</span></div>
+	//                     <div class="position">任务位置：<span>厦门大学</span></div>
+	//                 </footer>
 	//             </div>
 	//         </div>
 	//     </div>
@@ -13869,7 +13942,7 @@
 /* 51 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-msg\">\n    <header-bar :title=\"title\"></header-bar>\n    <ul class=\"scenefilter clearfix\">\n        <li>\n            订单邀请\n        </li>\n        <li>\n            消息\n        </li>\n    </ul>\n    <div class=\"content showHeader showTab showFooter\">\n        <div class=\"item\">\n            麻花科技需要传单员1月20日\n            今天去厦大发传单。今天去厦大发传单。还有什么昵？还有么昵？还有什么昵？随便写写。随便写写随便写写随便写写...\n            报酬：15元/小时\n            时间：1月22日  10：00-12：00  13：00-15：00\n            任务位置：厦门大学\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-msg\">\n    <header-bar :title=\"title\"></header-bar>\n    <ul class=\"scenefilter clearfix\">\n        <li>\n            订单邀请\n        </li>\n        <li>\n            消息\n        </li>\n    </ul>\n    <div class=\"content showHeader showTab showFooter\">\n        <div class=\"item\">\n            <span class=\"tag\">发传单</span>\n            <header class=\"clearfix\">\n                <div class=\"pull-left photoWrap\">\n                    <img :src=\"{{userInfo.photo}}\">\n                </div>\n                <div class=\"pull-left textWrap\">\n                    <div class=\"header\">\n                        麻花科技需要传单员\n                        <span>1月20日</span>\n                    </div>\n                    <div class=\"text\">\n                        今天去厦大发传单。今天去厦大发传单。还有什么昵？还有么昵？还有什么昵？随便写写。随便写写随便写写随便写写...\n                    </div>\n                </div>\n            </header>\n            <footer>\n                <div class=\"unit\">报酬：15元/小时</div>\n                <div class=\"time\">时间：<span>1月22日  10：00-12：00  13：00-15：00</span></div>\n                <div class=\"position\">任务位置：<span>厦门大学</span></div>\n            </footer>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 52 */
@@ -16113,7 +16186,7 @@
 /* 112 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.158613695530220870.8000099118798971xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.74685407639481130.7603210594970733xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
 
 /***/ },
 /* 113 */
