@@ -1,6 +1,7 @@
 <style lang="less">
 @import '../less/lib/mixins.less';
 .page-scene{
+    
     .scenefilter{
         position: absolute;
         left: 0;
@@ -29,51 +30,59 @@
             }
             .icon{
                 .rem(margin-left, 10);
-                &:before{
-                    content: '';
-                }
             }
         }
     }
-    .content{
-        &.showHeader{
-            .rem(padding-top, 200);
-        }
-        .item{
+    
+    .scenefilterList{
+        position:absolute;
+        top:4.4rem;
+        z-index: 11;
+        height:100%;
+        width:100%;
+        
+        .content{
+            width:100%;
+            height:100%;
+            padding-bottom:4.4rem;
             background:#fff;
-            .border-radius(8);
+        }
+    }
+
+    .item{
+        background:#fff;
+        .border-radius(8);
+        
+        header{
+            border-bottom:2px solid #dedede;
+            .rem(border-bottom-width, 2);
+            .rem(padding, 20);
+            .rem(font-size, 30);
             
-            header{
-                border-bottom:2px solid #dedede;
-                .rem(border-bottom-width, 2);
-                .rem(padding, 20);
-                .rem(font-size, 30);
-                
-                .photoWrap{
-                    .rem(margin-right, 20);
-                    .rem(width, 90);
-                    .rem(height, 90);
-                    .border-radius(90);
-					img{
-					    width:100%;
-						height:100%;
-					    .border-radius(120);
-					}
+            .photoWrap{
+                .rem(margin-right, 20);
+                .rem(width, 90);
+                .rem(height, 90);
+                .border-radius(90);
+                img{
+                    width:100%;
+                    height:100%;
+                    .border-radius(120);
                 }
-                
-                .pull-right{
-                    .rem(margin-top, 30);
-                }
             }
             
-            .main{
-                .rem(padding, 20);
+            .pull-right{
+                .rem(margin-top, 30);
             }
-            
-            .userScore{
-                border-top:2px solid #dedede;
-                .rem(border-top-width, 2);
-            }
+        }
+        
+        .main{
+            .rem(padding, 20);
+        }
+        
+        .userScore{
+            border-top:2px solid #dedede;
+            .rem(border-top-width, 2);
         }
     }
 }
@@ -84,11 +93,24 @@
     <div transition="page" class="page page-scene page-current">
         <header-bar :title="title" :back="true"></header-bar>
         <ul class="scenefilter clearfix">
-            <li><span>学校<i class="icon icon-down"></i></span></li>
-            <li><span>性别<i class="icon icon-down"></i></span></li>
-            <li><span>排序<i class="icon icon-down"></i></span></li>
+            <li @click="showFilter(1)">
+                <span>学校<i class="icon icon-down" :class="{'icon-up':filterType == 1}"></i></span>
+            </li>
+            <li @click="showFilter(2)">
+                <span>性别<i class="icon icon-down" :class="{'icon-up':filterType == 2}"></i></span>
+            </li>
+            <li @click="showFilter(3)">
+                <span>排序<i class="icon icon-down" :class="{'icon-up':filterType == 3}"></i></span>
+            </li>
         </ul>
-        <div class="content showHeader showFooter">
+        <div class="scenefilterList" v-show="isShowFilter">
+            <div class="content">
+                <ul>
+                    <li @click="filter"><i class="icon icon-yixuan"></i>asdfasdf</li>
+                </ul>
+            </div>
+        </div>
+        <div class="content showHeader showTab showFooter">
             <div class="item">
                 <header class="clearfix" v-link="{name: 'sceneDetail'}">
                     <div class="pull-left photoWrap">
@@ -137,7 +159,9 @@
 export default {
     data(){
         return {
-            title: null
+            title: null,
+            filterType: 0,
+            isShowFilter: false
         }
     },
     route:{
@@ -146,10 +170,24 @@ export default {
                 query = transition.to.query;
                 
             self.title = query.scene_name;
+        },
+        deactivate(){
+            this.filterType = 0;
         }  
     },
     ready: function () {
         
+    },
+    methods:{
+        showFilter(type){
+            let self = this;
+            self.filterType = type;
+            self.isShowFilter = true;
+        },
+        filter(){
+            let self = this;
+            self.isShowFilter = false;
+        }
     },
     components: {
         'headerBar': require('../components/header.vue')
