@@ -135,15 +135,11 @@
   -: ;font-size: 0.75rem;
 }
 .page-msg .scenefilter li:first-child {
-  border-right: 2px solid #b2b2b2;
+  border-right: 1px solid #b2b2b2;
   -: ;border-right-width: 0.05rem;
 }
-.page-msg .scenefilter li:last-child {
-  border-left: 2px solid #b2b2b2;
-  -: ;border-left-width: 0.05rem;
-}
-.page-msg .scenefilter li .icon {
-  -: ;margin-left: 0.25rem;
+.page-msg .scenefilter li span.cur {
+  color: #54c5ff;
 }
 .page-msg .item {
   position: relative;
@@ -153,12 +149,12 @@
 .page-msg .item header {
   border-bottom: 2px solid #b2b2b2;
   -: ;border-bottom-width: 0.05rem;
+  position: relative;
 }
 .page-msg .item header .photoWrap {
-  -: ;margin: 2rem;
-  -: ;margin: 2rem 0.5rem;
-  -: ;margin: 2rem 0.5rem 0rem;
-  -: ;margin: 2rem 0.5rem 0rem 0rem;
+  position: absolute;
+  -: ;left: 0.5rem;
+  -: ;top: 2rem;
   -: ;width: 2.25rem;
   -: ;height: 2.25rem;
   -: ;border-radius: 2.25rem;
@@ -169,8 +165,10 @@
   -: ;border-radius: 3rem;
 }
 .page-msg .item header .textWrap {
-  -: ;width: 11.75rem;
-  -: ;padding: 0.25rem;
+  -: ;padding: 0.5rem;
+  -: ;padding: 0.5rem 0.5rem;
+  -: ;padding: 0.5rem 0.5rem 0.5rem;
+  -: ;padding: 0.5rem 0.5rem 0.5rem 3.25rem;
 }
 .page-msg .item header .header {
   position: relative;
@@ -183,11 +181,13 @@
 }
 .page-msg .item header .text {
   -: ;font-size: 0.75rem;
+  -: ;padding: 0.25rem;
+  -: ;padding: 0.25rem 0rem;
 }
 .page-msg .item .tag {
   position: absolute;
-  top: 0;
-  left: 0;
+  -: ;top: -0.25rem;
+  -: ;left: -0.5rem;
   background: #11cd6e;
   color: #fff;
   transform: rotate(-30deg);

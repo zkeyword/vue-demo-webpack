@@ -20,15 +20,16 @@
             margin:0.4rem 0;
             .rem(font-size, 30);
             &:first-child{
-                 border-right:2px solid #b2b2b2;
-                .rem(border-right-width, 2);
+                 border-right:1px solid #b2b2b2;
+                 .rem(border-right-width, 2);
             }
-            &:last-child{
-                 border-left:2px solid #b2b2b2;
-                .rem(border-left-width, 2);
-            }
-            .icon{
-                .rem(margin-left, 10);
+            
+            span{
+                &.cur{
+                    color:#54c5ff
+                    //border-bottom:1px solid #54c5ff;
+                    //.rem(border-bottom-width, 2);
+                }
             }
         }
     }
@@ -41,9 +42,12 @@
         header{
             border-bottom:2px solid #b2b2b2;
             .rem(border-bottom-width, 2);
+            position:relative;
             
             .photoWrap{
-                .rem(margin, 80, 20, 0, 0);
+                position:absolute;
+                .rem(left, 20);
+                .rem(top, 80);
                 .rem(width, 90);
                 .rem(height, 90);
                 .border-radius(90);
@@ -55,8 +59,7 @@
             }
             
             .textWrap{
-                .rem(width, 470);
-                .rem(padding, 10);
+                .rem(padding, 20, 20, 20, 130);
             }
                 .header{
                     position:relative;
@@ -69,6 +72,7 @@
                 }
                 .text{
                     .rem(font-size, 30);
+                    .rem(padding, 10, 0);
                 }
         }
         
@@ -80,8 +84,8 @@
         
         .tag{
             position:absolute;
-            top:0;
-            left:0;
+            .rem(top, -10);
+            .rem(left, -20);
             background:#11cd6e;
             color:#fff;
             transform:rotate(-30deg);
@@ -93,6 +97,7 @@
             &.over{
                 background:#b2b2b2
             }
+            
         }
     }
 }
@@ -103,20 +108,20 @@
         <header-bar :title="title"></header-bar>
         <ul class="scenefilter clearfix">
             <li>
-                订单邀请
+                <span class="cur">订单邀请</span>
             </li>
             <li>
-                消息
+                <span>消息</span>
             </li>
         </ul>
         <div class="content showHeader showTab showFooter">
             <div class="item">
                 <span class="tag">发传单</span>
                 <header class="clearfix">
-                    <div class="pull-left photoWrap">
+                    <div class="photoWrap">
                         <img :src="{{userInfo.photo}}">
                     </div>
-                    <div class="pull-left textWrap">
+                    <div class="textWrap">
                         <div class="header">
                             麻花科技需要传单员
                             <span>1月20日</span>
