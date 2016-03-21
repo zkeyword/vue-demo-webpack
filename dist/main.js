@@ -13377,7 +13377,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/home.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\home.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(41)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -13388,7 +13388,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/home.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13562,7 +13562,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/swiper.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\components\\swiper.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(40)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -13573,7 +13573,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/swiper.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\components\\swiper.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13653,7 +13653,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/msg.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\msg.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(51)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -13664,7 +13664,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/msg.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\msg.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13878,7 +13878,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/header.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\components\\header.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(50)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -13889,7 +13889,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/header.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\components\\header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13959,7 +13959,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\scene.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(56)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -13970,7 +13970,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\scene.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14208,7 +14208,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene/detail.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\scene\\detail.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(68)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -14219,7 +14219,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene/detail.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\scene\\detail.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14314,7 +14314,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/timeConf.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\components\\timeConf.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(67)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -14325,7 +14325,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/timeConf.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\components\\timeConf.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14554,7 +14554,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene/reserve.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\scene\\reserve.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(73)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -14565,7 +14565,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene/reserve.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\scene\\reserve.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14666,7 +14666,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(78)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -14677,7 +14677,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14941,7 +14941,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/setting.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\setting.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(83)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -14952,7 +14952,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/setting.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\setting.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15248,7 +15248,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/money.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\money.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(89)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -15259,7 +15259,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/money.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\money.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15466,7 +15466,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/server.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\work\\server.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(99)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -15477,7 +15477,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/server.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\work\\server.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15651,7 +15651,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/sceneType.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\components\\sceneType.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(98)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -15662,7 +15662,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/sceneType.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\components\\sceneType.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15790,7 +15790,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/publish.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\work\\publish.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(104)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -15801,7 +15801,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/publish.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\work\\publish.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15964,7 +15964,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/accept.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\work\\accept.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(107)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -15975,7 +15975,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/accept.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\work\\accept.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16039,7 +16039,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/service.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\service.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(112)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -16050,7 +16050,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/service.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\service.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16191,7 +16191,7 @@
 /* 112 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.80173084186390040.29681122535839677xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.205457971896976230.2560318252071738xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
 
 /***/ },
 /* 113 */
@@ -16203,7 +16203,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/step1.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\auth\\step1.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(117)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -16214,7 +16214,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step1.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\step1.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16288,7 +16288,68 @@
 	//                     .rem(width, 32);
 	//                 }
 	//             }
-	//         } 
+	//         }
+	//         .moblieWrap{
+	// 	        border-bottom:1px solid #dedede;
+	// 	        .rem(border-bottom-width, 2);
+	// 	    }
+	//
+	// 	    input{
+	// 	        display:inline-block;
+	// 	        border:0 none;
+	// 	        background:none;
+	// 	        -webkit-appearance: none;
+	// 	        .rem(height, 40);
+	// 	        .rem(line-height, 40);
+	//
+	// 	        &#moblie{
+	// 	            .rem(width, 300);
+	// 	        }
+	// 	        &#code{
+	// 	            .rem(width, 150);
+	// 	        }
+	// 	    }
+	// 	    input::-webkit-outer-spin-button,
+	// 		input::-webkit-inner-spin-button{
+	// 		    -webkit-appearance: none !important;
+	// 		    margin: 0;
+	// 		}
+	//
+	// 	    label{
+	// 	        display:inline-block;
+	// 	        height:100%;
+	// 	        border-right:1px solid #dedede;
+	// 	        .rem(border-right-width, 2);
+	// 	        .rem(width, 120);
+	// 	    }
+	//
+	// 	    #getCode{
+	// 	        background:#54c5ff;
+	// 	        color:#fff;
+	// 	        text-align:center;
+	// 	        .rem(height, 40);
+	// 	        .rem(line-height, 40);
+	// 	        .rem(padding, 0, 20);
+	// 	        .border-radius(8);
+	//
+	// 	        &.disable{
+	// 	            background:#b2b2b2
+	// 	        }
+	// 	    }
+	// 	    .toastWrap{
+	// 	        display:block;
+	// 	        position: absolute;
+	// 	        top:20%;
+	// 	        top:20%;
+	// 	        width:100%;
+	// 	        .rem(padding, 10);
+	// 	    }
+	// 	    .toast{
+	// 	        display:block;
+	// 	        width:100%;
+	// 	        text-align:center;
+	// 	        font-size: 10px;;
+	// 	    }
 	//     }
 	// </style>
 	//
@@ -16319,16 +16380,45 @@
 	//                     <span class="pull-left">您的学校</span>
 	//                     <span class="pull-right">{{formData.school_name}}</span>
 	//                 </div>
+	//                 <div class="item clearfix" @click="showMobile">
+	//                     <span class="pull-left">手机号</span>
+	//                     <span class="pull-right">{{formData.mobile}}</span>
+	//                 </div>
 	//             </div>
 	//         </div>
 	//         <span
 	//             class="ui-btn ui-btn-big"
-	//             v-if="formData.city_id && formData.school_id"
+	//             v-if="formData.city_id && formData.school_id && formData.mobile"
 	//             @click="goAuth"
 	//         >
 	//             下一步
 	//         </span>
 	//     </div>
+	//
+	//     <script type="text/html" id="toastWrap">
+	//         <span class="toastWrap">
+	//             <span id="toast" class="toast">
+	//                 [[content]]
+	//             </span>
+	//         </span>
+	//     </script>
+	// 	<script type="text/html" id="moblieWrap">
+	//         <div class="page-user-formWrap">
+	//             <div class="moblieWrap clearfix">
+	//                 <label class="pull-left">手机</label>
+	//                 <input class="pull-left" type="number" id="mobile" pattern="[0-9]*" mobile placeholder="手机号" />
+	//             </div>
+	//             <div class="codeWrap clearfix">
+	//                 <label class="pull-left">验证码</label>
+	//                 <input class="pull-left" type="number" id="code" pattern="[0-9]*" mobile placeholder="验证码"  />
+	//                 <span class="pull-right" id="getCode">
+	//                     <span id="getCodeText">获取验证码</span>
+	//                     <span id="getCodeTime"></span>
+	//                 </span>
+	//             </div>
+	//             </div>
+	// 	</script>
+	//
 	// </template>
 	//
 	// <script>
@@ -16340,7 +16430,8 @@
 	                city_name: null,
 	                city_id: null,
 	                school_id: null,
-	                school_name: null
+	                school_name: null,
+	                mobile: null
 	            }
 	        };
 	    },
@@ -16357,7 +16448,7 @@
 	                //self.formData.school_id   = query.school_id ? query.school_id : self.formData.school_id;
 	                //self.formData.school_name = query.school_name ? query.school_name : self.formData.school_name;
 	            } else {
-	                    $.showPreloader('正在努力提交...');
+	                    $.showPreloader('数据加载中...');
 	                    $.ajax({
 	                        url: "/soytime/ca/caInfo",
 	                        type: 'POST',
@@ -16376,7 +16467,7 @@
 	                                self.$route.router.go('/auth/checking');
 	                                return;
 	                            } else if (status == 3) {
-	                                $.alert('您的身份核对有误！请您重新填写认证信息。', '认证失败');
+	                                $.alert(result.explain, '认证失败');
 	                            }
 	
 	                            $.extend(self.formData, result);
@@ -16404,12 +16495,135 @@
 	        selectSchool: function selectSchool() {
 	            var self = this;
 	            self.$route.router.go('/auth/selectSchool?' + $.param(self.formData));
+	        },
+	        showMobile: function showMobile() {
+	            var self = this,
+	                reg = /\[\[content\]\]/g,
+	                toastHtml = $('#toastWrap').html(),
+	                toast = function toast(content) {
+	                var formWrap = $('.page-user-formWrap'),
+	                    html = toastHtml.replace(reg, content),
+	                    toastObj = $('#toast');
+	                if (!toastObj.length) {
+	                    formWrap.append(html);
+	                } else {
+	                    toastObj.html(content);
+	                }
+	                setTimeout(function () {
+	                    formWrap.find('.toastWrap').remove();
+	                }, 2000);
+	            };
+	
+	            $.modal({
+	                text: $('#moblieWrap').html(),
+	                buttons: [{
+	                    text: '取消',
+	                    onClick: function onClick() {
+	                        //$.alert('You clicked second button!')
+	                    }
+	                }, {
+	                    text: '确定',
+	                    close: false,
+	                    onClick: function onClick() {
+	                        var that = $(this);
+	                        if (that.hasClass('disable')) {
+	                            return;
+	                        }
+	
+	                        var mobile = $('#mobile').val(),
+	                            code = $('#code').val(),
+	                            obj = {
+	                            mobile: mobile,
+	                            code: code
+	                        };
+	                        if (!/1[34578]{1}\d{9}$/.test(mobile) || !code) {
+	                            that.removeClass('disable');
+	                            toast('请填写正确的信息！');
+	                            return;
+	                        } else {
+	                            that.addClass('disable');
+	                        }
+	
+	                        $.ajax({
+	                            url: "/soytime/account/saveMobile",
+	                            type: 'GET',
+	                            data: obj,
+	                            dataType: 'json',
+	                            success: function success(data) {
+	                                if (data.success) {
+	                                    self.formData.mobile = mobile;
+	                                    //$.extend(self.formData, obj);
+	                                    $.closeModal();
+	                                } else {
+	                                    toast(data.result);
+	                                }
+	                            },
+	                            error: function error() {
+	                                toast('网络不给力，请重新尝试！');
+	                            }
+	                        });
+	                    }
+	                }]
+	            });
+	
+	            $('body').on('click', '#getCode', function () {
+	                var mobile = $('#mobile').val(),
+	                    getCodeBtn = $('#getCode'),
+	                    getCodeText = $('#getCodeText'),
+	                    getCodeTime = $('#getCodeTime'),
+	                    that = $(this);
+	
+	                if (that.hasClass('disable')) {
+	                    return;
+	                }
+	
+	                if (!/1[34578]{1}\d{9}$/.test(mobile)) {
+	                    toast('请填写正确的手机号');
+	                    that.removeClass('disable');
+	                    return;
+	                } else {
+	                    that.addClass('disable');
+	                }
+	
+	                $.ajax({
+	                    url: "/soytime/account/getMobileCode",
+	                    type: 'GET',
+	                    data: {
+	                        mobile: mobile
+	                    },
+	                    dataType: 'json',
+	                    success: function success(data) {
+	                        if (data.success) {
+	                            (function () {
+	                                var i = 60,
+	                                    timer = null;
+	                                getCodeText.html('重新获取');
+	                                getCodeTime.html('(60)');
+	                                timer = setInterval(function () {
+	                                    getCodeTime.html('(' + --i + ')');
+	                                    console.log(i);
+	                                    if (i === 0) {
+	                                        clearInterval(timer);
+	                                        that.removeClass('disable');
+	                                        getCodeTime.html('');
+	                                    };
+	                                }, 1000);
+	                            })();
+	                        } else {
+	                            that.removeClass('disable');
+	                            toast(data.result);
+	                        }
+	                    },
+	                    error: function error() {
+	                        $.showPreloader('网络不给力，请重新尝试！');
+	                    }
+	                });
+	            });
 	        }
 	    }
 	};
+
 	// </script>
-	//
-	//
 	//
 	//
 	//
@@ -16423,7 +16637,7 @@
 /* 117 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"page-authStep1\">\n        <header-bar :title=\"title\" :back=\"true\"></header-bar>\n        <div class=\"content showHeader\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item cur\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item clearfix\" @click=\"selectCity\">\n                    <span class=\"pull-left\">您的城市</span>\n                    <span class=\"pull-right\">{{formData.city_name}}</span>\n                </div>\n                <div class=\"item clearfix\" @click=\"selectSchool\" v-if=\"formData.city_id\">\n                    <span class=\"pull-left\">您的学校</span>\n                    <span class=\"pull-right\">{{formData.school_name}}</span>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"formData.city_id && formData.school_id\" \n            @click=\"goAuth\"\n        >\n            下一步\n        </span>\n    </div>\n";
+	module.exports = "\n    <div class=\"page-authStep1\">\n        <header-bar :title=\"title\" :back=\"true\"></header-bar>\n        <div class=\"content showHeader\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item cur\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item clearfix\" @click=\"selectCity\">\n                    <span class=\"pull-left\">您的城市</span>\n                    <span class=\"pull-right\">{{formData.city_name}}</span>\n                </div>\n                <div class=\"item clearfix\" @click=\"selectSchool\" v-if=\"formData.city_id\">\n                    <span class=\"pull-left\">您的学校</span>\n                    <span class=\"pull-right\">{{formData.school_name}}</span>\n                </div>\n                <div class=\"item clearfix\" @click=\"showMobile\">\n                    <span class=\"pull-left\">手机号</span>\n                    <span class=\"pull-right\">{{formData.mobile}}</span>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"formData.city_id && formData.school_id && formData.mobile\" \n            @click=\"goAuth\"\n        >\n            下一步\n        </span>\n    </div>\n    \n    <script type=\"text/html\" id=\"toastWrap\">\n        <span class=\"toastWrap\">\n            <span id=\"toast\" class=\"toast\">\n                [[content]]\n            </span>\n        </span>\n    </script>\n\t<script type=\"text/html\" id=\"moblieWrap\">\n        <div class=\"page-user-formWrap\">\n            <div class=\"moblieWrap clearfix\">\n                <label class=\"pull-left\">手机</label>\n                <input class=\"pull-left\" type=\"number\" id=\"mobile\" pattern=\"[0-9]*\" mobile placeholder=\"手机号\" />\n            </div>\n            <div class=\"codeWrap clearfix\">\n                <label class=\"pull-left\">验证码</label>\n                <input class=\"pull-left\" type=\"number\" id=\"code\" pattern=\"[0-9]*\" mobile placeholder=\"验证码\"  />\n                <span class=\"pull-right\" id=\"getCode\">\n                    <span id=\"getCodeText\">获取验证码</span>\n                    <span id=\"getCodeTime\"></span>\n                </span>\n            </div>\n            </div>\n\t</script>\n    \n";
 
 /***/ },
 /* 118 */
@@ -16435,7 +16649,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/selectCity.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\auth\\selectCity.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(122)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -16446,7 +16660,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectCity.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\selectCity.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16647,7 +16861,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/selectSchool.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\auth\\selectSchool.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(127)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -16658,7 +16872,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectSchool.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\selectSchool.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16801,7 +17015,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/selectMap.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\auth\\selectMap.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(132)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -16812,7 +17026,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectMap.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\selectMap.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17031,7 +17245,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/step2.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\auth\\step2.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(138)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -17042,7 +17256,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step2.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\step2.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17212,7 +17426,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/step3.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\auth\\step3.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(143)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -17223,7 +17437,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step3.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\step3.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17383,7 +17597,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/checking.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\auth\\checking.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(148)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -17394,7 +17608,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/checking.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\checking.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17474,7 +17688,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/success.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\user\\auth\\success.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(153)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -17485,7 +17699,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/success.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\views\\user\\auth\\success.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17565,7 +17779,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/App.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\App.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(178)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -17576,7 +17790,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/App.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\App.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17653,7 +17867,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/footer.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\components\\footer.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(177)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -17664,7 +17878,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/footer.vue"
+	  var id = "G:\\work\\vue-demo-webpack\\src\\components\\footer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {

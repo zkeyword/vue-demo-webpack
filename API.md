@@ -5,9 +5,7 @@
 
 
 ### 用户认证信息
-
-
-##### 接口URL http://127.0.0.1/soytime/ca/cainfo
+##### 接口URL http://127.0.0.1/soytime/ca/caInfo
 >请求方式：POST
 >请求参数：
 >返回格式：json
@@ -149,3 +147,48 @@
 
         success		boolean			true-成功 false-失败
         result      字符串			success为false时的提示信息
+        
+
+### 我的基本信息
+##### 接口URL http://127.0.0.1/soytime/account/myInfo
+>请求方式：POST
+>请求参数：
+>返回格式：json
+>返回数据：
+
+        success		boolean			true-成功 false-失败
+        result      区列表 字典：
+		{
+			timeConf	    	string		时间配置 （数据格式如：12-13-21-52, 需将-分割成数组，十位数表示星期，各位数1表示早上，2表示下午，3表示晚上）
+			nickname		string		昵称
+			head_img_url	string		头像地址（完整的一个url，无需拼接）
+			mobile		整形			手机号
+			sex			整形			性别（1：男，2：女，0：未知不显示）
+			height					身高
+			qq						qq
+			email					邮箱
+			longitude				精度（可能为null）
+			latitude					维度（可能为null）
+			city_id 					城市编号
+			city_name 				城市名称
+			school_id 				学校编号
+			school_name 				学校名称
+			sutdent_auth 				学生认证状态（0：未认证，1：已认证，2：认证中，3：认证失败）
+			explain					审核失败的结果说明
+		}
+		
+### 我被评价的次数和收藏次数统计
+##### 接口URL http://127.0.0.1/soytime/appraise/toCount
+>请求方式：POST
+>请求参数：
+>返回格式：json
+>返回数据：
+
+        success		boolean			true-成功 false-失败
+        result      区列表 字典：
+		{
+			goodCount		整形		好评数
+			cenCount					中评数
+			poolCount				差评数
+			collectCount				收藏数
+		}
