@@ -46,7 +46,7 @@ app.post('/soytime/ca/caInfo', function (req, res) {
 });
 
 
-app.get('/soytime/message/getMobileCode', function (req, res) {
+app.get('/soytime/account/myInfo', function (req, res) {
 	var Random = Mock.Random,
 		data   = Mock.mock({
             success: '1',
@@ -72,13 +72,44 @@ app.get('/soytime/user/info', function (req, res) {
 		data   = Mock.mock({
             success: '1',
             result:{
-                'photo': Random.image('160x200'),
-                'name': '@cname'
+                timeConf: '12-13-11',
+                nickname: 'ssxxxx',
+                head_img_url: Random.image('160x200'),
+                mobile: 'ss',
+                sex: 'ss',
+                height: 'xx',
+                qq: 'xx',
+                email: 'xx',
+                longitude: 'xx',
+                latitude: 'ss',
+                city_id: 'xx',
+                city_name: 'xx',
+                school_id: 'xx',
+                school_name: 'xx',
+                sutdent_auth: '@integer(0, 3)',
+                explain: 'xxxx'
             }			
 		});
 	
 	res.send( JSON.stringify(data, null, 4) );
 });
+
+
+app.get('/soytime/appraise/toCount', function (req, res) {
+	var Random = Mock.Random,
+		data   = Mock.mock({
+            success: '1',
+            result:{
+                goodCount: '@integer(1, 1000)',
+                cenCount: '@integer(1, 1000)',
+                poolCount: '@integer(1, 1000)',
+                collectCount: '@integer(1, 1000)'
+            }			
+		});
+	
+	res.send( JSON.stringify(data, null, 4) );
+});
+
 
 var server = app.listen(4000, function () {
 	var host = server.address().address;

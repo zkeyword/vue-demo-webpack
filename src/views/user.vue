@@ -76,13 +76,32 @@
             <div class="userHeader clearfix">
                 <div class="userWrap clearfix">
                     <div class="pull-left photoWrap">
-                        <img :src="{{userInfo.photo}}">
+                        <img :src="{{userInfo.head_img_url}}">
                     </div>
                     <div class="pull-right nameWrap">
-                        <div class="name">名字</div>
-                        <div class="auth clearfix" v-link="{name: 'auth'}">
+                        <div class="name">{{userInfo.nickname}}</div>
+                        <div 
+                            class="auth clearfix"
+                            v-link="{name: 'auth'}" 
+                            v-if="userInfo.sutdent_auth == 0 || userInfo.sutdent_auth == 3"
+                        >
                             <i class="icon icon-anquanbaozhang pull-left"></i>
-                            <span class="pull-left">未认证，点此认证！</span>
+                            <span class="pull-left" v-if="userInfo.sutdent_auth == 0">未认证，点此认证！</span>
+                            <span class="pull-left" v-if="userInfo.sutdent_auth == 3">认证失败，点此重新认证！</span>
+                        </div>
+                        <div
+                            class="auth clearfix"
+                            v-if="userInfo.sutdent_auth == 1"
+                        >
+                            <i class="icon icon-anquanbaozhang2 pull-left"></i>
+                            <span class="pull-left">认证成功</span>
+                        </div>
+                        <div
+                            class="auth clearfix"
+                            v-if="userInfo.sutdent_auth == 2"
+                        >
+                            <i class="icon icon-anquanbaozhang pull-left"></i>
+                            <span class="pull-left">认证中，请耐心等待</span>
                         </div>
                     </div>
                 </div>
@@ -90,22 +109,22 @@
                     <li>
                         <i class="icon icon-xiaolian pull-left"></i>
                         <span class="pull-left">好评</span>
-                        <em class="pull-left">1</em>
+                        <em class="pull-left">{{userCount.goodCount}}</em>
                     </li>
                     <li>
                         <i class="icon icon-cry pull-left"></i>
                         <span class="pull-left">中评</span>
-                        <em class="pull-left">1</em>
+                        <em class="pull-left">{{userCount.cenCount}}</em>
                     </li>
                     <li>
                         <i class="icon icon-kulian pull-left"></i>
                         <span class="pull-left">差评</span>
-                        <em class="pull-left">1</em>
+                        <em class="pull-left">{{userCount.poolCount}}</em>
                     </li>
                     <li>
                         <i class="icon icon-aixin pull-left"></i>
                         <span class="pull-left">收藏</span>
-                        <em class="pull-left">1</em>
+                        <em class="pull-left">{{userCount.collectCount}}</em>
                     </li>
                 </ul>
             </div>
@@ -167,7 +186,8 @@ export default {
 		return {
 			title: '我的',
 			userInfo: {},
-			formData: {}
+			formData: {},
+            userCount: {}
 		}
 	},
 	vuex:{
@@ -201,6 +221,16 @@ export default {
 				data: self.formData,
 				success: ((data)=>{
 					self.userInfo = data.result;
+				})
+			});
+            
+			$.ajax({
+				url: "/soytime/appraise/toCount",
+				type:'GET',
+				dataType: 'json',
+				data: self.formData,
+				success: ((data)=>{
+					self.userCount = data.result;
 				})
 			});
 			
