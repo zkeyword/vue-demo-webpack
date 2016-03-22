@@ -131,7 +131,7 @@
 
             <div class="list-block">
                 <ul>
-                    <li class="item-content item-link" v-link="{name: 'userMoney'}">
+                    <li class="item-content item-link" v-link="{name: 'userMoney', query: userInfo}">
                         <div class="item-inner">
                             <div class="item-title">我的余额</div>
                         </div>
@@ -140,12 +140,12 @@
             </div>
             <div class="list-block">
                 <ul>
-                    <li class="item-content item-link" v-link="{name: 'userSetting'}">
+                    <li class="item-content item-link" v-link="{name: 'userSetting', query: userInfo}">
                         <div class="item-inner">
                             <div class="item-title">设置</div>
                         </div>
                     </li>
-                    <li class="item-content item-link" v-link="{name: 'userWorkServer'}">
+                    <li class="item-content item-link" v-link="{name: 'userWorkServer', query: userInfo}">
                         <div class="item-inner">
                             <div class="item-title">发布服务</div>
                         </div>
