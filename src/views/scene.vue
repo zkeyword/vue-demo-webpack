@@ -90,7 +90,7 @@
 </style>
 
 <template>
-    <div transition="page" class="page page-scene page-current">
+    <div transition="page" class="page-scene page-current">
         <header-bar :title="title" :back="true"></header-bar>
         <ul class="scenefilter clearfix">
             <li @click="showFilter(1)">

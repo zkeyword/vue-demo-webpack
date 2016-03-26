@@ -76,29 +76,29 @@
             <div class="userHeader clearfix">
                 <div class="userWrap clearfix">
                     <div class="pull-left photoWrap">
-                        <img :src="{{userInfo.head_img_url}}">
+                        <img :src="formData.head_img_url">
                     </div>
                     <div class="pull-right nameWrap">
-                        <div class="name">{{userInfo.nickname}}</div>
+                        <div class="name">{{formData.nickname}}</div>
                         <div 
                             class="auth clearfix"
                             v-link="{name: 'auth'}" 
-                            v-if="userInfo.sutdent_auth == 0 || userInfo.sutdent_auth == 3"
+                            v-if="formData.sutdent_auth == 0 || formData.sutdent_auth == 3"
                         >
                             <i class="icon icon-anquanbaozhang pull-left"></i>
-                            <span class="pull-left" v-if="userInfo.sutdent_auth == 0">未认证，点此认证！</span>
-                            <span class="pull-left" v-if="userInfo.sutdent_auth == 3">认证失败，点此重新认证！</span>
+                            <span class="pull-left" v-if="formData.sutdent_auth == 0">未认证，点此认证！</span>
+                            <span class="pull-left" v-if="formData.sutdent_auth == 3">认证失败，点此重新认证！</span>
                         </div>
                         <div
                             class="auth clearfix"
-                            v-if="userInfo.sutdent_auth == 1"
+                            v-if="formData.sutdent_auth == 1"
                         >
                             <i class="icon icon-anquanbaozhang2 pull-left"></i>
                             <span class="pull-left">认证成功</span>
                         </div>
                         <div
                             class="auth clearfix"
-                            v-if="userInfo.sutdent_auth == 2"
+                            v-if="formData.sutdent_auth == 2"
                         >
                             <i class="icon icon-anquanbaozhang pull-left"></i>
                             <span class="pull-left">认证中，请耐心等待</span>
@@ -109,29 +109,29 @@
                     <li>
                         <i class="icon icon-xiaolian pull-left"></i>
                         <span class="pull-left">好评</span>
-                        <em class="pull-left">{{userCount.goodCount}}</em>
+                        <em class="pull-left">{{formData.goodCount}}</em>
                     </li>
                     <li>
                         <i class="icon icon-cry pull-left"></i>
                         <span class="pull-left">中评</span>
-                        <em class="pull-left">{{userCount.cenCount}}</em>
+                        <em class="pull-left">{{formData.cenCount}}</em>
                     </li>
                     <li>
                         <i class="icon icon-kulian pull-left"></i>
                         <span class="pull-left">差评</span>
-                        <em class="pull-left">{{userCount.poolCount}}</em>
+                        <em class="pull-left">{{formData.poolCount}}</em>
                     </li>
                     <li>
                         <i class="icon icon-aixin pull-left"></i>
                         <span class="pull-left">收藏</span>
-                        <em class="pull-left">{{userCount.collectCount}}</em>
+                        <em class="pull-left">{{formData.collectCount}}</em>
                     </li>
                 </ul>
             </div>
 
             <div class="list-block">
                 <ul>
-                    <li class="item-content item-link" v-link="{name: 'userMoney', query: userInfo}">
+                    <li class="item-content item-link" v-link="{name: 'userMoney'}">
                         <div class="item-inner">
                             <div class="item-title">我的余额</div>
                         </div>
@@ -140,12 +140,12 @@
             </div>
             <div class="list-block">
                 <ul>
-                    <li class="item-content item-link" v-link="{name: 'userSetting', query: userInfo}">
+                    <li class="item-content item-link" v-link="{name: 'userSetting'}">
                         <div class="item-inner">
                             <div class="item-title">设置</div>
                         </div>
                     </li>
-                    <li class="item-content item-link" v-link="{name: 'userWorkServer', query: userInfo}">
+                    <li class="item-content item-link" v-link="{name: 'userWorkServer'}">
                         <div class="item-inner">
                             <div class="item-title">发布服务</div>
                         </div>
@@ -175,7 +175,6 @@
                     </li>
                 </ul>
             </div>
-            <router-view></router-view>
         </div>
     </div>
 </template>
@@ -185,63 +184,23 @@ export default {
 	data() {
 		return {
 			title: '我的',
-			userInfo: {},
-			formData: {},
-            userCount: {}
+			formData: {}
 		}
-	},
-	vuex:{
-		getters: {
-			todos(){
-				console.log(11)
-			}
-		}
-		/*
-		getters: {
-			todos: state => state.todo.todos
-		},
-		actions: {
-			addTodo,
-			toggleAll,
-			clearCompleted
-		}
-		*/
 	},
 	route: {
 		data (transition){
-			let self     = this,
-				query    = transition.to.query;
-				
-			$.extend(self.formData, query);
+			let self = this;
 			
 			$.ajax({
-				url: "/soytime/user/info",
+				url: "/soytime/account/myInfo",
 				type:'GET',
 				dataType: 'json',
-				data: self.formData,
 				success: ((data)=>{
-					self.userInfo = data.result;
+					self.formData = data.result;
 				})
 			});
             
-			$.ajax({
-				url: "/soytime/appraise/toCount",
-				type:'GET',
-				dataType: 'json',
-				data: self.formData,
-				success: ((data)=>{
-					self.userCount = data.result;
-				})
-			});
-			
-			//console.log(this.$store.state.namexx, this)
-			console.log( this.todos );
 		}
-	},
-	ready (){
-		//setTimeout(() => {
-		//   this.$route.router.go({ name: 'list'});
-		//},2000);
 	},
 	components: {
 		'headerBar': require('../components/header.vue')

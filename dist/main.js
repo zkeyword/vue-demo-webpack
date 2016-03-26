@@ -13809,7 +13809,7 @@
 	//                 <span class="tag">发传单</span>
 	//                 <header class="clearfix">
 	//                     <div class="photoWrap">
-	//                         <img :src="{{userInfo.photo}}">
+	//                         <img :src="userInfo.photo">
 	//                     </div>
 	//                     <div class="textWrap">
 	//                         <div class="header">
@@ -13842,7 +13842,7 @@
 	
 	    route: {
 	        data: function data(transition) {
-	            console.log(this);
+	            //console.log(this)
 	        },
 	        deactivate: function deactivate() {
 	            console.log(121212);
@@ -13947,7 +13947,7 @@
 /* 51 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-msg\">\n    <header-bar :title=\"title\"></header-bar>\n    <ul class=\"scenefilter clearfix\">\n        <li>\n            <span class=\"cur\">订单邀请</span>\n        </li>\n        <li>\n            <span>消息</span>\n        </li>\n    </ul>\n    <div class=\"content showHeader showTab showFooter\">\n        <div class=\"item\">\n            <span class=\"tag\">发传单</span>\n            <header class=\"clearfix\">\n                <div class=\"photoWrap\">\n                    <img :src=\"{{userInfo.photo}}\">\n                </div>\n                <div class=\"textWrap\">\n                    <div class=\"header\">\n                        麻花科技需要传单员\n                        <span>1月20日</span>\n                    </div>\n                    <div class=\"text\">\n                        今天去厦大发传单。今天去厦大发传单。还有什么昵？还有么昵？还有什么昵？随便写写。随便写写随便写写随便写写...\n                    </div>\n                </div>\n            </header>\n            <footer>\n                <div class=\"unit\">报酬：15元/小时</div>\n                <div class=\"time\">时间：<span>1月22日  10：00-12：00  13：00-15：00</span></div>\n                <div class=\"position\">任务位置：<span>厦门大学</span></div>\n            </footer>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-msg\">\n    <header-bar :title=\"title\"></header-bar>\n    <ul class=\"scenefilter clearfix\">\n        <li>\n            <span class=\"cur\">订单邀请</span>\n        </li>\n        <li>\n            <span>消息</span>\n        </li>\n    </ul>\n    <div class=\"content showHeader showTab showFooter\">\n        <div class=\"item\">\n            <span class=\"tag\">发传单</span>\n            <header class=\"clearfix\">\n                <div class=\"photoWrap\">\n                    <img :src=\"userInfo.photo\">\n                </div>\n                <div class=\"textWrap\">\n                    <div class=\"header\">\n                        麻花科技需要传单员\n                        <span>1月20日</span>\n                    </div>\n                    <div class=\"text\">\n                        今天去厦大发传单。今天去厦大发传单。还有什么昵？还有么昵？还有什么昵？随便写写。随便写写随便写写随便写写...\n                    </div>\n                </div>\n            </header>\n            <footer>\n                <div class=\"unit\">报酬：15元/小时</div>\n                <div class=\"time\">时间：<span>1月22日  10：00-12：00  13：00-15：00</span></div>\n                <div class=\"position\">任务位置：<span>厦门大学</span></div>\n            </footer>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 52 */
@@ -14086,7 +14086,7 @@
 	// </style>
 	//
 	// <template>
-	//     <div transition="page" class="page page-scene page-current">
+	//     <div transition="page" class="page-scene page-current">
 	//         <header-bar :title="title" :back="true"></header-bar>
 	//         <ul class="scenefilter clearfix">
 	//             <li @click="showFilter(1)">
@@ -14196,7 +14196,7 @@
 /* 56 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div transition=\"page\" class=\"page page-scene page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <ul class=\"scenefilter clearfix\">\n        <li @click=\"showFilter(1)\">\n            <span>学校<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 1}\"></i></span>\n        </li>\n        <li @click=\"showFilter(2)\">\n            <span>性别<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 2}\"></i></span>\n        </li>\n        <li @click=\"showFilter(3)\">\n            <span>排序<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 3}\"></i></span>\n        </li>\n    </ul>\n    <div class=\"scenefilterList\" v-show=\"isShowFilter\">\n        <div class=\"content\">\n            <ul>\n                <li @click=\"filter\"><i class=\"icon icon-yixuan\"></i>asdfasdf</li>\n            </ul>\n        </div>\n    </div>\n    <div class=\"content showHeader showTab showFooter\">\n        <div class=\"item\">\n            <header class=\"clearfix\" v-link=\"{name: 'sceneDetail'}\">\n                <div class=\"pull-left photoWrap\">\n                    <img :src=\"{{userInfo.photo}}\">\n                </div>\n                <div class=\"pull-left nameWrap\">\n                    <div class=\"name\"><i class=\"icon icon-xingbienan2\"></i>名字</div>\n                    <div class=\"auth clearfix\">\n                        厦门大学\n                    </div>\n                </div>\n                <i class=\"icon icon-jiantouyou pull-right\"></i>\n            </header>\n            <div class=\"main\">\n                <div class=\"text\">Hello,大家好，本人擅长英语和语文，尤其是其理解和写作方面。英语过6级沟通能力好，有耐心。</div>\n                <div class=\"img\"></div>\n            </div>\n            <ul class=\"userScore clearfix\">\n                <li>\n                    <i class=\"icon icon-xiaolian pull-left\"></i>\n                    <span class=\"pull-left\">好评</span>\n                    <em class=\"pull-left\">1</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-cry pull-left\"></i>\n                    <span class=\"pull-left\">中评</span>\n                    <em class=\"pull-left\">1</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-kulian pull-left\"></i>\n                    <span class=\"pull-left\">差评</span>\n                    <em class=\"pull-left\">1</em>\n                </li>\n            </ul>\n        </div>\n    </div>\n    <span \n            class=\"ui-btn ui-btn-big\"\n        >\n        一键预约\n    </span>\n</div>\n";
+	module.exports = "\n<div transition=\"page\" class=\"page-scene page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <ul class=\"scenefilter clearfix\">\n        <li @click=\"showFilter(1)\">\n            <span>学校<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 1}\"></i></span>\n        </li>\n        <li @click=\"showFilter(2)\">\n            <span>性别<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 2}\"></i></span>\n        </li>\n        <li @click=\"showFilter(3)\">\n            <span>排序<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 3}\"></i></span>\n        </li>\n    </ul>\n    <div class=\"scenefilterList\" v-show=\"isShowFilter\">\n        <div class=\"content\">\n            <ul>\n                <li @click=\"filter\"><i class=\"icon icon-yixuan\"></i>asdfasdf</li>\n            </ul>\n        </div>\n    </div>\n    <div class=\"content showHeader showTab showFooter\">\n        <div class=\"item\">\n            <header class=\"clearfix\" v-link=\"{name: 'sceneDetail'}\">\n                <div class=\"pull-left photoWrap\">\n                    <img :src=\"{{userInfo.photo}}\">\n                </div>\n                <div class=\"pull-left nameWrap\">\n                    <div class=\"name\"><i class=\"icon icon-xingbienan2\"></i>名字</div>\n                    <div class=\"auth clearfix\">\n                        厦门大学\n                    </div>\n                </div>\n                <i class=\"icon icon-jiantouyou pull-right\"></i>\n            </header>\n            <div class=\"main\">\n                <div class=\"text\">Hello,大家好，本人擅长英语和语文，尤其是其理解和写作方面。英语过6级沟通能力好，有耐心。</div>\n                <div class=\"img\"></div>\n            </div>\n            <ul class=\"userScore clearfix\">\n                <li>\n                    <i class=\"icon icon-xiaolian pull-left\"></i>\n                    <span class=\"pull-left\">好评</span>\n                    <em class=\"pull-left\">1</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-cry pull-left\"></i>\n                    <span class=\"pull-left\">中评</span>\n                    <em class=\"pull-left\">1</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-kulian pull-left\"></i>\n                    <span class=\"pull-left\">差评</span>\n                    <em class=\"pull-left\">1</em>\n                </li>\n            </ul>\n        </div>\n    </div>\n    <span \n            class=\"ui-btn ui-btn-big\"\n        >\n        一键预约\n    </span>\n</div>\n";
 
 /***/ },
 /* 57 */
@@ -14252,7 +14252,7 @@
 	// </style>
 	//
 	// <template>
-	//     <div transition="page" class="page page-scene-detail page-current">
+	//     <div transition="page" class="page-scene-detail page-current">
 	//         <header-bar :title="title" :back="true"></header-bar>
 	//         <div class="content showHeader showFooter">
 	//             <header>
@@ -14365,15 +14365,21 @@
 	            timerArr: []
 	        };
 	    },
-	    ready: function ready() {
-	        var self = this;
 	
-	        self.$nextTick(function () {
-	            if (!self.timer) return;
+	    // ready(){
+	    //     let self = this;
+	
+	    //     self.$nextTick(function () {
+	    //         if( !self.timer ) return;
+	    //         self.timerArr = self.timer.split('-');
+	    //     })
+	    // },
+	    watch: {
+	        timer: function timer() {
+	            var self = this;
 	            self.timerArr = self.timer.split('-');
-	        });
+	        }
 	    },
-	
 	    methods: {
 	        setAccount: function setAccount(id) {
 	            var self = this;
@@ -14542,7 +14548,7 @@
 /* 68 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div transition=\"page\" class=\"page page-scene-detail page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        <header>\n            林小兔\n            5人已收藏\n            厦门大学\n            厦门\n            我的服务：地推 酒店服务 话务员 物流 家教\n        </header>\n        介绍服务\n        工作时间\n        <time-conf :timer=\"formData.timeConf\"></time-conf>\n        客户评价\n        马小跳6080\n        2016-2-22\n        查看5条评论\n    </div>\n    <span \n            class=\"ui-btn ui-btn-big\"\n        >\n        约TA\n    </span>\n</div>\n";
+	module.exports = "\n<div transition=\"page\" class=\"page-scene-detail page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        <header>\n            林小兔\n            5人已收藏\n            厦门大学\n            厦门\n            我的服务：地推 酒店服务 话务员 物流 家教\n        </header>\n        介绍服务\n        工作时间\n        <time-conf :timer=\"formData.timeConf\"></time-conf>\n        客户评价\n        马小跳6080\n        2016-2-22\n        查看5条评论\n    </div>\n    <span \n            class=\"ui-btn ui-btn-big\"\n        >\n        约TA\n    </span>\n</div>\n";
 
 /***/ },
 /* 69 */
@@ -14598,7 +14604,7 @@
 	// </style>
 	//
 	// <template>
-	//     <div transition="page" class="page page-scene-detail page-current">
+	//     <div transition="page" class="page-scene-detail page-current">
 	//         <header-bar :title="title" :back="true"></header-bar>
 	//         <div class="content showHeader showFooter">
 	//             <header>
@@ -14654,7 +14660,7 @@
 /* 73 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div transition=\"page\" class=\"page page-scene-detail page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        <header>\n            林小兔\n            5人已收藏\n            厦门大学\n            厦门\n            我的服务：地推 酒店服务 话务员 物流 家教\n        </header>\n        介绍服务\n        工作时间\n        <time-conf :timer=\"formData.timeConf\"></time-conf>\n        客户评价\n        马小跳6080\n        2016-2-22\n        查看5条评论\n    </div>\n    <span \n            class=\"ui-btn ui-btn-big\"\n        >\n        约TA\n    </span>\n</div>\n";
+	module.exports = "\n<div transition=\"page\" class=\"page-scene-detail page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        <header>\n            林小兔\n            5人已收藏\n            厦门大学\n            厦门\n            我的服务：地推 酒店服务 话务员 物流 家教\n        </header>\n        介绍服务\n        工作时间\n        <time-conf :timer=\"formData.timeConf\"></time-conf>\n        客户评价\n        马小跳6080\n        2016-2-22\n        查看5条评论\n    </div>\n    <span \n            class=\"ui-btn ui-btn-big\"\n        >\n        约TA\n    </span>\n</div>\n";
 
 /***/ },
 /* 74 */
@@ -14779,29 +14785,29 @@
 	//             <div class="userHeader clearfix">
 	//                 <div class="userWrap clearfix">
 	//                     <div class="pull-left photoWrap">
-	//                         <img :src="{{userInfo.head_img_url}}">
+	//                         <img :src="formData.head_img_url">
 	//                     </div>
 	//                     <div class="pull-right nameWrap">
-	//                         <div class="name">{{userInfo.nickname}}</div>
+	//                         <div class="name">{{formData.nickname}}</div>
 	//                         <div
 	//                             class="auth clearfix"
 	//                             v-link="{name: 'auth'}"
-	//                             v-if="userInfo.sutdent_auth == 0 || userInfo.sutdent_auth == 3"
+	//                             v-if="formData.sutdent_auth == 0 || formData.sutdent_auth == 3"
 	//                         >
 	//                             <i class="icon icon-anquanbaozhang pull-left"></i>
-	//                             <span class="pull-left" v-if="userInfo.sutdent_auth == 0">未认证，点此认证！</span>
-	//                             <span class="pull-left" v-if="userInfo.sutdent_auth == 3">认证失败，点此重新认证！</span>
+	//                             <span class="pull-left" v-if="formData.sutdent_auth == 0">未认证，点此认证！</span>
+	//                             <span class="pull-left" v-if="formData.sutdent_auth == 3">认证失败，点此重新认证！</span>
 	//                         </div>
 	//                         <div
 	//                             class="auth clearfix"
-	//                             v-if="userInfo.sutdent_auth == 1"
+	//                             v-if="formData.sutdent_auth == 1"
 	//                         >
 	//                             <i class="icon icon-anquanbaozhang2 pull-left"></i>
 	//                             <span class="pull-left">认证成功</span>
 	//                         </div>
 	//                         <div
 	//                             class="auth clearfix"
-	//                             v-if="userInfo.sutdent_auth == 2"
+	//                             v-if="formData.sutdent_auth == 2"
 	//                         >
 	//                             <i class="icon icon-anquanbaozhang pull-left"></i>
 	//                             <span class="pull-left">认证中，请耐心等待</span>
@@ -14812,29 +14818,29 @@
 	//                     <li>
 	//                         <i class="icon icon-xiaolian pull-left"></i>
 	//                         <span class="pull-left">好评</span>
-	//                         <em class="pull-left">{{userCount.goodCount}}</em>
+	//                         <em class="pull-left">{{formData.goodCount}}</em>
 	//                     </li>
 	//                     <li>
 	//                         <i class="icon icon-cry pull-left"></i>
 	//                         <span class="pull-left">中评</span>
-	//                         <em class="pull-left">{{userCount.cenCount}}</em>
+	//                         <em class="pull-left">{{formData.cenCount}}</em>
 	//                     </li>
 	//                     <li>
 	//                         <i class="icon icon-kulian pull-left"></i>
 	//                         <span class="pull-left">差评</span>
-	//                         <em class="pull-left">{{userCount.poolCount}}</em>
+	//                         <em class="pull-left">{{formData.poolCount}}</em>
 	//                     </li>
 	//                     <li>
 	//                         <i class="icon icon-aixin pull-left"></i>
 	//                         <span class="pull-left">收藏</span>
-	//                         <em class="pull-left">{{userCount.collectCount}}</em>
+	//                         <em class="pull-left">{{formData.collectCount}}</em>
 	//                     </li>
 	//                 </ul>
 	//             </div>
 	//
 	//             <div class="list-block">
 	//                 <ul>
-	//                     <li class="item-content item-link" v-link="{name: 'userMoney', query: userInfo}">
+	//                     <li class="item-content item-link" v-link="{name: 'userMoney'}">
 	//                         <div class="item-inner">
 	//                             <div class="item-title">我的余额</div>
 	//                         </div>
@@ -14843,12 +14849,12 @@
 	//             </div>
 	//             <div class="list-block">
 	//                 <ul>
-	//                     <li class="item-content item-link" v-link="{name: 'userSetting', query: userInfo}">
+	//                     <li class="item-content item-link" v-link="{name: 'userSetting'}">
 	//                         <div class="item-inner">
 	//                             <div class="item-title">设置</div>
 	//                         </div>
 	//                     </li>
-	//                     <li class="item-content item-link" v-link="{name: 'userWorkServer', query: userInfo}">
+	//                     <li class="item-content item-link" v-link="{name: 'userWorkServer'}">
 	//                         <div class="item-inner">
 	//                             <div class="item-title">发布服务</div>
 	//                         </div>
@@ -14878,7 +14884,6 @@
 	//                     </li>
 	//                 </ul>
 	//             </div>
-	//             <router-view></router-view>
 	//         </div>
 	//     </div>
 	// </template>
@@ -14888,66 +14893,24 @@
 		data: function data() {
 			return {
 				title: '我的',
-				userInfo: {},
-				formData: {},
-				userCount: {}
+				formData: {}
 			};
 		},
 	
-		vuex: {
-			getters: {
-				todos: function todos() {
-					console.log(11);
-				}
-			}
-			/*
-	  getters: {
-	  	todos: state => state.todo.todos
-	  },
-	  actions: {
-	  	addTodo,
-	  	toggleAll,
-	  	clearCompleted
-	  }
-	  */
-		},
 		route: {
 			data: function data(transition) {
-				var self = this,
-				    query = transition.to.query;
-	
-				$.extend(self.formData, query);
+				var self = this;
 	
 				$.ajax({
-					url: "/soytime/user/info",
+					url: "/soytime/account/myInfo",
 					type: 'GET',
 					dataType: 'json',
-					data: self.formData,
 					success: function success(data) {
-						self.userInfo = data.result;
+						self.formData = data.result;
 					}
 				});
-	
-				$.ajax({
-					url: "/soytime/appraise/toCount",
-					type: 'GET',
-					dataType: 'json',
-					data: self.formData,
-					success: function success(data) {
-						self.userCount = data.result;
-					}
-				});
-	
-				//console.log(this.$store.state.namexx, this)
-				console.log(this.todos);
 			}
 		},
-		ready: function ready() {
-			//setTimeout(() => {
-			//   this.$route.router.go({ name: 'list'});
-			//},2000);
-		},
-	
 		components: {
 			'headerBar': __webpack_require__(46)
 		}
@@ -14959,7 +14922,7 @@
 /* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n    \n        <div class=\"userHeader clearfix\">\n            <div class=\"userWrap clearfix\">\n                <div class=\"pull-left photoWrap\">\n                    <img :src=\"{{userInfo.head_img_url}}\">\n                </div>\n                <div class=\"pull-right nameWrap\">\n                    <div class=\"name\">{{userInfo.nickname}}</div>\n                    <div \n                        class=\"auth clearfix\"\n                        v-link=\"{name: 'auth'}\" \n                        v-if=\"userInfo.sutdent_auth == 0 || userInfo.sutdent_auth == 3\"\n                    >\n                        <i class=\"icon icon-anquanbaozhang pull-left\"></i>\n                        <span class=\"pull-left\" v-if=\"userInfo.sutdent_auth == 0\">未认证，点此认证！</span>\n                        <span class=\"pull-left\" v-if=\"userInfo.sutdent_auth == 3\">认证失败，点此重新认证！</span>\n                    </div>\n                    <div\n                        class=\"auth clearfix\"\n                        v-if=\"userInfo.sutdent_auth == 1\"\n                    >\n                        <i class=\"icon icon-anquanbaozhang2 pull-left\"></i>\n                        <span class=\"pull-left\">认证成功</span>\n                    </div>\n                    <div\n                        class=\"auth clearfix\"\n                        v-if=\"userInfo.sutdent_auth == 2\"\n                    >\n                        <i class=\"icon icon-anquanbaozhang pull-left\"></i>\n                        <span class=\"pull-left\">认证中，请耐心等待</span>\n                    </div>\n                </div>\n            </div>\n            <ul class=\"userScore clearfix\">\n                <li>\n                    <i class=\"icon icon-xiaolian pull-left\"></i>\n                    <span class=\"pull-left\">好评</span>\n                    <em class=\"pull-left\">{{userCount.goodCount}}</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-cry pull-left\"></i>\n                    <span class=\"pull-left\">中评</span>\n                    <em class=\"pull-left\">{{userCount.cenCount}}</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-kulian pull-left\"></i>\n                    <span class=\"pull-left\">差评</span>\n                    <em class=\"pull-left\">{{userCount.poolCount}}</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-aixin pull-left\"></i>\n                    <span class=\"pull-left\">收藏</span>\n                    <em class=\"pull-left\">{{userCount.collectCount}}</em>\n                </li>\n            </ul>\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userMoney', query: userInfo}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">我的余额</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userSetting', query: userInfo}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">设置</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userWorkServer', query: userInfo}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">发布服务</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userWorkPublish'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">发单任务</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userWorkAccept'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">接单任务</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'service'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">在线客服</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n    \n        <div class=\"userHeader clearfix\">\n            <div class=\"userWrap clearfix\">\n                <div class=\"pull-left photoWrap\">\n                    <img :src=\"formData.head_img_url\">\n                </div>\n                <div class=\"pull-right nameWrap\">\n                    <div class=\"name\">{{formData.nickname}}</div>\n                    <div \n                        class=\"auth clearfix\"\n                        v-link=\"{name: 'auth'}\" \n                        v-if=\"formData.sutdent_auth == 0 || formData.sutdent_auth == 3\"\n                    >\n                        <i class=\"icon icon-anquanbaozhang pull-left\"></i>\n                        <span class=\"pull-left\" v-if=\"formData.sutdent_auth == 0\">未认证，点此认证！</span>\n                        <span class=\"pull-left\" v-if=\"formData.sutdent_auth == 3\">认证失败，点此重新认证！</span>\n                    </div>\n                    <div\n                        class=\"auth clearfix\"\n                        v-if=\"formData.sutdent_auth == 1\"\n                    >\n                        <i class=\"icon icon-anquanbaozhang2 pull-left\"></i>\n                        <span class=\"pull-left\">认证成功</span>\n                    </div>\n                    <div\n                        class=\"auth clearfix\"\n                        v-if=\"formData.sutdent_auth == 2\"\n                    >\n                        <i class=\"icon icon-anquanbaozhang pull-left\"></i>\n                        <span class=\"pull-left\">认证中，请耐心等待</span>\n                    </div>\n                </div>\n            </div>\n            <ul class=\"userScore clearfix\">\n                <li>\n                    <i class=\"icon icon-xiaolian pull-left\"></i>\n                    <span class=\"pull-left\">好评</span>\n                    <em class=\"pull-left\">{{formData.goodCount}}</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-cry pull-left\"></i>\n                    <span class=\"pull-left\">中评</span>\n                    <em class=\"pull-left\">{{formData.cenCount}}</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-kulian pull-left\"></i>\n                    <span class=\"pull-left\">差评</span>\n                    <em class=\"pull-left\">{{formData.poolCount}}</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-aixin pull-left\"></i>\n                    <span class=\"pull-left\">收藏</span>\n                    <em class=\"pull-left\">{{formData.collectCount}}</em>\n                </li>\n            </ul>\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userMoney'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">我的余额</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userSetting'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">设置</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userWorkServer'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">发布服务</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userWorkPublish'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">发单任务</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userWorkAccept'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">接单任务</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'service'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">在线客服</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 79 */
@@ -15014,25 +14977,82 @@
 	// </style>
 	//
 	// <template>
-	//     <div class="page-user page-user-setting">
+	//     <div class="page-user page-user-setting" transition="page">
 	//         <header-bar :title="title" back="true"></header-bar>
 	//         <div class="content showHeader showFooter">
 	//
-	//             头像
-	//             姓名
-	//             性别
-	//             身高
-	//             出生日期
-	//             邮箱
-	//             订单接送提醒
+	//             <div class="clearfix">
+	//                 <div class="pull-left">头像</div>
+	//                 <div class="pull-left photoWrap">
+	//                     <img :src="formData.head_img_url">
+	//                 </div>
+	//             </div>
+	//
+	//
+	//             <div class="list-block">
+	//                 <ul>
+	//                     <li class="item-content item-link">
+	//                         <div class="item-inner">
+	//                             <div class="item-title">姓名 {{formData.nickname}}</div>
+	//                         </div>
+	//                     </li>
+	//                     <li class="item-content item-link">
+	//                         <div class="item-inner">
+	//                             <div class="item-title">性别 {{formData.sex}}</div>
+	//                         </div>
+	//                     </li>
+	//                     <li class="item-content item-link">
+	//                         <div class="item-inner">
+	//                             <div class="item-title">身高 {{formData.height}}</div>
+	//                         </div>
+	//                     </li>
+	//                     <li class="item-content item-link">
+	//                         <div class="item-inner">
+	//                             <div class="item-title">出生日期 {{formData.birthday}}</div>
+	//                         </div>
+	//                     </li>
+	//                     <li class="item-content item-link">
+	//                         <div class="item-inner">
+	//                             <div class="item-title">邮箱 {{formData.email}}</div>
+	//                         </div>
+	//                     </li>
+	//                     <li class="item-content item-link">
+	//                         <div class="item-inner">
+	//                             <div class="item-title">qq {{formData.qq}}</div>
+	//                         </div>
+	//                     </li>
+	//                 </ul>
+	//             </div>
+	//
 	//
 	//             <div class="params">
 	//                 <bind-mobile :mobile.sync="formData.mobile"></bind-mobile>
 	//             </div>
 	//
-	//             <time-conf :timer.sync="formData.timeConf"></time-conf>
 	//
+	//             订单接送提醒 {{formData.open}}
+	//             <li>
+	//                 <div class="item-content">
+	//                 <div class="item-media"><i class="icon icon-form-toggle"></i></div>
+	//                 <div class="item-inner">
+	//                     <div class="item-title label">开关</div>
+	//                     <div class="item-input">
+	//                     <label class="label-switch">
+	//                         <input type="checkbox">
+	//                         <div class="checkbox"></div>
+	//                     </label>
+	//                     </div>
+	//                 </div>
+	//                 </div>
+	//             </li>
+	//             <time-conf :timer.sync="formData.timeConf"></time-conf>
 	//         </div>
+	//         <span
+	//             class="ui-btn ui-btn-big"
+	//             @click="save"
+	//         >
+	//             保存
+	//         </span>
 	//     </div>
 	// </template>
 	//
@@ -15041,29 +15061,55 @@
 	    data: function data() {
 	        return {
 	            title: '设置',
-	            formData: {
-	                timeConf: null,
-	                mobile: null //components bug？
-	            }
+	            tmpData: {},
+	            formData: {}
 	        };
-	    },
-	
-	    route: {
-	        data: function data(transition) {
-	            var self = this,
-	                query = transition.to.query;
-	
-	            $.extend(self.formData, query);
-	
-	            console.log(1, self.formData.city_id);
-	        }
 	    },
 	    ready: function ready() {
 	        var self = this;
-	        console.log(2, self.formData);
+	
+	        $.ajax({
+	            url: "/soytime/account/getSettingInfo",
+	            type: 'GET',
+	            dataType: 'json',
+	            success: function success(data) {
+	                self.formData = data.result;
+	            }
+	        });
 	    },
 	
-	    methods: {},
+	    // watch: {
+	    //     'formData': {
+	    //         handler: function (val, oldVal) {
+	    //              let self = this;
+	    //             self.formData = self.tmpData;
+	    //             console.log(self.formData.timeConf)
+	    //         },
+	    //         deep: true
+	    //     }
+	    // },
+	    methods: {
+	        save: function save() {
+	            var self = this;
+	            $.showPreloader('正在努力提交...');
+	            $.ajax({
+	                url: "/soytime/account/saveSetInfo",
+	                type: 'POST',
+	                dataType: 'json',
+	                data: self.formData,
+	                success: function success(data) {
+	                    if (data.success) {
+	                        $.hidePreloader();
+	                        self.$route.router.go('/user');
+	                    }
+	                },
+	                error: function error() {
+	                    $.hidePreloader();
+	                    $.toast('网络不给力，请尝试重新提交！');
+	                }
+	            });
+	        }
+	    },
 	    components: {
 	        'headerBar': __webpack_require__(46),
 	        'timeConf': __webpack_require__(61),
@@ -15131,7 +15177,7 @@
 	//         .rem(font-size, 24);
 	//     }
 	//
-	//     .moblieWrap{
+	//     .mobileWrap{
 	//         border-bottom:1px solid #dedede;
 	//         .rem(border-bottom-width, 2);
 	//     }
@@ -15143,7 +15189,7 @@
 	//         .rem(height, 40);
 	//         .rem(line-height, 40);
 	//
-	//         &#moblie{
+	//         &#mobile{
 	//             .rem(width, 300);
 	//         }
 	//         &#code{
@@ -15200,11 +15246,11 @@
 	//             </span>
 	//         </span>
 	//     </script>
-	// 	<script type="text/html" id="moblieWrap">
+	// 	<script type="text/html" id="mobileWrap">
 	//         <div class="page-user-formWrap">
-	//             <div class="moblieWrap clearfix">
+	//             <div class="mobileWrap clearfix">
 	//                 <label class="pull-left">手机</label>
-	//                 <input class="pull-left" type="text" id="moblie" placeholder="手机号" />
+	//                 <input class="pull-left" type="text" id="mobile" placeholder="手机号" />
 	//             </div>
 	//             <div class="codeWrap clearfix">
 	//                 <label class="pull-left">验证码</label>
@@ -15242,7 +15288,7 @@
 	            };
 	
 	            $.modal({
-	                text: $('#moblieWrap').html(),
+	                text: $('#mobileWrap').html(),
 	                buttons: [{
 	                    text: '取消',
 	                    onClick: function onClick() {
@@ -15253,6 +15299,7 @@
 	                    close: false,
 	                    onClick: function onClick() {
 	                        var that = $(this);
+	
 	                        if (that.hasClass('disable')) {
 	                            return;
 	                        }
@@ -15263,6 +15310,7 @@
 	                            mobile: mobile,
 	                            code: code
 	                        };
+	
 	                        if (!/1[34578]{1}\d{9}$/.test(mobile) || !code) {
 	                            that.removeClass('disable');
 	                            toast('请填写正确的信息！');
@@ -15356,13 +15404,13 @@
 /* 87 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"item clearfix\" @click=\"showMobile\">\n        <span class=\"pull-left\">手机号1111qwqwqw</span>\n        <span class=\"pull-right\">{{mobile}}</span>\n    </div>\n    <script type=\"text/html\" id=\"toastWrap\">\n        <span class=\"toastWrap\">\n            <span id=\"toast\" class=\"toast\">\n                [[content]]\n            </span>\n        </span>\n    </script>\n\t<script type=\"text/html\" id=\"moblieWrap\">\n        <div class=\"page-user-formWrap\">\n            <div class=\"moblieWrap clearfix\">\n                <label class=\"pull-left\">手机</label>\n                <input class=\"pull-left\" type=\"text\" id=\"moblie\" placeholder=\"手机号\" />\n            </div>\n            <div class=\"codeWrap clearfix\">\n                <label class=\"pull-left\">验证码</label>\n                <input class=\"pull-left\" type=\"text\" id=\"code\" placeholder=\"验证码\"  />\n                <span class=\"pull-right\" id=\"getCode\">\n                    <span id=\"getCodeText\">获取验证码</span>\n                    <span id=\"getCodeTime\"></span>\n                </span>\n            </div>\n        </div>\n\t</script>\n";
+	module.exports = "\n    <div class=\"item clearfix\" @click=\"showMobile\">\n        <span class=\"pull-left\">手机号1111qwqwqw</span>\n        <span class=\"pull-right\">{{mobile}}</span>\n    </div>\n    <script type=\"text/html\" id=\"toastWrap\">\n        <span class=\"toastWrap\">\n            <span id=\"toast\" class=\"toast\">\n                [[content]]\n            </span>\n        </span>\n    </script>\n\t<script type=\"text/html\" id=\"mobileWrap\">\n        <div class=\"page-user-formWrap\">\n            <div class=\"mobileWrap clearfix\">\n                <label class=\"pull-left\">手机</label>\n                <input class=\"pull-left\" type=\"text\" id=\"mobile\" placeholder=\"手机号\" />\n            </div>\n            <div class=\"codeWrap clearfix\">\n                <label class=\"pull-left\">验证码</label>\n                <input class=\"pull-left\" type=\"text\" id=\"code\" placeholder=\"验证码\"  />\n                <span class=\"pull-right\" id=\"getCode\">\n                    <span id=\"getCodeText\">获取验证码</span>\n                    <span id=\"getCodeTime\"></span>\n                </span>\n            </div>\n        </div>\n\t</script>\n";
 
 /***/ },
 /* 88 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-user page-user-setting\">\n    <header-bar :title=\"title\" back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        \n        头像\n        姓名\n        性别\n        身高\n        出生日期\n        邮箱\n        订单接送提醒\n        \n        <div class=\"params\">\n            <bind-mobile :mobile.sync=\"formData.mobile\"></bind-mobile>\n        </div>\n        \n        <time-conf :timer.sync=\"formData.timeConf\"></time-conf>\n\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-user page-user-setting\" transition=\"page\">\n    <header-bar :title=\"title\" back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        \n        <div class=\"clearfix\">\n            <div class=\"pull-left\">头像</div>\n            <div class=\"pull-left photoWrap\">\n                <img :src=\"formData.head_img_url\">\n            </div>\n        </div>\n        \n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">姓名 {{formData.nickname}}</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">性别 {{formData.sex}}</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">身高 {{formData.height}}</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">出生日期 {{formData.birthday}}</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">邮箱 {{formData.email}}</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">qq {{formData.qq}}</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        \n        \n        <div class=\"params\">\n            <bind-mobile :mobile.sync=\"formData.mobile\"></bind-mobile>\n        </div>\n        \n        \n        订单接送提醒 {{formData.open}}\n        <li>\n            <div class=\"item-content\">\n            <div class=\"item-media\"><i class=\"icon icon-form-toggle\"></i></div>\n            <div class=\"item-inner\">\n                <div class=\"item-title label\">开关</div>\n                <div class=\"item-input\">\n                <label class=\"label-switch\">\n                    <input type=\"checkbox\">\n                    <div class=\"checkbox\"></div>\n                </label>\n                </div>\n            </div>\n            </div>\n        </li>\n        <time-conf :timer.sync=\"formData.timeConf\"></time-conf>\n    </div>\n    <span \n        class=\"ui-btn ui-btn-big\"\n        @click=\"save\"\n    >\n        保存\n    </span>\n</div>\n";
 
 /***/ },
 /* 89 */
@@ -15553,12 +15601,6 @@
 				$.extend(self.formData, query);
 			}
 		},
-		ready: function ready() {
-			//setTimeout(() => {
-			//   this.$route.router.go({ name: 'list'});
-			//},2000);
-		},
-	
 		components: {
 			'headerBar': __webpack_require__(46)
 		}
@@ -15827,15 +15869,21 @@
 	            sceneArr: []
 	        };
 	    },
-	    ready: function ready() {
-	        var self = this;
 	
-	        self.$nextTick(function () {
-	            if (!self.sceneIds) return;
+	    // ready(){
+	    //     let self = this;
+	
+	    //     self.$nextTick(function () {
+	    //         if( !self.sceneIds ) return;
+	    //         self.sceneArr = self.sceneIds.split('-');
+	    //     })
+	    // },
+	    watch: {
+	        sceneIds: function sceneIds() {
+	            var self = this;
 	            self.sceneArr = self.sceneIds.split('-');
-	        });
+	        }
 	    },
-	
 	    methods: {
 	        setScene: function setScene(id) {
 	            var self = this;
@@ -16317,7 +16365,7 @@
 /* 117 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.78618075023405250.8741318178363144xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.66477197804488240.8141203371342272xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
 
 /***/ },
 /* 118 */
@@ -17223,7 +17271,7 @@
 	// </style>
 	//
 	// <template>
-	//     <div transition="page" class="page page-selectMap page-current">
+	//     <div transition="page" class="page-selectMap page-current">
 	//         <header-bar :title="title" :back="true"></header-bar>
 	//         <div id="amapWrap" class="content"></div>
 	// 		<div id="panel"></div>
@@ -17359,7 +17407,7 @@
 /* 137 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div transition=\"page\" class=\"page page-selectMap page-current\">\n        <header-bar :title=\"title\" :back=\"true\"></header-bar>\n        <div id=\"amapWrap\" class=\"content\"></div>\n\t\t<div id=\"panel\"></div>\n    </div>\n";
+	module.exports = "\n    <div transition=\"page\" class=\"page-selectMap page-current\">\n        <header-bar :title=\"title\" :back=\"true\"></header-bar>\n        <div id=\"amapWrap\" class=\"content\"></div>\n\t\t<div id=\"panel\"></div>\n    </div>\n";
 
 /***/ },
 /* 138 */
@@ -17682,7 +17730,6 @@
 	        },
 	        submit: function submit() {
 	            var self = this;
-	            console.log(self.formData);
 	            $.showPreloader('正在努力提交...');
 	            $.ajax({
 	                url: "/soytime/ca/save",

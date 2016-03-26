@@ -45,17 +45,6 @@ app.post('/soytime/ca/caInfo', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
-
-app.get('/soytime/account/myInfo', function (req, res) {
-	var Random = Mock.Random,
-		data   = Mock.mock({
-            success: '1',
-            result: '@integer(60, 1000)'		
-		});
-	
-	res.send( JSON.stringify(data, null, 4) );
-});
-
 app.get('/soytime/account/saveMobile', function (req, res) {
 	var Random = Mock.Random,
 		data   = Mock.mock({
@@ -66,40 +55,16 @@ app.get('/soytime/account/saveMobile', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
-
-app.get('/soytime/user/info', function (req, res) {
+app.get('/soytime/account/myInfo', function (req, res) {
 	var Random = Mock.Random,
 		data   = Mock.mock({
             success: '1',
             result:{
-                timeConf: '12-13-11',
-                nickname: 'ssxxxx',
+                nickname: '@cname',
                 head_img_url: Random.image('160x200'),
-                mobile: 'ss',
-                sex: 'ss',
-                height: 'xx',
-                qq: 'xx',
-                email: 'xx',
-                longitude: 'xx',
-                latitude: 'ss',
-                city_id: 'xx',
-                city_name: 'xx',
-                school_id: 'xx',
-                school_name: 'xx',
+                sex: '@integer(0, 1)',
                 sutdent_auth: '@integer(0, 3)',
-                explain: 'xxxx'
-            }			
-		});
-	
-	res.send( JSON.stringify(data, null, 4) );
-});
-
-
-app.get('/soytime/appraise/toCount', function (req, res) {
-	var Random = Mock.Random,
-		data   = Mock.mock({
-            success: '1',
-            result:{
+                explain: 'xxxx',
                 goodCount: '@integer(1, 1000)',
                 cenCount: '@integer(1, 1000)',
                 poolCount: '@integer(1, 1000)',
@@ -109,6 +74,28 @@ app.get('/soytime/appraise/toCount', function (req, res) {
 	
 	res.send( JSON.stringify(data, null, 4) );
 });
+
+app.get('/soytime/account/getSettingInfo', function (req, res) {
+	var Random = Mock.Random,
+		data   = Mock.mock({
+            success: '1',
+            result:{
+                open: '@integer(0, 1)',
+                timeConf: '12-13-21-52',
+                nickname: '@cname',
+                head_img_url: Random.image('160x200'),
+                mobile:'@integer(13100000000, 13900000000)',
+                sex: '@integer(0, 2)',
+                height: '@integer(150, 200)',
+                birthday:'1991-01-01',
+                qq:'@integer(100000, 999999999)',
+                email:'@email'
+            }			
+		});
+	
+	res.send( JSON.stringify(data, null, 4) );
+});
+
 
 
 var server = app.listen(4000, function () {

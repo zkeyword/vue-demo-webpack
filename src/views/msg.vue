@@ -119,7 +119,7 @@
                 <span class="tag">发传单</span>
                 <header class="clearfix">
                     <div class="photoWrap">
-                        <img :src="{{userInfo.photo}}">
+                        <img :src="userInfo.photo">
                     </div>
                     <div class="textWrap">
                         <div class="header">
@@ -151,7 +151,7 @@ export default {
     },
     route: {
         data (transition){
-            console.log(this)
+            //console.log(this)
         },
         deactivate(){
             console.log(121212)  

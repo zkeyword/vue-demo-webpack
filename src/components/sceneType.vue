@@ -50,13 +50,19 @@
                 sceneArr: []  
             }  
         },
-        ready(){
-            let self = this;
+        // ready(){
+        //     let self = this;
             
-            self.$nextTick(function () {
-                if( !self.sceneIds ) return;
+        //     self.$nextTick(function () {
+        //         if( !self.sceneIds ) return;
+        //         self.sceneArr = self.sceneIds.split('-');
+        //     })
+        // },
+        watch:{
+            sceneIds(){
+                let self = this;
                 self.sceneArr = self.sceneIds.split('-');
-            })
+            }
         },
         methods: {
 			setScene(id){

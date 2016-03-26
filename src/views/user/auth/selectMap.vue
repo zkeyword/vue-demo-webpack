@@ -45,7 +45,7 @@
 </style>
 
 <template>
-    <div transition="page" class="page page-selectMap page-current">
+    <div transition="page" class="page-selectMap page-current">
         <header-bar :title="title" :back="true"></header-bar>
         <div id="amapWrap" class="content"></div>
 		<div id="panel"></div>

@@ -61,13 +61,19 @@
                 timerArr: []  
             }  
         },
-        ready(){
-            let self = this;
-            
-            self.$nextTick(function () {
-                if( !self.timer ) return;
+        // ready(){
+        //     let self = this;
+
+        //     self.$nextTick(function () {
+        //         if( !self.timer ) return;
+        //         self.timerArr = self.timer.split('-');
+        //     })
+        // },
+        watch:{
+            timer(){
+                let self = this;
                 self.timerArr = self.timer.split('-');
-            })
+            }
         },
         methods: {
 			setAccount(id){

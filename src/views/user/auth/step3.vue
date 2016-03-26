@@ -92,7 +92,6 @@ export default {
         },
         submit(){
             let self = this;
-            console.log(self.formData)
             $.showPreloader('正在努力提交...')
             $.ajax({
                 url: "/soytime/ca/save",

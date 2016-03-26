@@ -7,7 +7,7 @@
 </style>
 
 <template>
-    <div transition="page" class="page page-scene-detail page-current">
+    <div transition="page" class="page-scene-detail page-current">
         <header-bar :title="title" :back="true"></header-bar>
         <div class="content showHeader showFooter">
             <header>

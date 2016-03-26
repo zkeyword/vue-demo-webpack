@@ -11,7 +11,7 @@
         .rem(font-size, 24);
     }
     
-    .moblieWrap{
+    .mobileWrap{
         border-bottom:1px solid #dedede;
         .rem(border-bottom-width, 2);
     }
@@ -23,7 +23,7 @@
         .rem(height, 40);
         .rem(line-height, 40);
         
-        &#moblie{
+        &#mobile{
             .rem(width, 300);
         }
         &#code{
@@ -80,11 +80,11 @@
             </span>
         </span>
     </script>
-	<script type="text/html" id="moblieWrap">
+	<script type="text/html" id="mobileWrap">
         <div class="page-user-formWrap">
-            <div class="moblieWrap clearfix">
+            <div class="mobileWrap clearfix">
                 <label class="pull-left">手机</label>
-                <input class="pull-left" type="text" id="moblie" placeholder="手机号" />
+                <input class="pull-left" type="text" id="mobile" placeholder="手机号" />
             </div>
             <div class="codeWrap clearfix">
                 <label class="pull-left">验证码</label>
@@ -122,7 +122,7 @@
                                 }
 
                 $.modal({
-					text : $('#moblieWrap').html(),
+					text : $('#mobileWrap').html(),
 					buttons : [
 						{
 							text : '取消',
@@ -133,7 +133,8 @@
 							text : '确定',
 							close: false,
 							onClick : function () {
-								let that        = $(this);
+								let that = $(this);
+                                
 								if( that.hasClass('disable') ){
 			                        return;
 			                    }
@@ -144,6 +145,7 @@
                                         mobile: mobile,
                                         code: code
                                     };
+                                    
                                 if( !/1[34578]{1}\d{9}$/.test(mobile) || !code ){
                                 	that.removeClass('disable');
                                     toast('请填写正确的信息！');
