@@ -1,80 +1,117 @@
 <style lang="less">
 @import '../../less/lib/mixins.less';
 .page-user-setting{
+    .block{
+        background:#fff;
+        
+        .rem(padding, 26, 16);
+        .rem(margin-bottom, 20);
+        
+        .clearfix{
+            border-bottom:2px solid #dedede;
+            .rem(border-bottom-width, 2);
+            .rem(padding, 20, 0);
+            .rem(font-size, 30);
+            .rem(line-height, 40);            
+            
+            &:first-child{
+                .rem(padding-top, 0);
+            }
+            
+            &:last-child{
+                border-bottom:0 none;
+                .rem(padding-bottom, 0);
+            }
+            
+            input{
+                border:0 none;
+                text-align:right;
+            }
+        }
+    }
     
+    .photoName{
+        .rem(height, 120);
+        .rem(line-height, 120); 
+    }
+    
+    .photoWrap{
+        .rem(width, 120);
+        .rem(height, 120);
+        .border-radius(120);
+        img{
+            width:100%;
+            height:100%;
+            .border-radius(120);
+        }
+    }
 }
 </style>
 
 <template>
     <div class="page-user page-user-setting" transition="page">
+    
         <header-bar :title="title" back="true"></header-bar>
+        
         <div class="content showHeader showFooter">
             
-            <div class="clearfix">
-                <div class="pull-left">头像</div>
-                <div class="pull-left photoWrap">
-                    <img :src="formData.head_img_url">
-                </div>
-            </div>
-            
-
-            <div class="list-block">
-                <ul>
-                    <li class="item-content item-link">
-                        <div class="item-inner">
-                            <div class="item-title">姓名 {{formData.nickname}}</div>
-                        </div>
-                    </li>
-                    <li class="item-content item-link">
-                        <div class="item-inner">
-                            <div class="item-title">性别 {{formData.sex}}</div>
-                        </div>
-                    </li>
-                    <li class="item-content item-link">
-                        <div class="item-inner">
-                            <div class="item-title">身高 {{formData.height}}</div>
-                        </div>
-                    </li>
-                    <li class="item-content item-link">
-                        <div class="item-inner">
-                            <div class="item-title">出生日期 {{formData.birthday}}</div>
-                        </div>
-                    </li>
-                    <li class="item-content item-link">
-                        <div class="item-inner">
-                            <div class="item-title">邮箱 {{formData.email}}</div>
-                        </div>
-                    </li>
-                    <li class="item-content item-link">
-                        <div class="item-inner">
-                            <div class="item-title">qq {{formData.qq}}</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            
-            
-            <div class="params">
-                <bind-mobile :mobile.sync="formData.mobile"></bind-mobile>
-            </div>
-            
-            
-            订单接送提醒 {{formData.open}}
-            <li>
-                <div class="item-content">
-                <div class="item-media"><i class="icon icon-form-toggle"></i></div>
-                <div class="item-inner">
-                    <div class="item-title label">开关</div>
-                    <div class="item-input">
-                    <label class="label-switch">
-                        <input type="checkbox">
-                        <div class="checkbox"></div>
-                    </label>
+            <div class="block">
+                <div class="clearfix">
+                    <div class="pull-left photoName">头像</div>
+                    <div class="pull-right photoWrap">
+                        <img :src="formData.head_img_url">
                     </div>
                 </div>
+                <div class="clearfix">
+                    <div class="pull-left">姓名 </div>
+                    <div class="pull-right">
+                        <input type="text" v-model="formData.nickname" />
+                    </div>
                 </div>
-            </li>
-            <time-conf :timer.sync="formData.timeConf"></time-conf>
+                <div class="clearfix">
+                    <div class="pull-left">性别</div>
+                    <div class="pull-right">{{formData.sex}}</div>
+                </div>
+                <div class="clearfix">
+                    <bind-birthday :birthday.sync="formData.birthday"></bind-birthday>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-left">身高 </div>
+                    <div class="pull-right">
+                        <input type="text" v-model="formData.height" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="block">
+                <bind-mobile :mobile.sync="formData.mobile"></bind-mobile>
+                <div class="clearfix">
+                    <div class="pull-left">邮箱</div>
+                    <div class="pull-right">
+                        <input type="text" v-model="formData.email" />
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="pull-left">QQ</div>
+                    <div class="pull-right">
+                        <input type="text" v-model="formData.qq" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="block">
+                <div class="clearfix">
+                    <div class="pull-left">订单接送提醒</div>
+                    <div class="pull-right">
+                        <label class="label-switch">
+                            <input type="checkbox" v-model="formData.open" >
+                            <div class="checkbox"></div>
+                        </label>
+                    </div>
+                </div>
+                <time-conf :timer.sync="formData.timeConf"></time-conf>
+            </div>
+            
         </div>
         <span 
             class="ui-btn ui-btn-big"
@@ -106,16 +143,6 @@
                 })
             });
         },
-        // watch: {
-        //     'formData': {
-        //         handler: function (val, oldVal) { 
-        //              let self = this;
-        //             self.formData = self.tmpData;
-        //             console.log(self.formData.timeConf)
-        //         },
-        //         deep: true
-        //     }
-        // },
         methods:{
             save(){
                 let self = this;
@@ -141,7 +168,8 @@
         components: {
             'headerBar': require('../../components/header.vue'),
             'timeConf': require('../../components/timeConf.vue'),
-            'bindMobile': require('../../components/bindMobile.vue')
+            'bindMobile': require('../../components/bindMobile.vue'),
+            'bindBirthday': require('../../components/bindBirthday.vue')
         }
     }
 </script>

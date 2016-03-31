@@ -1,99 +1,137 @@
 <style lang="less">
     @import '../../../less/lib/mixins.less';
-    .page-user{
-        .list-block{
-            .rem(margin, 20, 0);
-            ul{
-                .border-radius(8);
-            }
-            .item-inner{
-                .rem(margin-right, 20);
-                .rem(font-size, 30);
-            }
+    .page-user-work-server{
+        .content{
+            padding-left:0;
+            padding-right:0;
         }
-        .userHeader{
-            background:#fff;
-            .border-radius(8);
-            .rem(padding, 20);
-            .userWrap{
-                .rem(width, 420);
-                .photoWrap{
-                    .rem(width, 120);
-                    .rem(height, 120);
-                    .border-radius(120);
-					img{
-					    width:100%;
-						height:100%;
-					    .border-radius(120);
-					}
+        
+            .userHeader{
+                .rem(max-height, 350);
+                overflow:hidden;
+                position:relative;
+                
+                img{
+                    width:100%;
                 }
-                .nameWrap{
-                    .rem(width, 280);
-                    .name{
-                        .rem(font-size, 30);
+                
+                .userWrap{
+                    position:absolute;
+                    left:0;
+                    width:100%;
+                    .rem(top, 70);
+                    
+                    .btn{
+                        .rem(width, 150);
+                        .rem(height, 150);
+                        margin:0 auto;
+                        position:relative;
+                        
+                        .radius{
+                            width:100%;
+                            height:100%;
+                            background:#fff;
+                            position:absolute;
+                            .border-radius(150);
+                            .opacity(0.5);
+                        }
+                        
+                        .icon{
+                            text-align:center;
+                            position:absolute;
+                            .rem(font-size, 100);
+                            .rem(line-height,150);
+                            .rem(width, 150);
+                            .rem(height, 150);
+                        }
                     }
-                    .auth{
-                        color:#b2b2b2;
-                        .rem(font-size, 24);
-                        .rem(height, 32);
-                        .rem(line-height, 32);
-                        .rem(margin-top, 20);
+                    
+                    .name{
+                        text-align:center;
+                        .rem(font-size, 60);
+                        color:#fff;
                     }
                 }
             }
             
-            .userScore{
-                .rem(padding, 20, 0, 0);
-                .rem(margin, 20, 0, 0);
-                border-top:2px solid #dedede;
-                .rem(border-top-width, 2);
-                li{
-                    float:left;
-                    width:25%;
+            .block{
+                background:#fff;
+                .rem(padding, 26, 16);
+                .rem(margin, 0, 26, 20);
+                
+                .header{
                     .rem(font-size, 30);
-                    .rem(line-height, 30);
-                    em{
-                        font-style:normal;
-                    }
-                    span{
-                        .rem(margin, 0, 8);
-                    }
-                    i{
-                        
-                    }
+                }
+                
+                textarea{
+                    width:100%;
+                    border:0 none;
+                    .rem(font-size, 30);
                 }
             }
-        }
     }
 </style>
 
 <template>
-    <div class="page-user">
-        <header-bar :title="title"></header-bar>
+    <div class="page-user-work-server">
+        <header-bar :title="title" back="true"></header-bar>
         
-        <div class="content showHeader showFooter">
-            添加照片
-            林小图
+        <div class="content showHeaderNopading showFooter">
+
+            <div class="userHeader">
+                <img src="/dist/defaultImg/serverDefault.jpg" v-if="!formData.photo_url" />
+                <img :src="formData.photo_url" v-else />
+                <div class="userWrap">
+                    <div class="btn">
+                        <div class="radius"></div>
+                        <div class="icon">+</div>
+                        <div class="text">添加照片</div>
+                    </div>
+                    <div class="name">{{formData.usernick}}</div>
+                </div>
+            </div>
+        
+            <div class="block">
+                <div class="header">请选择工作类别(可多选)</div>
+                <scene-type 
+                    :scene-list="indexData.sceneList"
+                    :scene-ids.sync="formData.sceneIds"
+                ></scene-type>
+            </div>
             
+            <div class="block">
+                <div class="header">个人描述</div>
+                <textarea placeholder="请填写您的服务描述！">{{formData.detail}}</textarea>
+            </div>
             
-            请选择工作类别(可多选 ）
-            <scene-type 
-                :scene-list="indexData.sceneList"
-                :scene-ids.sync="formData.sceneIds"
-            ></scene-type>
+            <div class="block">
+                <div class="header">上传照片</div>
+                <ul class="clearfix">
+                    <li class="skillImgs" v-for="item in skillImgs">
+                        <img :src="item.img_url" />
+                    </li>
+                    <li v-if="skillImgs.length >= 3">
+                        增加照片
+                    </li>
+                </ul>
+            </div>
             
-            个人描述
-            <textarea>
-                请填写您的服务描述！
-            </textarea>
+            <div class="block">
+                <div class="header">工作区域(选择)</div>
+            </div>
             
-            上传照片
-            
-            工作区域(选择)
-            
-            工作时间
-            <time-conf :timer.sync="formData.timeConf"></time-conf>
+            <div class="block">
+                <div class="header">工作时间</div>
+                <time-conf :timer.sync="formData.timeConf"></time-conf>
+            </div>
         </div>
+        
+        <span 
+            class="ui-btn ui-btn-big"
+        >
+            发布
+        </span>
+        
     </div>
 </template>
 
@@ -107,27 +145,17 @@ export default {
 			formData: {}
 		}
 	},
-	route: {
-		data (transition){
-			let self     = this,
-				query    = transition.to.query;
-				
-			$.extend(self.formData, query);
-			
-			$.ajax({
-				url: "/soytime/user/info",
-				type:'GET',
-				dataType: 'json',
-				data: self.formData,
-				success: ((data)=>{
-					self.userInfo = data.result;
-				})
-			});
-			
-			//console.log(this.$store.state.namexx, this)
-			console.log( this.todos );
-		}
-	},
+    ready(){
+        let self = this;
+        $.ajax({
+            url: "/soytime/skill/myInfo",
+            type:'GET',
+            dataType: 'json',
+            success: ((data)=>{
+                self.formData = data.result;
+            })
+        });
+    },
 	components: {
 		'headerBar': require('../../../components/header.vue'),
         'timeConf': require('../../../components/timeConf.vue'),

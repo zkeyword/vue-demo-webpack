@@ -10,6 +10,7 @@
             .rem(height, 58);
             .rem(line-height, 58);
             .rem(margin, 16, 8, 0);
+            .rem(font-size, 24);
             .border-radius(8);
             span{
                 display:block;

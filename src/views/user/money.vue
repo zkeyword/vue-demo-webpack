@@ -110,14 +110,14 @@
             <div class="moneyList">
                 <header>交易记录</header>
                 <ul>
-                    <li class="clearfix">
-                        2313 khjh
-                    </li>
-                    <li class="clearfix">
-                        2313 khjh
+                    <li class="clearfix" v-for="tradeRecord in formData.tradeRecord">
+                        {{tradeRecord.type}}
+                        {{tradeRecord.amount}}
+                        {{tradeRecord.status}}
+                        {{tradeRecord.create_time}}
                     </li>
                 </ul>
-                <footer>点击更多...</footer>
+                <footer @click="geMore">点击更多...</footer>
             </div>
         </div>
     </div>
@@ -129,18 +129,56 @@ export default {
 		return {
 			title: '我的余额',
 			userInfo: {},
-			formData: {}
+            currentPage: 0,
+			formData: {
+                balance: 0,
+                tradeRecord: []
+            }
 		}
 	},
 	route: {
 		data (transition){
-			let self     = this,
-				query    = transition.to.query;
+			let self = this;
 				
-			$.extend(self.formData, query);
+            $.ajax({
+                url: "/soytime/account/balance",
+                type:'POST',
+                dataType: 'json',
+                success: (data)=>{
+                    $.extend(self.formData, data);
+                },
+                error: ()=>{
+                    $.toast('网络不给力，请重新尝试！');
+                }
+            });
+            
+            self.getTradeRecord();
 			
 		}
 	},
+    methods:{
+        getTradeRecord(){
+            let self = this;
+            $.ajax({
+                url: "/soytime/account/tradeRecord",
+                type:'POST',
+                data:{
+                    currentPage:self.currentPage
+                },
+                dataType: 'json',
+                success: (data)=>{
+                    $.extend(self.formData, data);
+                },
+                error: ()=>{
+                    $.toast('网络不给力，请重新尝试！');
+                }
+            });
+        },
+        getMore(){
+            self.currentPage ++;
+            self.getTradeRecord();
+        }
+    },
 	components: {
         'headerBar': require('../../components/header.vue'),
 	}

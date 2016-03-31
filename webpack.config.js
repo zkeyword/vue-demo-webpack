@@ -30,6 +30,7 @@ module.exports = {
 			{
                 //剥离图片
 				test: /\.svg$|\.png$|\.jpg$|\.gif$/, 
+                exclude: '/\/dist/',
 				loader: 'file-loader?name=img/[hash:8].[name].[ext]' + version
 			}
         ]

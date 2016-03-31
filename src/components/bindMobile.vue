@@ -70,7 +70,7 @@
 
 <template>
     <div class="item clearfix" @click="showMobile">
-        <span class="pull-left">手机号1111qwqwqw</span>
+        <span class="pull-left">手机号</span>
         <span class="pull-right">{{mobile}}</span>
     </div>
     <script type="text/html" id="toastWrap">
@@ -84,7 +84,7 @@
         <div class="page-user-formWrap">
             <div class="mobileWrap clearfix">
                 <label class="pull-left">手机</label>
-                <input class="pull-left" type="text" id="mobile" placeholder="手机号" />
+                <input class="pull-left" type="text" id="mobile" placeholder="手机号" v-model="mobile" />
             </div>
             <div class="codeWrap clearfix">
                 <label class="pull-left">验证码</label>

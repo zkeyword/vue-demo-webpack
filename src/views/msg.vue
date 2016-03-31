@@ -38,6 +38,7 @@
         position:relative;
         background:#fff;
         .border-radius(8);
+        .rem(margin-bottom, 20);
         
         header{
             border-bottom:2px solid #b2b2b2;
@@ -47,7 +48,7 @@
             .photoWrap{
                 position:absolute;
                 .rem(left, 20);
-                .rem(top, 80);
+                .rem(top, 40);
                 .rem(width, 90);
                 .rem(height, 90);
                 .border-radius(90);
@@ -77,6 +78,9 @@
         }
         
         footer{
+            .rem(margin, 0, 20);
+            .rem(padding, 20, 0);
+            .rem(font-size, 30);
             .unit{}
             .time{}
             .position{}
@@ -97,7 +101,16 @@
             &.over{
                 background:#b2b2b2
             }
-            
+        }
+        
+        .timeout{
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:url(../img/timeout.png) no-repeat center;
+            .rem(background-size, 240, 180);
         }
     }
 }
@@ -107,35 +120,45 @@
     <div class="page-msg">
         <header-bar :title="title"></header-bar>
         <ul class="scenefilter clearfix">
-            <li>
-                <span class="cur">订单邀请</span>
+            <li @click="showMsgList(true)">
+                <span :class="{'cur': isOrder}">订单邀请</span>
             </li>
-            <li>
-                <span>消息</span>
+            <li @click="showMsgList(false)">
+                <span :class="{'cur': !isOrder}">消息</span>
             </li>
         </ul>
         <div class="content showHeader showTab showFooter">
-            <div class="item">
-                <span class="tag">发传单</span>
+            <div class="item" v-if="isOrder" v-for="order in formData.order">
+                <div class="timeout"></div>
+                <span class="tag">{{order.scene_name}}</span>
                 <header class="clearfix">
                     <div class="photoWrap">
-                        <img :src="userInfo.photo">
+                        <img :src="order.head_img_url">
                     </div>
                     <div class="textWrap">
                         <div class="header">
                             麻花科技需要传单员
-                            <span>1月20日</span>
+                            <span>{{order.create_time}}</span>
                         </div>
                         <div class="text">
-                            今天去厦大发传单。今天去厦大发传单。还有什么昵？还有么昵？还有什么昵？随便写写。随便写写随便写写随便写写...
+                            {{order.detail}}
                         </div>
                     </div>
                 </header>
                 <footer>
-                    <div class="unit">报酬：15元/小时</div>
-                    <div class="time">时间：<span>1月22日  10：00-12：00  13：00-15：00</span></div>
-                    <div class="position">任务位置：<span>厦门大学</span></div>
+                    <div class="unit">报酬：{{order.unit}}</div>
+                    <div class="time">时间：<span>{{order.start_time}}  {{order.end_time}}</span></div>
+                    <div class="position">任务位置：<span>{{order.workplace}}</span></div>
                 </footer>
+            </div>
+            <div class="item" v-if="!isOrder" v-for="msg in formData.msg">
+                {{msg.type}}
+                {{msg.from_id}}
+                {{msg.head_img_url}}
+                {{msg.nick_name}}
+                {{msg.content}}
+                <div class="pull-left"></div>
+                <div class="pull-right"></div>
             </div>
         </div>
     </div>
@@ -146,20 +169,47 @@
 export default {
     data(){
         return {
-            title: '消息'
+            title: '消息',
+            isOrder: true,
+            formData: {
+                order: {},
+                msg: {}
+            }
         }
     },
     route: {
         data (transition){
-            //console.log(this)
+            let self = this;
+            $.ajax({
+                url: "/soytime/msg/orderInviteList",
+                type:'GET',
+                dataType: 'json',
+                success: ((data)=>{
+                    self.formData.order = data.result;
+                })
+            });
+            $.ajax({
+                url: "/soytime/msg/list",
+                type:'GET',
+                dataType: 'json',
+                success: ((data)=>{
+                    self.formData.msg = data.result;
+                    console.log( self.formData.msg )
+                })
+            });
         },
         deactivate(){
-            console.log(121212)  
+            //console.log(121212)  
         }
     },
     ready(){
         let self = this;
 
+    },
+    methods:{
+        showMsgList(arg){
+            this.isOrder = arg;
+        }  
     },
     components: {
         'headerBar': require('../components/header.vue')

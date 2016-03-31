@@ -4,6 +4,7 @@
         table{
             width:100%;
             .rem(margin-top, 20);
+            .rem(font-size, 24);
             td{
                 text-align:center;
                 border:1px solid #b2b2b2;
