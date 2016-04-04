@@ -307,7 +307,7 @@ export default {
                                 
                                 $.ajax({
                                     url: "/soytime/account/saveMobile",
-                                    type:'GET',
+                                    type:'POST',
                                     data: obj,
                                     dataType: 'json',
                                     success: (data)=>{
@@ -349,7 +349,7 @@ export default {
                     
                     $.ajax({
                         url: "/soytime/account/getMobileCode",
-                        type:'GET',
+                        type:'POST',
                         data:{
                             mobile: mobile  
                         },

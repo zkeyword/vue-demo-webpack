@@ -193,7 +193,7 @@ export default {
 			
 			$.ajax({
 				url: "/soytime/account/myInfo",
-				type:'GET',
+				type:'POST',
 				dataType: 'json',
 				success: ((data)=>{
 					self.formData = data.result;

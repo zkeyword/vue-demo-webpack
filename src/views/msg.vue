@@ -39,24 +39,30 @@
         background:#fff;
         .border-radius(8);
         .rem(margin-bottom, 20);
+        position:relative;
+        
+        .photoWrap{
+            position:absolute;
+            .rem(width, 90);
+            .rem(height, 90);
+            .border-radius(90);
+            img{
+                width:100%;
+                height:100%;
+                .border-radius(120);
+            }
+        }
+    }
+    
+    .order{
         
         header{
             border-bottom:2px solid #b2b2b2;
             .rem(border-bottom-width, 2);
-            position:relative;
             
             .photoWrap{
-                position:absolute;
                 .rem(left, 20);
                 .rem(top, 40);
-                .rem(width, 90);
-                .rem(height, 90);
-                .border-radius(90);
-                img{
-                    width:100%;
-                    height:100%;
-                    .border-radius(120);
-                }
             }
             
             .textWrap{
@@ -113,6 +119,30 @@
             .rem(background-size, 240, 180);
         }
     }
+    
+    .msg{
+        .photoWrap{
+            .rem(left, 20);
+            .rem(top, 20);
+        }
+        .textWrap{
+            .rem(padding, 20, 20, 20, 120);
+        }
+        .name{
+            .rem(font-size, 30);
+            .rem(padding-right, 140);
+        }
+        .text{
+            .rem(font-size, 30);
+        }
+        .time{
+            color:#b2b2b2;
+            .rem(font-size, 24);
+            position:absolute;
+            .rem(top, 20);
+            .rem(right, 20);
+        }
+    }
 }
 </style>
 
@@ -128,8 +158,9 @@
             </li>
         </ul>
         <div class="content showHeader showTab showFooter">
-            <div class="item" v-if="isOrder" v-for="order in formData.order">
-                <div class="timeout"></div>
+        
+            <div class="item order" v-if="isOrder" v-for="order in formData.order" v-link="{name: 'msgOrder'}">
+                <div class="timeout" v-if="order.status == 3"></div>
                 <span class="tag">{{order.scene_name}}</span>
                 <header class="clearfix">
                     <div class="photoWrap">
@@ -137,7 +168,7 @@
                     </div>
                     <div class="textWrap">
                         <div class="header">
-                            麻花科技需要传单员
+                            {{order.create_name}}
                             <span>{{order.create_time}}</span>
                         </div>
                         <div class="text">
@@ -151,15 +182,19 @@
                     <div class="position">任务位置：<span>{{order.workplace}}</span></div>
                 </footer>
             </div>
-            <div class="item" v-if="!isOrder" v-for="msg in formData.msg">
-                {{msg.type}}
-                {{msg.from_id}}
-                {{msg.head_img_url}}
-                {{msg.nick_name}}
-                {{msg.content}}
-                <div class="pull-left"></div>
-                <div class="pull-right"></div>
+            
+            <div class="item msg" v-if="!isOrder" v-for="msg in formData.msg" @click="goMsg(msg.type, msg.id)">
+                <div class="photoWrap">
+                    <img :src="msg.head_img_url">
+                </div>
+                <div class="textWrap">
+                    <div class="name" v-if="msg.type == 3">系统</div>
+                    <div class="name" v-else>{{msg.nick_name}}</div>
+                    <div class="text">{{msg.content}} </div>
+                    <span class="time">{{msg.create_time}}</span>
+                </div>
             </div>
+            
         </div>
     </div>
 </template>
@@ -170,7 +205,7 @@ export default {
     data(){
         return {
             title: '消息',
-            isOrder: true,
+            isOrder: false,
             formData: {
                 order: {},
                 msg: {}
@@ -182,7 +217,7 @@ export default {
             let self = this;
             $.ajax({
                 url: "/soytime/msg/orderInviteList",
-                type:'GET',
+                type:'POST',
                 dataType: 'json',
                 success: ((data)=>{
                     self.formData.order = data.result;
@@ -190,16 +225,15 @@ export default {
             });
             $.ajax({
                 url: "/soytime/msg/list",
-                type:'GET',
+                type:'POST',
                 dataType: 'json',
                 success: ((data)=>{
                     self.formData.msg = data.result;
-                    console.log( self.formData.msg )
                 })
             });
         },
         deactivate(){
-            //console.log(121212)  
+            this.isOrder = false;
         }
     },
     ready(){
@@ -209,7 +243,23 @@ export default {
     methods:{
         showMsgList(arg){
             this.isOrder = arg;
-        }  
+        },
+        goMsg(type, id){
+            let self = this;
+            
+            switch(type){
+                case 1:
+                    self.$route.router.go({name: 'msgComment', query: {id: id}});
+                    break;
+                case 2:
+                    self.$route.router.go({name: 'msgOrder', query: {id: id}});
+                    break;
+                case 3:
+                    self.$route.router.go({name: 'msgSystem', query: {id: id}});
+                    break;
+            }
+            
+        }
     },
     components: {
         'headerBar': require('../components/header.vue')

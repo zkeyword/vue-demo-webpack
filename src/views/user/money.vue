@@ -96,10 +96,10 @@
 <template>
     <div class="page-user page-user-money" transition="page">
         <header-bar :title="title" back="true"></header-bar>
-        <div class="content showHeaderNopading">
+        <div class="content showHeaderNopading infinite-scroll infinite-scroll-bottom" data-distance="100">
             <div class="moneyHeader">
                 <header>
-                    <span><i>账户余额</i>121212.00</span>
+                    <span><i>账户余额</i>{{formData.balance}}</span>
                 </header>
                 <footer class="clearfix">
                     <div></div>
@@ -111,13 +111,16 @@
                 <header>交易记录</header>
                 <ul>
                     <li class="clearfix" v-for="tradeRecord in formData.tradeRecord">
-                        {{tradeRecord.type}}
-                        {{tradeRecord.amount}}
-                        {{tradeRecord.status}}
+                        {{typeText[ tradeRecord.type - 1]}}
                         {{tradeRecord.create_time}}
+                        {{tradeRecord.amount}}元
                     </li>
                 </ul>
                 <footer @click="geMore">点击更多...</footer>
+                <!-- 加载提示符 -->
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -130,6 +133,7 @@ export default {
 			title: '我的余额',
 			userInfo: {},
             currentPage: 0,
+            typeText: ['充值','取现', '下单', '接单', '接单红包','分享红包', '转账'],
 			formData: {
                 balance: 0,
                 tradeRecord: []
@@ -145,7 +149,7 @@ export default {
                 type:'POST',
                 dataType: 'json',
                 success: (data)=>{
-                    $.extend(self.formData, data);
+                    $.extend(self.formData, data.result);
                 },
                 error: ()=>{
                     $.toast('网络不给力，请重新尝试！');
@@ -153,6 +157,10 @@ export default {
             });
             
             self.getTradeRecord();
+            
+            $(document).on('infinite', '.infinite-scroll-bottom',function() {
+                console.log(222)
+            });
 			
 		}
 	},
@@ -167,7 +175,7 @@ export default {
                 },
                 dataType: 'json',
                 success: (data)=>{
-                    $.extend(self.formData, data);
+                    self.formData.tradeRecord = data.result;
                 },
                 error: ()=>{
                     $.toast('网络不给力，请重新尝试！');

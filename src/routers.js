@@ -9,16 +9,26 @@ export default (router)=>{
 			name: 'home',
 	        component: require('./views/home')
 	    },
+        /* 消息部分 */
 	    '/msg': {
 	    	name: 'msg',
 	        component: require('./views/msg')
-	        //子路由
-	        //subRoutes:{
-	         //   'detail/:giftId': {
-	        //        name: 'detail', //具名路由
-	        //        component: require('./views/detail')
-	         //   }
-	       // }
+	    },
+        '/msg/system': {
+	    	name: 'msgSystem',
+	        component: require('./views/msg/system')
+	    },
+        '/msg/comment': {
+	    	name: 'msgComment',
+	        component: require('./views/msg/comment')
+	    },
+        '/msg/message': {
+	    	name: 'msgMessage',
+	        component: require('./views/msg/message')
+	    },
+        '/msg/order': {
+	    	name: 'msgOrder',
+	        component: require('./views/msg/order')
 	    },
         /* 场景部分 */
         '/scene/': {

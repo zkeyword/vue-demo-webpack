@@ -52,6 +52,7 @@
     .item{
         background:#fff;
         .border-radius(8);
+        .rem(margin-bottom, 20);
         
         header{
             border-bottom:2px solid #dedede;
@@ -71,6 +72,11 @@
                 }
             }
             
+            .school{
+                .rem(font-size, 24);
+                color:#5e5e5e;
+            }
+            
             .pull-right{
                 .rem(margin-top, 30);
             }
@@ -78,11 +84,42 @@
         
         .main{
             .rem(padding, 20);
+            
+            .text{
+                .rem(font-size, 30);
+                color:#5e5e5e;
+            }
+            
+            .img{
+                width:30%;
+                float:left;
+                
+                &:nth-child(2){
+                    margin:0 5%;    
+                }
+                
+                img{
+                    width:100%;
+                }
+            }
         }
         
         .userScore{
             border-top:2px solid #dedede;
             .rem(border-top-width, 2);
+            .rem(font-size, 24);
+            color:#8e8e8e;
+            li{
+               width:33.33%;
+               float:left;
+               text-align:center;
+               .rem(padding, 10, 0);
+            }
+                em{
+                    font-style:normal;
+                    display:inline-block;
+                    .rem(padding, 0, 5);
+                }
         }
     }
 }
@@ -111,38 +148,44 @@
             </div>
         </div>
         <div class="content showHeader showTab showFooter">
-            <div class="item">
-                <header class="clearfix" v-link="{name: 'sceneDetail'}">
+            <div class="item" v-for="item in formData">
+                <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id}}">
                     <div class="pull-left photoWrap">
-                        <img :src="{{userInfo.photo}}">
+                        <img :src="item.head_img_url">
                     </div>
                     <div class="pull-left nameWrap">
-                        <div class="name"><i class="icon icon-xingbienan2"></i>名字</div>
-                        <div class="auth clearfix">
-                            厦门大学
+                        <div class="name">
+                            <i class="icon" 
+                                :class="{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}"
+                            ></i>
+                            {{item.usernick}}
+                        </div>
+                        <div class="school clearfix">
+                            {{item.school_name}}
                         </div>
                     </div>
                     <i class="icon icon-jiantouyou pull-right"></i>
                 </header>
                 <div class="main">
-                    <div class="text">Hello,大家好，本人擅长英语和语文，尤其是其理解和写作方面。英语过6级沟通能力好，有耐心。</div>
-                    <div class="img"></div>
+                    <div class="text">{{item.detail}}</div>
+                    <div class="imgWrap clearfix">
+                        <div class="img" v-for="subItem in item.skillImgs">
+                            <img :src="subItem.img_url">
+                        </div>
+                    </div>
                 </div>
                 <ul class="userScore clearfix">
                     <li>
-                        <i class="icon icon-xiaolian pull-left"></i>
-                        <span class="pull-left">好评</span>
-                        <em class="pull-left">1</em>
+                        <i class="icon icon-aixin-copy"></i>
+                        <em>{{item.collectCount}}</em>
                     </li>
                     <li>
-                        <i class="icon icon-cry pull-left"></i>
-                        <span class="pull-left">中评</span>
-                        <em class="pull-left">1</em>
+                        <i class="icon icon-liuyan"></i>
+                        <em>{{item.appraiseCount}}</em>
                     </li>
                     <li>
-                        <i class="icon icon-kulian pull-left"></i>
-                        <span class="pull-left">差评</span>
-                        <em class="pull-left">1</em>
+                        <i class="icon icon-yanjing"></i>
+                        <em>{{item.viewCount}}</em>
                     </li>
                 </ul>
             </div>
@@ -161,7 +204,18 @@ export default {
         return {
             title: null,
             filterType: 0,
-            isShowFilter: false
+            isShowFilter: false,
+            formData: {},
+            data:{
+                /*
+                currentPage		整数				当前页码
+                scene_id    	字符串			学生服务编号
+                city_id			整形				当前城市编号
+                school_id		整形				学校编号，默认不限（无需传值）
+                sex				整形				性别， 默认为不限，无需传值（1：男，2：女）
+                sort			整形				排序，默认排序，无需传值（1：评价最高，2：距离最近）
+                */
+            }
         }
     },
     route:{
@@ -170,6 +224,17 @@ export default {
                 query = transition.to.query;
                 
             self.title = query.scene_name;
+            
+            $.ajax({
+                url: "/soytime/scene/list",
+                type:'POST',
+                data:self.data,
+                dataType: 'json',
+                success: ((data)=>{
+                    self.formData = data.result;
+                })
+            });
+            
         },
         deactivate(){
             this.filterType = 0;

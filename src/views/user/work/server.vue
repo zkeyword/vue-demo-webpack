@@ -149,7 +149,7 @@ export default {
         let self = this;
         $.ajax({
             url: "/soytime/skill/myInfo",
-            type:'GET',
+            type:'POST',
             dataType: 'json',
             success: ((data)=>{
                 self.formData = data.result;

@@ -100,7 +100,7 @@ export default {
 			
 			$.ajax({
 				url: "/soytime/user/info",
-				type:'GET',
+				type:'POST',
 				dataType: 'json',
 				data: self.formData,
 				success: ((data)=>{
