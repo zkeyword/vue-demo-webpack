@@ -14944,29 +14944,59 @@
 	// <style lang="less">
 	// @import '../../less/lib/mixins.less';
 	// .page-scene-detail{
+	//     .userHeader{
+	//         .rem(max-height, 350);
+	//         overflow:hidden;
+	//         position:relative;
 	//
+	//         img{
+	//             width:100%;
+	//         }
+	//
+	//         .userWrap{
+	//             position:absolute;
+	//             left:0;
+	//             width:100%;
+	//             .rem(top, 70);
+	//
+	//             .name{
+	//                 text-align:center;
+	//                 .rem(font-size, 60);
+	//                 color:#fff;
+	//             }
+	//         }
+	//     }
 	// }
 	//
 	// </style>
 	//
 	// <template>
-	//     <div transition="page" class="page-scene-detail page-current">
+	//     <div class="page-scene-detail page-current">
 	//         <header-bar :title="title" :back="true"></header-bar>
 	//         <div class="content showHeader showFooter">
-	//             <header>
-	//                 林小兔
+	//             <div class="userHeader">
+	//                 <img src="/dist/defaultImg/serverDefault.jpg" v-if="!formData.photo_url" />
+	//                 <img :src="formData.photo_url" v-else />
+	//                 <div class="userWrap">
+	//                     <div class="name">{{formData.usernick}}</div>
+	//                 </div>
 	//                 5人已收藏
-	//                 厦门大学
+	//                 {{formData.school_name}}
 	//                 厦门
-	//                 我的服务：地推 酒店服务 话务员 物流 家教
+	//             </div>
+	//             <header>
+	//                 我的服务：
+	//                 <span v-for="item in sceneList" v-if="item | sceneCur sceneArr">{{item.scene_name}}</span>
 	//             </header>
 	//             介绍服务
+	//             {{formData.detail}}
 	//             工作时间
 	//             <time-conf :timer="formData.timeConf"></time-conf>
 	//             客户评价
-	//             马小跳6080
-	//             2016-2-22
-	//             查看5条评论
+	//             {{formData.orderAppraise.content}}
+	//             {{formData.orderAppraise.username}}
+	//             {{formData.orderAppraise.create_time}}
+	//             查看{{formData.orderAppraise.appraise_count}}条评价
 	//         </div>
 	//         <span
 	//                 class="ui-btn ui-btn-big"
@@ -14980,7 +15010,10 @@
 	exports.default = {
 	    data: function data() {
 	        return {
-	            title: null
+	            title: null,
+	            formData: {},
+	            sceneArr: [],
+	            sceneList: indexData.sceneList
 	        };
 	    },
 	
@@ -14990,6 +15023,17 @@
 	                query = transition.to.query;
 	
 	            self.title = query.scene_name;
+	
+	            $.ajax({
+	                url: '/soytime/scene/stuInfo',
+	                type: 'POST',
+	                dataType: 'json',
+	                success: function success(data) {
+	                    self.formData = data.result;
+	                    self.title = data.result.usernick;
+	                    self.sceneArr = data.result.sceneIds.split('-');
+	                }
+	            });
 	        }
 	    },
 	    ready: function ready() {},
@@ -15247,7 +15291,7 @@
 /* 89 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div transition=\"page\" class=\"page-scene-detail page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        <header>\n            林小兔\n            5人已收藏\n            厦门大学\n            厦门\n            我的服务：地推 酒店服务 话务员 物流 家教\n        </header>\n        介绍服务\n        工作时间\n        <time-conf :timer=\"formData.timeConf\"></time-conf>\n        客户评价\n        马小跳6080\n        2016-2-22\n        查看5条评论\n    </div>\n    <span \n            class=\"ui-btn ui-btn-big\"\n        >\n        约TA\n    </span>\n</div>\n";
+	module.exports = "\n<div class=\"page-scene-detail page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        <div class=\"userHeader\">\n            <img src=\"/dist/defaultImg/serverDefault.jpg\" v-if=\"!formData.photo_url\" />\n            <img :src=\"formData.photo_url\" v-else />\n            <div class=\"userWrap\">\n                <div class=\"name\">{{formData.usernick}}</div>\n            </div>\n            5人已收藏\n            {{formData.school_name}}\n            厦门\n        </div>\n        <header>\n            我的服务：\n            <span v-for=\"item in sceneList\" v-if=\"item | sceneCur sceneArr\">{{item.scene_name}}</span>\n        </header>\n        介绍服务\n        {{formData.detail}}\n        工作时间\n        <time-conf :timer=\"formData.timeConf\"></time-conf>\n        客户评价\n        {{formData.orderAppraise.content}}\n        {{formData.orderAppraise.username}}\n        {{formData.orderAppraise.create_time}}\n        查看{{formData.orderAppraise.appraise_count}}条评价\n    </div>\n    <span \n            class=\"ui-btn ui-btn-big\"\n        >\n        约TA\n    </span>\n</div>\n";
 
 /***/ },
 /* 90 */
@@ -17258,7 +17302,7 @@
 /* 143 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.441318570170551540.12993415631353855xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.7226406929548830.9963179072365165xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
 
 /***/ },
 /* 144 */

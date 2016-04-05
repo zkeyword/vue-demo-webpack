@@ -207,6 +207,40 @@ app.post('/soytime/scene/list', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
+/* 查看学生服务信息 */
+app.post('/soytime/scene/stuInfo', function (req, res) {
+	var Random = Mock.Random,
+		data   = Mock.mock({
+            success: '1',
+            result: {
+                photo_url: Random.image('160x200'),
+                user_id: '@cname',
+                usernick: '@cname',
+                school_name: '@cname',
+                sceneIds: '200001-200002-200003',
+                detail: '@cname',
+                'skillImgs|3':
+                [{
+                    img_url:  Random.image('160x200')
+                }],
+                longitude: '@integer(1, 200)',
+                latitude: '@integer(1, 200)',
+                workplace: '@integer(1, 200)',
+                timeConf:'12-21-41-62',		
+                orderAppraise: {
+                    content: '@cname',
+                    username: '@cname',
+                    create_time: '@cname',
+                    appraise_count: '@cname',
+                }
+            }
+		});
+	
+    
+    
+	res.send( JSON.stringify(data, null, 4) );
+});
+
 
 /* 预约 */
 app.post('/soytime/order/inviteOrder', function (req, res) {
