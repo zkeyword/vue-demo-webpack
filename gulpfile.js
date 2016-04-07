@@ -1,5 +1,5 @@
 var gulp          = require('gulp'),
-	webpack       = require('gulp-webpack'),
+	webpack       = require('webpack-stream'),
 	webpackConfig = require('./webpack.config'),
 	nodemon       = require('gulp-nodemon'),
 	path          = {
