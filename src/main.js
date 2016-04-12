@@ -25,7 +25,7 @@ RouterMap(router);
 //在二级页时隐藏
 router.beforeEach(function (transition) {
     var toPath = transition.to.path;
-    if( toPath.replace(/[^/]/g,"").length > 1 || /auth/.test(toPath) ){
+    if( toPath.replace(/[^/]/g,"").length > 1 || /auth/.test(toPath) || /scene/.test(toPath) ){
         router.app.isShowTab = false;
     }else{
         router.app.isShowTab = true;
@@ -35,7 +35,7 @@ router.beforeEach(function (transition) {
 
 //注册路由切换后
 router.afterEach(function (transition) {
-    $.refreshScroller();
+    //$.refreshScroller();
 })
 
 App.store = Store;

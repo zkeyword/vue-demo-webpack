@@ -149,7 +149,7 @@
         </div>
         <div class="content showHeader showTab showFooter">
             <div class="item" v-for="item in formData">
-                <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id}}">
+                <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': scene_name, 'scene_id': scene_id}}">
                     <div class="pull-left photoWrap">
                         <img :src="item.head_img_url">
                     </div>
@@ -191,8 +191,9 @@
             </div>
         </div>
         <span 
-                class="ui-btn ui-btn-big"
-            >
+            class="ui-btn ui-btn-big"
+            v-link="{ name: 'sceneOneKeyOrder' }"
+        >
             一键预约
         </span>
     </div>
@@ -206,6 +207,8 @@ export default {
             filterType: 0,
             isShowFilter: false,
             formData: {},
+            scene_name: '',
+            scene_id: '',
             data:{
                 /*
                 currentPage		整数				当前页码

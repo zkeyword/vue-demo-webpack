@@ -13,15 +13,14 @@
             .rem(border-bottom-width, 2);
         }
         
-        .icon-xiaolaba{
+        .ico-xiaolaba{
             position:absolute;
-            background:url(../img/xiaolaba.svg) no-repeat;
-            .rem(background-size, 40, 40) !important;
             .rem(width,40);
-            
             .rem(height,40);
             .rem(top, 20);
             .rem(left, 20);
+            .rem(font-size, 40);
+            color:#ff946e;
         }
            
         /* 场景 */
@@ -94,9 +93,10 @@
 
 <template>
     <div class="page-home content showFooter">
-        <vn-swiper :slides="slides"></vn-swiper>
+        <!--<vn-swiper :slides="slides"></vn-swiper>-->
+        <swiper :list="list"></swiper>
         <div class="systemMsg">
-            <i class="icon icon-xiaolaba"></i>
+            <i class="ico ico-xiaolaba"></i>
             <marquee direction="left" scrollamount="3">
                 {{systemMsg}}
             </marquee>
@@ -116,13 +116,18 @@
 <script>
 export default {
     data(){
-        return indexData;
+        return {
+            list: indexData.slides,
+            systemMsg: indexData.systemMsg,
+            sceneList: indexData.sceneList
+        };
     },
     ready(){
-        $(".swiper-container").swiper();
+        //$(".swiper-container").swiper();
     },
     components:{
-        'vnSwiper': require('../components/swiper.vue')
+        //'vnSwiper': require('../components/swiper.vue'),
+        'swiper': require('../components/swiper/index'),
     }
 }
 </script>

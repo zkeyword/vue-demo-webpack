@@ -9,6 +9,7 @@ export default (router)=>{
 			name: 'home',
 	        component: require('./views/home')
 	    },
+        
         /* 消息部分 */
 	    '/msg': {
 	    	name: 'msg',
@@ -30,6 +31,7 @@ export default (router)=>{
 	    	name: 'msgOrder',
 	        component: require('./views/msg/order')
 	    },
+        
         /* 场景部分 */
         '/scene/': {
 	    	name: 'scene',
@@ -43,6 +45,22 @@ export default (router)=>{
 	    	name: 'sceneReserve',
 	        component: require('./views/scene/reserve')
 	    },
+        '/scene/appraise': {
+	    	name: 'sceneAppraise',
+	        component: require('./views/scene/appraise')
+	    },
+        '/scene/inviteOrder': {
+	    	name: 'sceneInviteOrder',
+	        component: require('./views/scene/inviteOrder')
+	    },
+        '/scene/oneKeyOrder': {
+	    	name: 'sceneOneKeyOrder',
+	        component: require('./views/scene/oneKeyOrder')
+	    },
+		'/scene/orderSuccess': {
+			name: 'sceneOrderSuccess',
+			component: require('./views/scene/orderSuccess')
+		},
         
         /* 用户部分 */
 	    '/user': {

@@ -3,6 +3,7 @@
     /* 幻灯片 */
     .swiper-container{
         padding:0;
+        .rem(height, 384);
     }
     .swiper-pagination-bullet{
         background:#fff;
@@ -17,7 +18,7 @@
     <div class="swiper-container" data-space-between="10" data-pagination=".swiper-pagination">
         <div class="swiper-wrapper">
             <div v-for="slide in slides" class="swiper-slide">
-                <a href="{{slide.url}}"><img :src="slide.img" alt="" style="width: 100%"></a>
+                <a :href="{{slide.url}}"><img :src="slide.img" alt="" style="width: 100%"></a>
             </div>
         </div>
         <div class="swiper-pagination"></div>

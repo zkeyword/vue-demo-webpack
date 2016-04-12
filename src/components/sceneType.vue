@@ -16,8 +16,8 @@
                 display:block;
                 background:#b2b2b2;
                 .rem(width, 122);
-                .rem(height, 58);
-                .rem(line-height, 58);
+                .rem(height, 58) !important;
+                .rem(line-height, 58) !important;
                 &.cur{
                     background:#ff946e
                 }
@@ -45,7 +45,7 @@
     import utils from '../lib/utils';
     export default {
         replace:true,
-        props: ['sceneList', 'sceneIds'],
+        props: ['sceneList', 'sceneIds', 'isRadio'],
         data(){
             return {
                 sceneArr: []  
@@ -68,12 +68,18 @@
         methods: {
 			setScene(id){
                 let self = this;
-                if( utils.indexOf( self.sceneArr, id ) > -1 ){
-                    self.sceneArr = utils.remove( self.sceneArr, id );
+                if( !self.isRadio ){
+                    if( utils.indexOf( self.sceneArr, id ) > -1 ){
+                        self.sceneArr = utils.remove( self.sceneArr, id );
+                    }else{
+                        self.sceneArr.push(id);
+                    }
+                    self.sceneIds = self.sceneArr.join('-');
                 }else{
+                    self.sceneArr = [];
                     self.sceneArr.push(id);
+                    self.sceneIds = id;
                 }
-                self.sceneIds = self.sceneArr.join('-');
 			}
         }
     }

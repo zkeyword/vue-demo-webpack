@@ -1,0 +1,176 @@
+@font-face {
+    font-family: 'icomoon';
+    src:
+        url('fonts/icomoon.ttf?lmnqm') format('truetype'),
+        url('fonts/icomoon.woff?lmnqm') format('woff'),
+        url('fonts/icomoon.svg?lmnqm#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.ico {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ico-close3:before {
+    content: "\e901";
+}
+.ico-aixin-copy:before {
+    content: "\e900";
+}
+.ico-aixin:before {
+    content: "\e902";
+}
+.ico-anonymous:before {
+    content: "\e903";
+}
+.ico-anonymous2:before {
+    content: "\e904";
+}
+.ico-anquanbaozhang:before {
+    content: "\e905";
+}
+.ico-close:before {
+    content: "\e906";
+}
+.ico-close2:before {
+    content: "\e907";
+}
+.ico-cry:before {
+    content: "\e908";
+}
+.ico-dianhua:before {
+    content: "\e909";
+}
+.ico-dianhua3:before {
+    content: "\e90a";
+}
+.ico-down:before {
+    content: "\e90b";
+}
+.ico-home1:before {
+    content: "\e90c";
+}
+.ico-university:before {
+    content: "\e90d";
+}
+.ico-traffic:before {
+    content: "\e90e";
+}
+.ico-women:before {
+    content: "\e90f";
+}
+.ico-service:before {
+    content: "\e910";
+}
+.ico-bus:before {
+    content: "\e911";
+}
+.ico-bofang:before {
+    content: "\e912";
+}
+.ico-dianhua2:before {
+    content: "\e913";
+}
+.ico-ditu:before {
+    content: "\e914";
+}
+.ico-dizhi:before {
+    content: "\e915";
+}
+.ico-calendar:before {
+    content: "\e916";
+}
+.ico-everyone:before {
+    content: "\e917";
+}
+.ico-open:before {
+    content: "\e918";
+}
+.ico-left:before {
+    content: "\e919";
+}
+.ico-renzheng:before {
+    content: "\e91a";
+}
+.ico-money:before {
+    content: "\e91b";
+}
+.ico-time:before {
+    content: "\e91c";
+}
+.ico-search:before {
+    content: "\e91d";
+}
+.ico-wudao:before {
+    content: "\e91e";
+}
+.ico-zuobiao:before {
+    content: "\e91f";
+}
+.ico-jiantouyou:before {
+    content: "\e920";
+}
+.ico-kulian:before {
+    content: "\e921";
+}
+.ico-liuyan:before {
+    content: "\e922";
+}
+.ico-shouye:before {
+    content: "\e923";
+}
+.ico-up:before {
+    content: "\e924";
+}
+.ico-wode:before {
+    content: "\e925";
+}
+.ico-xiaolaba:before {
+    content: "\e926";
+}
+.ico-xiaolian:before {
+    content: "\e927";
+}
+.ico-xiaoxi:before {
+    content: "\e928";
+}
+.ico-xingbienan:before {
+    content: "\e92a";
+}
+.ico-xingbienan3:before {
+    content: "\e92b";
+}
+.ico-xingbienv:before {
+    content: "\e92c";
+}
+.ico-xingbienv4:before {
+    content: "\e92d";
+}
+.ico-xuan:before {
+    content: "\e92e";
+}
+.ico-xuanzhong:before {
+    content: "\e930";
+}
+.ico-yanjing:before {
+    content: "\e931";
+}
+.ico-yixuan:before {
+    content: "\e932";
+}
+.ico-yixuan2:before {
+    content: "\e933";
+}
+

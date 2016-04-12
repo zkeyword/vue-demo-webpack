@@ -24,15 +24,16 @@
     "gulp-nodemon": "*",
     "gulp-rev": "*",
     "gulp-rev-collector": "*",
-    "webpack-stream": "*",
     "less-loader": "*",
     "mockjs": "*",
     "svg-loader": "*",
+    "url-loader": "^0.5.7",
     "vue-hot-reload-api": "*",
     "vue-html-loader": "*",
     "vue-loader": "*",
     "vue-style-loader": "*",
-    "webpack": "*"
+    "webpack": "*",
+    "webpack-stream": "*"
   },
   "dependencies": {
     "es6-promise": "*",

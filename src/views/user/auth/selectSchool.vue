@@ -77,7 +77,13 @@ export default {
             let self = this;
             self.formData.school_id   = item.school_id;
             self.formData.school_name = item.school_name;
-            self.$route.router.go('/auth?' + $.param( self.formData ) );
+
+            if( self.formData.form == 'onekeyOrder' ){
+                self.$route.router.go({'name':'sceneOneKeyOrder', query: self.formData });
+            }else{
+                self.$route.router.go({'name':'auth', query: self.formData});
+            }
+
         },
         filteData (keyword) {
             let self    = this,

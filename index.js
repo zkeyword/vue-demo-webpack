@@ -67,7 +67,7 @@ app.post('/soytime/account/myInfo', function (req, res) {
             success: '1',
             result:{
                 nickname: '@cname',
-                head_img_url: Random.image('160x200'),
+                head_img_url: Random.image('160x160'),
                 sex: '@integer(0, 1)',
                 sutdent_auth: '@integer(0, 3)',
                 explain: 'xxxx',
@@ -120,7 +120,7 @@ app.post('/soytime/account/getSettingInfo', function (req, res) {
                 open: '@integer(0, 1)',
                 timeConf: '12-13-21-52',
                 nickname: '@cname',
-                head_img_url: Random.image('160x200'),
+                head_img_url: Random.image('160x160'),
                 mobile:'@integer(13100000000, 13900000000)',
                 sex: '@integer(0, 2)',
                 height: '@integer(150, 200)',
@@ -150,14 +150,14 @@ app.post('/soytime/skill/myInfo', function name(req, res) {
 		data   = Mock.mock({
             success: '1',
             result:{
-                photo_url2: Random.image('160x200'),
+                photo_url2: Random.image('160x160'),
                 usernick: '@cname',
                 sceneIds: '@cname',
                 detail: '@cname',
                 skillImgs:
                 {
                     id: '@cname',
-                    img_url: Random.image('160x200')
+                    img_url: Random.image('160x160')
                 },
                 longitude: '@cname',
                 latitude: '@cname',
@@ -191,11 +191,11 @@ app.post('/soytime/scene/list', function (req, res) {
                     usernick: '@cname',
                     sex: '@integer(1, 2)',
                     school_name: '@cname',
-                    head_img_url: Random.image('160x200'),
+                    head_img_url: Random.image('160x160'),
                     detail: '@cname',
                     'skillImgs|3':
                     [{
-                        img_url:  Random.image('160x200')
+                        img_url:  Random.image('160x160')
                     }],
                     collectCount: '@integer(1, 200)',
                     appraiseCount: '@integer(1, 200)',
@@ -213,7 +213,8 @@ app.post('/soytime/scene/stuInfo', function (req, res) {
 		data   = Mock.mock({
             success: '1',
             result: {
-                photo_url: Random.image('160x200'),
+                photo_url: '',
+                head_img_url: Random.image('160x160'),
                 user_id: '@cname',
                 usernick: '@cname',
                 school_name: '@cname',
@@ -221,7 +222,7 @@ app.post('/soytime/scene/stuInfo', function (req, res) {
                 detail: '@cname',
                 'skillImgs|3':
                 [{
-                    img_url:  Random.image('160x200')
+                    img_url:  Random.image('160x160')
                 }],
                 longitude: '@integer(1, 200)',
                 latitude: '@integer(1, 200)',
@@ -229,15 +230,39 @@ app.post('/soytime/scene/stuInfo', function (req, res) {
                 timeConf:'12-21-41-62',		
                 orderAppraise: {
                     content: '@cname',
-                    username: '@cname',
+                    from_name: '@cname',
                     create_time: '@cname',
                     appraise_count: '@cname',
+                    head_img_url: Random.image('160x160')
                 }
             }
 		});
-	
-    
-    
+
+	res.send( JSON.stringify(data, null, 4) );
+});
+
+/* 查看学生的评价记录 */
+app.post('/soytime/appraise/list', function (req, res) {
+	var Random = Mock.Random,
+		data   = Mock.mock({
+            success: '1',
+            result: {
+                count:{
+                    allCount: '@integer(1, 200)',
+                    goodCount: '@integer(1, 200)',
+                    cenCount: '@integer(1, 200)',
+                    poolCount: '@integer(1, 200)',
+                },
+                'appraises|10': [{
+                    content: '@cname',
+                    from_name: '@cname',
+                    type: '@integer(1, 3)',
+                    head_img_url: Random.image('160x160'),
+                    create_time: '@date'
+                }]
+            }
+		});
+
 	res.send( JSON.stringify(data, null, 4) );
 });
 
@@ -253,6 +278,18 @@ app.post('/soytime/order/inviteOrder', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
+/* 一键预约 */
+app.post('/soytime/order/oneKeyOrder', function (req, res) {
+	var Random = Mock.Random,
+		data   = Mock.mock({
+            success: '1',
+            result: {
+                order_id: '@integer(60, 1000)'
+            }		
+		});
+	
+	res.send( JSON.stringify(data, null, 4) );
+});
 
 /* 邀请消息 */
 app.post('/soytime/msg/orderInviteList', function (req, res) {
@@ -263,7 +300,7 @@ app.post('/soytime/msg/orderInviteList', function (req, res) {
                 order_id:'@integer(60, 1000)',
                 scene_name:'@integer(60, 1000)',
                 create_time:'@integer(60, 1000)',
-                head_img_url:Random.image('160x200'),
+                head_img_url:Random.image('160x160'),
                 detail:'@integer(60, 1000)',
                 salary:'@integer(60, 1000)',
                 unit:'@integer(60, 1000)',
@@ -287,7 +324,7 @@ app.post('/soytime/msg/list', function (req, res) {
                 id:'@integer(60, 1000)',
                 type:'@integer(1, 3)',
                 from_id:'@integer(60, 1000)',
-                head_img_url:Random.image('160x200'),
+                head_img_url:Random.image('160x160'),
                 nick_name:'@integer(60, 1000)',
                 content:'@integer(60, 1000)',
                 create_time:'@date'
@@ -302,7 +339,7 @@ app.post('/soytime/msg/msnList', function (req, res) {
 		data   = Mock.mock({
             success: '1',
             'result|10': [{
-                head_img_url:Random.image('160x200'),
+                head_img_url:Random.image('160x160'),
                 nick_name:'@integer(60, 1000)',
                 content:'@integer(60, 1000)',
                 create_time:'@integer(60, 1000)',
@@ -319,7 +356,7 @@ app.post('/soytime/msg/msgAppraise', function (req, res) {
 		data   = Mock.mock({
             success: '1',
             'result|10': [{
-                head_img_url:Random.image('160x200'),
+                head_img_url:Random.image('160x160'),
 				nick_name:'@integer(60, 1000)',
 				order_content:'@integer(60, 1000)',
 				create_time:'@integer(60, 1000)',
