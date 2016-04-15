@@ -9,7 +9,7 @@
     <div class="clearfix">
         <div class="pull-left">生日</div>
         <div class="pull-right">
-            <input type="text" id="datetime-picker" v-model="birthday" />
+            <input type="text" id="datetime-picker" v-model="birthday"  mobiscroll-datetime="settings" />
         </div>
     </div>
 </template>

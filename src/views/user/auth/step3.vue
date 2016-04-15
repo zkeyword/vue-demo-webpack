@@ -92,7 +92,7 @@ export default {
         },
         submit(){
             let self = this;
-            $.showPreloader('正在努力提交...')
+            //$.showPreloader('正在努力提交...')
             $.ajax({
                 url: "/soytime/ca/save",
                 type:'POST',
@@ -105,8 +105,8 @@ export default {
                     }
                 },
                 error: ()=>{
-                    $.hidePreloader();
-                    $.toast('网络不给力，请尝试重新提交！');
+                    //$.hidePreloader();
+                    //$.toast('网络不给力，请尝试重新提交！');
                 }
             });
         }

@@ -73,7 +73,10 @@
                     <div class="pull-right">{{formData.sex}}</div>
                 </div>
                 <div class="clearfix">
-                    <bind-birthday :birthday.sync="formData.birthday"></bind-birthday>
+                    <div class="pull-left">生日</div>
+                    <div class="pull-right">
+                        <input type="text" id="datetime-picker" v-model="formData.birthday" mobiscroll-datetime="settings" />
+                    </div>
                 </div>
                 <div class="clearfix">
                     <div class="pull-left">身高 </div>
@@ -140,13 +143,14 @@
                 dataType: 'json',
                 success: ((data)=>{
                     self.formData = data.result;
+                    self.$store.state.getScrollerTime('#datetime-picker', 0);
                 })
             });
         },
         methods:{
             save(){
                 let self = this;
-                $.showPreloader('正在努力提交...')
+                //$.showPreloader('正在努力提交...')
                 $.ajax({
                     url: "/soytime/account/saveSetInfo",
                     type:'POST',
@@ -154,13 +158,13 @@
                     data: self.formData,
                     success: (data)=>{
                         if( data.success ){
-                            $.hidePreloader();
+                            //$.hidePreloader();
                             self.$route.router.go('/user');
                         }
                     },
                     error: ()=>{
-                        $.hidePreloader();
-                        $.toast('网络不给力，请尝试重新提交！');
+                        //$.hidePreloader();
+                       // $.toast('网络不给力，请尝试重新提交！');
                     }
                 });
             }
@@ -168,8 +172,7 @@
         components: {
             'headerBar': require('../../components/header.vue'),
             'timeConf': require('../../components/timeConf.vue'),
-            'bindMobile': require('../../components/bindMobile.vue'),
-            'bindBirthday': require('../../components/bindBirthday.vue')
+            'bindMobile': require('../../components/bindMobile.vue')
         }
     }
 </script>

@@ -207,7 +207,7 @@ export default {
                 //self.formData.school_id   = query.school_id ? query.school_id : self.formData.school_id;
                 //self.formData.school_name = query.school_name ? query.school_name : self.formData.school_name;
             }else{
-                $.showPreloader('数据加载中...');
+                //$.showPreloader('数据加载中...');
                 $.ajax({
                     url: "/soytime/ca/caInfo",
                     type:'POST',
@@ -216,7 +216,7 @@ export default {
                         let result = data.result,
                             status = result.sutdent_auth;
                             
-                        $.hidePreloader();
+                        //$.hidePreloader();
                         
                         // 0：未认证，1：已认证，2：认证中，3：认证失败
                         if( status == 1 ){
@@ -232,7 +232,7 @@ export default {
                         $.extend(self.formData, result);
                     },
                     error: ()=>{
-                        $.hidePreloader();
+                        //$.hidePreloader();
                         $.toast('网络不给力，请重新尝试！');
                     }
                 });

@@ -1,6 +1,33 @@
 <style lang="less">
 @import '../../less/lib/mixins.less';
 .page-scene-inviteOrder{
+
+    .userWrap{
+        width:100%;
+
+        .name{
+            text-align:center;
+            .rem(font-size, 38);
+            .rem(padding, 10, 0);
+            color:#333333;
+        }
+
+        .radius{
+            .rem(width, 150);
+            .rem(height, 150);
+
+            margin:0 auto;
+            position:relative;
+            background:#fff;
+            overflow:hidden;
+            .border-radius(150);
+            img{
+                height:100%;
+                width:100%;
+                .border-radius(150);
+            }
+        }
+    }
     
     .block{
         background:#fff;
@@ -68,12 +95,33 @@
 
         .ico-jiantouyou{color:#b2b2b2}
 
+        .timeWrap{
+            span{
+                float: left;
+            }
+            input{
+            .rem(width, 100);
+                float:left;
+                text-align:center
+            }
+            i{
+                float:left;
+            }
+            .ico{
+                float:left;
+                .rem(height, 44);
+                .rem(line-height, 44);
+                .rem(padding-left, 10);
+                .rem(font-size, 40);
+            }
+        }
+
     }
 }
 </style>
 
 <template>
-    <div class="page-scene-oneKeyOrder page-current">
+    <div class="page-scene-inviteOrder page-current">
         <header-bar :title="title" :back="true"></header-bar>
         <div class="content showHeader showFooter">
 
@@ -89,7 +137,7 @@
 
             <div class="block clearfix">
                 <span class="pull-left">任务类型</span>
-                <span class="pull-right">家教</span>
+                <span class="pull-right">{{formData.scene_name}}</span>
             </div>
 
             <div class="block clearfix">
