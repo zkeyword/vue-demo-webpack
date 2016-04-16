@@ -83,6 +83,10 @@ export default (router)=>{
 	    	name: 'userWorkPublish',
 	        component: require('./views/user/work/publish')
 	    },
+		'/user/work/publishDetail': {
+			name: 'userWorkPublishDetail',
+			component: require('./views/user/work/publishDetail')
+		},
         '/user/work/accept': {
 	    	name: 'userWorkAccept',
 	        component: require('./views/user/work/accept')

@@ -26,6 +26,7 @@
                         .rem(height, 150);
                         margin:0 auto;
                         position:relative;
+                        text-align:center;
                         
                         .radius{
                             width:100%;
@@ -34,21 +35,30 @@
                             position:absolute;
                             .border-radius(150);
                             .opacity(0.5);
+                            top:0;
+                            left:0;
+                            z-index: 1;
                         }
-                        
-                        .icon{
+                        .ico{
                             text-align:center;
                             position:absolute;
-                            .rem(font-size, 100);
+                            .rem(font-size, 50);
                             .rem(line-height,150);
                             .rem(width, 150);
                             .rem(height, 150);
+                        }
+                        .text{
+                            .rem(padding, 100, 0, 0);
+                            .rem(font-size, 24);
+                            position: relative;
+                            z-index: 2;
+                            color: #fff;
                         }
                     }
                     
                     .name{
                         text-align:center;
-                        .rem(font-size, 60);
+                        .rem(font-size, 50);
                         color:#fff;
                     }
                 }
@@ -84,7 +94,7 @@
                 <div class="userWrap">
                     <div class="btn">
                         <div class="radius"></div>
-                        <div class="icon">+</div>
+                        <div class="ico ico-anonymous"></div>
                         <div class="text">添加照片</div>
                     </div>
                     <div class="name">{{formData.usernick}}</div>
@@ -155,6 +165,12 @@ export default {
                 self.formData = data.result;
             })
         });
+    },
+    methods:{
+        getMap(){
+            let self = this;
+            self.$route.router.go('/auth/selectMap?' + $.param( self.formData ) );
+        }
     },
 	components: {
 		'headerBar': require('../../../components/header.vue'),
