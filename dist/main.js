@@ -19902,41 +19902,42 @@
 	//         <header-bar :title="title"></header-bar>
 	//
 	//         <div class="content showHeader">
-	//             <div class="item order">
-	//                 <span class="tag">563</span>
-	//                 <header class="clearfix" v-link="{ name: 'userWorkPublishDetail', query:{} }">
-	//                     2016-2-22 12:30
-	//                     <div class="status">{{ statusText[item.status] }}</div>
+	//             <div class="">
+	//                 <header>麻花科技</header>
+	//                 <section>
+	//                     公司地址：软件园31号
+	//                     工作任务：家教
+	//                     需要人数：2人(报名3人，剩余1 人可约）
+	//                     工作时间：03/02 10:00-12:00 ,18:00-20:00
+	//                     工作内容：
+	//                     辅导孩子完成家庭作业，并且进行课外辅导！让孩子在理解能力跟读题能力有所提高！
+	//                 </section>
+	//             </div>
+	//             <div class="item">
+	//                 <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': scene_name, 'scene_id': scene_id}}">
+	//                     <div class="pull-left photoWrap">
+	//                         <img :src="item.head_img_url">
+	//                     </div>
+	//                     <div class="pull-left nameWrap">
+	//                         <div class="name">
+	//                             <i class="icon"
+	//                                :class="{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}"
+	//                             ></i>
+	//                             {{item.usernick}}
+	//                         </div>
+	//                         <div class="school clearfix">
+	//                             {{item.school_name}}
+	//                         </div>
+	//                     </div>
+	//                     <i class="icon icon-jiantouyou pull-right"></i>
 	//                 </header>
 	//                 <section>
-	//                     <div class="item">
-	//                         <div class="commit clearfix">
-	//                             <i class="ico ico-dianhua3"></i>
-	//                             <span>评价</span>
-	//                         </div>
-	//                         <div>指定接单人：案发的说法</div>
-	//                         <div>afasdfadfadfadfaf </div>
-	//                         <div class="address">工作地点：厦门思明区</div>
-	//                     </div>
+	//                     辅导孩子完成家庭作业，并且进行课外辅导！让孩子在理解能力跟读题能力有所提高！
 	//                 </section>
-	//                 <footer>
-	//                     <div class="textWrap">
-	//                         <div>报名人数：3人    已选2人，剩余1人可选</div>
-	//                         <div>报名者，请获取一个人的联系方式</div>
-	//                     </div>
-	//                     <ul class="userList">
-	//                         <li class="clearfix">
-	//                             <div class="nameWrap">
-	//                                 <i class="ico ico-xuan"></i>
-	//                                 <span class="name">afdsfa</span>
-	//                             </div>
-	//                             <div class="commit">
-	//                                 <i class="ico ico-dianhua3"></i>
-	//                                 <span>评价</span>
-	//                             </div>
-	//                         </li>
-	//                     </ul>
-	//
+	//                 <footer class="clearfix">
+	//                     <span>拒绝</span>
+	//                     <span>约TA</span>
+	//                     <span>已约</span>
 	//                 </footer>
 	//             </div>
 	//         </div>
@@ -19989,7 +19990,7 @@
 /* 171 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-user-work-publish\">\n    <header-bar :title=\"title\"></header-bar>\n\n    <div class=\"content showHeader\">\n        <div class=\"item order\">\n            <span class=\"tag\">563</span>\n            <header class=\"clearfix\" v-link=\"{ name: 'userWorkPublishDetail', query:{} }\">\n                2016-2-22 12:30\n                <div class=\"status\">{{ statusText[item.status] }}</div>\n            </header>\n            <section>\n                <div class=\"item\">\n                    <div class=\"commit clearfix\">\n                        <i class=\"ico ico-dianhua3\"></i>\n                        <span>评价</span>\n                    </div>\n                    <div>指定接单人：案发的说法</div>\n                    <div>afasdfadfadfadfaf </div>\n                    <div class=\"address\">工作地点：厦门思明区</div>\n                </div>\n            </section>\n            <footer>\n                <div class=\"textWrap\">\n                    <div>报名人数：3人    已选2人，剩余1人可选</div>\n                    <div>报名者，请获取一个人的联系方式</div>\n                </div>\n                <ul class=\"userList\">\n                    <li class=\"clearfix\">\n                        <div class=\"nameWrap\">\n                            <i class=\"ico ico-xuan\"></i>\n                            <span class=\"name\">afdsfa</span>\n                        </div>\n                        <div class=\"commit\">\n                            <i class=\"ico ico-dianhua3\"></i>\n                            <span>评价</span>\n                        </div>\n                    </li>\n                </ul>\n\n            </footer>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-user-work-publish\">\n    <header-bar :title=\"title\"></header-bar>\n\n    <div class=\"content showHeader\">\n        <div class=\"\">\n            <header>麻花科技</header>\n            <section>\n                公司地址：软件园31号\n                工作任务：家教\n                需要人数：2人(报名3人，剩余1 人可约）\n                工作时间：03/02 10:00-12:00 ,18:00-20:00\n                工作内容：\n                辅导孩子完成家庭作业，并且进行课外辅导！让孩子在理解能力跟读题能力有所提高！\n            </section>\n        </div>\n        <div class=\"item\">\n            <header class=\"clearfix\" v-link=\"{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': scene_name, 'scene_id': scene_id}}\">\n                <div class=\"pull-left photoWrap\">\n                    <img :src=\"item.head_img_url\">\n                </div>\n                <div class=\"pull-left nameWrap\">\n                    <div class=\"name\">\n                        <i class=\"icon\"\n                           :class=\"{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}\"\n                        ></i>\n                        {{item.usernick}}\n                    </div>\n                    <div class=\"school clearfix\">\n                        {{item.school_name}}\n                    </div>\n                </div>\n                <i class=\"icon icon-jiantouyou pull-right\"></i>\n            </header>\n            <section>\n                辅导孩子完成家庭作业，并且进行课外辅导！让孩子在理解能力跟读题能力有所提高！\n            </section>\n            <footer class=\"clearfix\">\n                <span>拒绝</span>\n                <span>约TA</span>\n                <span>已约</span>\n            </footer>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 172 */
@@ -20227,7 +20228,7 @@
 /* 179 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.085379729047417640.4770163861103356xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.69432018254883590.477637063479051xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
 
 /***/ },
 /* 180 */

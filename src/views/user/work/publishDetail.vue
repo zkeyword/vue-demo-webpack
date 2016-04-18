@@ -23,8 +23,22 @@
                 </section>
             </div>
             <div class="item">
-                <header class="clearfix">
-
+                <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': scene_name, 'scene_id': scene_id}}">
+                    <div class="pull-left photoWrap">
+                        <img :src="item.head_img_url">
+                    </div>
+                    <div class="pull-left nameWrap">
+                        <div class="name">
+                            <i class="icon"
+                               :class="{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}"
+                            ></i>
+                            {{item.usernick}}
+                        </div>
+                        <div class="school clearfix">
+                            {{item.school_name}}
+                        </div>
+                    </div>
+                    <i class="icon icon-jiantouyou pull-right"></i>
                 </header>
                 <section>
                     辅导孩子完成家庭作业，并且进行课外辅导！让孩子在理解能力跟读题能力有所提高！
