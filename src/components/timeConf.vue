@@ -56,7 +56,7 @@
     import utils from '../lib/utils';
     export default {
         replace:true,
-        props: ['timer'],
+        props: ['timer', 'isRadio'],
         data(){
             return {
                 timerArr: []  
@@ -79,12 +79,14 @@
         methods: {
 			setAccount(id){
 				let self = this;
-                if( utils.indexOf( self.timerArr, id ) > -1 ){
-                    self.timerArr = utils.remove( self.timerArr, id );
-                }else{
-                    self.timerArr.push(id);
+                if( !self.isRadio ){
+                    if( utils.indexOf( self.timerArr, id ) > -1 ){
+                        self.timerArr = utils.remove( self.timerArr, id );
+                    }else{
+                        self.timerArr.push(id);
+                    }
+                    self.timer = self.timerArr.join('-');
                 }
-                self.timer = self.timerArr.join('-');
 			}
         }
     }

@@ -91,6 +91,10 @@ export default (router)=>{
 	    	name: 'userWorkAccept',
 	        component: require('./views/user/work/accept')
 	    },
+		'/user/work/acceptDetail': {
+			name: 'userWorkAcceptDetail',
+			component: require('./views/user/work/acceptDetail')
+		},
         
         /* 客服 */
         '/service/': {

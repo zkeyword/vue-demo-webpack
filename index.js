@@ -180,8 +180,114 @@ app.post('/soytime/skill/saveInfo', function (req, res) {
 	res.send( JSON.stringify(data, null, 4) );
 });
 
+/* 我的发单任务列表 */
+app.post('/soytime/order/demandList', function (req, res) {
+    var Random = Mock.Random,
+        data   = Mock.mock({
+            success: '1',
+            result: [
+                {
+                    order_id: '@integer(60, 1000)',
+                    scene_name: '@integer(60, 1000)',
+                    create_time: '@integer(60, 1000)',
+                    salary: '@integer(60, 1000)',
+                    unit: '@integer(60, 1000)',
+                    status: '@integer(60, 1000)',
+                    stu_name: '@integer(60, 1000)',
+                    detail: '@integer(60, 1000)',
+                    number: '@integer(60, 1000)',
+                    workplace: '@integer(60, 1000)',
+                    start_time: '@integer(60, 1000)',
+                    end_time: '@integer(60, 1000)',
+                    period_times: '@integer(60, 1000)',
+                    orderResponses: [
+                        {
+                            stu_id: '@integer(60, 1000)',
+                            nickname: '@integer(60, 1000)',
+                            is_checked: '@integer(60, 1000)',
+                            mobile: '@integer(60, 1000)',
+                            is_appraise: '@integer(60, 1000)'
+                        }
+                    ]
+                }
+            ]
+        });
+
+    res.send( JSON.stringify(data, null, 4) );
+});
+
+/* 我的接单任务列表 */
+app.post('/soytime/order/receiveList', function (req, res) {
+    var Random = Mock.Random,
+        data   = Mock.mock({
+            success: '1',
+            'result|10': [
+                {
+                    order_id:'@integer(60, 1000)',
+                    scene_name:'@integer(60, 1000)',
+                    create_time:'@date',
+                    head_img_url: Random.image('160x160'),
+                    detail:'@integer(60, 1000)',
+                    salary:'@integer(60, 1000)',
+                    unit:'@integer(60, 1000)',
+                    workplace:'@integer(60, 1000)',
+                    start_time:'@date',
+                    end_time:'@date',
+                    period_times:'@integer(60, 1000)',
+                    is_checked:'@integer(60, 1000)',
+                    is_appraise:'@integer(60, 1000)',
+                }
+            ]
+        });
+
+    res.send( JSON.stringify(data, null, 4) );
+});
+
+app.post('/soytime/order/receiveDetail', function (req, res) {
+    var Random = Mock.Random,
+        data   = Mock.mock({
+            success: '1',
+            result: {
+                order_id:'@integer(60, 1000)',
+                scene_name:'@integer(60, 1000)',
+                create_time:'@date',
+                head_img_url: Random.image('160x160'),
+                detail: '@name',
+                salary:'@integer(60, 1000)',
+                unit:'@name',
+                number:'@integer(1, 10)',
+                comp_addr:'@name',
+                comp_longitude:'@name',
+                comp_latitude:'@name',
+                workplace:'@name',
+                work_longitude:'@name',
+                work_latitude:'@name',
+                start_time:'@date',
+                end_time:'@date',
+                period_times:'@date',
+                clientAppraise: {
+                    goodCount:'@name',
+                    cenCount:'@name',
+                    poolCount:'@name',
+                    mobile:'@name',
+                },
+                'response|10': [
+                    {
+                        head_img_url: Random.image('160x160'),
+                    }
+                ],
+                is_response:'@name',
+            }
+        });
+
+    res.send( JSON.stringify(data, null, 4) );
+});
+
+
+
+
 /* 查看场景下的学生列表 */
-app.post('/soytime/scene/list', function (req, res) {
+app.post('/soytime/server/list', function (req, res) {
 	var Random = Mock.Random,
 		data   = Mock.mock({
             success: '1',
@@ -208,7 +314,7 @@ app.post('/soytime/scene/list', function (req, res) {
 });
 
 /* 查看学生服务信息 */
-app.post('/soytime/scene/stuInfo', function (req, res) {
+app.post('/soytime/server/stuInfo', function (req, res) {
 	var Random = Mock.Random,
 		data   = Mock.mock({
             success: '1',

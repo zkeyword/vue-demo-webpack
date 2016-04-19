@@ -1,0 +1,79 @@
+/* === Pull To Refresh === */
+@layerHeight:  2.2rem;
+.pull-to-refresh-layer {
+    position: relative;
+    // margin-top: -44px;
+    left:0; 
+    top:0; 
+    width:100%; 
+    height:@layerHeight; 
+    
+    .preloader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -0.5rem;
+        margin-top: -0.5rem;
+        visibility: hidden;
+    }
+    .pull-to-refresh-arrow {
+        width: 0.65rem;
+        height: 1rem;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -0.15rem;
+        margin-top: -0.5rem;
+        background: no-repeat center;
+        .encoded-svg-background("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 40'><polygon points='9,22 9,0 17,0 17,22 26,22 13.5,40 0,22' fill='#8c8c8c'/></svg>");
+        background-size: 0.65rem  1rem;
+        z-index: 10;
+        transform: rotate(0deg) translate3d(0,0,0);
+        transition-duration: 300ms;
+    }
+    
+}
+.pull-to-refresh-content {
+    transform: translate3d(0, 0, 0);
+    &.transitioning, &.refreshing {
+      transition: transform 400ms; 
+    }
+    &:not(.refreshing) {
+        .pull-to-refresh-layer .preloader {
+            animation:none;
+        }
+    }
+    &.refreshing {
+        .pull-to-refresh-arrow {
+            visibility: hidden;
+            transition-duration: 0ms;
+        }
+        .preloader {
+            visibility: visible;
+        }   
+    }
+    &.pull-up {
+        .pull-to-refresh-arrow {
+            transform: rotate(180deg) translate3d(0,0,0);
+        }
+    }
+    
+}
+.pull-to-refresh-content {
+  top: -@layerHeight;
+  &.refreshing {
+    transform: translate3d(0, @layerHeight, 0);
+  }
+}
+.bar-nav ~ .pull-to-refresh-content,
+.bar-footer ~ .pull-to-refresh-content,
+.bar-tab ~ .pull-to-refresh-content {
+  top: 0;
+  &.refreshing {
+    transform: translate3d(0, @layerHeight, 0);
+  }
+}
+.bar-header-secondary ~ .pull-to-refresh-content,
+.bar-footer-secondary ~ .pull-to-refresh-content {
+  top: 2.2rem;
+}

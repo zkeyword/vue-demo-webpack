@@ -249,7 +249,7 @@
                 <div class="block">
                     <header>工作时间</header>
                     <div class="main">
-                        <time-conf :timer="formData.timeConf"></time-conf>
+                        <time-conf :timer="formData.timeConf" :is-radio="true"></time-conf>
                     </div>
                 </div>
                 
@@ -306,8 +306,9 @@ export default {
                 query = transition.to.query;
             
             $.ajax({
-                url: '/soytime/scene/stuInfo',
+                url: '/soytime/server/stuInfo',
                 type: 'POST',
+                data:'scene_id'+query.scene_id+"&user_id="+query.user_id,
                 dataType: 'json',
                 success: ((data)=>{
                     self.formData = data.result;
@@ -321,9 +322,7 @@ export default {
                     }
                 })
             });
-            
-            
-        }  
+        }
     },
     ready: function () {
         

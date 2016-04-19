@@ -205,7 +205,7 @@ export default {
     data(){
         return {
             title: '消息',
-            isOrder: false,
+            isOrder: true,
             formData: {
                 order: {},
                 msg: {}

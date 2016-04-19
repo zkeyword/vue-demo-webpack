@@ -92,22 +92,23 @@
 </style>
 
 <template>
-    <div class="page-home content showFooter">
-        <!--<vn-swiper :slides="slides"></vn-swiper>-->
-        <swiper :list="list"></swiper>
-        <div class="systemMsg">
-            <i class="ico ico-xiaolaba"></i>
-            <marquee direction="left" scrollamount="3">
-                {{systemMsg}}
-            </marquee>
-        </div>
-        <div class="sceneWrap">
-            <div class="sceneItem" :class="{'red': index % 4 == 2 || index % 4 == 1 }" v-for="(index, scene) in sceneList">
-                <a external v-link="{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name} }">
-                   <i class="icon sceneIcon icon-home{{scene.id}}"></i>
-                   <span class="first">{{scene.scene_name}}</span>
-                   <span class="last">{{scene.scene_detail}}</span>
-                </a>
+    <div class="page-home page-current">
+        <div class="content showFooter">
+            <swiper :list="list"></swiper>
+            <div class="systemMsg">
+                <i class="ico ico-xiaolaba"></i>
+                <marquee direction="left" scrollamount="3">
+                    {{systemMsg}}
+                </marquee>
+            </div>
+            <div class="sceneWrap">
+                <div class="sceneItem" :class="{'red': index % 4 == 2 || index % 4 == 1 }" v-for="(index, scene) in sceneList">
+                    <a external v-link="{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name} }">
+                       <i class="icon sceneIcon icon-home{{scene.id}}"></i>
+                       <span class="first">{{scene.scene_name}}</span>
+                       <span class="last">{{scene.scene_detail}}</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -122,11 +123,7 @@ export default {
             sceneList: indexData.sceneList
         };
     },
-    ready(){
-        //$(".swiper-container").swiper();
-    },
     components:{
-        //'vnSwiper': require('../components/swiper.vue'),
         'swiper': require('../components/swiper/index'),
     }
 }

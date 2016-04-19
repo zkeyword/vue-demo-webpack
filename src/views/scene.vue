@@ -123,11 +123,26 @@
         }
     }
 }
+.pullRreshwrap{
+    position: relative !important;
+    .bar{
+        position: fixed;
+    }
+    .scenefilter{
+        position: fixed;
+    }
+    .content{
+        position:relative;
+    }
+    .ui-btn-big{
+        position: fixed;
+    }
+}
     
 </style>
 
 <template>
-    <div transition="page" class="page-scene page-current">
+    <div transition="page" class="page-scene page-current pullRreshwrap">
         <header-bar :title="title" :back="true"></header-bar>
         <ul class="scenefilter clearfix">
             <li @click="showFilter(1)">
@@ -148,47 +163,49 @@
             </div>
         </div>
         <div class="content showHeader showTab showFooter">
-            <div class="item" v-for="item in formData">
-                <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': scene_name, 'scene_id': scene_id}}">
-                    <div class="pull-left photoWrap">
-                        <img :src="item.head_img_url">
-                    </div>
-                    <div class="pull-left nameWrap">
-                        <div class="name">
-                            <i class="icon" 
-                                :class="{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}"
-                            ></i>
-                            {{item.usernick}}
+            <pull-refresh @on-scroll-lodding="getData">
+                <div class="item" v-for="item in formData">
+                    <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': scene_name, 'scene_id': scene_id}}">
+                        <div class="pull-left photoWrap">
+                            <img :src="item.head_img_url">
                         </div>
-                        <div class="school clearfix">
-                            {{item.school_name}}
+                        <div class="pull-left nameWrap">
+                            <div class="name">
+                                <i class="icon"
+                                    :class="{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}"
+                                ></i>
+                                {{item.nickname}}
+                            </div>
+                            <div class="school clearfix">
+                                {{item.school_name}}
+                            </div>
+                        </div>
+                        <i class="icon icon-jiantouyou pull-right"></i>
+                    </header>
+                    <div class="main">
+                        <div class="text">{{item.detail}}</div>
+                        <div class="imgWrap clearfix">
+                            <div class="img" v-for="subItem in item.skillImgs">
+                                <img :src="subItem.img_url">
+                            </div>
                         </div>
                     </div>
-                    <i class="icon icon-jiantouyou pull-right"></i>
-                </header>
-                <div class="main">
-                    <div class="text">{{item.detail}}</div>
-                    <div class="imgWrap clearfix">
-                        <div class="img" v-for="subItem in item.skillImgs">
-                            <img :src="subItem.img_url">
-                        </div>
-                    </div>
+                    <ul class="userScore clearfix">
+                        <li>
+                            <i class="icon icon-aixin-copy"></i>
+                            <em>{{item.collectCount}}</em>
+                        </li>
+                        <li>
+                            <i class="icon icon-liuyan"></i>
+                            <em>{{item.appraiseCount}}</em>
+                        </li>
+                        <li>
+                            <i class="icon icon-yanjing"></i>
+                            <em>{{item.viewCount}}</em>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="userScore clearfix">
-                    <li>
-                        <i class="icon icon-aixin-copy"></i>
-                        <em>{{item.collectCount}}</em>
-                    </li>
-                    <li>
-                        <i class="icon icon-liuyan"></i>
-                        <em>{{item.appraiseCount}}</em>
-                    </li>
-                    <li>
-                        <i class="icon icon-yanjing"></i>
-                        <em>{{item.viewCount}}</em>
-                    </li>
-                </ul>
-            </div>
+            </pull-refresh>
         </div>
         <span 
             class="ui-btn ui-btn-big"
@@ -206,17 +223,16 @@ export default {
             title: null,
             filterType: 0,
             isShowFilter: false,
-            formData: {},
+            formData: [],
             scene_name: '',
             scene_id: '',
             data:{
-                /*
-                currentPage		整数				当前页码
-                scene_id    	字符串			学生服务编号
-                city_id			整形				当前城市编号
-                school_id		整形				学校编号，默认不限（无需传值）
-                sex				整形				性别， 默认为不限，无需传值（1：男，2：女）
-                sort			整形				排序，默认排序，无需传值（1：评价最高，2：距离最近）
+                currentPage: 0,
+                /*scene_id:
+                city_id:
+                school_id:
+                sex:
+                sort: 1
                 */
             }
         }
@@ -227,24 +243,12 @@ export default {
                 query = transition.to.query;
                 
             self.title = query.scene_name;
-            
-            $.ajax({
-                url: "/soytime/scene/list",
-                type:'POST',
-                data:self.data,
-                dataType: 'json',
-                success: ((data)=>{
-                    self.formData = data.result;
-                })
-            });
-            
+            self.scene_id = query.scene_id;
+            self.scene_name = query.scene_name;
         },
         deactivate(){
             this.filterType = 0;
         }  
-    },
-    ready: function () {
-        
     },
     methods:{
         showFilter(type){
@@ -255,10 +259,30 @@ export default {
         filter(){
             let self = this;
             self.isShowFilter = false;
+        },
+        getData(index, callback){
+            let self = this;
+            self.data.currentPage = index;
+            $.ajax({
+                url: "/soytime/server/list",
+                type:'POST',
+                data:self.data,
+                dataType: 'json',
+                success: ((data)=>{
+                    let arr = data.result,
+                        len = arr.length;
+                    for(let i = 0; i<len; i++){
+                        self.formData.push(arr[i]);
+                    }
+                    //self.formData = self.formData.concat(data.result);
+                    callback && callback();
+                })
+            });
         }
     },
     components: {
-        'headerBar': require('../components/header.vue')
+        'headerBar': require('../components/header.vue'),
+        'pullRefresh': require('../components/pullRefresh.vue')
     }
 }
 </script>

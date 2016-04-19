@@ -35,7 +35,15 @@ router.beforeEach(function (transition) {
 
 //注册路由切换后
 router.afterEach(function (transition) {
-    //$.refreshScroller();
+    if (/Android/gi.test(navigator.userAgent)) {
+        window.addEventListener('resize', function () {
+            if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
+                window.setTimeout(function () {
+                    document.activeElement.scrollIntoViewIfNeeded();
+                }, 0);
+            }
+        })
+    }
 })
 
 App.store = Store;

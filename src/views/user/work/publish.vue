@@ -83,7 +83,7 @@
                     .rem(line-height, 80);
                 }
             }
-    
+
             .commit{
                 position: absolute;
                 top:0;
@@ -107,7 +107,7 @@
                     .rem(font-size, 24);
                 }
             }
-            
+
             .address{
                 color: #b2b2b2;
                 .rem(font-size, 30);
@@ -155,7 +155,7 @@
                 <span :class="{'cur':tag == 3}">排序</span>
             </li>
         </ul>
-        
+
         <div class="content showHeader showTab">
             <div class="item order">
                 <span class="tag">563</span>
@@ -215,7 +215,7 @@ export default {
 		data (transition){
 			let self     = this,
 				query    = transition.to.query;
-				
+
 			$.extend(self.formData, query);
 
 
