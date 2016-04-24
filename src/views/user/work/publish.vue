@@ -40,17 +40,21 @@
             }
         }
 
-        section{
-            .rem(padding, 20);
-            .rem(font-size, 30);
-        }
+
 
         .item{
             position:relative;
             background:#fff;
             .border-radius(8);
+            .rem(margin-bottom, 30);
             position:relative;
-        }
+
+            section{
+                .rem(padding, 20);
+                .rem(font-size, 30);
+                position:relative;
+            }
+
 
             .tag{
                 position:absolute;
@@ -70,11 +74,12 @@
             }
 
             header{
+                text-align:center;
                 border-bottom:1px solid #dedede;
                 .rem(border-bottom-width, 2);
                 .rem(height, 80);
                 .rem(line-height, 80);
-                text-align:center;
+                .rem(font-size, 30);
                 .status{
                     position: absolute;
                     top:0;
@@ -86,8 +91,8 @@
 
             .commit{
                 position: absolute;
-                top:0;
-                right:0;
+                .rem(top, 20);
+                .rem(right, 20);
                 .ico{
                     float: left;
                     .rem(font-size, 50);
@@ -104,11 +109,11 @@
                     .rem(height, 50);
                     .rem(line-height, 50);
                     .rem(padding, 0, 20);
-                    .rem(font-size, 24);
+                    .rem(font-size, 28);
                 }
             }
 
-            .address{
+            .address, .number{
                 color: #b2b2b2;
                 .rem(font-size, 30);
                 text-align: right;
@@ -119,6 +124,16 @@
                 .rem(border-top-width, 2);
                 .rem(padding, 0, 20);
                 .rem(font-size, 30);
+
+                .textWrap{
+                    .rem(padding, 10, 0);
+                    div{
+                        .rem(padding, 5, 0);
+                    }
+                    .mark{
+                        color:#b2b2b2;
+                    }
+                }
             }
 
             .userList{
@@ -129,7 +144,10 @@
                     .rem(height, 80);
                     .rem(line-height, 80);
                     .ico-xuan{
-                        color:#11cd6e;
+                        color:#b2b2b2;
+                        &.cur{
+                             color:#11cd6e;
+                        }
                     }
                     .commit{
                         .rem(top, 14);
@@ -137,65 +155,74 @@
                     }
                 }
             }
-
+        }
     }
 </style>
 
 <template>
-    <div class="page-user-work-publish">
-        <header-bar :title="title"></header-bar>
+    <div class="page-user-work-publish pullRreshwrap">
+        <header-bar :title="title" :back="true"></header-bar>
+
         <ul class="filter clearfix">
-            <li @click="getList(1)">
+            <li @click="setTag(1)">
                 <span :class="{'cur':tag == 1}">最近订单</span>
             </li>
-            <li @click="getList(2)">
+            <li @click="setTag(2)">
                 <span :class="{'cur':tag == 2}">历史订单</span>
             </li>
-            <li @click="getList(3)">
-                <span :class="{'cur':tag == 3}">排序</span>
+            <li @click="setTag(3)">
+                <span :class="{'cur':tag == 3}">待评价</span>
             </li>
         </ul>
 
         <div class="content showHeader showTab">
-            <div class="item order">
-                <span class="tag">563</span>
-                <header class="clearfix" v-link="{ name: 'userWorkPublishDetail', query:{} }">
-                    2016-2-22 12:30
-                    <div class="status">{{ statusText[item.status] }}</div>
-                </header>
-                <section>
-                    <div>
-                        <div class="commit clearfix">
-                            <i class="ico ico-dianhua3"></i>
-                            <span>评价</span>
+            <pull-refresh @on-scroll-lodding="getData">
+                <div class="item" v-for="(index,item) in formData">
+                    <span class="tag">{{item.scene_name}}</span>
+                    <header class="clearfix" v-link="{ name: 'userWorkPublishDetail', query:formData }">
+                        2016-2-22 12:30
+                        <div class="status">{{ statusText[item.status] }}</div>
+                    </header>
+                    <section class="clearfix">
+                        <div v-if="item.orderRespon">
+                            <div class="commit clearfix">
+                                <a href="tel:{{item.orderRespon.mobile}}" class="ico ico-dianhua3"></a>
+                                <span v-if="item.orderRespon.is_appraise">评价</span>
+                            </div>
+                            <div>指定接单人：{{item.orderRespon.nickname}}</div>
                         </div>
-                        <div>指定接单人：案发的说法</div>
-                        <div>afasdfadfadfadfaf </div>
-                        <div class="address">工作地点：厦门思明区</div>
-                    </div>
-                </section>
-                <footer>
-                    <div class="textWrap">
-                        <div>报名人数：3人    已选2人，剩余1人可选</div>
-                        <div>报名者，请获取一个人的联系方式</div>
-                    </div>
-                    <ul class="userList">
-                        <li class="clearfix">
-                            <div class="nameWrap">
-                                <i class="ico ico-xuan"></i>
-                                <span class="name">afdsfa</span>
-                            </div>
-                            <div class="commit">
-                                <i class="ico ico-dianhua3"></i>
-                                <span>评价</span>
-                            </div>
-                        </li>
-                    </ul>
+                        <div>{{item.detail}} </div>
+                        <div class="number">预定人数：{{item.number}}人</div>
+                        <div class="address">工作地点：{{item.workplace}}</div>
+                    </section>
+                    <footer v-if="item.orderResponses">
+                        <div class="textWrap">
+                            <div>报名人数：{{resultResponse.responseCount}}人&nbsp;&nbsp;已选{{resultResponse.selectedCount}}人，剩余{{resultResponse.restCount}}人可选</div>
+                            <div class="mark">报名者，请获取一个人的联系方式</div>
+                        </div>
+                        <ul class="userList">
+                            <li class="clearfix" v-for="(subIndex,subItem) in item.orderResponses">
+                                <div class="nameWrap" @click="getMobile(item, subItem, index, subIndex)">
+                                    <i class="ico ico-xuan" :class="{'cur': subItem.is_checked == 1}"></i>
+                                    <span class="name">{{subItem.nickname}}</span>
+                                </div>
+                                <div class="commit">
+                                    <a v-if="subItem.is_checked == 1" href="tel:{{subItem.mobile}}" class="ico ico-dianhua3"></a>
+                                    <span>评价</span>
+                                </div>
+                            </li>
+                        </ul>
 
-                </footer>
-            </div>
+                    </footer>
+                </div>
+            </pull-refresh>
         </div>
     </div>
+    <confirm :show.sync="isShowConfirm" @on-confirm="confirm">
+        <div class="page-scene-orderSuccess-formWrap">
+            是否要获取{{confirmName}}的联系方式？
+        </div>
+    </confirm>
 </template>
 
 <script>
@@ -205,9 +232,11 @@ export default {
 			title: '发单任务',
             indexData: indexData,
 			userInfo: {},
-			formData: {},
+			formData: [],
 			currentPage: 0,
 			tag: 1,
+            isShowConfirm: false,
+            confirmData:{},
             statusText:['报名中','报名结束','报名成功','被拒绝','过期']
 		}
 	},
@@ -217,30 +246,75 @@ export default {
 				query    = transition.to.query;
 
 			$.extend(self.formData, query);
-
-
 		}
 	},
+    watch:{
+        tag(){
+            let self = this;
+            self.formData = [];
+            self.getData(1);
+        }
+    },
 	methods:{
-		getList(tag){
-			let self = this;
-            self.tag = tag;
-			$.ajax({
-				url: "/soytime/order/demandList",
-				type:'POST',
-				dataType: 'json',
-				data: {
-					tag: self.tag,
-					currentPage: self.currentPage
-				},
-				success: ((data)=>{
-					self.formData = data.result;
-				})
-			});
-		}
+        setTag(tag){
+            this.tag = tag;
+		},
+        getData(index, callback){
+            let self = this;
+            $.ajax({
+                url: "/soytime/order/demandList",
+                type:'POST',
+                data:{
+                    tag: self.tag,
+                    currentPage: index
+                },
+                dataType: 'json',
+                success: ((data)=>{
+                    let arr = data.result,
+                        len = arr.length;
+                    for(let i = 0; i<len; i++){
+                        self.formData.push(arr[i]);
+                    }
+                    callback && callback();
+                })
+            });
+        },
+        confirm(){
+            let self = this;
+            self.isShowConfirm = false;
+            $.ajax({
+                url: "/soytime/order/getStuMobile",
+                type:'POST',
+                data:{
+                    type: self.confirmData.order_type,
+                    order_id: self.confirmData.order_id,
+                    stu_id: self.confirmData.stu_id
+                },
+                dataType: 'json',
+                success: ((data)=>{
+                    //self.formData[self.confirmData.index].resultResponse.restCount = data.remainCount;
+                    let orderResponses = self.formData[self.confirmData.index].orderResponses[self.confirmData.subIndex];
+                    orderResponses.mobile = data.result.mobile;
+                    orderResponses.is_checked = 1;
+                })
+            });
+        },
+        getMobile(item, subItem, index, subIndex){
+            let self = this;
+            self.isShowConfirm = true;
+            self.confirmName   = subItem.nickname;
+            self.confirmData   = {
+                item: item,
+                subItem: subItem,
+                index: index,
+                subIndex: subIndex
+            }
+        }
 	},
 	components: {
-		'headerBar': require('../../../components/header.vue')
+		'headerBar': require('../../../components/header.vue'),
+        'pullRefresh': require('../../../components/pullRefresh.vue'),
+        'confirm': require('../../../components/confirm')
 	}
 }
 </script>

@@ -72,31 +72,24 @@
             .rem(padding, 0, 30);
         }
         
-        ul{
+        .pull-refresh{
             .rem(margin, 0, 30);
             color:#888;
         }
         
-        li{
+        .item{
             border-bottom:2px solid #dedede;
             .rem(border-bottom-width, 2);
             .rem(padding, 15, 0);
-        }
-        
-        footer{
-            color:#b2b2b2;
-            text-align:center;
-            .rem(padding, 30);
-            .rem(font-size, 24);            
         }
     }
 }
 </style>
 
 <template>
-    <div class="page-user page-user-money" transition="page">
+    <div class="page-user page-user-money pullRreshwrap" transition="page">
         <header-bar :title="title" back="true"></header-bar>
-        <div class="content showHeaderNopading infinite-scroll infinite-scroll-bottom" data-distance="100">
+        <div class="content showHeaderNopading">
             <div class="moneyHeader">
                 <header>
                     <span><i>账户余额</i>{{formData.balance}}</span>
@@ -109,18 +102,13 @@
             </div>
             <div class="moneyList">
                 <header>交易记录</header>
-                <ul>
-                    <li class="clearfix" v-for="tradeRecord in formData.tradeRecord">
+                <pull-refresh @on-scroll-lodding="getData">
+                    <li class="item clearfix" v-for="tradeRecord in formData.tradeRecord">
                         {{typeText[ tradeRecord.type - 1]}}
                         {{tradeRecord.create_time}}
                         {{tradeRecord.amount}}元
                     </li>
-                </ul>
-                <footer @click="geMore">点击更多...</footer>
-                <!-- 加载提示符 -->
-                <div class="infinite-scroll-preloader">
-                    <div class="preloader"></div>
-                </div>
+                </pull-refresh>
             </div>
         </div>
     </div>
@@ -155,40 +143,34 @@ export default {
                     $.toast('网络不给力，请重新尝试！');
                 }
             });
-            
-            self.getTradeRecord();
-            
-            $(document).on('infinite', '.infinite-scroll-bottom',function() {
-                console.log(222)
-            });
-			
+
 		}
 	},
     methods:{
-        getTradeRecord(){
+        getData(index, callback){
             let self = this;
             $.ajax({
                 url: "/soytime/account/tradeRecord",
                 type:'POST',
                 data:{
-                    currentPage:self.currentPage
+                    currentPage: index
                 },
                 dataType: 'json',
-                success: (data)=>{
-                    self.formData.tradeRecord = data.result;
-                },
-                error: ()=>{
-                    $.toast('网络不给力，请重新尝试！');
-                }
+                success: ((data)=>{
+                    let arr = data.result,
+                            len = arr.length;
+                    for(let i = 0; i<len; i++){
+                        self.formData.tradeRecord.push(arr[i]);
+                    }
+                    //self.formData = self.formData.concat(data.result);
+                    callback && callback();
+                })
             });
-        },
-        getMore(){
-            self.currentPage ++;
-            self.getTradeRecord();
         }
     },
 	components: {
         'headerBar': require('../../components/header.vue'),
+        'pullRefresh': require('../../components/pullRefresh.vue')
 	}
 }
 </script>

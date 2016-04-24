@@ -226,7 +226,7 @@ export default {
                             self.$route.router.go('/auth/checking');
                                 return;
                         }else if( status == 3 ){
-                            $.alert(result.explain,'认证失败');
+                            //$.alert(result.explain,'认证失败');
                         }
 
                         $.extend(self.formData, result);

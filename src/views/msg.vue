@@ -62,7 +62,7 @@
             
             .photoWrap{
                 .rem(left, 20);
-                .rem(top, 40);
+                .rem(top, 5);
             }
             
             .textWrap{
@@ -87,9 +87,20 @@
             .rem(margin, 0, 20);
             .rem(padding, 20, 0);
             .rem(font-size, 30);
-            .unit{}
-            .time{}
-            .position{}
+
+            .unit{
+                color:#ff946e;
+            }
+            .time{
+                span{
+                    color:#b2b2b2;
+                }
+            }
+            .position{
+                span{
+                    color:#b2b2b2;
+                }
+            }
         }
         
         .tag{
@@ -101,8 +112,9 @@
             transform:rotate(-30deg);
             -webkit-transform:rotate(-30deg);
             .border-radius(8);
-            .rem(padding, 10, 20);
+            .rem(padding, 5, 20);
             .rem(font-size, 24);
+            z-index:1;
             
             &.over{
                 background:#b2b2b2
@@ -159,7 +171,11 @@
         </ul>
         <div class="content showHeader showTab showFooter">
         
-            <div class="item order" v-if="isOrder" v-for="order in formData.order" v-link="{name: 'msgOrder'}">
+            <div class="item order"
+                 v-if="isOrder"
+                 v-for="order in formData.order"
+                 v-link="{name: 'userWorkAcceptDetail', query:{order_id:order.order_id} }"
+            >
                 <div class="timeout" v-if="order.status == 3"></div>
                 <span class="tag">{{order.scene_name}}</span>
                 <header class="clearfix">
@@ -177,7 +193,7 @@
                     </div>
                 </header>
                 <footer>
-                    <div class="unit">报酬：{{order.unit}}</div>
+                    <div class="unit">报酬：<span>{{order.unit}}</span></div>
                     <div class="time">时间：<span>{{order.start_time}}  {{order.end_time}}</span></div>
                     <div class="position">任务位置：<span>{{order.workplace}}</span></div>
                 </footer>
@@ -233,7 +249,7 @@ export default {
             });
         },
         deactivate(){
-            this.isOrder = false;
+            this.isOrder = true;
         }
     },
     ready(){
@@ -252,7 +268,7 @@ export default {
                     self.$route.router.go({name: 'msgComment', query: {id: id}});
                     break;
                 case 2:
-                    self.$route.router.go({name: 'msgOrder', query: {id: id}});
+                    self.$route.router.go({name: 'userWorkAcceptDetail', query: {order_id: id}});
                     break;
                 case 3:
                     self.$route.router.go({name: 'msgSystem', query: {id: id}});

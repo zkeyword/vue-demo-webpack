@@ -140,11 +140,11 @@
                 }
 
                 let mobile = $('#mobile').val(),
-                        code   = $('#code').val(),
-                        obj    = {
-                            mobile: mobile,
-                            code: code
-                        };
+                    code   = $('#code').val(),
+                    obj    = {
+                        mobile: mobile,
+                        code: code
+                    };
 
                 if( !/1[34578]{1}\d{9}$/.test(mobile) || !code ){
                     self.isDisable = false;

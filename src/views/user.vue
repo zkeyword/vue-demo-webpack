@@ -16,7 +16,6 @@
             .border-radius(8);
             .rem(padding, 20);
             .userWrap{
-                .rem(width, 420);
                 .photoWrap{
                     .rem(width, 120);
                     .rem(height, 120);
@@ -28,7 +27,8 @@
 					}
                 }
                 .nameWrap{
-                    .rem(width, 280);
+                    .rem(width, 320);
+                    .rem(padding-left, 20);
                     .name{
                         .rem(font-size, 30);
                     }
@@ -78,7 +78,7 @@
                     <div class="pull-left photoWrap">
                         <img :src="formData.head_img_url">
                     </div>
-                    <div class="pull-right nameWrap">
+                    <div class="pull-left nameWrap">
                         <div class="name">{{formData.nickname}}</div>
                         <div 
                             class="auth clearfix"

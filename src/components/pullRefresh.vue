@@ -25,22 +25,23 @@
             let self = this;
             self.load();
             document.addEventListener("scroll", function(){
-                if( !self.scroll ) return;
                 self.getScrollData();
             });
 //            document.addEventListener("touchmove", function(){
-//                if( !self.scroll ) return;
 //                self.getScrollData();
 //            });
         },
         methods:{
             getScrollData (){
-                let self       = this,
-                    wrapHeight = $('.pull-refresh').height(),
-                    lodingTop  = $('.pull-lodding').offsetTop
-                let totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
-                if ($(document).height() <= totalheight + 100) {
-                //if( wrapHeight > lodingTop + 200 ){
+                let self = this,
+                    docH = parseFloat($(document).height()),
+                    winH = parseFloat($(window).height()),
+                    winT = parseFloat($(window).scrollTop());
+
+                //console.log( docH, winH, winT )
+
+                if ( docH <= winH + winT ) {
+                    if( !self.scroll ) return;
                     self.scroll = false;
                     self.index ++;
                     self.load();
@@ -57,6 +58,27 @@
 </script>
 
 <style lang="less">
+    .pullRreshwrap{
+        position: relative !important;
+        .content{
+            position: relative !important;
+        }
+        .bar{
+            position: fixed;
+        }
+        .filter{
+            position: fixed !important;
+        }
+        .scenefilter{
+            position: fixed;
+        }
+        .content{
+            position:relative;
+        }
+        .ui-btn-big{
+            position: fixed;
+        }
+    }
     .pull-lodding{
         width: 1rem;
         height: 1rem;

@@ -123,21 +123,6 @@
         }
     }
 }
-.pullRreshwrap{
-    position: relative !important;
-    .bar{
-        position: fixed;
-    }
-    .scenefilter{
-        position: fixed;
-    }
-    .content{
-        position:relative;
-    }
-    .ui-btn-big{
-        position: fixed;
-    }
-}
     
 </style>
 

@@ -61,6 +61,10 @@ export default (router)=>{
 			name: 'sceneOrderSuccess',
 			component: require('./views/scene/orderSuccess')
 		},
+		'/scene/address': {
+			name: 'sceneAddress',
+			component: require('./views/scene/address')
+		},
         
         /* 用户部分 */
 	    '/user': {
@@ -95,7 +99,15 @@ export default (router)=>{
 			name: 'userWorkAcceptDetail',
 			component: require('./views/user/work/acceptDetail')
 		},
-        
+		'/user/work/acceptAppraise': {
+			name: 'userWorkAcceptAppraise',
+			component: require('./views/user/work/acceptAppraise')
+		},
+		'/user/work/acceptBus': {
+			name: 'userWorkAcceptBus',
+			component: require('./views/user/work/acceptBus')
+		},
+
         /* 客服 */
         '/service/': {
 	    	name: 'service',

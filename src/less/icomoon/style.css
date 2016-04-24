@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'icomoon';
     src:
-        url('fonts/icomoon.ttf?lmnqm') format('truetype'),
-        url('fonts/icomoon.woff?lmnqm') format('woff'),
-        url('fonts/icomoon.svg?lmnqm#icomoon') format('svg');
+        url('fonts/icomoon.ttf?epwova') format('truetype'),
+        url('fonts/icomoon.woff?epwova') format('woff'),
+        url('fonts/icomoon.svg?epwova#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,128 +23,131 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.ico-close3:before {
-    content: "\e901";
-}
-.ico-aixin-copy:before {
+.ico-shanchu:before {
     content: "\e900";
 }
-.ico-aixin:before {
+.ico-aixin-copy:before {
+    content: "\e901";
+}
+.ico-close3:before {
     content: "\e902";
 }
-.ico-anonymous:before {
+.ico-aixin:before {
     content: "\e903";
 }
-.ico-anonymous2:before {
+.ico-anonymous:before {
     content: "\e904";
 }
-.ico-anquanbaozhang:before {
+.ico-anonymous2:before {
     content: "\e905";
 }
-.ico-close:before {
+.ico-anquanbaozhang:before {
     content: "\e906";
 }
-.ico-close2:before {
+.ico-close:before {
     content: "\e907";
 }
-.ico-cry:before {
+.ico-close2:before {
     content: "\e908";
 }
-.ico-dianhua:before {
+.ico-cry:before {
     content: "\e909";
 }
-.ico-dianhua3:before {
+.ico-dianhua:before {
     content: "\e90a";
 }
-.ico-down:before {
+.ico-dianhua3:before {
     content: "\e90b";
 }
-.ico-home1:before {
+.ico-down:before {
     content: "\e90c";
 }
-.ico-university:before {
+.ico-home1:before {
     content: "\e90d";
 }
-.ico-traffic:before {
+.ico-university:before {
     content: "\e90e";
 }
-.ico-women:before {
+.ico-traffic:before {
     content: "\e90f";
 }
-.ico-service:before {
+.ico-women:before {
     content: "\e910";
 }
-.ico-bus:before {
+.ico-service:before {
     content: "\e911";
 }
-.ico-bofang:before {
+.ico-bus:before {
     content: "\e912";
 }
-.ico-dianhua2:before {
+.ico-bofang:before {
     content: "\e913";
 }
-.ico-ditu:before {
+.ico-dianhua2:before {
     content: "\e914";
 }
-.ico-dizhi:before {
+.ico-ditu:before {
     content: "\e915";
 }
-.ico-calendar:before {
+.ico-dizhi:before {
     content: "\e916";
 }
-.ico-everyone:before {
+.ico-calendar:before {
     content: "\e917";
 }
-.ico-open:before {
+.ico-everyone:before {
     content: "\e918";
 }
-.ico-left:before {
+.ico-open:before {
     content: "\e919";
 }
-.ico-renzheng:before {
+.ico-left:before {
     content: "\e91a";
 }
-.ico-money:before {
+.ico-renzheng:before {
     content: "\e91b";
 }
-.ico-time:before {
+.ico-money:before {
     content: "\e91c";
 }
-.ico-search:before {
+.ico-time:before {
     content: "\e91d";
 }
-.ico-wudao:before {
+.ico-search:before {
     content: "\e91e";
 }
-.ico-zuobiao:before {
+.ico-wudao:before {
     content: "\e91f";
 }
-.ico-jiantouyou:before {
+.ico-zuobiao:before {
     content: "\e920";
 }
-.ico-kulian:before {
+.ico-jiantouyou:before {
     content: "\e921";
 }
-.ico-liuyan:before {
+.ico-kulian:before {
     content: "\e922";
 }
-.ico-shouye:before {
+.ico-liuyan:before {
     content: "\e923";
 }
-.ico-up:before {
+.ico-shouye:before {
     content: "\e924";
 }
-.ico-wode:before {
+.ico-up:before {
     content: "\e925";
 }
-.ico-xiaolaba:before {
+.ico-wode:before {
     content: "\e926";
 }
-.ico-xiaolian:before {
+.ico-xiaolaba:before {
     content: "\e927";
 }
-.ico-xiaoxi:before {
+.ico-xiaolian:before {
     content: "\e928";
+}
+.ico-xiaoxi:before {
+    content: "\e929";
 }
 .ico-xingbienan:before {
     content: "\e92a";

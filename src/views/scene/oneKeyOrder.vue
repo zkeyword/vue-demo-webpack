@@ -229,11 +229,11 @@
             <div class="block clearfix">
                 <div class="item clearfix">
                     <span>公司地址</span>
-                    <input type="text" placeholder="请填写详细地址">
+                    <input type="text" placeholder="请填写详细地址" v-model="formData.comp_addr" @click="setAddress(0)">
                 </div>
                 <div class="clearfix">
                     <span>服务位置</span>
-                    <input type="text" placeholder="请输入准确位置">
+                    <input type="text" placeholder="请输入准确位置" v-model="formData.workplace" @click="setAddress(1)">
                 </div>
             </div>
 
@@ -425,6 +425,12 @@ export default {
             }else{
                 self.formData.auto_select = 1;
             }
+        },
+        setAddress(type){
+            let self = this;
+            self.formData.type     = type;
+            self.formData.pageType = 0;
+            self.$route.router.go({name: 'sceneAddress', query: self.formData});
         },
         save(){
             let self = this;
