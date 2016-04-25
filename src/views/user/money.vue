@@ -143,9 +143,12 @@ export default {
                     $.toast('网络不给力，请重新尝试！');
                 }
             });
-
-		}
-	},
+		},
+        deactivate(){
+            let self = this;
+            self.formData.tradeRecord = [];
+        }
+    },
     methods:{
         getData(index, callback){
             let self = this;
@@ -158,7 +161,7 @@ export default {
                 dataType: 'json',
                 success: ((data)=>{
                     let arr = data.result,
-                            len = arr.length;
+                        len = arr.length;
                     for(let i = 0; i<len; i++){
                         self.formData.tradeRecord.push(arr[i]);
                     }

@@ -27,7 +27,7 @@
 					}
                 }
                 .nameWrap{
-                    .rem(width, 320);
+                    .rem(width, 360);
                     .rem(padding-left, 20);
                     .name{
                         .rem(font-size, 30);
@@ -50,6 +50,7 @@
                 li{
                     float:left;
                     width:25%;
+                    text-align:center;
                     .rem(font-size, 30);
                     .rem(line-height, 30);
                     em{
@@ -58,8 +59,20 @@
                     span{
                         .rem(margin, 0, 8);
                     }
-                    i{
-                        
+                    .ico{
+                        .rem(font-size, 40);
+                    }
+                    .ico-xiaolian{
+                        color:#eb503a;
+                    }
+                    .ico-cry{
+                        color:#5e5e5e;
+                    }
+                    .ico-kulian{
+                        color:#b2b2b2;
+                    }
+                    .ico-aixin{
+                        color: #ff946e;
                     }
                 }
             }
@@ -107,24 +120,32 @@
                 </div>
                 <ul class="userScore clearfix">
                     <li>
-                        <i class="icon icon-xiaolian pull-left"></i>
-                        <span class="pull-left">好评</span>
-                        <em class="pull-left">{{formData.goodCount}}</em>
+                        <i class="ico ico-xiaolian"></i>
+                        <div class="clearfix">
+                            <span class="pull-left">好评</span>
+                            <em class="pull-left">{{formData.goodCount}}</em>
+                        </div>
                     </li>
                     <li>
-                        <i class="icon icon-cry pull-left"></i>
-                        <span class="pull-left">中评</span>
-                        <em class="pull-left">{{formData.cenCount}}</em>
+                        <i class="ico ico-cry"></i>
+                        <div class="clearfix">
+                            <span class="pull-left">中评</span>
+                            <em class="pull-left">{{formData.cenCount}}</em>
+                        </div>
                     </li>
                     <li>
-                        <i class="icon icon-kulian pull-left"></i>
-                        <span class="pull-left">差评</span>
-                        <em class="pull-left">{{formData.poolCount}}</em>
+                        <i class="ico ico-kulian"></i>
+                        <div class="clearfix">
+                            <span class="pull-left">差评</span>
+                            <em class="pull-left">{{formData.poolCount}}</em>
+                        </div>
                     </li>
                     <li>
-                        <i class="icon icon-aixin pull-left"></i>
-                        <span class="pull-left">收藏</span>
-                        <em class="pull-left">{{formData.collectCount}}</em>
+                        <i class="ico ico-aixin"></i>
+                        <div class="clearfix">
+                            <span class="pull-left">收藏</span>
+                            <em class="pull-left">{{formData.collectCount}}</em>
+                        </div>
                     </li>
                 </ul>
             </div>

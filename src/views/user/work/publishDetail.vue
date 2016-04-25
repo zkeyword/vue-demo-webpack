@@ -156,10 +156,10 @@
                     <i class="ico ico-dianhua pull-right"></i>
                 </header>
                 <section>
-                    辅导孩子完成家庭作业，并且进行课外辅导！让孩子在理解能力跟读题能力有所提高！
+                    {{item.skill_detail}}
                 </section>
                 <footer class="clearfix">
-                    <span class="no">拒绝</span>
+                    <span class="no" v-if="item.status">拒绝</span>
                     <span class="yes">约TA</span>
                     <span class="pass">已约</span>
                 </footer>

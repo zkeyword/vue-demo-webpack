@@ -115,7 +115,7 @@
             <div class="subHeader">需求人数2人</div>
             <span class="jump">跳过</span>
             <div class="imgWrap">
-                <img src="/dist/img/orderSucess.png">
+                <img src="../../img/orderSucess.png">
             </div>
             <div class="userList">
                 <div class="text">
@@ -126,7 +126,7 @@
                     <header>剩余选择人数：2人</header>
                     <div class="item clearfix">
                         <span class="ico ico-xuan"></span>
-                        <span class="img"><img src="/dist/img/orderSucess.png" alt=""></span>
+                        <span class="img"><img src="../../img/orderSucess.png" alt=""></span>
                         <span class="name">林小兔</span>
                         <span class="ico ico-dianhua3" @click="getPhone(formData.name)"></span>
                     </div>
@@ -146,7 +146,7 @@
             </div>
             -->
         </div>
-        <span class="showOrderDetail">
+        <span class="showOrderDetail" v-link="{name: 'userWorkPublishDetail', query:formData }">
             查看订单详情
         </span>
     </div>
@@ -162,12 +162,9 @@
     export default {
         data(){
         return {
-            title: null,
             isShowConfirm: false,
             confirmName: '',
-            formData: {
-                name: 'xxx'
-            }
+            formData: {}
         }
     },
     route:{
@@ -175,11 +172,8 @@
             let self  = this,
                 query = transition.to.query;
 
-            self.title = query.scene_name;
+            $.extend(self.formData, query);
         }
-    },
-    ready: function () {
-
     },
     methods:{
         confirm(){

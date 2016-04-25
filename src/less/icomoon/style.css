@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'icomoon';
     src:
-        url('fonts/icomoon.ttf?epwova') format('truetype'),
-        url('fonts/icomoon.woff?epwova') format('woff'),
-        url('fonts/icomoon.svg?epwova#icomoon') format('svg');
+        url('fonts/icomoon.ttf?qwx6i5') format('truetype'),
+        url('fonts/icomoon.woff?qwx6i5') format('woff'),
+        url('fonts/icomoon.svg?qwx6i5#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,46 +23,46 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.ico-shanchu:before {
+.ico-save:before {
     content: "\e900";
 }
-.ico-aixin-copy:before {
+.ico-shanchu:before {
     content: "\e901";
 }
-.ico-close3:before {
+.ico-aixin-copy:before {
     content: "\e902";
 }
-.ico-aixin:before {
+.ico-close3:before {
     content: "\e903";
 }
-.ico-anonymous:before {
+.ico-aixin:before {
     content: "\e904";
 }
-.ico-anonymous2:before {
+.ico-anonymous:before {
     content: "\e905";
 }
-.ico-anquanbaozhang:before {
+.ico-anonymous2:before {
     content: "\e906";
 }
-.ico-close:before {
+.ico-anquanbaozhang:before {
     content: "\e907";
 }
-.ico-close2:before {
+.ico-close:before {
     content: "\e908";
 }
-.ico-cry:before {
+.ico-close2:before {
     content: "\e909";
 }
-.ico-dianhua:before {
+.ico-cry:before {
     content: "\e90a";
 }
-.ico-dianhua3:before {
+.ico-dianhua:before {
     content: "\e90b";
 }
-.ico-down:before {
+.ico-dianhua3:before {
     content: "\e90c";
 }
-.ico-home1:before {
+.ico-down:before {
     content: "\e90d";
 }
 .ico-university:before {

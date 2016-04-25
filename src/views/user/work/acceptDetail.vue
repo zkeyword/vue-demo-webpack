@@ -280,8 +280,8 @@
         <footer class="footer">
             <span class="text">报名可领取红包哦!!!</span>
             <ul class="clearfix">
-                <li class="btn no"><span>拒绝</span></li>
-                <li class="btn yes"><span>报名</span></li>
+                <li class="btn no" @click="back"><span>拒绝</span></li>
+                <li class="btn yes" @click="save"><span>报名</span></li>
             </ul>
         </footer>
     </div>
@@ -322,7 +322,21 @@
             }
         },
         methods:{
+            save(){
+                let self = this;
+                $.ajax({
+                    url: "/soytime/order/agreeOrder",
+                    type:'POST',
+                    data:self.formData,
+                    dataType: 'json',
+                    success: ((data)=>{
 
+                    })
+                });
+            },
+            back(){
+                self.$route.router.go({name: 'userWorkAccept'});
+            }
         },
         components: {
             'headerBar': require('../../../components/header.vue')

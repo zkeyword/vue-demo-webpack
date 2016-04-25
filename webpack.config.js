@@ -27,18 +27,20 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue'
             },
+            /*
             {
                 //剥离图片
                 test: /\.(woff|woff2|eot|ttf|svg|png|jpg|gif)(\?.*$|$)/,  
                 exclude: '/\/dist/',
 				loader: 'file-loader?name=img/[hash:8].[name].[ext]' + version
 			}
-            /*
+            ,*/
             { 
-                test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/,  
+                test: /\.(woff|woff2|eot|ttf|svg|png|jpg|gif)(\?.*$|$)/,
                 exclude: '/\/dist/',
 				loader: 'url-loader?name=img/[hash:8].[name].[ext]' + version
-            },
+            }
+            /*
 			{
                 //剥离图片
 				test: /\.png$|\.jpg$|\.gif$/, 

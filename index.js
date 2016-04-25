@@ -145,7 +145,7 @@ app.post('/soytime/account/saveSetInfo', function (req, res) {
 });
 
 /* 个人服务信息 */
-app.post('/soytime/skill/myInfo', function name(req, res) {
+app.post('/soytime/server/myInfo', function name(req, res) {
     var Random = Mock.Random,
 		data   = Mock.mock({
             success: '1',
@@ -154,7 +154,7 @@ app.post('/soytime/skill/myInfo', function name(req, res) {
                 usernick: '@cname',
                 sceneIds: '@cname',
                 detail: '@cname',
-                skillImgs:
+                serverImgs:
                 {
                     id: '@cname',
                     img_url: Random.image('160x160')
@@ -170,7 +170,7 @@ app.post('/soytime/skill/myInfo', function name(req, res) {
 });
 
 /* 发布个人服务信息 */
-app.post('/soytime/skill/saveInfo', function (req, res) {
+app.post('/soytime/server/saveInfo', function (req, res) {
 	var Random = Mock.Random,
 		data   = Mock.mock({
             success: '1',
@@ -371,7 +371,7 @@ app.post('/soytime/server/list', function (req, res) {
                     school_name: '@cname',
                     head_img_url: Random.image('160x160'),
                     detail: '@cname',
-                    'skillImgs|3':
+                    'serverImgs|3':
                     [{
                         img_url:  Random.image('160x160')
                     }],
@@ -398,7 +398,7 @@ app.post('/soytime/server/stuInfo', function (req, res) {
                 school_name: '@cname',
                 sceneIds: '200001-200002-200003',
                 detail: '@cname',
-                'skillImgs|3':
+                'serverImgs|3':
                 [{
                     img_url:  Random.image('160x160')
                 }],

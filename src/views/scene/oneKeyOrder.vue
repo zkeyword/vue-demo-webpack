@@ -247,6 +247,7 @@
             </div>
         </div>
         <actionsheet :show.sync="isShow" :menus="actionsheet" @menu-click="setPayWay"></actionsheet>
+        <alert :show.sync="showAlert" title="null">提交失败!</alert>
         <span
             class="ui-btn ui-btn-big"
             @click="save"
@@ -307,6 +308,7 @@ export default {
                 }
             ],
             isShow: false,
+            showAlert: false,
             actionsheet: {
                 menu1: '酱油支付平台',
                 menu2: '现金支付',
@@ -436,12 +438,16 @@ export default {
             let self = this;
 
             $.ajax({
-                url: "/soytime/order/inviteOrder",
+                url: "/soytime/order/oneKeyOrder",
                 type:'POST',
                 dataType: 'json',
                 data:self.formData,
                 success: (data)=>{
-					self.$route.router.go({name: 'sceneOrderSuccess', query: data.result.order_id});
+                    if( !data.success ){
+                        self.showAlert = true;
+                    }else{
+                        self.$route.router.go({name: 'sceneOrderSuccess', query: {order_id: data.result.order_id}});
+                    }
                 }
             });
         }
@@ -450,7 +456,8 @@ export default {
         'headerBar': require('../../components/header.vue'),
         'sceneType': require('../../components/sceneType.vue'),
         'welfares': require('../../components/welfares.vue'),
-        'actionsheet': require('../../components/actionsheet')
+        'actionsheet': require('../../components/actionsheet'),
+        'alert': require('../../components/alert')
     }
 }
 </script>

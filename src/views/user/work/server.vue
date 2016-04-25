@@ -117,10 +117,10 @@
             <div class="block">
                 <div class="header">上传照片</div>
                 <ul class="clearfix">
-                    <li class="skillImgs" v-for="item in skillImgs">
+                    <li class="serverImgs" v-for="item in serverImgs">
                         <img :src="item.img_url" />
                     </li>
-                    <li v-if="skillImgs.length >= 3">
+                    <li v-if="serverImgs.length >= 3">
                         增加照片
                     </li>
                 </ul>
@@ -158,7 +158,7 @@ export default {
     ready(){
         let self = this;
         $.ajax({
-            url: "/soytime/skill/myInfo",
+            url: "/soytime/server/myInfo",
             type:'POST',
             dataType: 'json',
             success: ((data)=>{

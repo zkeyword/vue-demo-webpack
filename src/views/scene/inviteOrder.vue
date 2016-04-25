@@ -207,6 +207,7 @@
             </div>
 
         </div>
+        <alert :show.sync="showAlert" title="null">提交失败!</alert>
         <span
             class="ui-btn ui-btn-big"
             @click="save"
@@ -256,6 +257,7 @@
 				unitTextArr:['时','日','周','月','次'],
 				payTextArr:['酱油平台支付','现金支付','线上支付'],
 				isShow: false,
+                showAlert: false,
 				actionsheet: {
 					menu1: '酱油支付平台',
 					menu2: '现金支付',
@@ -371,14 +373,19 @@
 					dataType: 'json',
 					data:self.formData,
 					success: (data)=>{
-						self.$route.router.go({name: 'sceneOrderSuccess', query: data.result.order_id});
+                        if( !data.success ){
+                            self.showAlert = true;
+                        }else{
+                            self.$route.router.go({name: 'sceneOrderSuccess', query: {order_id: data.result.order_id}});
+                        }
 					}
 				});
 			}
 		},
 		components: {
 			'headerBar': require('../../components/header.vue'),
-			'actionsheet': require('../../components/actionsheet')
+			'actionsheet': require('../../components/actionsheet'),
+            'alert': require('../../components/alert')
 		}
     }
 </script>

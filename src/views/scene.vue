@@ -1,50 +1,146 @@
 <style lang="less">
 @import '../less/lib/mixins.less';
+.page-scene{
 
-#header {
-	position: absolute;
-	z-index: 2;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 45px;
-	line-height: 45px;
-	background: #CD235C;
-	padding: 0;
-	color: #eee;
-	font-size: 20px;
-	text-align: center;
-	font-weight: bold;
-}
+    height:100%;
+    
+    .scenefilter{
+        position: absolute;
+        left: 0;
+        top: 2.2rem;
+        z-index: 10;
+        height: 2.2rem;
+        background:#fff;
+        width:100%;
+        border-bottom:2px solid #b2b2b2;
+        .rem(border-bottom-width, 2);
+        
+        li{
+            width:33.333%;
+            float:left;
+            text-align:center;
+            line-height:1.4rem;
+            margin:0.4rem 0;
+            .rem(font-size, 30);
+            &:first-child{
+                 border-right:2px solid #b2b2b2;
+                .rem(border-right-width, 2);
+            }
+            &:last-child{
+                 border-left:2px solid #b2b2b2;
+                .rem(border-left-width, 2);
+            }
+            .icon{
+                .rem(margin-left, 10);
+            }
+        }
+    }
+    
+    .scenefilterList{
+        position:absolute;
+        top:4.4rem;
+        z-index: 11;
+        height:100%;
+        width:100%;
+        
+        .content{
+            width:100%;
+            height:100%;
+            padding-bottom:4.4rem;
+            background:#fff;
+        }
+    }
 
-#footer {
-	position: absolute;
-	z-index: 2;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 48px;
-	background: #444;
-	padding: 0;
-	border-top: 1px solid #444;
+    .item{
+        background:#fff;
+        .border-radius(8);
+        .rem(margin-bottom, 20);
+        
+        header{
+            border-bottom:2px solid #dedede;
+            .rem(border-bottom-width, 2);
+            .rem(padding, 20);
+            .rem(font-size, 30);
+            
+            .photoWrap{
+                .rem(margin-right, 20);
+                .rem(width, 90);
+                .rem(height, 90);
+                .border-radius(90);
+                img{
+                    width:100%;
+                    height:100%;
+                    .border-radius(120);
+                }
+            }
+            
+            .school{
+                .rem(font-size, 24);
+                color:#5e5e5e;
+            }
+            
+            .pull-right{
+                .rem(margin-top, 30);
+            }
+        }
+        
+        .main{
+            .rem(padding, 20);
+            
+            .text{
+                .rem(font-size, 30);
+                color:#5e5e5e;
+            }
+            
+            .img{
+                width:30%;
+                float:left;
+                
+                &:nth-child(2){
+                    margin:0 5%;    
+                }
+                
+                img{
+                    width:100%;
+                }
+            }
+        }
+        
+        .userScore{
+            border-top:2px solid #dedede;
+            .rem(border-top-width, 2);
+            .rem(font-size, 24);
+            color:#8e8e8e;
+            li{
+               width:33.33%;
+               float:left;
+               text-align:center;
+               .rem(padding, 10, 0);
+            }
+                em{
+                    font-style:normal;
+                    display:inline-block;
+                    .rem(padding, 0, 5);
+                }
+        }
+    }
 }
 
 #wrapper {
-	position: absolute;
-	z-index: 1;
-	top: 45px;
-	bottom: 48px;
-	left: 0;
-	width: 100%;
-	background: #ccc;
-	overflow: hidden;
+    padding-top: 5rem;
+    padding-bottom: 2.45rem;
+    width: 100%;
+    height:100%;
+    overflow: hidden;
 }
 
 #scroller {
-	position: absolute;
-	z-index: 1;
+    position: absolute;
+    z-index: 1;
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+    width:100%;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	width: 100%;
 	-webkit-transform: translateZ(0);
 	-moz-transform: translateZ(0);
 	-ms-transform: translateZ(0);
@@ -62,81 +158,82 @@
 	text-size-adjust: none;
 }
 
-#scroller ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	width: 100%;
-	text-align: left;
-	position: relative;
-}
-
-#scroller li {
-	padding: 0 10px;
-	height: 40px;
-	line-height: 40px;
-	border-bottom: 1px solid #ccc;
-	border-top: 1px solid #fff;
-	background-color: #fafafa;
-	font-size: 16px;
-}
     
 </style>
 
 <template>
-    <div id="header">iScroll</div>
+    <div transition="page" class="page-scene pullRreshwrap">
+        <header-bar :title="title" :back="true" target="home"></header-bar>
+        <ul class="scenefilter clearfix">
+            <li @click="filterSchool">
+                <span>学校<i class="icon icon-down" :class="{'icon-up':filterType == 1}"></i></span>
+            </li>
+            <li @click="filterSex">
+                <span>性别<i class="icon icon-down" :class="{'icon-up':filterType == 2}"></i></span>
+            </li>
+            <li @click="filterSort">
+                <span>排序<i class="icon icon-down" :class="{'icon-up':filterType == 3}"></i></span>
+            </li>
+        </ul>
 
-<div id="wrapper">
-	<div id="scroller">
-		<div class="item clearfix" v-for="item in dataList">
-			<header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': formData.scene_name, 'scene_id': formData.scene_id}}">
-				<div class="pull-left photoWrap">
-					<img :src="item.head_img_url">
-				</div>
-				<div class="pull-left nameWrap">
-					<div class="name">
-						<i class="icon"
-							:class="{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}"
-						></i>
-						{{item.nickname}}
-					</div>
-					<div class="school clearfix">
-						{{item.school_name}}
-					</div>
-				</div>
-				<i class="icon icon-jiantouyou pull-right"></i>
-			</header>
-			<div class="main">
-				<div class="text">{{item.detail}}</div>
-				<div class="imgWrap clearfix">
-					<div class="img" v-for="subItem in item.skillImgs">
-						<img :src="subItem.img_url">
-					</div>
-				</div>
-			</div>
-			<ul class="userScore clearfix">
-				<li>
-					<i class="icon icon-aixin-copy"></i>
-					<em>{{item.collectCount}}</em>
-				</li>
-				<li>
-					<i class="icon icon-liuyan"></i>
-					<em>{{item.appraiseCount}}</em>
-				</li>
-				<li>
-					<i class="icon icon-yanjing"></i>
-					<em>{{item.viewCount}}</em>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div>
+        <div id="wrapper">
+            <ul id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+                <li class="item clearfix" v-for="item in dataList">
+                    <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': formData.scene_name, 'scene_id': formData.scene_id}}">
+                        <div class="pull-left photoWrap">
+                            <img :src="item.head_img_url">
+                        </div>
+                        <div class="pull-left nameWrap">
+                            <div class="name">
+                                <i class="icon"
+                                   :class="{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}"
+                                ></i>
+                                {{item.nickname}}
+                            </div>
+                            <div class="school clearfix">
+                                {{item.school_name}}
+                            </div>
+                        </div>
+                        <i class="icon icon-jiantouyou pull-right"></i>
+                    </header>
+                    <div class="main">
+                        <div class="text">{{item.detail}}</div>
+                        <div class="imgWrap clearfix">
+                            <div class="img" v-for="subItem in item.serverImgs">
+                                <img :src="subItem.img_url">
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="userScore clearfix">
+                        <li>
+                            <i class="icon icon-aixin-copy"></i>
+                            <em>{{item.collectCount}}</em>
+                        </li>
+                        <li>
+                            <i class="icon icon-liuyan"></i>
+                            <em>{{item.appraiseCount}}</em>
+                        </li>
+                        <li>
+                            <i class="icon icon-yanjing"></i>
+                            <em>{{item.viewCount}}</em>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-<div id="footer"></div>
+        <span
+            class="ui-btn ui-btn-big"
+            v-link="{name:'sceneOneKeyOrder', query:formData}"
+        >
+            一键预约
+        </span>
+
+    </div>
 </template>
 
 <script>
-import IScroll from 'iscroll/build/iscroll'
+import IScroll from 'iscroll/build/iscroll-infinite';
 
 export default {
     data(){
@@ -144,6 +241,7 @@ export default {
             title: null,
             filterType: 0,
             isShowFilter: false,
+            busy: false,
             dataList: [],
             formData:{
 				scene_name: '',
@@ -168,22 +266,27 @@ export default {
         deactivate(){
 			let self = this;
 			self.formData.currentPage = 1;
+            self.dataList = [];
         }  
     },
 	ready(){
 		let self = this;
-		self.loadMore(function(){
-			var myScroll = new IScroll('#wrapper');
-			myScroll.refresh();
-			myScroll.on('scrollEnd', function(){
-				//console.log( this.directionY, this.y )
-				if( this.directionY ){
-					loadMore();
-				}
-			});
-			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-		});
-	},
+//		var myScroll = new IScroll('#wrapper',{
+//            mouseWheel: true,
+//            scrollbars: true,
+//			cacheSize: 1000
+//		});
+//		self.loadMore();
+//		myScroll.on('scrollEnd', function(){
+//			console.log( this.directionY, this.y )
+//			if( this.directionY >= 0 ){
+//				self.loadMore(()=>{
+//                    myScroll.refresh();
+//                });
+//			}
+//		});
+//        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    },
     methods:{
         showFilter(type){
             let self = this;

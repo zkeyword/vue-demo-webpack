@@ -235,7 +235,7 @@
 ###--------------------发布服务相关-----------------------
 ### 个人服务信息
 ###### 说明：
-##### 接口URL http://127.0.0.1/soytime/skill/myInfo
+##### 接口URL http://127.0.0.1/soytime/server/myInfo
 >请求方式：POST	</br>
 >请求参数：
 >返回格式：json	</br>
@@ -248,7 +248,7 @@
 			usernick		字符串			学生昵称
 			sceneIds    	字符串			选择的场景ID（eg:12-12-23）
 			detail			字符串			个人描述
-			skillImgs		数值			服务描述相关图片
+			serverImgs		数值			服务描述相关图片
 			{
 				id			整形			图片编号
 				img_url		字符串			图片地址
@@ -261,13 +261,13 @@
 
 ### 发布个人服务信息
 ###### 说明：
-##### 接口URL http://127.0.0.1/soytime/skill/saveInfo
+##### 接口URL http://127.0.0.1/soytime/server/saveInfo
 >请求方式：POST	</br>
 >请求参数：
 
 			sceneIds    	字符串			选择的场景ID（eg:12-12-23）
 			detail			字符串			个人描述
-			skillImgs		数值			服务描述相关图片
+			serverImgs		数值			服务描述相关图片
 			longitude		数值			精度
 			latitude		数值			维度
 			workplace		字符串			工作地址
@@ -307,7 +307,7 @@
 					school_name		字符串			学校名称
 					head_img_url	字符串			头像地址
 					detail			字符串			个人描述
-					skillImgs						服务描述相关图片
+					serverImgs						服务描述相关图片
 					{
 						img_url		字符串			图片地址
 					}
@@ -340,7 +340,7 @@
 			school_name		字符串			学习名称
 			sceneIds    	字符串			选择的场景ID（eg:12-12-23）
 			detail			字符串			个人描述
-			skillImgs		数值			服务描述相关图片
+			serverImgs		数值			服务描述相关图片
 			{
 				img_url		字符串			图片地址
 			}

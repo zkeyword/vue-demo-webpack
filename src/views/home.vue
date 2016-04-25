@@ -60,33 +60,12 @@
         }
 
         .sceneIcon{
-            .rem(background-size, 80, 80) !important;
             .rem(width,80);
             .rem(height,80);
             .rem(top, 50);
             .rem(left, 20);
+            .rem(font-size, 80);
             position:absolute;
-        }
-        .icon-home1{
-            background:url(../img/home1.svg) no-repeat;
-        }
-        .icon-home2{
-            background:url(../img/home2.svg) no-repeat;
-        }
-        .icon-home3{
-            //background:url(../img/home3.svg) no-repeat;
-        }
-        .icon-home4{
-            background:url(../img/home4.svg) no-repeat;
-        }
-        .icon-home5{
-            background:url(../img/home5.svg) no-repeat;
-        }
-        .icon-home6{
-            background:url(../img/home6.svg) no-repeat;
-        }
-        .icon-home7{
-            //background:url(../img/home7.svg) no-repeat;
         }
     }
 </style>
@@ -104,7 +83,7 @@
             <div class="sceneWrap">
                 <div class="sceneItem" :class="{'red': index % 4 == 2 || index % 4 == 1 }" v-for="(index, scene) in sceneList">
                     <a external v-link="{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name, city_id: cityId} }">
-                       <i class="icon sceneIcon icon-home{{scene.id}}"></i>
+                       <i class="ico sceneIcon {{icoArr[scene.id]}}"></i>
                        <span class="first">{{scene.scene_name}}</span>
                        <span class="last">{{scene.scene_detail}}</span>
                     </a>
@@ -121,7 +100,8 @@ export default {
             list: indexData.slides,
             systemMsg: indexData.systemMsg,
             sceneList: indexData.sceneList,
-			cityId: ''
+			cityId: '',
+            icoArr: ['ico-ditu', 'ico-university', 'ico-save', 'ico-traffic', 'ico-traffic', 'ico-women', 'ico-service', 'ico-wudao']
         };
     },
 	route:{

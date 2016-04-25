@@ -2,39 +2,117 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb5a3c40-63bc-4316-8064-fe84dcacff7b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/acceptDetail-detail.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/img/acceptDetail-header.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/toast/index.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/scene/address.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/user/work/acceptAppraise.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/views/user/work/acceptBus.vue" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/alert/index.vue" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/01d07357.yixuan.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/1.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/12.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/13.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/1981efe3.kulian.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/2165dfa7.xiaolaba.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/21a58403.home1.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/233bf640.icomoon.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/264f5c96.xingbienv.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/292082fa.home6.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/2a83ade9.up.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/2d966c8e.yanjing.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/2f06351a.icomoon.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/30302d35.icomoon.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/307f8e36.anquanbaozhang.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/343d1d00.icomoon.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/39ff6be2.acceptDetail-header.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/3b196795.yixuan2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/3cd300c1.xingbienv.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/3d6ab238.up.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/42779cea.xingbienan.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/4371bb9e.icomoon.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/45dd8680.xiaolaba.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/4669f192.xingbienan.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/4a11b33b.xingbienan2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/4c570353.home5.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/4dfb9e1a.anonymous2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/52672894.home2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/5d8f4016.home4.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/60d47024.liuyan.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/62813799.xiaolian.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/698ccc0c.anquanbaozhang2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/6f6c431d.home5.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/77a582dc.xingbienan2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/7cfb1304.aixin.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/80a8f6fa.icomoon.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/836f70ad.icomoon.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/85dacb32.xingbienv2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/89cb9cbe.mapImg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/8a6bb340.cry.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/9008c7b1.cry.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/925972fb.xuanzhong.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/93306638.icomoon.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/994a77a1.home1.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/a18e9eaf.yixuan.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/a1cdb076.yixuan2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/a557d062.liuyan.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/a6769de3.anonymous2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/aa2c7510.yanjing.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/aea09d4c.jiantouyou.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/b077e19f.icomoon.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/b210427f.anquanbaozhang.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/b2a22900.moneyBg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/b460e8a6.xiaolian.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/b818dd37.xuanzhong.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/bb2a13f1.aixin-copy.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/bcf9da95.home6.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/bef2f69c.acceptDetail-detail.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/c0eb732f.jiantouyou.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/c3172d71.icomoon.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/c346d4f6.down.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/c70ad1cb.icomoon.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/c79cdfef.mapImg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/c7f80e59.icomoon.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/c90d0706.down.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/d4d5b1d0.home2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/d615d32f.anquanbaozhang2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/dd87a5b3.sprite.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/de1265e6.icomoon.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/dee5a0c4.xingbienv2.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/e26dd789.kulian.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/ea4bd44a.serverDefault.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/eb0dc262.orderSucess.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/f391d4ba.icomoon.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/f4157ab9.aixin-copy.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/f4a087e3.home4.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/f557cad5.timeout.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/f7d0dc6c.aixin.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/img/orderSucess.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/sm-extend.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/sm-extend.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/sm.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/sm.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/vue-demo-webpack.rar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/API.md" afterPath="$PROJECT_DIR$/API.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/icomoon/fonts/icomoon.ttf" afterPath="$PROJECT_DIR$/src/less/icomoon/fonts/icomoon.ttf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/icomoon/fonts/icomoon.woff" afterPath="$PROJECT_DIR$/src/less/icomoon/fonts/icomoon.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/main.js" afterPath="$PROJECT_DIR$/dist/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/main.js.map" afterPath="$PROJECT_DIR$/dist/main.js.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/style.css" afterPath="$PROJECT_DIR$/dist/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.js" afterPath="$PROJECT_DIR$/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/bindMobile.vue" afterPath="$PROJECT_DIR$/src/components/bindMobile.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/pullRefresh.vue" afterPath="$PROJECT_DIR$/src/components/pullRefresh.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/icomoon/demo.html" afterPath="$PROJECT_DIR$/src/less/icomoon/demo.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/icomoon/fonts/icomoon.svg" afterPath="$PROJECT_DIR$/src/less/icomoon/fonts/icomoon.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/icomoon/selection.json" afterPath="$PROJECT_DIR$/src/less/icomoon/selection.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/less/icomoon/style.css" afterPath="$PROJECT_DIR$/src/less/icomoon/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/routers.js" afterPath="$PROJECT_DIR$/src/routers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/msg.vue" afterPath="$PROJECT_DIR$/src/views/msg.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/msg/comment.vue" afterPath="$PROJECT_DIR$/src/views/msg/comment.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scene.vue" afterPath="$PROJECT_DIR$/src/scene.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/common/selectSex.vue" afterPath="$PROJECT_DIR$/src/views/common/selectSex.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/common/selectSort.vue" afterPath="$PROJECT_DIR$/src/views/common/selectSort.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/home.vue" afterPath="$PROJECT_DIR$/src/views/home.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/scene.vue" afterPath="$PROJECT_DIR$/src/views/scene.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/scene/inviteOrder.vue" afterPath="$PROJECT_DIR$/src/views/scene/inviteOrder.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/scene/oneKeyOrder.vue" afterPath="$PROJECT_DIR$/src/views/scene/oneKeyOrder.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/scene/orderSuccess.vue" afterPath="$PROJECT_DIR$/src/views/scene/orderSuccess.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/user.vue" afterPath="$PROJECT_DIR$/src/views/user.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/user/auth/step1.vue" afterPath="$PROJECT_DIR$/src/views/user/auth/step1.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/user/money.vue" afterPath="$PROJECT_DIR$/src/views/user/money.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/user/work/acceptDetail.vue" afterPath="$PROJECT_DIR$/src/views/user/work/acceptDetail.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/user/work/publish.vue" afterPath="$PROJECT_DIR$/src/views/user/work/publish.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/user/work/publishDetail.vue" afterPath="$PROJECT_DIR$/src/views/user/work/publishDetail.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vue-demo-webpack.iml" afterPath="$PROJECT_DIR$/vue-demo-webpack.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/user/work/server.vue" afterPath="$PROJECT_DIR$/src/views/user/work/server.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.js" afterPath="$PROJECT_DIR$/webpack.config.js" />
     </list>
     <ignored path="vue-demo-webpack.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,98 +134,7 @@
     <favorites_list name="vue-demo-webpack" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="accept.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/user/work/accept.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-30.321428">
-              <caret line="116" column="47" selection-start-line="116" selection-start-column="47" selection-end-line="116" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="selectMap.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/user/auth/selectMap.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-72.60714">
-              <caret line="129" column="11" selection-start-line="114" selection-start-column="8" selection-end-line="129" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="oneKeyOrder.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/scene/oneKeyOrder.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.75">
-              <caret line="7" column="30" selection-start-line="6" selection-start-column="8" selection-end-line="7" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="appraise.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/scene/appraise.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.928572">
-              <caret line="22" column="9" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/toast/index.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.892858">
-              <caret line="51" column="15" selection-start-line="51" selection-start-column="15" selection-end-line="51" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="address.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/views/scene/address.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.88727856">
-              <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routers.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/routers.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="35" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/user.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.357143">
-              <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="acceptBus.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/user/work/acceptBus.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.178572">
-              <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -160,23 +147,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/views/user/auth/selectSchool.vue" />
-        <option value="$PROJECT_DIR$/src/filters.js" />
-        <option value="$PROJECT_DIR$/src/components/welfares.vue" />
-        <option value="$PROJECT_DIR$/src/components/calendar/calendar.js" />
-        <option value="$PROJECT_DIR$/src/components/calendar/index.vue" />
-        <option value="$PROJECT_DIR$/src/components/calendar/period.vue" />
         <option value="$PROJECT_DIR$/src/components/swiper.vue" />
         <option value="$PROJECT_DIR$/dist/indexData.json" />
         <option value="$PROJECT_DIR$/src/components/actionsheet/index.vue" />
         <option value="$PROJECT_DIR$/src/store/store.js" />
         <option value="$PROJECT_DIR$/src/components/swiper/index.vue" />
-        <option value="$PROJECT_DIR$/src/views/scene/inviteOrder.vue" />
         <option value="$PROJECT_DIR$/src/components/bindBirthday.vue" />
         <option value="$PROJECT_DIR$/src/components/confirm/index.vue" />
         <option value="$PROJECT_DIR$/src/views/user/auth/step3.vue" />
         <option value="$PROJECT_DIR$/src/views/user/setting.vue" />
-        <option value="$PROJECT_DIR$/src/views/scene/orderSuccess.vue" />
         <option value="$PROJECT_DIR$/src/views/user/work/server.vue" />
         <option value="$PROJECT_DIR$/src/components/sceneType.vue" />
         <option value="$PROJECT_DIR$/src/components/timeConf.vue" />
@@ -187,30 +166,38 @@
         <option value="$PROJECT_DIR$/src/components/scroller/index.vue" />
         <option value="$PROJECT_DIR$/src/less/style.less" />
         <option value="$PROJECT_DIR$/src/main.js" />
-        <option value="$PROJECT_DIR$/src/views/home.vue" />
         <option value="$PROJECT_DIR$/src/less/lib/sui/base.less" />
         <option value="$PROJECT_DIR$/src/less/app/layout.less" />
         <option value="$PROJECT_DIR$/src/less/lib/sui/sm.less" />
         <option value="$PROJECT_DIR$/src/views/user/auth/step1.vue" />
-        <option value="$PROJECT_DIR$/src/views/scene.vue" />
         <option value="$PROJECT_DIR$/src/views/user/work/publish.vue" />
         <option value="$PROJECT_DIR$/src/views/user/work/acceptAppraise.vue" />
-        <option value="$PROJECT_DIR$/src/views/user/money.vue" />
         <option value="$PROJECT_DIR$/src/views/msg.vue" />
-        <option value="$PROJECT_DIR$/src/views/user.vue" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/views/user/work/acceptBus.vue" />
-        <option value="$PROJECT_DIR$/src/views/user/work/acceptDetail.vue" />
-        <option value="$PROJECT_DIR$/src/views/user/work/publishDetail.vue" />
         <option value="$PROJECT_DIR$/src/views/msg/comment.vue" />
         <option value="$PROJECT_DIR$/src/components/pullRefresh.vue" />
         <option value="$PROJECT_DIR$/src/routers.js" />
-        <option value="$PROJECT_DIR$/src/views/user/work/accept.vue" />
-        <option value="$PROJECT_DIR$/src/views/scene/oneKeyOrder.vue" />
         <option value="$PROJECT_DIR$/src/components/bindMobile.vue" />
-        <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/src/components/toast/index.vue" />
         <option value="$PROJECT_DIR$/src/views/scene/address.vue" />
+        <option value="$PROJECT_DIR$/API.md" />
+        <option value="$PROJECT_DIR$/dist/main.js" />
+        <option value="$PROJECT_DIR$/dist/main.js.map" />
+        <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/src/views/common/selectSex.vue" />
+        <option value="$PROJECT_DIR$/src/views/common/selectSort.vue" />
+        <option value="$PROJECT_DIR$/webpack.config.js" />
+        <option value="$PROJECT_DIR$/src/views/home.vue" />
+        <option value="$PROJECT_DIR$/src/views/user.vue" />
+        <option value="$PROJECT_DIR$/src/views/scene/orderSuccess.vue" />
+        <option value="$PROJECT_DIR$/src/views/user/work/accept.vue" />
+        <option value="$PROJECT_DIR$/src/views/user/work/acceptDetail.vue" />
+        <option value="$PROJECT_DIR$/src/views/scene/inviteOrder.vue" />
+        <option value="$PROJECT_DIR$/src/views/scene/oneKeyOrder.vue" />
+        <option value="$PROJECT_DIR$/src/views/user/work/publishDetail.vue" />
+        <option value="$PROJECT_DIR$/src/views/scene.vue" />
+        <option value="$PROJECT_DIR$/src/views/user/money.vue" />
       </list>
     </option>
   </component>
@@ -391,11 +378,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scene" />
+              <option name="myItemId" value="less" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -414,28 +397,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vue-demo-webpack" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vue-demo-webpack" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="toast" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -490,10 +451,10 @@
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/less/icomoon" />
       <recent name="$PROJECT_DIR$/src/img" />
       <recent name="$PROJECT_DIR$/src/views/user/work" />
       <recent name="$PROJECT_DIR$/src/less/lib" />
-      <recent name="$PROJECT_DIR$/src/less" />
     </key>
   </component>
   <component name="RunManager" selected="Gulp.js.Unnamed">
@@ -952,16 +913,16 @@
       <workItem from="1461072519984" duration="1551000" />
       <workItem from="1461078515737" duration="4015000" />
       <workItem from="1461153459366" duration="41821000" />
-      <workItem from="1461479445141" duration="13726000" />
+      <workItem from="1461479445141" duration="25642000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147661000" />
+    <option name="totallyTimeSpent" value="159577000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="793" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -974,13 +935,13 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15407407" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18669528" sideWeight="0.5110783" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18669528" sideWeight="0.4889217" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18669528" sideWeight="0.4830133" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32740742" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18669528" sideWeight="0.5110783" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18669528" sideWeight="0.5169867" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1004,14 +965,14 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15407407" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18669528" sideWeight="0.5110783" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18669528" sideWeight="0.4889217" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18669528" sideWeight="0.4830133" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32740742" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18669528" sideWeight="0.5110783" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18669528" sideWeight="0.5169867" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -1037,76 +998,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/less/lib/sui/push.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/lib/sui/grid.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/lib/sui/bars.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/lib/sui/rem.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/lib/sui/lists.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5185184">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/lib/sui/infinite.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/lib/sui/scroller.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/lib/sui/searchbar.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/lib/sui/pull-to-refresh.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.6006441">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/footer.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7037037">
-          <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.60225445">
@@ -1149,20 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0246533">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/less/style.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.132045">
-          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1177,17 +1054,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/home.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44927537">
-          <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/less/app/layout.less">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.03069467">
           <caret line="17" column="11" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1195,6 +1066,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.821429">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1230,13 +1102,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/user/money.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.571428">
-          <caret line="92" column="37" selection-start-line="92" selection-start-column="37" selection-end-line="92" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/less/lib/mixins.less">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.42972535">
@@ -1261,66 +1126,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/user/work/acceptDetail.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.0">
-          <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/scene.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5088853">
-          <caret line="194" column="8" selection-start-line="194" selection-start-column="8" selection-end-line="199" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/user/work/publishDetail.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="183" column="47" selection-start-line="180" selection-start-column="16" selection-end-line="183" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/user/work/publish.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.821428">
-          <caret line="130" column="24" selection-start-line="130" selection-start-column="24" selection-end-line="130" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/scene/orderSuccess.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.035714">
-          <caret line="98" column="22" selection-start-line="98" selection-start-column="22" selection-end-line="98" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/pullRefresh.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/user/auth/step1.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28502417">
           <caret line="222" column="67" selection-start-line="222" selection-start-column="28" selection-end-line="222" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/msg/comment.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09178744">
-          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -1341,82 +1150,250 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
+    <entry file="file://$PROJECT_DIR$/src/components/toast/index.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56086284">
-          <caret line="491" column="12" selection-start-line="491" selection-start-column="12" selection-end-line="491" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/user/work/acceptBus.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.178572">
-          <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/routers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="35" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/user.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.357143">
-          <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/user/work/accept.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-30.321428">
-          <caret line="116" column="47" selection-start-line="116" selection-start-column="47" selection-end-line="116" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.58132046">
+          <caret line="51" column="15" selection-start-line="51" selection-start-column="15" selection-end-line="51" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/scene/appraise.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.928572">
+        <state vertical-scroll-proportion="0.67310786">
           <caret line="22" column="9" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/scene/oneKeyOrder.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.75">
-          <caret line="7" column="30" selection-start-line="6" selection-start-column="8" selection-end-line="7" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/user/auth/selectMap.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-72.60714">
+        <state vertical-scroll-proportion="3.273752">
           <caret line="129" column="11" selection-start-line="114" selection-start-column="8" selection-end-line="129" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/toast/index.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/user/work/acceptBus.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.892858">
-          <caret line="51" column="15" selection-start-line="51" selection-start-column="15" selection-end-line="51" selection-end-column="15" />
+        <state vertical-scroll-proportion="1.0">
+          <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3541147">
+          <caret line="237" column="37" selection-start-line="237" selection-start-column="37" selection-end-line="237" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scene.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0475">
+          <caret line="142" column="8" selection-start-line="142" selection-start-column="8" selection-end-line="147" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/common/selectSort.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7697263">
+          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/common/selectSex.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7085346">
+          <caret line="35" column="32" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/less/style.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7085346">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/indexData.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-86.6876">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/less/icomoon/demo-files/demo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/msg/comment.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33655393">
+          <caret line="43" column="12" selection-start-line="43" selection-start-column="12" selection-end-line="54" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/user.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.489533">
+          <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.117103234">
+          <caret line="4" column="68" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/home.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35748792">
+          <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/alert/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/user/work/publish.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61191624">
+          <caret line="181" column="83" selection-start-line="181" selection-start-column="62" selection-end-line="181" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/scene/orderSuccess.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67741936">
+          <caret line="190" column="54" selection-start-line="190" selection-start-column="54" selection-end-line="190" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/header.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.79549116">
+          <caret line="34" column="85" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="85" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/scene/address.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.88727856">
+        <state vertical-scroll-proportion="0.31561998">
           <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/scene/inviteOrder.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.510467">
+          <caret line="209" column="49" selection-start-line="209" selection-start-column="49" selection-end-line="209" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/scene/oneKeyOrder.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.030595813">
+          <caret line="249" column="49" selection-start-line="249" selection-start-column="49" selection-end-line="249" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.847458">
+          <caret line="148" column="29" selection-start-line="148" selection-start-column="29" selection-end-line="148" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3898305">
+          <caret line="94" column="33" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/user/work/accept.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.130435">
+          <caret line="135" column="44" selection-start-line="135" selection-start-column="36" selection-end-line="135" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/user/work/acceptDetail.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.1723027">
+          <caret line="332" column="0" selection-start-line="332" selection-start-column="0" selection-end-line="332" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/user/work/publishDetail.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66344607">
+          <caret line="200" column="10" selection-start-line="200" selection-start-column="10" selection-end-line="200" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7318952">
+          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/user/money.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.63124">
+          <caret line="148" column="17" selection-start-line="148" selection-start-column="17" selection-end-line="148" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/scene.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.510467">
+          <caret line="264" column="9" selection-start-line="264" selection-start-column="9" selection-end-line="269" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/pullRefresh.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38058552">
+          <caret line="61" column="18" selection-start-line="61" selection-start-column="5" selection-end-line="61" selection-end-column="18" />
           <folding />
         </state>
       </provider>
