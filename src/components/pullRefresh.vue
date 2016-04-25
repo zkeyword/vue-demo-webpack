@@ -30,6 +30,7 @@
 //            document.addEventListener("touchmove", function(){
 //                self.getScrollData();
 //            });
+			//document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
         },
         methods:{
             getScrollData (){

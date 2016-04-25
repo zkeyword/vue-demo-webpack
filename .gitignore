@@ -1,6 +1,5 @@
 node_modules
 npm-debug.log
-dist
 .idea
 .vscode
 .sublime-workspace

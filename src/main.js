@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import InfiniteScroll from 'vue-infinite-scroll'
+
 import Store from './store/store'
 import RouterMap from './routers'
 import App from './App'
 import Filters from './filters'
 
+Vue.use(InfiniteScroll);
 Vue.use(VueRouter);
 
 //添加过滤

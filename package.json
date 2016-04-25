@@ -37,7 +37,9 @@
   },
   "dependencies": {
     "es6-promise": "*",
+    "iscroll": "^5.2.0",
     "vue": "*",
+    "vue-infinite-scroll": "^0.2.2",
     "vue-resource": "*",
     "vue-router": "*",
     "vuex": "*",

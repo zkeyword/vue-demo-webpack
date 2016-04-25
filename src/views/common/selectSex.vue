@@ -3,28 +3,12 @@
 </style>
 
 <template>
-    <div id="area" class="page-selectCity page-selectSchool" transition="page" >
+    <div class="page-selectCity page-selectSex" transition="page" >
 
-        <div class="bar">
-            <div class="searchbar">
-                <a class="searchbar-cancel">取消</a>
-                <div class="search-input">
-                    <label class="icon icon-search" for="search"></label>
-                    <input type="text" id='search' v-model="keyword" placeholder='输入关键字...'/>
-                </div>
-            </div>
-        </div>
-
-        <div class="content showHeader">
-            <ul class="list" v-if="!tmpData.length">
-				<li v-for="item in schoolList" @click="goAuth(item)">
-                    {{item.school_name}}
-                </li>
-            </ul>
-            <ul class="list" v-else="tmpData.length">
-				<li v-for="item in tmpData" @click="goAuth(item)">
-                    {{item.school_name}}
-                </li>
+        <div class="content">
+            <ul class="list">
+				<li>男</li>
+				<li>女</li>
             </ul>
         </div>
 
@@ -46,29 +30,12 @@ export default {
             }
         }
     },
-    watch: {
-        keyword (){
-            this.tmpData = this.filteData( this.keyword );
-        }
-    },
     route: {
         data (transition){
             let self  = this,
                 query = transition.to.query;
                 
             $.extend(self.formData, query);
-            
-            $.ajax({
-                url: "/soytime/data/loadSchool",
-                type:'POST',
-                dataType: 'json',
-                data: self.formData,
-                success: ((data)=>{
-                    self.schoolList = data.result;
-                })
-            });
-            
-            transition.next();
         }
     },
     methods: {
