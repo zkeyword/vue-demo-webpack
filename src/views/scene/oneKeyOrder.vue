@@ -117,7 +117,7 @@
 
 <template>
     <div class="page-scene-oneKeyOrder page-current">
-        <header-bar :title="title" :back="true"></header-bar>
+        <header-bar :title="title" :back="true" target="scene"></header-bar>
         <div class="content showHeader showFooter">
             <div class="block clearfix">
                 <span>雇主名</span>
@@ -435,20 +435,13 @@ export default {
         save(){
             let self = this;
 
-            console.log( self.formData.period_times );
-            return;
-
             $.ajax({
-                url: "/soytime/appraise/list",
+                url: "/soytime/order/inviteOrder",
                 type:'POST',
                 dataType: 'json',
-                data:{
-                    to_id: self.toId,
-                    currentPage: self.currentPage,
-                    type: self.type
-                },
+                data:self.formData,
                 success: (data)=>{
-                    //self.formData = data.result
+					self.$route.router.go({name: 'sceneOrderSuccess', query: data.result.order_id});
                 }
             });
         }

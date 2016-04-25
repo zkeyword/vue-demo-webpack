@@ -50,27 +50,27 @@
 	
 	var _keys2 = _interopRequireDefault(_keys);
 	
-	var _vue = __webpack_require__(36);
+	var _vue = __webpack_require__(59);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _vueRouter = __webpack_require__(38);
+	var _vueRouter = __webpack_require__(61);
 	
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 	
-	var _store = __webpack_require__(39);
+	var _store = __webpack_require__(62);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _routers = __webpack_require__(41);
+	var _routers = __webpack_require__(64);
 	
 	var _routers2 = _interopRequireDefault(_routers);
 	
-	var _App = __webpack_require__(273);
+	var _App = __webpack_require__(310);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _filters = __webpack_require__(305);
+	var _filters = __webpack_require__(342);
 	
 	var _filters2 = _interopRequireDefault(_filters);
 	
@@ -160,16 +160,17 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(26);
-	module.exports = __webpack_require__(32).Object.keys;
+	module.exports = __webpack_require__(46).Object.keys;
 
 /***/ },
 /* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 Object.keys(O)
-	var toObject = __webpack_require__(27);
+	var toObject = __webpack_require__(27)
+	  , $keys    = __webpack_require__(29);
 	
-	__webpack_require__(29)('keys', function($keys){
+	__webpack_require__(44)('keys', function(){
 	  return function keys(it){
 	    return $keys(toObject(it));
 	  };
@@ -199,10 +200,193 @@
 /* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+	var $keys       = __webpack_require__(30)
+	  , enumBugKeys = __webpack_require__(43);
+	
+	module.exports = Object.keys || function keys(O){
+	  return $keys(O, enumBugKeys);
+	};
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var has          = __webpack_require__(31)
+	  , toIObject    = __webpack_require__(32)
+	  , arrayIndexOf = __webpack_require__(35)(false)
+	  , IE_PROTO     = __webpack_require__(39)('IE_PROTO');
+	
+	module.exports = function(object, names){
+	  var O      = toIObject(object)
+	    , i      = 0
+	    , result = []
+	    , key;
+	  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+	  // Don't enum bug & hidden keys
+	  while(names.length > i)if(has(O, key = names[i++])){
+	    ~arrayIndexOf(result, key) || result.push(key);
+	  }
+	  return result;
+	};
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	var hasOwnProperty = {}.hasOwnProperty;
+	module.exports = function(it, key){
+	  return hasOwnProperty.call(it, key);
+	};
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// to indexed object, toObject with fallback for non-array-like ES3 strings
+	var IObject = __webpack_require__(33)
+	  , defined = __webpack_require__(28);
+	module.exports = function(it){
+	  return IObject(defined(it));
+	};
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// fallback for non-array-like ES3 and non-enumerable old V8 strings
+	var cof = __webpack_require__(34);
+	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+	  return cof(it) == 'String' ? it.split('') : Object(it);
+	};
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	var toString = {}.toString;
+	
+	module.exports = function(it){
+	  return toString.call(it).slice(8, -1);
+	};
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// false -> Array#indexOf
+	// true  -> Array#includes
+	var toIObject = __webpack_require__(32)
+	  , toLength  = __webpack_require__(36)
+	  , toIndex   = __webpack_require__(38);
+	module.exports = function(IS_INCLUDES){
+	  return function($this, el, fromIndex){
+	    var O      = toIObject($this)
+	      , length = toLength(O.length)
+	      , index  = toIndex(fromIndex, length)
+	      , value;
+	    // Array#includes uses SameValueZero equality algorithm
+	    if(IS_INCLUDES && el != el)while(length > index){
+	      value = O[index++];
+	      if(value != value)return true;
+	    // Array#toIndex ignores holes, Array#includes - not
+	    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+	      if(O[index] === el)return IS_INCLUDES || index || 0;
+	    } return !IS_INCLUDES && -1;
+	  };
+	};
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.15 ToLength
+	var toInteger = __webpack_require__(37)
+	  , min       = Math.min;
+	module.exports = function(it){
+	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+	};
+
+/***/ },
+/* 37 */
+/***/ function(module, exports) {
+
+	// 7.1.4 ToInteger
+	var ceil  = Math.ceil
+	  , floor = Math.floor;
+	module.exports = function(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	};
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(37)
+	  , max       = Math.max
+	  , min       = Math.min;
+	module.exports = function(index, length){
+	  index = toInteger(index);
+	  return index < 0 ? max(index + length, 0) : min(index, length);
+	};
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var shared = __webpack_require__(40)('keys')
+	  , uid    = __webpack_require__(42);
+	module.exports = function(key){
+	  return shared[key] || (shared[key] = uid(key));
+	};
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(41)
+	  , SHARED = '__core-js_shared__'
+	  , store  = global[SHARED] || (global[SHARED] = {});
+	module.exports = function(key){
+	  return store[key] || (store[key] = {});
+	};
+
+/***/ },
+/* 41 */
+/***/ function(module, exports) {
+
+	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+	var global = module.exports = typeof window != 'undefined' && window.Math == Math
+	  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+
+/***/ },
+/* 42 */
+/***/ function(module, exports) {
+
+	var id = 0
+	  , px = Math.random();
+	module.exports = function(key){
+	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+	};
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	// IE 8- don't enum bug keys
+	module.exports = (
+	  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+	).split(',');
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(30)
-	  , core    = __webpack_require__(32)
-	  , fails   = __webpack_require__(35);
+	var $export = __webpack_require__(45)
+	  , core    = __webpack_require__(46)
+	  , fails   = __webpack_require__(55);
 	module.exports = function(KEY, exec){
 	  var fn  = (core.Object || {})[KEY] || Object[KEY]
 	    , exp = {};
@@ -211,12 +395,13 @@
 	};
 
 /***/ },
-/* 30 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(31)
-	  , core      = __webpack_require__(32)
-	  , ctx       = __webpack_require__(33)
+	var global    = __webpack_require__(41)
+	  , core      = __webpack_require__(46)
+	  , ctx       = __webpack_require__(47)
+	  , hide      = __webpack_require__(49)
 	  , PROTOTYPE = 'prototype';
 	
 	var $export = function(type, name, source){
@@ -227,12 +412,13 @@
 	    , IS_BIND   = type & $export.B
 	    , IS_WRAP   = type & $export.W
 	    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+	    , expProto  = exports[PROTOTYPE]
 	    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
 	    , key, own, out;
 	  if(IS_GLOBAL)source = name;
 	  for(key in source){
 	    // contains in native
-	    own = !IS_FORCED && target && key in target;
+	    own = !IS_FORCED && target && target[key] !== undefined;
 	    if(own && key in exports)continue;
 	    // export native or passed
 	    out = own ? target[key] : source[key];
@@ -242,47 +428,51 @@
 	    : IS_BIND && own ? ctx(out, global)
 	    // wrap global constructors for prevent change them in library
 	    : IS_WRAP && target[key] == out ? (function(C){
-	      var F = function(param){
-	        return this instanceof C ? new C(param) : C(param);
+	      var F = function(a, b, c){
+	        if(this instanceof C){
+	          switch(arguments.length){
+	            case 0: return new C;
+	            case 1: return new C(a);
+	            case 2: return new C(a, b);
+	          } return new C(a, b, c);
+	        } return C.apply(this, arguments);
 	      };
 	      F[PROTOTYPE] = C[PROTOTYPE];
 	      return F;
 	    // make static versions for prototype methods
 	    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-	    if(IS_PROTO)(exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+	    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+	    if(IS_PROTO){
+	      (exports.virtual || (exports.virtual = {}))[key] = out;
+	      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+	      if(type & $export.R && expProto && !expProto[key])hide(expProto, key, out);
+	    }
 	  }
 	};
 	// type bitmap
-	$export.F = 1;  // forced
-	$export.G = 2;  // global
-	$export.S = 4;  // static
-	$export.P = 8;  // proto
-	$export.B = 16; // bind
-	$export.W = 32; // wrap
+	$export.F = 1;   // forced
+	$export.G = 2;   // global
+	$export.S = 4;   // static
+	$export.P = 8;   // proto
+	$export.B = 16;  // bind
+	$export.W = 32;  // wrap
+	$export.U = 64;  // safe
+	$export.R = 128; // real proto method for `library` 
 	module.exports = $export;
 
 /***/ },
-/* 31 */
+/* 46 */
 /***/ function(module, exports) {
 
-	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-	var global = module.exports = typeof window != 'undefined' && window.Math == Math
-	  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-
-/***/ },
-/* 32 */
-/***/ function(module, exports) {
-
-	var core = module.exports = {version: '1.2.6'};
+	var core = module.exports = {version: '2.2.2'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 33 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(34);
+	var aFunction = __webpack_require__(48);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -303,7 +493,7 @@
 	};
 
 /***/ },
-/* 34 */
+/* 48 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -312,7 +502,76 @@
 	};
 
 /***/ },
-/* 35 */
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dP         = __webpack_require__(50)
+	  , createDesc = __webpack_require__(58);
+	module.exports = __webpack_require__(54) ? function(object, key, value){
+	  return dP.f(object, key, createDesc(1, value));
+	} : function(object, key, value){
+	  object[key] = value;
+	  return object;
+	};
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var anObject       = __webpack_require__(51)
+	  , IE8_DOM_DEFINE = __webpack_require__(53)
+	  , toPrimitive    = __webpack_require__(57)
+	  , dP             = Object.defineProperty;
+	
+	exports.f = __webpack_require__(54) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	  anObject(O);
+	  P = toPrimitive(P, true);
+	  anObject(Attributes);
+	  if(IE8_DOM_DEFINE)try {
+	    return dP(O, P, Attributes);
+	  } catch(e){ /* empty */ }
+	  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+	  if('value' in Attributes)O[P] = Attributes.value;
+	  return O;
+	};
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(52);
+	module.exports = function(it){
+	  if(!isObject(it))throw TypeError(it + ' is not an object!');
+	  return it;
+	};
+
+/***/ },
+/* 52 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  return typeof it === 'object' ? it !== null : typeof it === 'function';
+	};
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = !__webpack_require__(54) && !__webpack_require__(55)(function(){
+	  return Object.defineProperty(__webpack_require__(56)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(55)(function(){
+	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 55 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -324,11 +583,53 @@
 	};
 
 /***/ },
-/* 36 */
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(52)
+	  , document = __webpack_require__(41).document
+	  // in old IE typeof document.createElement is 'object'
+	  , is = isObject(document) && isObject(document.createElement);
+	module.exports = function(it){
+	  return is ? document.createElement(it) : {};
+	};
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.1 ToPrimitive(input [, PreferredType])
+	var isObject = __webpack_require__(52);
+	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+	// and the second argument - flag - preferred type is a string
+	module.exports = function(it, S){
+	  if(!isObject(it))return it;
+	  var fn, val;
+	  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  throw TypeError("Can't convert object to primitive value");
+	};
+
+/***/ },
+/* 58 */
+/***/ function(module, exports) {
+
+	module.exports = function(bitmap, value){
+	  return {
+	    enumerable  : !(bitmap & 1),
+	    configurable: !(bitmap & 2),
+	    writable    : !(bitmap & 4),
+	    value       : value
+	  };
+	};
+
+/***/ },
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {/*!
-	 * Vue.js v1.0.17
+	 * Vue.js v1.0.20
 	 * (c) 2016 Evan You
 	 * Released under the MIT License.
 	 */
@@ -614,7 +915,7 @@
 	var isArray = Array.isArray;
 	
 	/**
-	 * Define a non-enumerable property
+	 * Define a property.
 	 *
 	 * @param {Object} obj
 	 * @param {String} key
@@ -973,7 +1274,7 @@
 	 *   ]
 	 * }
 	 *
-	 * @param {String} str
+	 * @param {String} s
 	 * @return {Object}
 	 */
 	
@@ -1233,6 +1534,13 @@
 	   */
 	
 	  warnExpressionErrors: true,
+	
+	  /**
+	   * Whether to allow devtools inspection.
+	   * Disabled by default in production builds.
+	   */
+	
+	  devtools: process.env.NODE_ENV !== 'production',
 	
 	  /**
 	   * Internal flag to indicate the delimiters have been
@@ -1572,6 +1880,22 @@
 	}
 	
 	/**
+	 * For IE9 compat: when both class and :class are present
+	 * getAttribute('class') returns wrong value...
+	 *
+	 * @param {Element} el
+	 * @return {String}
+	 */
+	
+	function getClass(el) {
+	  var classname = el.className;
+	  if (typeof classname === 'object') {
+	    classname = classname.baseVal || '';
+	  }
+	  return classname;
+	}
+	
+	/**
 	 * In IE9, setAttribute('class') will result in empty class
 	 * if the element also has the :class attribute; However in
 	 * PhantomJS, setting `className` does not work on SVG elements...
@@ -1601,7 +1925,7 @@
 	  if (el.classList) {
 	    el.classList.add(cls);
 	  } else {
-	    var cur = ' ' + (el.getAttribute('class') || '') + ' ';
+	    var cur = ' ' + getClass(el) + ' ';
 	    if (cur.indexOf(' ' + cls + ' ') < 0) {
 	      setClass(el, (cur + cls).trim());
 	    }
@@ -1619,7 +1943,7 @@
 	  if (el.classList) {
 	    el.classList.remove(cls);
 	  } else {
-	    var cur = ' ' + (el.getAttribute('class') || '') + ' ';
+	    var cur = ' ' + getClass(el) + ' ';
 	    var tar = ' ' + cls + ' ';
 	    while (cur.indexOf(tar) >= 0) {
 	      cur = cur.replace(tar, ' ');
@@ -1818,8 +2142,8 @@
 	  }
 	}
 	
-	var commonTagRE = /^(div|p|span|img|a|b|i|br|ul|ol|li|h1|h2|h3|h4|h5|h6|code|pre|table|th|td|tr|form|label|input|select|option|nav|article|section|header|footer)$/;
-	var reservedTagRE = /^(slot|partial|component)$/;
+	var commonTagRE = /^(div|p|span|img|a|b|i|br|ul|ol|li|h1|h2|h3|h4|h5|h6|code|pre|table|th|td|tr|form|label|input|select|option|nav|article|section|header|footer)$/i;
+	var reservedTagRE = /^(slot|partial|component)$/i;
 	
 	var isUnknownElement = undefined;
 	if (process.env.NODE_ENV !== 'production') {
@@ -1888,100 +2212,6 @@
 	      return { id: exp, dynamic: true };
 	    }
 	  }
-	}
-	
-	/**
-	 * Set a prop's initial value on a vm and its data object.
-	 *
-	 * @param {Vue} vm
-	 * @param {Object} prop
-	 * @param {*} value
-	 */
-	
-	function initProp(vm, prop, value) {
-	  var key = prop.path;
-	  value = coerceProp(prop, value);
-	  vm[key] = vm._data[key] = assertProp(prop, value) ? value : undefined;
-	}
-	
-	/**
-	 * Assert whether a prop is valid.
-	 *
-	 * @param {Object} prop
-	 * @param {*} value
-	 */
-	
-	function assertProp(prop, value) {
-	  if (!prop.options.required && ( // non-required
-	  prop.raw === null || // abscent
-	  value == null) // null or undefined
-	  ) {
-	      return true;
-	    }
-	  var options = prop.options;
-	  var type = options.type;
-	  var valid = true;
-	  var expectedType;
-	  if (type) {
-	    if (type === String) {
-	      expectedType = 'string';
-	      valid = typeof value === expectedType;
-	    } else if (type === Number) {
-	      expectedType = 'number';
-	      valid = typeof value === 'number';
-	    } else if (type === Boolean) {
-	      expectedType = 'boolean';
-	      valid = typeof value === 'boolean';
-	    } else if (type === Function) {
-	      expectedType = 'function';
-	      valid = typeof value === 'function';
-	    } else if (type === Object) {
-	      expectedType = 'object';
-	      valid = isPlainObject(value);
-	    } else if (type === Array) {
-	      expectedType = 'array';
-	      valid = isArray(value);
-	    } else {
-	      valid = value instanceof type;
-	    }
-	  }
-	  if (!valid) {
-	    process.env.NODE_ENV !== 'production' && warn('Invalid prop: type check failed for ' + prop.path + '="' + prop.raw + '".' + ' Expected ' + formatType(expectedType) + ', got ' + formatValue(value) + '.');
-	    return false;
-	  }
-	  var validator = options.validator;
-	  if (validator) {
-	    if (!validator(value)) {
-	      process.env.NODE_ENV !== 'production' && warn('Invalid prop: custom validator check failed for ' + prop.path + '="' + prop.raw + '"');
-	      return false;
-	    }
-	  }
-	  return true;
-	}
-	
-	/**
-	 * Force parsing value with coerce option.
-	 *
-	 * @param {*} value
-	 * @param {Object} options
-	 * @return {*}
-	 */
-	
-	function coerceProp(prop, value) {
-	  var coerce = prop.options.coerce;
-	  if (!coerce) {
-	    return value;
-	  }
-	  // coerce is a function
-	  return coerce(value);
-	}
-	
-	function formatType(val) {
-	  return val ? val.charAt(0).toUpperCase() + val.slice(1) : 'custom type';
-	}
-	
-	function formatValue(val) {
-	  return Object.prototype.toString.call(val).slice(8, -1);
 	}
 	
 	/**
@@ -2443,6 +2673,24 @@
 	var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
 	
 	/**
+	 * By default, when a reactive property is set, the new value is
+	 * also converted to become reactive. However in certain cases, e.g.
+	 * v-for scope alias and props, we don't want to force conversion
+	 * because the value may be a nested value under a frozen data structure.
+	 *
+	 * So whenever we want to set a reactive property without forcing
+	 * conversion on the new value, we wrap that call inside this function.
+	 */
+	
+	var shouldConvert = true;
+	
+	function withoutConversion(fn) {
+	  shouldConvert = false;
+	  fn();
+	  shouldConvert = true;
+	}
+	
+	/**
 	 * Observer class that are attached to each observed
 	 * object. Once attached, the observer converts target
 	 * object's property keys into getter/setters that
@@ -2537,7 +2785,7 @@
 	 * the prototype chain using __proto__
 	 *
 	 * @param {Object|Array} target
-	 * @param {Object} proto
+	 * @param {Object} src
 	 */
 	
 	function protoAugment(target, src) {
@@ -2579,7 +2827,7 @@
 	  var ob;
 	  if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
 	    ob = value.__ob__;
-	  } else if ((isArray(value) || isPlainObject(value)) && Object.isExtensible(value) && !value._isVue) {
+	  } else if (shouldConvert && (isArray(value) || isPlainObject(value)) && Object.isExtensible(value) && !value._isVue) {
 	    ob = new Observer(value);
 	  }
 	  if (ob && vm) {
@@ -2709,9 +2957,6 @@
 		resolveAsset: resolveAsset,
 		assertAsset: assertAsset,
 		checkComponentAttr: checkComponentAttr,
-		initProp: initProp,
-		assertProp: assertProp,
-		coerceProp: coerceProp,
 		commonTagRE: commonTagRE,
 		reservedTagRE: reservedTagRE,
 		get warn () { return warn; }
@@ -2790,13 +3035,6 @@
 	      this.$parent.$children.push(this);
 	    }
 	
-	    // save raw constructor data before merge
-	    // so that we know which properties are provided at
-	    // instantiation.
-	    if (process.env.NODE_ENV !== 'production') {
-	      this._runtimeData = options.data;
-	    }
-	
 	    // merge options.
 	    options = this.$options = mergeOptions(this.constructor.options, options, this);
 	
@@ -2806,6 +3044,11 @@
 	    // initialize data as empty object.
 	    // it will be filled up in _initScope().
 	    this._data = {};
+	
+	    // save raw constructor data before merge
+	    // so that we know which properties are provided at
+	    // instantiation.
+	    this._runtimeData = options.data;
 	
 	    // call init hook
 	    this._callHook('init');
@@ -3164,7 +3407,7 @@
 	var allowedKeywordsRE = new RegExp('^(' + allowedKeywords.replace(/,/g, '\\b|') + '\\b)');
 	
 	// keywords that don't make sense inside expressions
-	var improperKeywords = 'break,case,class,catch,const,continue,debugger,default,' + 'delete,do,else,export,extends,finally,for,function,if,' + 'import,in,instanceof,let,return,super,switch,throw,try,' + 'var,while,with,yield,enum,await,implements,package,' + 'proctected,static,interface,private,public';
+	var improperKeywords = 'break,case,class,catch,const,continue,debugger,default,' + 'delete,do,else,export,extends,finally,for,function,if,' + 'import,in,instanceof,let,return,super,switch,throw,try,' + 'var,while,with,yield,enum,await,implements,package,' + 'protected,static,interface,private,public';
 	var improperKeywordsRE = new RegExp('^(' + improperKeywords.replace(/,/g, '\\b|') + '\\b)');
 	
 	var wsRE = /\s/g;
@@ -3355,6 +3598,8 @@
 	// before user watchers so that when user watchers are
 	// triggered, the DOM would have already been in updated
 	// state.
+	
+	var queueIndex;
 	var queue = [];
 	var userQueue = [];
 	var has = {};
@@ -3384,7 +3629,7 @@
 	  runBatcherQueue(userQueue);
 	  // dev tool hook
 	  /* istanbul ignore if */
-	  if (devtools) {
+	  if (devtools && config.devtools) {
 	    devtools.emit('flush');
 	  }
 	  resetBatcherState();
@@ -3399,8 +3644,8 @@
 	function runBatcherQueue(queue) {
 	  // do not cache length because more watchers might be pushed
 	  // as we run existing watchers
-	  for (var i = 0; i < queue.length; i++) {
-	    var watcher = queue[i];
+	  for (queueIndex = 0; queueIndex < queue.length; queueIndex++) {
+	    var watcher = queue[queueIndex];
 	    var id = watcher.id;
 	    has[id] = null;
 	    watcher.run();
@@ -3429,20 +3674,20 @@
 	function pushWatcher(watcher) {
 	  var id = watcher.id;
 	  if (has[id] == null) {
-	    // if an internal watcher is pushed, but the internal
-	    // queue is already depleted, we run it immediately.
 	    if (internalQueueDepleted && !watcher.user) {
-	      watcher.run();
-	      return;
-	    }
-	    // push watcher into appropriate queue
-	    var q = watcher.user ? userQueue : queue;
-	    has[id] = q.length;
-	    q.push(watcher);
-	    // queue the flush
-	    if (!waiting) {
-	      waiting = true;
-	      nextTick(flushBatcherQueue);
+	      // an internal watcher triggered by a user watcher...
+	      // let's run it immediately after current user watcher is done.
+	      userQueue.splice(queueIndex + 1, 0, watcher);
+	    } else {
+	      // push watcher into appropriate queue
+	      var q = watcher.user ? userQueue : queue;
+	      has[id] = q.length;
+	      q.push(watcher);
+	      // queue the flush
+	      if (!waiting) {
+	        waiting = true;
+	        nextTick(flushBatcherQueue);
+	      }
 	    }
 	  }
 	}
@@ -3455,7 +3700,7 @@
 	 * This is used for both the $watch() api and directives.
 	 *
 	 * @param {Vue} vm
-	 * @param {String} expression
+	 * @param {String|Function} expOrFn
 	 * @param {Function} cb
 	 * @param {Object} options
 	 *                 - {Array} filters
@@ -3476,13 +3721,15 @@
 	  var isFn = typeof expOrFn === 'function';
 	  this.vm = vm;
 	  vm._watchers.push(this);
-	  this.expression = isFn ? expOrFn.toString() : expOrFn;
+	  this.expression = expOrFn;
 	  this.cb = cb;
 	  this.id = ++uid$2; // uid for batching
 	  this.active = true;
 	  this.dirty = this.lazy; // for lazy watchers
-	  this.deps = Object.create(null);
-	  this.newDeps = null;
+	  this.deps = [];
+	  this.newDeps = [];
+	  this.depIds = Object.create(null);
+	  this.newDepIds = null;
 	  this.prevError = null; // for async error stacks
 	  // parse expression for getter/setter
 	  if (isFn) {
@@ -3498,23 +3745,6 @@
 	  // watchers during vm._digest()
 	  this.queued = this.shallow = false;
 	}
-	
-	/**
-	 * Add a dependency to this directive.
-	 *
-	 * @param {Dep} dep
-	 */
-	
-	Watcher.prototype.addDep = function (dep) {
-	  var id = dep.id;
-	  if (!this.newDeps[id]) {
-	    this.newDeps[id] = dep;
-	    if (!this.deps[id]) {
-	      this.deps[id] = dep;
-	      dep.addSub(this);
-	    }
-	  }
-	};
 	
 	/**
 	 * Evaluate the getter, and re-collect dependencies.
@@ -3591,7 +3821,25 @@
 	
 	Watcher.prototype.beforeGet = function () {
 	  Dep.target = this;
-	  this.newDeps = Object.create(null);
+	  this.newDepIds = Object.create(null);
+	  this.newDeps.length = 0;
+	};
+	
+	/**
+	 * Add a dependency to this directive.
+	 *
+	 * @param {Dep} dep
+	 */
+	
+	Watcher.prototype.addDep = function (dep) {
+	  var id = dep.id;
+	  if (!this.newDepIds[id]) {
+	    this.newDepIds[id] = true;
+	    this.newDeps.push(dep);
+	    if (!this.depIds[id]) {
+	      dep.addSub(this);
+	    }
+	  }
 	};
 	
 	/**
@@ -3600,15 +3848,17 @@
 	
 	Watcher.prototype.afterGet = function () {
 	  Dep.target = null;
-	  var ids = Object.keys(this.deps);
-	  var i = ids.length;
+	  var i = this.deps.length;
 	  while (i--) {
-	    var id = ids[i];
-	    if (!this.newDeps[id]) {
-	      this.deps[id].removeSub(this);
+	    var dep = this.deps[i];
+	    if (!this.newDepIds[dep.id]) {
+	      dep.removeSub(this);
 	    }
 	  }
+	  this.depIds = this.newDepIds;
+	  var tmp = this.deps;
 	  this.deps = this.newDeps;
+	  this.newDeps = tmp;
 	};
 	
 	/**
@@ -3696,10 +3946,9 @@
 	 */
 	
 	Watcher.prototype.depend = function () {
-	  var depIds = Object.keys(this.deps);
-	  var i = depIds.length;
+	  var i = this.deps.length;
 	  while (i--) {
-	    this.deps[depIds[i]].depend();
+	    this.deps[i].depend();
 	  }
 	};
 	
@@ -3716,10 +3965,9 @@
 	    if (!this.vm._isBeingDestroyed && !this.vm._vForRemoving) {
 	      this.vm._watchers.$remove(this);
 	    }
-	    var depIds = Object.keys(this.deps);
-	    var i = depIds.length;
+	    var i = this.deps.length;
 	    while (i--) {
-	      this.deps[depIds[i]].removeSub(this);
+	      this.deps[i].removeSub(this);
 	    }
 	    this.active = false;
 	    this.vm = this.cb = this.value = null;
@@ -3787,7 +4035,7 @@
 	  return isTemplate(node) && isFragment(node.content);
 	}
 	
-	var tagRE$1 = /<([\w:]+)/;
+	var tagRE$1 = /<([\w:-]+)/;
 	var entityRE = /&#?\w+?;/;
 	
 	/**
@@ -3909,6 +4157,7 @@
 	 */
 	
 	function cloneNode(node) {
+	  /* istanbul ignore if */
 	  if (!node.querySelectorAll) {
 	    return node.cloneNode();
 	  }
@@ -4053,6 +4302,7 @@
 	 * @param {DocumentFragment} frag
 	 * @param {Vue} [host]
 	 * @param {Object} [scope]
+	 * @param {Fragment} [parentFrag]
 	 */
 	function Fragment(linker, vm, frag, host, scope, parentFrag) {
 	  this.children = [];
@@ -4218,7 +4468,7 @@
 	 */
 	
 	function attach(child) {
-	  if (!child._isAttached) {
+	  if (!child._isAttached && inDoc(child.$el)) {
 	    child._callHook('attached');
 	  }
 	}
@@ -4230,7 +4480,7 @@
 	 */
 	
 	function detach(child) {
-	  if (child._isAttached) {
+	  if (child._isAttached && !inDoc(child.$el)) {
 	    child._callHook('detached');
 	  }
 	}
@@ -4300,6 +4550,7 @@
 	var vFor = {
 	
 	  priority: FOR,
+	  terminal: true,
 	
 	  params: ['track-by', 'stagger', 'enter-stagger', 'leave-stagger'],
 	
@@ -4409,7 +4660,9 @@
 	        // update data for track-by, object repeat &
 	        // primitive values.
 	        if (trackByKey || convertedFromObject || primitive) {
-	          frag.scope[alias] = value;
+	          withoutConversion(function () {
+	            frag.scope[alias] = value;
+	          });
 	        }
 	      } else {
 	        // new isntance
@@ -4499,7 +4752,11 @@
 	    // for two-way binding on alias
 	    scope.$forContext = this;
 	    // define scope properties
-	    defineReactive(scope, alias, value);
+	    // important: define the scope alias without forced conversion
+	    // so that frozen data structures remain non-reactive.
+	    withoutConversion(function () {
+	      defineReactive(scope, alias, value);
+	    });
 	    defineReactive(scope, '$index', index);
 	    if (key) {
 	      defineReactive(scope, '$key', key);
@@ -4875,6 +5132,7 @@
 	var vIf = {
 	
 	  priority: IF,
+	  terminal: true,
 	
 	  bind: function bind() {
 	    var el = this.el;
@@ -4883,12 +5141,11 @@
 	      var next = el.nextElementSibling;
 	      if (next && getAttr(next, 'v-else') !== null) {
 	        remove(next);
-	        this.elseFactory = new FragmentFactory(next._context || this.vm, next);
+	        this.elseEl = next;
 	      }
 	      // check main block
 	      this.anchor = createAnchor('v-if');
 	      replace(el, this.anchor);
-	      this.factory = new FragmentFactory(this.vm, el);
 	    } else {
 	      process.env.NODE_ENV !== 'production' && warn('v-if="' + this.expression + '" cannot be ' + 'used on an instance root element.');
 	      this.invalid = true;
@@ -4911,6 +5168,10 @@
 	      this.elseFrag.remove();
 	      this.elseFrag = null;
 	    }
+	    // lazy init factory
+	    if (!this.factory) {
+	      this.factory = new FragmentFactory(this.vm, this.el);
+	    }
 	    this.frag = this.factory.create(this._host, this._scope, this._frag);
 	    this.frag.before(this.anchor);
 	  },
@@ -4920,7 +5181,10 @@
 	      this.frag.remove();
 	      this.frag = null;
 	    }
-	    if (this.elseFactory && !this.elseFrag) {
+	    if (this.elseEl && !this.elseFrag) {
+	      if (!this.elseFactory) {
+	        this.elseFactory = new FragmentFactory(this.elseEl._context || this.vm, this.elseEl);
+	      }
 	      this.elseFrag = this.elseFactory.create(this._host, this._scope, this._frag);
 	      this.elseFrag.before(this.anchor);
 	    }
@@ -5009,6 +5273,10 @@
 	      });
 	      this.on('blur', function () {
 	        self.focused = false;
+	        // do not sync value after fragment removal (#2017)
+	        if (!self._frag || self._frag.inserted) {
+	          self.rawListener();
+	        }
 	      });
 	    }
 	
@@ -5456,7 +5724,7 @@
 	    }
 	    // key filter
 	    var keys = Object.keys(this.modifiers).filter(function (key) {
-	      return key !== 'stop' && key !== 'prevent';
+	      return key !== 'stop' && key !== 'prevent' && key !== 'self';
 	    });
 	    if (keys.length) {
 	      handler = keyFilter(handler, keys);
@@ -5790,22 +6058,18 @@
 	
 	  handleObject: function handleObject(value) {
 	    this.cleanup(value);
-	    var keys = this.prevKeys = Object.keys(value);
-	    for (var i = 0, l = keys.length; i < l; i++) {
-	      var key = keys[i];
-	      if (value[key]) {
-	        addClass(this.el, key);
-	      } else {
-	        removeClass(this.el, key);
-	      }
-	    }
+	    this.prevKeys = Object.keys(value);
+	    setObjectClasses(this.el, value);
 	  },
 	
 	  handleArray: function handleArray(value) {
 	    this.cleanup(value);
 	    for (var i = 0, l = value.length; i < l; i++) {
-	      if (value[i]) {
-	        addClass(this.el, value[i]);
+	      var val = value[i];
+	      if (val && isPlainObject(val)) {
+	        setObjectClasses(this.el, val);
+	      } else if (val && typeof val === 'string') {
+	        addClass(this.el, val);
 	      }
 	    }
 	    this.prevKeys = value.slice();
@@ -5816,13 +6080,29 @@
 	      var i = this.prevKeys.length;
 	      while (i--) {
 	        var key = this.prevKeys[i];
-	        if (key && (!value || !contains(value, key))) {
+	        if (!key) continue;
+	        if (isPlainObject(key)) {
+	          var keys = Object.keys(key);
+	          for (var k = 0; k < keys.length; k++) {
+	            removeClass(this.el, keys[k]);
+	          }
+	        } else {
 	          removeClass(this.el, key);
 	        }
 	      }
 	    }
 	  }
 	};
+	
+	function setObjectClasses(el, obj) {
+	  var keys = Object.keys(obj);
+	  for (var i = 0, l = keys.length; i < l; i++) {
+	    var key = keys[i];
+	    if (obj[key]) {
+	      addClass(el, key);
+	    }
+	  }
+	}
 	
 	function stringToObject(value) {
 	  var res = {};
@@ -5832,10 +6112,6 @@
 	    res[keys[i]] = true;
 	  }
 	  return res;
-	}
-	
-	function contains(value, key) {
-	  return isArray(value) ? value.indexOf(key) > -1 : hasOwn(value, key);
 	}
 	
 	var component = {
@@ -5934,16 +6210,19 @@
 	  /**
 	   * Resolve the component constructor to use when creating
 	   * the child vm.
+	   *
+	   * @param {String|Function} value
+	   * @param {Function} cb
 	   */
 	
-	  resolveComponent: function resolveComponent(id, cb) {
+	  resolveComponent: function resolveComponent(value, cb) {
 	    var self = this;
 	    this.pendingComponentCb = cancellable(function (Component) {
-	      self.ComponentName = Component.options.name || id;
+	      self.ComponentName = Component.options.name || (typeof value === 'string' ? value : null);
 	      self.Component = Component;
 	      cb();
 	    });
-	    this.vm._resolveComponent(id, this.pendingComponentCb);
+	    this.vm._resolveComponent(value, this.pendingComponentCb);
 	  },
 	
 	  /**
@@ -6075,13 +6354,16 @@
 	
 	  unbuild: function unbuild(defer) {
 	    if (this.waitingFor) {
-	      this.waitingFor.$destroy();
+	      if (!this.keepAlive) {
+	        this.waitingFor.$destroy();
+	      }
 	      this.waitingFor = null;
 	    }
 	    var child = this.childVM;
 	    if (!child || this.keepAlive) {
 	      if (child) {
 	        // remove ref
+	        child._inactive = true;
 	        child._updateRef(true);
 	      }
 	      return;
@@ -6134,10 +6416,8 @@
 	    var self = this;
 	    var current = this.childVM;
 	    // for devtool inspection
-	    if (process.env.NODE_ENV !== 'production') {
-	      if (current) current._inactive = true;
-	      target._inactive = false;
-	    }
+	    if (current) current._inactive = true;
+	    target._inactive = false;
 	    this.childVM = target;
 	    switch (self.params.transitionMode) {
 	      case 'in-out':
@@ -6195,6 +6475,288 @@
 	  }
 	}
 	
+	var propBindingModes = config._propBindingModes;
+	var empty = {};
+	
+	// regexes
+	var identRE$1 = /^[$_a-zA-Z]+[\w$]*$/;
+	var settablePathRE = /^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*|\[[^\[\]]+\])*$/;
+	
+	/**
+	 * Compile props on a root element and return
+	 * a props link function.
+	 *
+	 * @param {Element|DocumentFragment} el
+	 * @param {Array} propOptions
+	 * @return {Function} propsLinkFn
+	 */
+	
+	function compileProps(el, propOptions) {
+	  var props = [];
+	  var names = Object.keys(propOptions);
+	  var i = names.length;
+	  var options, name, attr, value, path, parsed, prop;
+	  while (i--) {
+	    name = names[i];
+	    options = propOptions[name] || empty;
+	
+	    if (process.env.NODE_ENV !== 'production' && name === '$data') {
+	      warn('Do not use $data as prop.');
+	      continue;
+	    }
+	
+	    // props could contain dashes, which will be
+	    // interpreted as minus calculations by the parser
+	    // so we need to camelize the path here
+	    path = camelize(name);
+	    if (!identRE$1.test(path)) {
+	      process.env.NODE_ENV !== 'production' && warn('Invalid prop key: "' + name + '". Prop keys ' + 'must be valid identifiers.');
+	      continue;
+	    }
+	
+	    prop = {
+	      name: name,
+	      path: path,
+	      options: options,
+	      mode: propBindingModes.ONE_WAY,
+	      raw: null
+	    };
+	
+	    attr = hyphenate(name);
+	    // first check dynamic version
+	    if ((value = getBindAttr(el, attr)) === null) {
+	      if ((value = getBindAttr(el, attr + '.sync')) !== null) {
+	        prop.mode = propBindingModes.TWO_WAY;
+	      } else if ((value = getBindAttr(el, attr + '.once')) !== null) {
+	        prop.mode = propBindingModes.ONE_TIME;
+	      }
+	    }
+	    if (value !== null) {
+	      // has dynamic binding!
+	      prop.raw = value;
+	      parsed = parseDirective(value);
+	      value = parsed.expression;
+	      prop.filters = parsed.filters;
+	      // check binding type
+	      if (isLiteral(value) && !parsed.filters) {
+	        // for expressions containing literal numbers and
+	        // booleans, there's no need to setup a prop binding,
+	        // so we can optimize them as a one-time set.
+	        prop.optimizedLiteral = true;
+	      } else {
+	        prop.dynamic = true;
+	        // check non-settable path for two-way bindings
+	        if (process.env.NODE_ENV !== 'production' && prop.mode === propBindingModes.TWO_WAY && !settablePathRE.test(value)) {
+	          prop.mode = propBindingModes.ONE_WAY;
+	          warn('Cannot bind two-way prop with non-settable ' + 'parent path: ' + value);
+	        }
+	      }
+	      prop.parentPath = value;
+	
+	      // warn required two-way
+	      if (process.env.NODE_ENV !== 'production' && options.twoWay && prop.mode !== propBindingModes.TWO_WAY) {
+	        warn('Prop "' + name + '" expects a two-way binding type.');
+	      }
+	    } else if ((value = getAttr(el, attr)) !== null) {
+	      // has literal binding!
+	      prop.raw = value;
+	    } else if (process.env.NODE_ENV !== 'production') {
+	      // check possible camelCase prop usage
+	      var lowerCaseName = path.toLowerCase();
+	      value = /[A-Z\-]/.test(name) && (el.getAttribute(lowerCaseName) || el.getAttribute(':' + lowerCaseName) || el.getAttribute('v-bind:' + lowerCaseName) || el.getAttribute(':' + lowerCaseName + '.once') || el.getAttribute('v-bind:' + lowerCaseName + '.once') || el.getAttribute(':' + lowerCaseName + '.sync') || el.getAttribute('v-bind:' + lowerCaseName + '.sync'));
+	      if (value) {
+	        warn('Possible usage error for prop `' + lowerCaseName + '` - ' + 'did you mean `' + attr + '`? HTML is case-insensitive, remember to use ' + 'kebab-case for props in templates.');
+	      } else if (options.required) {
+	        // warn missing required
+	        warn('Missing required prop: ' + name);
+	      }
+	    }
+	    // push prop
+	    props.push(prop);
+	  }
+	  return makePropsLinkFn(props);
+	}
+	
+	/**
+	 * Build a function that applies props to a vm.
+	 *
+	 * @param {Array} props
+	 * @return {Function} propsLinkFn
+	 */
+	
+	function makePropsLinkFn(props) {
+	  return function propsLinkFn(vm, scope) {
+	    // store resolved props info
+	    vm._props = {};
+	    var i = props.length;
+	    var prop, path, options, value, raw;
+	    while (i--) {
+	      prop = props[i];
+	      raw = prop.raw;
+	      path = prop.path;
+	      options = prop.options;
+	      vm._props[path] = prop;
+	      if (raw === null) {
+	        // initialize absent prop
+	        initProp(vm, prop, undefined);
+	      } else if (prop.dynamic) {
+	        // dynamic prop
+	        if (prop.mode === propBindingModes.ONE_TIME) {
+	          // one time binding
+	          value = (scope || vm._context || vm).$get(prop.parentPath);
+	          initProp(vm, prop, value);
+	        } else {
+	          if (vm._context) {
+	            // dynamic binding
+	            vm._bindDir({
+	              name: 'prop',
+	              def: propDef,
+	              prop: prop
+	            }, null, null, scope); // el, host, scope
+	          } else {
+	              // root instance
+	              initProp(vm, prop, vm.$get(prop.parentPath));
+	            }
+	        }
+	      } else if (prop.optimizedLiteral) {
+	        // optimized literal, cast it and just set once
+	        var stripped = stripQuotes(raw);
+	        value = stripped === raw ? toBoolean(toNumber(raw)) : stripped;
+	        initProp(vm, prop, value);
+	      } else {
+	        // string literal, but we need to cater for
+	        // Boolean props with no value, or with same
+	        // literal value (e.g. disabled="disabled")
+	        // see https://github.com/vuejs/vue-loader/issues/182
+	        value = options.type === Boolean && (raw === '' || raw === hyphenate(prop.name)) ? true : raw;
+	        initProp(vm, prop, value);
+	      }
+	    }
+	  };
+	}
+	
+	/**
+	 * Set a prop's initial value on a vm and its data object.
+	 *
+	 * @param {Vue} vm
+	 * @param {Object} prop
+	 * @param {*} value
+	 */
+	
+	function initProp(vm, prop, value) {
+	  var key = prop.path;
+	  value = coerceProp(prop, value);
+	  if (value === undefined) {
+	    value = getPropDefaultValue(vm, prop.options);
+	  }
+	  if (assertProp(prop, value)) {
+	    defineReactive(vm, key, value);
+	  }
+	}
+	
+	/**
+	 * Get the default value of a prop.
+	 *
+	 * @param {Vue} vm
+	 * @param {Object} options
+	 * @return {*}
+	 */
+	
+	function getPropDefaultValue(vm, options) {
+	  // no default, return undefined
+	  if (!hasOwn(options, 'default')) {
+	    // absent boolean value defaults to false
+	    return options.type === Boolean ? false : undefined;
+	  }
+	  var def = options['default'];
+	  // warn against non-factory defaults for Object & Array
+	  if (isObject(def)) {
+	    process.env.NODE_ENV !== 'production' && warn('Object/Array as default prop values will be shared ' + 'across multiple instances. Use a factory function ' + 'to return the default value instead.');
+	  }
+	  // call factory function for non-Function types
+	  return typeof def === 'function' && options.type !== Function ? def.call(vm) : def;
+	}
+	
+	/**
+	 * Assert whether a prop is valid.
+	 *
+	 * @param {Object} prop
+	 * @param {*} value
+	 */
+	
+	function assertProp(prop, value) {
+	  if (!prop.options.required && ( // non-required
+	  prop.raw === null || // abscent
+	  value == null) // null or undefined
+	  ) {
+	      return true;
+	    }
+	  var options = prop.options;
+	  var type = options.type;
+	  var valid = true;
+	  var expectedType;
+	  if (type) {
+	    if (type === String) {
+	      expectedType = 'string';
+	      valid = typeof value === expectedType;
+	    } else if (type === Number) {
+	      expectedType = 'number';
+	      valid = typeof value === 'number';
+	    } else if (type === Boolean) {
+	      expectedType = 'boolean';
+	      valid = typeof value === 'boolean';
+	    } else if (type === Function) {
+	      expectedType = 'function';
+	      valid = typeof value === 'function';
+	    } else if (type === Object) {
+	      expectedType = 'object';
+	      valid = isPlainObject(value);
+	    } else if (type === Array) {
+	      expectedType = 'array';
+	      valid = isArray(value);
+	    } else {
+	      valid = value instanceof type;
+	    }
+	  }
+	  if (!valid) {
+	    process.env.NODE_ENV !== 'production' && warn('Invalid prop: type check failed for ' + prop.path + '="' + prop.raw + '".' + ' Expected ' + formatType(expectedType) + ', got ' + formatValue(value) + '.');
+	    return false;
+	  }
+	  var validator = options.validator;
+	  if (validator) {
+	    if (!validator(value)) {
+	      process.env.NODE_ENV !== 'production' && warn('Invalid prop: custom validator check failed for ' + prop.path + '="' + prop.raw + '"');
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+	
+	/**
+	 * Force parsing value with coerce option.
+	 *
+	 * @param {*} value
+	 * @param {Object} options
+	 * @return {*}
+	 */
+	
+	function coerceProp(prop, value) {
+	  var coerce = prop.options.coerce;
+	  if (!coerce) {
+	    return value;
+	  }
+	  // coerce is a function
+	  return coerce(value);
+	}
+	
+	function formatType(val) {
+	  return val ? val.charAt(0).toUpperCase() + val.slice(1) : 'custom type';
+	}
+	
+	function formatValue(val) {
+	  return Object.prototype.toString.call(val).slice(8, -1);
+	}
+	
 	var bindingModes = config._propBindingModes;
 	
 	var propDef = {
@@ -6207,11 +6769,18 @@
 	    var childKey = prop.path;
 	    var parentKey = prop.parentPath;
 	    var twoWay = prop.mode === bindingModes.TWO_WAY;
+	    var isSimple = isSimplePath(parentKey);
 	
 	    var parentWatcher = this.parentWatcher = new Watcher(parent, parentKey, function (val) {
 	      val = coerceProp(prop, val);
 	      if (assertProp(prop, val)) {
-	        child[childKey] = val;
+	        if (isSimple) {
+	          withoutConversion(function () {
+	            child[childKey] = val;
+	          });
+	        } else {
+	          child[childKey] = val;
+	        }
 	      }
 	    }, {
 	      twoWay: twoWay,
@@ -6222,7 +6791,14 @@
 	    });
 	
 	    // set the child initial value.
-	    initProp(child, prop, parentWatcher.value);
+	    var value = parentWatcher.value;
+	    if (isSimple && value !== undefined) {
+	      withoutConversion(function () {
+	        initProp(child, prop, value);
+	      });
+	    } else {
+	      initProp(child, prop, value);
+	    }
 	
 	    // setup two-way binding
 	    if (twoWay) {
@@ -6289,6 +6865,32 @@
 	var TYPE_ANIMATION = 'animation';
 	var transDurationProp = transitionProp + 'Duration';
 	var animDurationProp = animationProp + 'Duration';
+	
+	/**
+	 * If a just-entered element is applied the
+	 * leave class while its enter transition hasn't started yet,
+	 * and the transitioned property has the same value for both
+	 * enter/leave, then the leave transition will be skipped and
+	 * the transitionend event never fires. This function ensures
+	 * its callback to be called after a transition has started
+	 * by waiting for double raf.
+	 *
+	 * It falls back to setTimeout on devices that support CSS
+	 * transitions but not raf (e.g. Android 4.2 browser) - since
+	 * these environments are usually slow, we are giving it a
+	 * relatively large timeout.
+	 */
+	
+	var raf = inBrowser && window.requestAnimationFrame;
+	var waitForTransitionStart = raf
+	/* istanbul ignore next */
+	? function (fn) {
+	  raf(function () {
+	    raf(fn);
+	  });
+	} : function (fn) {
+	  setTimeout(fn, 50);
+	};
 	
 	/**
 	 * A Transition object that encapsulates the state and logic
@@ -6374,19 +6976,13 @@
 	 */
 	
 	p$1.enterNextTick = function () {
-	  // Important hack:
-	  // in Chrome, if a just-entered element is applied the
-	  // leave class while its interpolated property still has
-	  // a very small value (within one frame), Chrome will
-	  // skip the leave transition entirely and not firing the
-	  // transtionend event. Therefore we need to protected
-	  // against such cases using a one-frame timeout.
-	  this.justEntered = true;
-	  var self = this;
-	  setTimeout(function () {
-	    self.justEntered = false;
-	  }, 17);
+	  var _this = this;
 	
+	  // prevent transition skipping
+	  this.justEntered = true;
+	  waitForTransitionStart(function () {
+	    _this.justEntered = false;
+	  });
 	  var enterDone = this.enterDone;
 	  var type = this.getCssTransitionType(this.enterClass);
 	  if (!this.pendingJsCb) {
@@ -6663,187 +7259,6 @@
 	  transition: transition$1
 	};
 	
-	var propBindingModes = config._propBindingModes;
-	var empty = {};
-	
-	// regexes
-	var identRE$1 = /^[$_a-zA-Z]+[\w$]*$/;
-	var settablePathRE = /^[A-Za-z_$][\w$]*(\.[A-Za-z_$][\w$]*|\[[^\[\]]+\])*$/;
-	
-	/**
-	 * Compile props on a root element and return
-	 * a props link function.
-	 *
-	 * @param {Element|DocumentFragment} el
-	 * @param {Array} propOptions
-	 * @return {Function} propsLinkFn
-	 */
-	
-	function compileProps(el, propOptions) {
-	  var props = [];
-	  var names = Object.keys(propOptions);
-	  var i = names.length;
-	  var options, name, attr, value, path, parsed, prop;
-	  while (i--) {
-	    name = names[i];
-	    options = propOptions[name] || empty;
-	
-	    if (process.env.NODE_ENV !== 'production' && name === '$data') {
-	      warn('Do not use $data as prop.');
-	      continue;
-	    }
-	
-	    // props could contain dashes, which will be
-	    // interpreted as minus calculations by the parser
-	    // so we need to camelize the path here
-	    path = camelize(name);
-	    if (!identRE$1.test(path)) {
-	      process.env.NODE_ENV !== 'production' && warn('Invalid prop key: "' + name + '". Prop keys ' + 'must be valid identifiers.');
-	      continue;
-	    }
-	
-	    prop = {
-	      name: name,
-	      path: path,
-	      options: options,
-	      mode: propBindingModes.ONE_WAY,
-	      raw: null
-	    };
-	
-	    attr = hyphenate(name);
-	    // first check dynamic version
-	    if ((value = getBindAttr(el, attr)) === null) {
-	      if ((value = getBindAttr(el, attr + '.sync')) !== null) {
-	        prop.mode = propBindingModes.TWO_WAY;
-	      } else if ((value = getBindAttr(el, attr + '.once')) !== null) {
-	        prop.mode = propBindingModes.ONE_TIME;
-	      }
-	    }
-	    if (value !== null) {
-	      // has dynamic binding!
-	      prop.raw = value;
-	      parsed = parseDirective(value);
-	      value = parsed.expression;
-	      prop.filters = parsed.filters;
-	      // check binding type
-	      if (isLiteral(value) && !parsed.filters) {
-	        // for expressions containing literal numbers and
-	        // booleans, there's no need to setup a prop binding,
-	        // so we can optimize them as a one-time set.
-	        prop.optimizedLiteral = true;
-	      } else {
-	        prop.dynamic = true;
-	        // check non-settable path for two-way bindings
-	        if (process.env.NODE_ENV !== 'production' && prop.mode === propBindingModes.TWO_WAY && !settablePathRE.test(value)) {
-	          prop.mode = propBindingModes.ONE_WAY;
-	          warn('Cannot bind two-way prop with non-settable ' + 'parent path: ' + value);
-	        }
-	      }
-	      prop.parentPath = value;
-	
-	      // warn required two-way
-	      if (process.env.NODE_ENV !== 'production' && options.twoWay && prop.mode !== propBindingModes.TWO_WAY) {
-	        warn('Prop "' + name + '" expects a two-way binding type.');
-	      }
-	    } else if ((value = getAttr(el, attr)) !== null) {
-	      // has literal binding!
-	      prop.raw = value;
-	    } else if (process.env.NODE_ENV !== 'production') {
-	      // check possible camelCase prop usage
-	      var lowerCaseName = path.toLowerCase();
-	      value = /[A-Z\-]/.test(name) && (el.getAttribute(lowerCaseName) || el.getAttribute(':' + lowerCaseName) || el.getAttribute('v-bind:' + lowerCaseName) || el.getAttribute(':' + lowerCaseName + '.once') || el.getAttribute('v-bind:' + lowerCaseName + '.once') || el.getAttribute(':' + lowerCaseName + '.sync') || el.getAttribute('v-bind:' + lowerCaseName + '.sync'));
-	      if (value) {
-	        warn('Possible usage error for prop `' + lowerCaseName + '` - ' + 'did you mean `' + attr + '`? HTML is case-insensitive, remember to use ' + 'kebab-case for props in templates.');
-	      } else if (options.required) {
-	        // warn missing required
-	        warn('Missing required prop: ' + name);
-	      }
-	    }
-	    // push prop
-	    props.push(prop);
-	  }
-	  return makePropsLinkFn(props);
-	}
-	
-	/**
-	 * Build a function that applies props to a vm.
-	 *
-	 * @param {Array} props
-	 * @return {Function} propsLinkFn
-	 */
-	
-	function makePropsLinkFn(props) {
-	  return function propsLinkFn(vm, scope) {
-	    // store resolved props info
-	    vm._props = {};
-	    var i = props.length;
-	    var prop, path, options, value, raw;
-	    while (i--) {
-	      prop = props[i];
-	      raw = prop.raw;
-	      path = prop.path;
-	      options = prop.options;
-	      vm._props[path] = prop;
-	      if (raw === null) {
-	        // initialize absent prop
-	        initProp(vm, prop, getDefault(vm, options));
-	      } else if (prop.dynamic) {
-	        // dynamic prop
-	        if (prop.mode === propBindingModes.ONE_TIME) {
-	          // one time binding
-	          value = (scope || vm._context || vm).$get(prop.parentPath);
-	          initProp(vm, prop, value);
-	        } else {
-	          if (vm._context) {
-	            // dynamic binding
-	            vm._bindDir({
-	              name: 'prop',
-	              def: propDef,
-	              prop: prop
-	            }, null, null, scope); // el, host, scope
-	          } else {
-	              // root instance
-	              initProp(vm, prop, vm.$get(prop.parentPath));
-	            }
-	        }
-	      } else if (prop.optimizedLiteral) {
-	        // optimized literal, cast it and just set once
-	        var stripped = stripQuotes(raw);
-	        value = stripped === raw ? toBoolean(toNumber(raw)) : stripped;
-	        initProp(vm, prop, value);
-	      } else {
-	        // string literal, but we need to cater for
-	        // Boolean props with no value
-	        value = options.type === Boolean && raw === '' ? true : raw;
-	        initProp(vm, prop, value);
-	      }
-	    }
-	  };
-	}
-	
-	/**
-	 * Get the default value of a prop.
-	 *
-	 * @param {Vue} vm
-	 * @param {Object} options
-	 * @return {*}
-	 */
-	
-	function getDefault(vm, options) {
-	  // no default, return undefined
-	  if (!hasOwn(options, 'default')) {
-	    // absent boolean value defaults to false
-	    return options.type === Boolean ? false : undefined;
-	  }
-	  var def = options['default'];
-	  // warn against non-factory defaults for Object & Array
-	  if (isObject(def)) {
-	    process.env.NODE_ENV !== 'production' && warn('Object/Array as default prop values will be shared ' + 'across multiple instances. Use a factory function ' + 'to return the default value instead.');
-	  }
-	  // call factory function for non-Function types
-	  return typeof def === 'function' && options.type !== Function ? def.call(vm) : def;
-	}
-	
 	// special binding prefixes
 	var bindRE = /^v-bind:|^:/;
 	var onRE = /^v-on:|^@/;
@@ -6851,11 +7266,9 @@
 	var modifierRE = /\.[^\.]+/g;
 	var transitionRE = /^(v-bind:|:)?transition$/;
 	
-	// terminal directives
-	var terminalDirectives = ['for', 'if'];
-	
 	// default directive priority
 	var DEFAULT_PRIORITY = 1000;
+	var DEFAULT_TERMINAL_PRIORITY = 2000;
 	
 	/**
 	 * Compile a template and return a reusable composite link
@@ -7128,9 +7541,10 @@
 	  }
 	  var linkFn;
 	  var hasAttrs = el.hasAttributes();
+	  var attrs = hasAttrs && toArray(el.attributes);
 	  // check terminal directives (for & if)
 	  if (hasAttrs) {
-	    linkFn = checkTerminalDirectives(el, options);
+	    linkFn = checkTerminalDirectives(el, attrs, options);
 	  }
 	  // check element directives
 	  if (!linkFn) {
@@ -7142,7 +7556,7 @@
 	  }
 	  // normal directives
 	  if (!linkFn && hasAttrs) {
-	    linkFn = compileDirectives(el.attributes, options);
+	    linkFn = compileDirectives(attrs, options);
 	  }
 	  return linkFn;
 	}
@@ -7371,11 +7785,12 @@
 	 * If it finds one, return a terminal link function.
 	 *
 	 * @param {Element} el
+	 * @param {Array} attrs
 	 * @param {Object} options
 	 * @return {Function} terminalLinkFn
 	 */
 	
-	function checkTerminalDirectives(el, options) {
+	function checkTerminalDirectives(el, attrs, options) {
 	  // skip v-pre
 	  if (getAttr(el, 'v-pre') !== null) {
 	    return skip;
@@ -7387,13 +7802,28 @@
 	      return skip;
 	    }
 	  }
-	  var value, dirName;
-	  for (var i = 0, l = terminalDirectives.length; i < l; i++) {
-	    dirName = terminalDirectives[i];
-	    value = el.getAttribute('v-' + dirName);
-	    if (value != null) {
-	      return makeTerminalNodeLinkFn(el, dirName, value, options);
+	
+	  var attr, name, value, modifiers, matched, dirName, rawName, arg, def, termDef;
+	  for (var i = 0, j = attrs.length; i < j; i++) {
+	    attr = attrs[i];
+	    modifiers = parseModifiers(attr.name);
+	    name = attr.name.replace(modifierRE, '');
+	    if (matched = name.match(dirAttrRE)) {
+	      def = resolveAsset(options, 'directives', matched[1]);
+	      if (def && def.terminal) {
+	        if (!termDef || (def.priority || DEFAULT_TERMINAL_PRIORITY) > termDef.priority) {
+	          termDef = def;
+	          rawName = attr.name;
+	          value = attr.value;
+	          dirName = matched[1];
+	          arg = matched[2];
+	        }
+	      }
 	    }
+	  }
+	
+	  if (termDef) {
+	    return makeTerminalNodeLinkFn(el, dirName, value, options, termDef, rawName, arg, modifiers);
 	  }
 	}
 	
@@ -7410,20 +7840,24 @@
 	 * @param {String} dirName
 	 * @param {String} value
 	 * @param {Object} options
-	 * @param {Object} [def]
+	 * @param {Object} def
+	 * @param {String} [rawName]
+	 * @param {String} [arg]
+	 * @param {Object} [modifiers]
 	 * @return {Function} terminalLinkFn
 	 */
 	
-	function makeTerminalNodeLinkFn(el, dirName, value, options, def) {
+	function makeTerminalNodeLinkFn(el, dirName, value, options, def, rawName, arg, modifiers) {
 	  var parsed = parseDirective(value);
 	  var descriptor = {
 	    name: dirName,
+	    arg: arg,
 	    expression: parsed.expression,
 	    filters: parsed.filters,
 	    raw: value,
-	    // either an element directive, or if/for
-	    // #2366 or custom terminal directive
-	    def: def || resolveAsset(options, 'directives', dirName)
+	    attr: rawName,
+	    modifiers: modifiers,
+	    def: def
 	  };
 	  // check ref for v-for and router-view
 	  if (dirName === 'for' || dirName === 'router-view') {
@@ -7735,7 +8169,7 @@
 	    if (!to.hasAttribute(name) && !specialCharRE.test(name)) {
 	      to.setAttribute(name, value);
 	    } else if (name === 'class' && !parseText(value)) {
-	      value.split(/\s+/).forEach(function (cls) {
+	      value.trim().split(/\s+/).forEach(function (cls) {
 	        addClass(to, cls);
 	      });
 	    }
@@ -7753,39 +8187,28 @@
 	 * @param {Vue} vm
 	 */
 	
-	function scanSlots(template, content, vm) {
+	function resolveSlots(vm, content) {
 	  if (!content) {
 	    return;
 	  }
-	  var contents = vm._slotContents = {};
-	  var slots = template.querySelectorAll('slot');
-	  if (slots.length) {
-	    var hasDefault, slot, name;
-	    for (var i = 0, l = slots.length; i < l; i++) {
-	      slot = slots[i];
-	      /* eslint-disable no-cond-assign */
-	      if (name = slot.getAttribute('name')) {
-	        select(slot, name);
-	      } else if (process.env.NODE_ENV !== 'production' && (name = getBindAttr(slot, 'name'))) {
-	        warn('<slot :name="' + name + '">: slot names cannot be dynamic.');
-	      } else {
-	        // default slot
-	        hasDefault = true;
-	      }
-	      /* eslint-enable no-cond-assign */
+	  var contents = vm._slotContents = Object.create(null);
+	  var el, name;
+	  for (var i = 0, l = content.children.length; i < l; i++) {
+	    el = content.children[i];
+	    /* eslint-disable no-cond-assign */
+	    if (name = el.getAttribute('slot')) {
+	      (contents[name] || (contents[name] = [])).push(el);
 	    }
-	    if (hasDefault) {
-	      contents['default'] = extractFragment(content.childNodes, content);
+	    /* eslint-enable no-cond-assign */
+	    if (process.env.NODE_ENV !== 'production' && getBindAttr(el, 'slot')) {
+	      warn('The "slot" attribute must be static.');
 	    }
 	  }
-	
-	  function select(slot, name) {
-	    // named slot
-	    var selector = '[slot="' + name + '"]';
-	    var nodes = content.querySelectorAll(selector);
-	    if (nodes.length) {
-	      contents[name] = extractFragment(nodes, content);
-	    }
+	  for (name in contents) {
+	    contents[name] = extractFragment(contents[name], content);
+	  }
+	  if (content.hasChildNodes()) {
+	    contents['default'] = extractFragment(content.childNodes, content);
 	  }
 	}
 	
@@ -7793,7 +8216,6 @@
 	 * Extract qualified content nodes from a node list.
 	 *
 	 * @param {NodeList} nodes
-	 * @param {Element} parent
 	 * @return {DocumentFragment}
 	 */
 	
@@ -7802,13 +8224,11 @@
 	  nodes = toArray(nodes);
 	  for (var i = 0, l = nodes.length; i < l; i++) {
 	    var node = nodes[i];
-	    if (node.parentNode === parent) {
-	      if (isTemplate(node) && !node.hasAttribute('v-if') && !node.hasAttribute('v-for')) {
-	        parent.removeChild(node);
-	        node = parseTemplate(node);
-	      }
-	      frag.appendChild(node);
+	    if (isTemplate(node) && !node.hasAttribute('v-if') && !node.hasAttribute('v-for')) {
+	      parent.removeChild(node);
+	      node = parseTemplate(node);
 	    }
+	    frag.appendChild(node);
 	  }
 	  return frag;
 	}
@@ -7819,9 +8239,8 @@
 		compile: compile,
 		compileAndLinkProps: compileAndLinkProps,
 		compileRoot: compileRoot,
-		terminalDirectives: terminalDirectives,
 		transclude: transclude,
-		scanSlots: scanSlots
+		resolveSlots: resolveSlots
 	});
 	
 	function stateMixin (Vue) {
@@ -7881,33 +8300,29 @@
 	   */
 	
 	  Vue.prototype._initData = function () {
-	    var propsData = this._data;
-	    var optionsDataFn = this.$options.data;
-	    var optionsData = optionsDataFn && optionsDataFn();
-	    var runtimeData;
-	    if (process.env.NODE_ENV !== 'production') {
-	      runtimeData = (typeof this._runtimeData === 'function' ? this._runtimeData() : this._runtimeData) || {};
-	      this._runtimeData = null;
+	    var dataFn = this.$options.data;
+	    var data = this._data = dataFn ? dataFn() : {};
+	    if (!isPlainObject(data)) {
+	      data = {};
+	      process.env.NODE_ENV !== 'production' && warn('data functions should return an object.');
 	    }
-	    if (optionsData) {
-	      this._data = optionsData;
-	      for (var prop in propsData) {
-	        if (process.env.NODE_ENV !== 'production' && hasOwn(optionsData, prop) && !hasOwn(runtimeData, prop)) {
-	          warn('Data field "' + prop + '" is already defined ' + 'as a prop. Use prop default value instead.');
-	        }
-	        if (this._props[prop].raw !== null || !hasOwn(optionsData, prop)) {
-	          set(optionsData, prop, propsData[prop]);
-	        }
-	      }
-	    }
-	    var data = this._data;
+	    var props = this._props;
+	    var runtimeData = this._runtimeData ? typeof this._runtimeData === 'function' ? this._runtimeData() : this._runtimeData : null;
 	    // proxy data on instance
 	    var keys = Object.keys(data);
 	    var i, key;
 	    i = keys.length;
 	    while (i--) {
 	      key = keys[i];
-	      this._proxy(key);
+	      // there are two scenarios where we can proxy a data key:
+	      // 1. it's not already defined as a prop
+	      // 2. it's provided via a instantiation option AND there are no
+	      //    template prop present
+	      if (!props || !hasOwn(props, key) || runtimeData && hasOwn(runtimeData, key) && props[key].raw === null) {
+	        this._proxy(key);
+	      } else if (process.env.NODE_ENV !== 'production') {
+	        warn('Data field "' + key + '" is already defined ' + 'as a prop. Use prop default value instead.');
+	      }
 	    }
 	    // observe data
 	    observe(data, this);
@@ -8243,18 +8658,21 @@
 	 * It registers a watcher with the expression and calls
 	 * the DOM update function when a change is triggered.
 	 *
-	 * @param {String} name
-	 * @param {Node} el
-	 * @param {Vue} vm
 	 * @param {Object} descriptor
 	 *                 - {String} name
 	 *                 - {Object} def
 	 *                 - {String} expression
 	 *                 - {Array<Object>} [filters]
+	 *                 - {Object} [modifiers]
 	 *                 - {Boolean} literal
 	 *                 - {String} attr
+	 *                 - {String} arg
 	 *                 - {String} raw
-	 * @param {Object} def - directive definition object
+	 *                 - {String} [ref]
+	 *                 - {Array<Object>} [interp]
+	 *                 - {Boolean} [hasOneTime]
+	 * @param {Vue} vm
+	 * @param {Node} el
 	 * @param {Vue} [host] - transclusion host component
 	 * @param {Object} [scope] - v-for scope
 	 * @param {Fragment} [frag] - owner fragment
@@ -8290,8 +8708,6 @@
 	 * Initialize the directive, mixin definition properties,
 	 * setup the watcher, call definition bind() and update()
 	 * if present.
-	 *
-	 * @param {Object} def
 	 */
 	
 	Directive.prototype._bind = function () {
@@ -8372,7 +8788,7 @@
 	  var i = params.length;
 	  var key, val, mappedKey;
 	  while (i--) {
-	    key = params[i];
+	    key = hyphenate(params[i]);
 	    mappedKey = camelize(key);
 	    val = getBindAttr(this.el, key);
 	    if (val != null) {
@@ -8585,9 +9001,8 @@
 	    var contextOptions = this._context && this._context.$options;
 	    var rootLinker = compileRoot(el, options, contextOptions);
 	
-	    // scan for slot distribution before compiling the content
-	    // so that it's decoupeld from slot/directive compilation order
-	    scanSlots(el, options._content, this);
+	    // resolve slot distribution
+	    resolveSlots(this, options._content);
 	
 	    // compile and link the rest
 	    var contentLinkFn;
@@ -8651,10 +9066,8 @@
 	  /**
 	   * Create and bind a directive to an element.
 	   *
-	   * @param {String} name - directive name
+	   * @param {Object} descriptor - parsed directive descriptor
 	   * @param {Node} node   - target node
-	   * @param {Object} desc - parsed directive descriptor
-	   * @param {Object} def  - directive definition object
 	   * @param {Vue} [host] - transclusion host component
 	   * @param {Object} [scope] - v-for scope
 	   * @param {Fragment} [frag] - owner fragment
@@ -8797,7 +9210,7 @@
 	  Vue.prototype._applyFilters = function (value, oldValue, filters, write) {
 	    var filter, fn, args, arg, offset, i, l, j, k;
 	    for (i = 0, l = filters.length; i < l; i++) {
-	      filter = filters[i];
+	      filter = filters[write ? l - i - 1 : i];
 	      fn = resolveAsset(this.$options, 'filters', filter.name);
 	      if (process.env.NODE_ENV !== 'production') {
 	        assertAsset(fn, 'filter', filter.name);
@@ -8825,14 +9238,19 @@
 	   * resolves asynchronously and caches the resolved
 	   * constructor on the factory.
 	   *
-	   * @param {String} id
+	   * @param {String|Function} value
 	   * @param {Function} cb
 	   */
 	
-	  Vue.prototype._resolveComponent = function (id, cb) {
-	    var factory = resolveAsset(this.$options, 'components', id);
-	    if (process.env.NODE_ENV !== 'production') {
-	      assertAsset(factory, 'component', id);
+	  Vue.prototype._resolveComponent = function (value, cb) {
+	    var factory;
+	    if (typeof value === 'function') {
+	      factory = value;
+	    } else {
+	      factory = resolveAsset(this.$options, 'components', value);
+	      if (process.env.NODE_ENV !== 'production') {
+	        assertAsset(factory, 'component', value);
+	      }
 	    }
 	    if (!factory) {
 	      return;
@@ -8859,7 +9277,7 @@
 	            cbs[i](res);
 	          }
 	        }, function reject(reason) {
-	          process.env.NODE_ENV !== 'production' && warn('Failed to resolve async component: ' + id + '. ' + (reason ? '\nReason: ' + reason : ''));
+	          process.env.NODE_ENV !== 'production' && warn('Failed to resolve async component' + (typeof value === 'string' ? ': ' + value : '') + '. ' + (reason ? '\nReason: ' + reason : ''));
 	        });
 	      }
 	    } else {
@@ -9019,8 +9437,14 @@
 	    }
 	    // include computed fields
 	    if (!path) {
-	      for (var key in this.$options.computed) {
+	      var key;
+	      for (key in this.$options.computed) {
 	        data[key] = clean(this[key]);
+	      }
+	      if (this._props) {
+	        for (key in this._props) {
+	          data[key] = clean(this[key]);
+	        }
 	      }
 	    }
 	    console.log(data);
@@ -9459,6 +9883,9 @@
 	  /**
 	   * Teardown the instance, simply delegate to the internal
 	   * _destroy.
+	   *
+	   * @param {Boolean} remove
+	   * @param {Boolean} deferCleanup
 	   */
 	
 	  Vue.prototype.$destroy = function (remove, deferCleanup) {
@@ -9471,6 +9898,8 @@
 	   *
 	   * @param {Element|DocumentFragment} el
 	   * @param {Vue} [host]
+	   * @param {Object} [scope]
+	   * @param {Fragment} [frag]
 	   * @return {Function}
 	   */
 	
@@ -9653,12 +10082,12 @@
 	    if (j) {
 	      while (j--) {
 	        key = keys[j];
-	        if (key === '$key' && contains$1(item.$key, search) || contains$1(getPath(val, key), search)) {
+	        if (key === '$key' && contains(item.$key, search) || contains(getPath(val, key), search)) {
 	          res.push(item);
 	          break;
 	        }
 	      }
-	    } else if (contains$1(item, search)) {
+	    } else if (contains(item, search)) {
 	      res.push(item);
 	    }
 	  }
@@ -9697,20 +10126,20 @@
 	 * @param {String} search
 	 */
 	
-	function contains$1(val, search) {
+	function contains(val, search) {
 	  var i;
 	  if (isPlainObject(val)) {
 	    var keys = Object.keys(val);
 	    i = keys.length;
 	    while (i--) {
-	      if (contains$1(val[keys[i]], search)) {
+	      if (contains(val[keys[i]], search)) {
 	        return true;
 	      }
 	    }
 	  } else if (isArray(val)) {
 	    i = val.length;
 	    while (i--) {
-	      if (contains$1(val[i], search)) {
+	      if (contains(val[i], search)) {
 	        return true;
 	      }
 	    }
@@ -10007,21 +10436,23 @@
 	
 	installGlobalAPI(Vue);
 	
-	Vue.version = '1.0.17';
+	Vue.version = '1.0.20';
 	
 	// devtools global hook
 	/* istanbul ignore next */
-	if (devtools) {
-	  devtools.emit('init', Vue);
-	} else if (process.env.NODE_ENV !== 'production' && inBrowser && /Chrome\/\d+/.test(window.navigator.userAgent)) {
-	  console.log('Download the Vue Devtools for a better development experience:\n' + 'https://github.com/vuejs/vue-devtools');
+	if (config.devtools) {
+	  if (devtools) {
+	    devtools.emit('init', Vue);
+	  } else if (process.env.NODE_ENV !== 'production' && inBrowser && /Chrome\/\d+/.test(window.navigator.userAgent)) {
+	    console.log('Download the Vue Devtools for a better development experience:\n' + 'https://github.com/vuejs/vue-devtools');
+	  }
 	}
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(37)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(60)))
 
 /***/ },
-/* 37 */
+/* 60 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -10118,11 +10549,11 @@
 
 
 /***/ },
-/* 38 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
-	 * vue-router v0.7.11
+	 * vue-router v0.7.12
 	 * (c) 2016 Evan You
 	 * Released under the MIT License.
 	 */
@@ -10247,6 +10678,21 @@
 	  var specials = ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'];
 	
 	  var escapeRegex = new RegExp('(\\' + specials.join('|\\') + ')', 'g');
+	
+	  var noWarning = false;
+	  function warn(msg) {
+	    if (!noWarning && typeof console !== 'undefined') {
+	      console.error('[vue-router] ' + msg);
+	    }
+	  }
+	
+	  function tryDecode(uri, asComponent) {
+	    try {
+	      return asComponent ? decodeURIComponent(uri) : decodeURI(uri);
+	    } catch (e) {
+	      warn('malformed URI' + (asComponent ? ' component: ' : ': ') + uri);
+	    }
+	  }
 	
 	  function isArray(test) {
 	    return Object.prototype.toString.call(test) === "[object Array]";
@@ -10588,7 +11034,7 @@
 	  function decodeQueryParamPart(part) {
 	    // http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1
 	    part = part.replace(/\+/gm, '%20');
-	    return decodeURIComponent(part);
+	    return tryDecode(part, true);
 	  }
 	
 	  // The main interface
@@ -10770,7 +11216,8 @@
 	      return queryParams;
 	    },
 	
-	    recognize: function recognize(path) {
+	    recognize: function recognize(path, silent) {
+	      noWarning = silent;
 	      var states = [this.rootState],
 	          pathLen,
 	          i,
@@ -10783,10 +11230,13 @@
 	      if (queryStart !== -1) {
 	        var queryString = path.substr(queryStart + 1, path.length);
 	        path = path.substr(0, queryStart);
-	        queryParams = this.parseQueryString(queryString);
+	        if (queryString) {
+	          queryParams = this.parseQueryString(queryString);
+	        }
 	      }
 	
-	      path = decodeURI(path);
+	      path = tryDecode(path);
+	      if (!path) return;
 	
 	      // DEBUG GROUP path
 	
@@ -10833,8 +11283,6 @@
 	
 	  RouteRecognizer.prototype.map = map;
 	
-	  RouteRecognizer.VERSION = '0.1.9';
-	
 	  var genQuery = RouteRecognizer.prototype.generateQueryString;
 	
 	  // export default for holding the Vue reference
@@ -10845,13 +11293,10 @@
 	   * @param {String} msg
 	   */
 	
-	  function warn(msg) {
+	  function warn$1(msg) {
 	    /* istanbul ignore next */
-	    if (window.console) {
-	      console.warn('[vue-router] ' + msg);
-	      if (!exports$1.Vue || exports$1.Vue.config.debug) {
-	        console.warn(new Error('warning stack trace:').stack);
-	      }
+	    if (typeof console !== 'undefined') {
+	      console.error('[vue-router] ' + msg);
 	    }
 	  }
 	
@@ -10970,7 +11415,7 @@
 	      var val = params[key];
 	      /* istanbul ignore if */
 	      if (!val) {
-	        warn('param "' + key + '" not found when generating ' + 'path for "' + path + '" with params ' + JSON.stringify(params));
+	        warn$1('param "' + key + '" not found when generating ' + 'path for "' + path + '" with params ' + JSON.stringify(params));
 	      }
 	      return val || '';
 	    });
@@ -10988,7 +11433,7 @@
 	      var onChange = _ref.onChange;
 	      babelHelpers.classCallCheck(this, HTML5History);
 	
-	      if (root) {
+	      if (root && root !== '/') {
 	        // make sure there's the starting slash
 	        if (root.charAt(0) !== '/') {
 	          root = '/' + root;
@@ -11009,7 +11454,7 @@
 	      var _this = this;
 	
 	      this.listener = function (e) {
-	        var url = decodeURI(location.pathname + location.search);
+	        var url = location.pathname + location.search;
 	        if (_this.root) {
 	          url = url.replace(_this.rootRE, '');
 	        }
@@ -11085,7 +11530,7 @@
 	        // note it's possible to have queries in both the actual URL
 	        // and the hash fragment itself.
 	        var query = location.search && path.indexOf('?') > -1 ? '&' + location.search.slice(1) : location.search;
-	        self.onChange(decodeURI(path.replace(/^#!?/, '') + query));
+	        self.onChange(path.replace(/^#!?/, '') + query);
 	      };
 	      window.addEventListener('hashchange', this.listener);
 	      this.listener();
@@ -11658,7 +12103,7 @@
 	      var onError = function onError(err) {
 	        postActivate ? next() : abort();
 	        if (err && !transition.router._suppress) {
-	          warn('Uncaught error during transition: ');
+	          warn$1('Uncaught error during transition: ');
 	          throw err instanceof Error ? err : new Error(err);
 	        }
 	      };
@@ -11678,7 +12123,7 @@
 	      // advance the transition to the next step
 	      var next = function next() {
 	        if (nextCalled) {
-	          warn('transition.next() should be called only once.');
+	          warn$1('transition.next() should be called only once.');
 	          return;
 	        }
 	        nextCalled = true;
@@ -11788,7 +12233,7 @@
 	    return val ? Array.prototype.slice.call(val) : [];
 	  }
 	
-	  var internalKeysRE = /^(component|subRoutes)$/;
+	  var internalKeysRE = /^(component|subRoutes|fullPath)$/;
 	
 	  /**
 	   * Route Context Object
@@ -11825,9 +12270,13 @@
 	    }
 	    // expose path and router
 	    this.path = path;
-	    this.router = router;
 	    // for internal use
 	    this.matched = matched || router._notFoundHandler;
+	    // internal reference to router
+	    Object.defineProperty(this, 'router', {
+	      enumerable: false,
+	      value: router
+	    });
 	    // Important: freeze self to prevent observation
 	    Object.freeze(this);
 	  };
@@ -11915,7 +12364,7 @@
 	        var route = this.vm.$route;
 	        /* istanbul ignore if */
 	        if (!route) {
-	          warn('<router-view> can only be used inside a ' + 'router-enabled app.');
+	          warn$1('<router-view> can only be used inside a ' + 'router-enabled app.');
 	          return;
 	        }
 	        // force dynamic directive so v-component doesn't
@@ -11980,39 +12429,62 @@
 	  function Link (Vue) {
 	    var _Vue$util = Vue.util;
 	    var _bind = _Vue$util.bind;
+	    var getAttr = _Vue$util.getAttr;
 	    var isObject = _Vue$util.isObject;
 	    var addClass = _Vue$util.addClass;
 	    var removeClass = _Vue$util.removeClass;
 	
+	    var onPriority = Vue.directive('on').priority;
+	    var LINK_UPDATE = '__vue-router-link-update__';
+	
+	    var activeId = 0;
+	
 	    Vue.directive('link-active', {
-	      priority: 1001,
+	      priority: 9999,
 	      bind: function bind() {
-	        this.el.__v_link_active = true;
+	        var _this = this;
+	
+	        var id = String(activeId++);
+	        // collect v-links contained within this element.
+	        // we need do this here before the parent-child relationship
+	        // gets messed up by terminal directives (if, for, components)
+	        var childLinks = this.el.querySelectorAll('[v-link]');
+	        for (var i = 0, l = childLinks.length; i < l; i++) {
+	          var link = childLinks[i];
+	          var existingId = link.getAttribute(LINK_UPDATE);
+	          var value = existingId ? existingId + ',' + id : id;
+	          // leave a mark on the link element which can be persisted
+	          // through fragment clones.
+	          link.setAttribute(LINK_UPDATE, value);
+	        }
+	        this.vm.$on(LINK_UPDATE, this.cb = function (link, path) {
+	          if (link.activeIds.indexOf(id) > -1) {
+	            link.updateClasses(path, _this.el);
+	          }
+	        });
+	      },
+	      unbind: function unbind() {
+	        this.vm.$off(LINK_UPDATE, this.cb);
 	      }
 	    });
 	
 	    Vue.directive('link', {
-	      priority: 1000,
+	      priority: onPriority - 2,
 	
 	      bind: function bind() {
 	        var vm = this.vm;
 	        /* istanbul ignore if */
 	        if (!vm.$route) {
-	          warn('v-link can only be used inside a router-enabled app.');
+	          warn$1('v-link can only be used inside a router-enabled app.');
 	          return;
 	        }
 	        this.router = vm.$route.router;
 	        // update things when the route changes
 	        this.unwatch = vm.$watch('$route', _bind(this.onRouteUpdate, this));
-	        // check if active classes should be applied to a different element
-	        this.activeEl = this.el;
-	        var parent = this.el.parentNode;
-	        while (parent) {
-	          if (parent.__v_link_active) {
-	            this.activeEl = parent;
-	            break;
-	          }
-	          parent = parent.parentNode;
+	        // check v-link-active ids
+	        var activeIds = getAttr(this.el, LINK_UPDATE);
+	        if (activeIds) {
+	          this.activeIds = activeIds.split(',');
 	        }
 	        // no need to handle click if link expects to be opened
 	        // in a new window/tab.
@@ -12060,8 +12532,12 @@
 	          }
 	          if (el.tagName === 'A' && sameOrigin(el)) {
 	            e.preventDefault();
+	            var path = el.pathname;
+	            if (this.router.history.root) {
+	              path = path.replace(this.router.history.rootRE, '');
+	            }
 	            this.router.go({
-	              path: el.pathname,
+	              path: path,
 	              replace: target && target.replace,
 	              append: target && target.append
 	            });
@@ -12070,15 +12546,19 @@
 	      },
 	
 	      onRouteUpdate: function onRouteUpdate(route) {
-	        // router._stringifyPath is dependent on current route
+	        // router.stringifyPath is dependent on current route
 	        // and needs to be called again whenver route changes.
-	        var newPath = this.router._stringifyPath(this.target);
+	        var newPath = this.router.stringifyPath(this.target);
 	        if (this.path !== newPath) {
 	          this.path = newPath;
 	          this.updateActiveMatch();
 	          this.updateHref();
 	        }
-	        this.updateClasses(route.path);
+	        if (this.activeIds) {
+	          this.vm.$emit(LINK_UPDATE, this, route.path);
+	        } else {
+	          this.updateClasses(route.path, this.el);
+	        }
 	      },
 	
 	      updateActiveMatch: function updateActiveMatch() {
@@ -12101,12 +12581,11 @@
 	        }
 	      },
 	
-	      updateClasses: function updateClasses(path) {
-	        var el = this.activeEl;
+	      updateClasses: function updateClasses(path, el) {
 	        var activeClass = this.activeClass || this.router._linkActiveClass;
 	        // clear old class
-	        if (this.prevActiveClass !== activeClass) {
-	          removeClass(el, this.prevActiveClass);
+	        if (this.prevActiveClass && this.prevActiveClass !== activeClass) {
+	          toggleClasses(el, this.prevActiveClass, removeClass);
 	        }
 	        // remove query string before matching
 	        var dest = this.path.replace(queryStringRE, '');
@@ -12116,15 +12595,15 @@
 	          if (dest === path ||
 	          // also allow additional trailing slash
 	          dest.charAt(dest.length - 1) !== '/' && dest === path.replace(trailingSlashRE, '')) {
-	            addClass(el, activeClass);
+	            toggleClasses(el, activeClass, addClass);
 	          } else {
-	            removeClass(el, activeClass);
+	            toggleClasses(el, activeClass, removeClass);
 	          }
 	        } else {
 	          if (this.activeRE && this.activeRE.test(path)) {
-	            addClass(el, activeClass);
+	            toggleClasses(el, activeClass, addClass);
 	          } else {
-	            removeClass(el, activeClass);
+	            toggleClasses(el, activeClass, removeClass);
 	          }
 	        }
 	      },
@@ -12137,6 +12616,20 @@
 	
 	    function sameOrigin(link) {
 	      return link.protocol === location.protocol && link.hostname === location.hostname && link.port === location.port;
+	    }
+	
+	    // this function is copied from v-bind:class implementation until
+	    // we properly expose it...
+	    function toggleClasses(el, key, fn) {
+	      key = key.trim();
+	      if (key.indexOf(' ') === -1) {
+	        fn(el, key);
+	        return;
+	      }
+	      var keys = key.split(/\s+/);
+	      for (var i = 0, l = keys.length; i < l; i++) {
+	        fn(el, keys[i]);
+	      }
 	    }
 	  }
 	
@@ -12346,7 +12839,7 @@
 	        replace = path.replace;
 	        append = path.append;
 	      }
-	      path = this._stringifyPath(path);
+	      path = this.stringifyPath(path);
 	      if (path) {
 	        this.history.go(path, replace, append);
 	      }
@@ -12377,7 +12870,7 @@
 	    Router.prototype.start = function start(App, container, cb) {
 	      /* istanbul ignore if */
 	      if (this._started) {
-	        warn('already started.');
+	        warn$1('already started.');
 	        return;
 	      }
 	      this._started = true;
@@ -12419,6 +12912,41 @@
 	    Router.prototype.stop = function stop() {
 	      this.history.stop();
 	      this._started = false;
+	    };
+	
+	    /**
+	     * Normalize named route object / string paths into
+	     * a string.
+	     *
+	     * @param {Object|String|Number} path
+	     * @return {String}
+	     */
+	
+	    Router.prototype.stringifyPath = function stringifyPath(path) {
+	      var generatedPath = '';
+	      if (path && typeof path === 'object') {
+	        if (path.name) {
+	          var extend = Vue.util.extend;
+	          var currentParams = this._currentTransition && this._currentTransition.to.params;
+	          var targetParams = path.params || {};
+	          var params = currentParams ? extend(extend({}, currentParams), targetParams) : targetParams;
+	          generatedPath = encodeURI(this._recognizer.generate(path.name, params));
+	        } else if (path.path) {
+	          generatedPath = encodeURI(path.path);
+	        }
+	        if (path.query) {
+	          // note: the generated query string is pre-URL-encoded by the recognizer
+	          var query = this._recognizer.generateQueryString(path.query);
+	          if (generatedPath.indexOf('?') > -1) {
+	            generatedPath += '&' + query.slice(1);
+	          } else {
+	            generatedPath += query;
+	          }
+	        }
+	      } else {
+	        generatedPath = encodeURI(path ? path + '' : '');
+	      }
+	      return generatedPath;
 	    };
 	
 	    // Internal methods ======================================
@@ -12523,7 +13051,7 @@
 	     */
 	
 	    Router.prototype._checkGuard = function _checkGuard(path) {
-	      var matched = this._guardRecognizer.recognize(path);
+	      var matched = this._guardRecognizer.recognize(path, true);
 	      if (matched) {
 	        matched[0].handler(matched[0], matched.queryParams);
 	        return true;
@@ -12686,43 +13214,6 @@
 	      }
 	    };
 	
-	    /**
-	     * Normalize named route object / string paths into
-	     * a string.
-	     *
-	     * @param {Object|String|Number} path
-	     * @return {String}
-	     */
-	
-	    Router.prototype._stringifyPath = function _stringifyPath(path) {
-	      var fullPath = '';
-	      if (path && typeof path === 'object') {
-	        if (path.name) {
-	          var extend = Vue.util.extend;
-	          var currentParams = this._currentTransition && this._currentTransition.to.params;
-	          var targetParams = path.params || {};
-	          var params = currentParams ? extend(extend({}, currentParams), targetParams) : targetParams;
-	          if (path.query) {
-	            params.queryParams = path.query;
-	          }
-	          fullPath = this._recognizer.generate(path.name, params);
-	        } else if (path.path) {
-	          fullPath = path.path;
-	          if (path.query) {
-	            var query = this._recognizer.generateQueryString(path.query);
-	            if (fullPath.indexOf('?') > -1) {
-	              fullPath += '&' + query.slice(1);
-	            } else {
-	              fullPath += query;
-	            }
-	          }
-	        }
-	      } else {
-	        fullPath = path ? path + '' : '';
-	      }
-	      return encodeURI(fullPath);
-	    };
-	
 	    return Router;
 	  })();
 	
@@ -12734,7 +13225,7 @@
 	    /* istanbul ignore if */
 	    if (typeof comp !== 'function') {
 	      handler.component = null;
-	      warn('invalid component for route "' + path + '".');
+	      warn$1('invalid component for route "' + path + '".');
 	    }
 	  }
 	
@@ -12750,7 +13241,7 @@
 	  Router.install = function (externalVue) {
 	    /* istanbul ignore if */
 	    if (Router.installed) {
-	      warn('already installed.');
+	      warn$1('already installed.');
 	      return;
 	    }
 	    Vue = externalVue;
@@ -12772,7 +13263,7 @@
 	}));
 
 /***/ },
-/* 39 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12781,11 +13272,11 @@
 	    value: true
 	});
 	
-	var _vue = __webpack_require__(36);
+	var _vue = __webpack_require__(59);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _vuex = __webpack_require__(40);
+	var _vuex = __webpack_require__(63);
 	
 	var _vuex2 = _interopRequireDefault(_vuex);
 	
@@ -12850,11 +13341,11 @@
 	});
 
 /***/ },
-/* 40 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*!
-	 * Vuex v0.5.1
+	 * Vuex v0.6.2
 	 * (c) 2016 Evan You
 	 * Released under the MIT License.
 	 */
@@ -12894,6 +13385,16 @@
 	      return Constructor;
 	    };
 	  }();
+	
+	  babelHelpers.toConsumableArray = function (arr) {
+	    if (Array.isArray(arr)) {
+	      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+	
+	      return arr2;
+	    } else {
+	      return Array.from(arr);
+	    }
+	  };
 	
 	  babelHelpers;
 	
@@ -12947,6 +13448,31 @@
 	    }
 	  }
 	
+	  /**
+	   * Hacks to get access to Vue internals.
+	   * Maybe we should expose these...
+	   */
+	
+	  var Watcher = void 0;
+	  function getWatcher(vm) {
+	    if (!Watcher) {
+	      var unwatch = vm.$watch('__vuex__', function (a) {
+	        return a;
+	      });
+	      Watcher = vm._watchers[0].constructor;
+	      unwatch();
+	    }
+	    return Watcher;
+	  }
+	
+	  var Dep = void 0;
+	  function getDep(vm) {
+	    if (!Dep) {
+	      Dep = vm._data.__ob__.dep.constructor;
+	    }
+	    return Dep;
+	  }
+	
 	  var hook = typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
 	
 	  var devtoolMiddleware = {
@@ -12968,62 +13494,121 @@
 	    }
 	  };
 	
-	  // export install function
 	  function override (Vue) {
+	    // override init and inject vuex init procedure
 	    var _init = Vue.prototype._init;
-	    Vue.prototype._init = function (options) {
-	      var _this = this;
+	    Vue.prototype._init = function () {
+	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	
-	      options = options || {};
-	      var componentOptions = this.constructor.options;
+	      options.init = options.init ? [vuexInit].concat(options.init) : vuexInit;
+	      _init.call(this, options);
+	    };
+	
+	    function vuexInit() {
+	      var options = this.$options;
+	      var store = options.store;
+	      var vuex = options.vuex;
 	      // store injection
-	      var store = options.store || componentOptions.store;
+	
 	      if (store) {
 	        this.$store = store;
 	      } else if (options.parent && options.parent.$store) {
 	        this.$store = options.parent.$store;
 	      }
 	      // vuex option handling
-	      var vuex = options.vuex || componentOptions.vuex;
 	      if (vuex) {
-	        (function () {
-	          if (!_this.$store) {
-	            console.warn('[vuex] store not injected. make sure to ' + 'provide the store option in your root component.');
-	          }
-	          var state = vuex.state;
-	          var actions = vuex.actions;
-	          // state
+	        if (!this.$store) {
+	          console.warn('[vuex] store not injected. make sure to ' + 'provide the store option in your root component.');
+	        }
+	        var state = vuex.state;
+	        var getters = vuex.getters;
+	        var actions = vuex.actions;
+	        // handle deprecated state option
 	
-	          if (state) {
-	            options.computed = options.computed || {};
-	            Object.keys(state).forEach(function (key) {
-	              options.computed[key] = function vuexBoundGetter() {
-	                return state[key].call(this, this.$store.state);
-	              };
-	            });
+	        if (state && !getters) {
+	          console.warn('[vuex] vuex.state option will been deprecated in 1.0. ' + 'Use vuex.getters instead.');
+	          getters = state;
+	        }
+	        // getters
+	        if (getters) {
+	          options.computed = options.computed || {};
+	          for (var key in getters) {
+	            defineVuexGetter(this, key, getters[key]);
 	          }
-	          // actions
-	          if (actions) {
-	            options.methods = options.methods || {};
-	            Object.keys(actions).forEach(function (key) {
-	              options.methods[key] = function vuexBoundAction() {
-	                var _actions$key;
-	
-	                for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	                  args[_key] = arguments[_key];
-	                }
-	
-	                return (_actions$key = actions[key]).call.apply(_actions$key, [this, this.$store].concat(args));
-	              };
-	            });
+	        }
+	        // actions
+	        if (actions) {
+	          options.methods = options.methods || {};
+	          for (var _key in actions) {
+	            options.methods[_key] = makeBoundAction(actions[_key], this.$store);
 	          }
-	        })();
+	        }
 	      }
-	      _init.call(this, options);
+	    }
+	
+	    function setter() {
+	      throw new Error('vuex getter properties are read-only.');
+	    }
+	
+	    function defineVuexGetter(vm, key, getter) {
+	      Object.defineProperty(vm, key, {
+	        enumerable: true,
+	        configurable: true,
+	        get: makeComputedGetter(vm.$store, getter),
+	        set: setter
+	      });
+	    }
+	
+	    function makeComputedGetter(store, getter) {
+	      var id = store._getterCacheId;
+	      // cached
+	      if (getter[id]) {
+	        return getter[id];
+	      }
+	      var vm = store._vm;
+	      var Watcher = getWatcher(vm);
+	      var Dep = getDep(vm);
+	      var watcher = new Watcher(vm, function (state) {
+	        return getter(state);
+	      }, null, { lazy: true });
+	      var computedGetter = function computedGetter() {
+	        if (watcher.dirty) {
+	          watcher.evaluate();
+	        }
+	        if (Dep.target) {
+	          watcher.depend();
+	        }
+	        return watcher.value;
+	      };
+	      getter[id] = computedGetter;
+	      return computedGetter;
+	    }
+	
+	    function makeBoundAction(action, store) {
+	      return function vuexBoundAction() {
+	        for (var _len = arguments.length, args = Array(_len), _key2 = 0; _key2 < _len; _key2++) {
+	          args[_key2] = arguments[_key2];
+	        }
+	
+	        return action.call.apply(action, [this, store].concat(args));
+	      };
+	    }
+	
+	    // option merging
+	    var merge = Vue.config.optionMergeStrategies.computed;
+	    Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
+	      if (!toVal) return fromVal;
+	      if (!fromVal) return toVal;
+	      return {
+	        getters: merge(toVal.getters, fromVal.getters),
+	        state: merge(toVal.state, fromVal.state),
+	        actions: merge(toVal.actions, fromVal.actions)
+	      };
 	    };
 	  }
 	
-	  var Vue = undefined;
+	  var Vue = void 0;
+	  var uid = 0;
 	
 	  var Store = function () {
 	
@@ -13053,6 +13638,7 @@
 	      var strict = _ref$strict === undefined ? false : _ref$strict;
 	      babelHelpers.classCallCheck(this, Store);
 	
+	      this._getterCacheId = 'vuex_store_' + uid++;
 	      this._dispatching = false;
 	      this._rootMutations = this._mutations = mutations;
 	      this._modules = modules;
@@ -13068,6 +13654,9 @@
 	      // use a Vue instance to store the state tree
 	      // suppress warnings just in case the user has added
 	      // some funky global mixins
+	      if (!Vue) {
+	        throw new Error('[vuex] must call Vue.use(Vuex) before creating a store instance.');
+	      }
 	      var silent = Vue.config.silent;
 	      Vue.config.silent = true;
 	      this._vm = new Vue({
@@ -13107,20 +13696,25 @@
 	          payload[_key2 - 1] = arguments[_key2];
 	        }
 	
+	        // compatibility for object actions, e.g. FSA
+	        if ((typeof type === 'undefined' ? 'undefined' : babelHelpers.typeof(type)) === 'object' && type.type && arguments.length === 1) {
+	          payload = [type];
+	          type = type.type;
+	        }
 	        var mutation = this._mutations[type];
 	        var prevSnapshot = this._prevSnapshot;
 	        var state = this.state;
-	        var snapshot = undefined,
-	            clonedPayload = undefined;
+	        var snapshot = void 0,
+	            clonedPayload = void 0;
 	        if (mutation) {
 	          this._dispatching = true;
 	          // apply the mutation
 	          if (Array.isArray(mutation)) {
 	            mutation.forEach(function (m) {
-	              return m.apply(undefined, [state].concat(payload));
+	              return m.apply(undefined, [state].concat(babelHelpers.toConsumableArray(payload)));
 	            });
 	          } else {
-	            mutation.apply(undefined, [state].concat(payload));
+	            mutation.apply(undefined, [state].concat(babelHelpers.toConsumableArray(payload)));
 	          }
 	          this._dispatching = false;
 	          // invoke middlewares
@@ -13163,7 +13757,7 @@
 	      }
 	
 	      /**
-	       * Hot update actions and mutations.
+	       * Hot update mutations & modules.
 	       *
 	       * @param {Object} options
 	       *        - {Object} [mutations]
@@ -13203,16 +13797,19 @@
 	       * Bind mutations for each module to its sub tree and
 	       * merge them all into one final mutations map.
 	       *
-	       * @param {Object} modules
+	       * @param {Object} updatedModules
 	       */
 	
 	    }, {
 	      key: '_setupModuleMutations',
-	      value: function _setupModuleMutations(modules) {
-	        this._modules = modules;
+	      value: function _setupModuleMutations(updatedModules) {
+	        var modules = this._modules;
 	        var getPath = Vue.parsers.path.getPath;
 	
 	        var allMutations = [this._rootMutations];
+	        Object.keys(updatedModules).forEach(function (key) {
+	          modules[key] = updatedModules[key];
+	        });
 	        Object.keys(modules).forEach(function (key) {
 	          var module = modules[key];
 	          if (!module || !module.mutations) return;
@@ -13247,14 +13844,7 @@
 	      value: function _setupMutationCheck() {
 	        var _this4 = this;
 	
-	        // a hack to get the watcher constructor from older versions of Vue
-	        // mainly because the public $watch method does not allow sync
-	        // watchers.
-	        var unwatch = this._vm.$watch('__vuex__', function (a) {
-	          return a;
-	        });
-	        var Watcher = this._vm._watchers[0].constructor;
-	        unwatch();
+	        var Watcher = getWatcher(this._vm);
 	        /* eslint-disable no-new */
 	        new Watcher(this._vm, '$data', function () {
 	          if (!_this4._dispatching) {
@@ -13312,6 +13902,11 @@
 	    override(Vue);
 	  }
 	
+	  // auto install in dist mode
+	  if (typeof window !== 'undefined' && window.Vue) {
+	    install(window.Vue);
+	  }
+	
 	  function createLogger() {
 	    console.warn('[vuex] Vuex.createLogger has been deprecated.' + 'Use `import createLogger from \'vuex/logger\' instead.');
 	  }
@@ -13327,7 +13922,7 @@
 	}));
 
 /***/ },
-/* 41 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13339,165 +13934,175 @@
 	exports.default = function (router) {
 								router.map({
 															'*': {
-																						component: __webpack_require__(42)
+																						component: __webpack_require__(65)
 															},
 															'/home': {
 																						name: 'home',
-																						component: __webpack_require__(42)
+																						component: __webpack_require__(65)
 															},
 	
 															/* 消息部分 */
 															'/msg': {
 																						name: 'msg',
-																						component: __webpack_require__(60)
+																						component: __webpack_require__(83)
 															},
 															'/msg/system': {
 																						name: 'msgSystem',
-																						component: __webpack_require__(71)
+																						component: __webpack_require__(98)
 															},
 															'/msg/comment': {
 																						name: 'msgComment',
-																						component: __webpack_require__(76)
+																						component: __webpack_require__(103)
 															},
 															'/msg/message': {
 																						name: 'msgMessage',
-																						component: __webpack_require__(81)
+																						component: __webpack_require__(108)
 															},
 															'/msg/order': {
 																						name: 'msgOrder',
-																						component: __webpack_require__(86)
+																						component: __webpack_require__(113)
 															},
 	
 															/* 场景部分 */
 															'/scene/': {
 																						name: 'scene',
-																						component: __webpack_require__(91)
+																						component: __webpack_require__(118)
 															},
 															'/scene/detail': {
 																						name: 'sceneDetail',
-																						component: __webpack_require__(101)
+																						component: __webpack_require__(128)
 															},
 															'/scene/reserve': {
 																						name: 'sceneReserve',
-																						component: __webpack_require__(113)
+																						component: __webpack_require__(140)
 															},
 															'/scene/appraise': {
 																						name: 'sceneAppraise',
-																						component: __webpack_require__(118)
+																						component: __webpack_require__(145)
 															},
 															'/scene/inviteOrder': {
 																						name: 'sceneInviteOrder',
-																						component: __webpack_require__(123)
+																						component: __webpack_require__(150)
 															},
 															'/scene/oneKeyOrder': {
 																						name: 'sceneOneKeyOrder',
-																						component: __webpack_require__(133)
+																						component: __webpack_require__(160)
 															},
 															'/scene/orderSuccess': {
 																						name: 'sceneOrderSuccess',
-																						component: __webpack_require__(148)
+																						component: __webpack_require__(175)
 															},
 															'/scene/address': {
 																						name: 'sceneAddress',
-																						component: __webpack_require__(158)
+																						component: __webpack_require__(185)
 															},
 	
 															/* 用户部分 */
 															'/user': {
 																						name: 'user',
-																						component: __webpack_require__(168)
+																						component: __webpack_require__(195)
 															},
 															'/user/setting': {
 																						name: 'userSetting',
-																						component: __webpack_require__(173)
+																						component: __webpack_require__(200)
 															},
 															'/user/money': {
 																						name: 'userMoney',
-																						component: __webpack_require__(183)
+																						component: __webpack_require__(210)
 															},
 															'/user/work/server': {
 																						name: 'userWorkServer',
-																						component: __webpack_require__(189)
+																						component: __webpack_require__(216)
 															},
 															'/user/work/publish': {
 																						name: 'userWorkPublish',
-																						component: __webpack_require__(194)
+																						component: __webpack_require__(221)
 															},
 															'/user/work/publishDetail': {
 																						name: 'userWorkPublishDetail',
-																						component: __webpack_require__(199)
+																						component: __webpack_require__(226)
 															},
 															'/user/work/accept': {
 																						name: 'userWorkAccept',
-																						component: __webpack_require__(204)
+																						component: __webpack_require__(231)
 															},
 															'/user/work/acceptDetail': {
 																						name: 'userWorkAcceptDetail',
-																						component: __webpack_require__(209)
+																						component: __webpack_require__(236)
 															},
 															'/user/work/acceptAppraise': {
 																						name: 'userWorkAcceptAppraise',
-																						component: __webpack_require__(217)
+																						component: __webpack_require__(244)
 															},
 															'/user/work/acceptBus': {
 																						name: 'userWorkAcceptBus',
-																						component: __webpack_require__(222)
+																						component: __webpack_require__(249)
 															},
 	
 															/* 客服 */
 															'/service/': {
 																						name: 'service',
-																						component: __webpack_require__(227)
+																						component: __webpack_require__(254)
 															},
 	
 															/* 认证部分 */
 															'/auth': {
 																						name: 'auth',
-																						component: __webpack_require__(232)
-															},
-															'/auth/selectCity': {
-																						name: 'selectCity',
-																						component: __webpack_require__(237)
-															},
-															'/auth/selectSchool': {
-																						name: 'selectSchool',
-																						component: __webpack_require__(242)
+																						component: __webpack_require__(259)
 															},
 															'/auth/selectMap': {
 																						name: 'selectMap',
-																						component: __webpack_require__(247)
+																						component: __webpack_require__(264)
 															},
 															'/auth/step2': {
 																						name: 'authStep2',
-																						component: __webpack_require__(252)
+																						component: __webpack_require__(269)
 															},
 															'/auth/step3': {
 																						name: 'authStep3',
-																						component: __webpack_require__(258)
+																						component: __webpack_require__(275)
 															},
 															'/auth/checking': {
 																						name: 'authChecking',
-																						component: __webpack_require__(263)
+																						component: __webpack_require__(280)
 															},
 															'/auth/success': {
 																						name: 'authSuccess',
-																						component: __webpack_require__(268)
+																						component: __webpack_require__(285)
+															},
+	
+															/* 公用页面 */
+															'/common/selectCity': {
+																						name: 'selectCity',
+																						component: __webpack_require__(290)
+															},
+															'/common/selectSchool': {
+																						name: 'selectSchool',
+																						component: __webpack_require__(295)
+															},
+															'/common/selectSex': {
+																						name: 'selectSex',
+																						component: __webpack_require__(300)
+															},
+															'/common/selectSort': {
+																						name: 'selectSort',
+																						component: __webpack_require__(305)
 															}
 								});
 	};
 
 /***/ },
-/* 42 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(43)
-	__vue_script__ = __webpack_require__(52)
+	__webpack_require__(66)
+	__vue_script__ = __webpack_require__(75)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/home.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(59)
+	  console.warn("[vue-loader] src\\views\\home.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(82)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13507,7 +14112,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/home.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13516,21 +14121,21 @@
 	})()}
 
 /***/ },
-/* 43 */
+/* 66 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13643,7 +14248,7 @@
 	//             </div>
 	//             <div class="sceneWrap">
 	//                 <div class="sceneItem" :class="{'red': index % 4 == 2 || index % 4 == 1 }" v-for="(index, scene) in sceneList">
-	//                     <a external v-link="{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name} }">
+	//                     <a external v-link="{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name, city_id: cityId} }">
 	//                        <i class="icon sceneIcon icon-home{{scene.id}}"></i>
 	//                        <span class="first">{{scene.scene_name}}</span>
 	//                        <span class="last">{{scene.scene_detail}}</span>
@@ -13660,12 +14265,21 @@
 	        return {
 	            list: indexData.slides,
 	            systemMsg: indexData.systemMsg,
-	            sceneList: indexData.sceneList
+	            sceneList: indexData.sceneList,
+	            cityId: ''
 	        };
 	    },
 	
+	    route: {
+	        data: function data(transition) {
+	            var self = this,
+	                query = transition.to.query;
+	
+	            self.cityId = returnCitySN.cid;
+	        }
+	    },
 	    components: {
-	        'swiper': __webpack_require__(53)
+	        'swiper': __webpack_require__(76)
 	    }
 	};
 	// </script>
@@ -13673,17 +14287,17 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 53 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(54)
-	__vue_script__ = __webpack_require__(56)
+	__webpack_require__(77)
+	__vue_script__ = __webpack_require__(79)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/swiper/index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(58)
+	  console.warn("[vue-loader] src\\components\\swiper\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(81)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13693,7 +14307,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/swiper/index.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\swiper\\index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13702,14 +14316,14 @@
 	})()}
 
 /***/ },
-/* 54 */
+/* 77 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 55 */,
-/* 56 */
+/* 78 */,
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13718,7 +14332,7 @@
 	  value: true
 	});
 	
-	var _swiper = __webpack_require__(57);
+	var _swiper = __webpack_require__(80);
 	
 	var _swiper2 = _interopRequireDefault(_swiper);
 	
@@ -13893,7 +14507,7 @@
 	// <script>
 
 /***/ },
-/* 57 */
+/* 80 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14149,29 +14763,29 @@
 	exports.default = Swiper;
 
 /***/ },
-/* 58 */
+/* 81 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"slider\">\n  <div class=\"swiper\" :style=\"{height: height+'px'}\">\n    <slot></slot>\n    <div class=\"item\" v-for=\"item in list\">\n      <a :href=\"item.url\">\n        <div class=\"img\" :style=\"{backgroundImage: buildBackgroundUrl(item.img)}\"></div>\n        <div class=\"desc\">{{item.title}}</div>\n      </a>\n    </div>\n  </div>\n  <div class=\"indicator\" v-show=\"show_dots\">\n    <a href=\"javascript:\" v-for=\"(index, item) in list\">\n      <i class=\"icon_dot\" :class=\"{'active':index === current}\"></i>\n    </a>\n  </div>\n</div>\n";
 
 /***/ },
-/* 59 */
+/* 82 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-home page-current\">\n    <div class=\"content showFooter\">\n        <swiper :list=\"list\"></swiper>\n        <div class=\"systemMsg\">\n            <i class=\"ico ico-xiaolaba\"></i>\n            <marquee direction=\"left\" scrollamount=\"3\">\n                {{systemMsg}}\n            </marquee>\n        </div>\n        <div class=\"sceneWrap\">\n            <div class=\"sceneItem\" :class=\"{'red': index % 4 == 2 || index % 4 == 1 }\" v-for=\"(index, scene) in sceneList\">\n                <a external v-link=\"{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name} }\">\n                   <i class=\"icon sceneIcon icon-home{{scene.id}}\"></i>\n                   <span class=\"first\">{{scene.scene_name}}</span>\n                   <span class=\"last\">{{scene.scene_detail}}</span>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-home page-current\">\n    <div class=\"content showFooter\">\n        <swiper :list=\"list\"></swiper>\n        <div class=\"systemMsg\">\n            <i class=\"ico ico-xiaolaba\"></i>\n            <marquee direction=\"left\" scrollamount=\"3\">\n                {{systemMsg}}\n            </marquee>\n        </div>\n        <div class=\"sceneWrap\">\n            <div class=\"sceneItem\" :class=\"{'red': index % 4 == 2 || index % 4 == 1 }\" v-for=\"(index, scene) in sceneList\">\n                <a external v-link=\"{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name, city_id: cityId} }\">\n                   <i class=\"icon sceneIcon icon-home{{scene.id}}\"></i>\n                   <span class=\"first\">{{scene.scene_name}}</span>\n                   <span class=\"last\">{{scene.scene_detail}}</span>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 60 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(61)
-	__vue_script__ = __webpack_require__(64)
+	__webpack_require__(84)
+	__vue_script__ = __webpack_require__(87)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/msg.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(70)
+	  console.warn("[vue-loader] src\\views\\msg.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(97)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14181,7 +14795,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/msg.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\msg.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14190,15 +14804,15 @@
 	})()}
 
 /***/ },
-/* 61 */
+/* 84 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 62 */,
-/* 63 */,
-/* 64 */
+/* 85 */,
+/* 86 */,
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14486,7 +15100,7 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
@@ -14502,17 +15116,17 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 65 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(66)
-	__vue_script__ = __webpack_require__(68)
+	__webpack_require__(89)
+	__vue_script__ = __webpack_require__(91)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/header.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(69)
+	  console.warn("[vue-loader] src\\components\\header.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(96)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14522,7 +15136,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/header.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14531,21 +15145,30 @@
 	})()}
 
 /***/ },
-/* 66 */
+/* 89 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 67 */,
-/* 68 */
-/***/ function(module, exports) {
+/* 90 */,
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	
+	var _defineProperty2 = __webpack_require__(92);
+	
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+	
+	var _replace$props$props$;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	// <style lang="less">
 	//
 	// </style>
@@ -14558,42 +15181,113 @@
 	// </template>
 	//
 	// <script>
-	exports.default = {
+	exports.default = (_replace$props$props$ = {
 	    replace: true,
-	    props: ['title', 'back'],
-	    methods: {
-	        goBack: function goBack() {
+	    props: {
+	        title: {
+	            type: String
+	        },
+	        back: {
+	            type: Boolean
+	        },
+	        target: {
+	            type: String
+	        },
+	        query: {
+	            type: Object,
+	            default: {}
+	        }
+	    }
+	}, (0, _defineProperty3.default)(_replace$props$props$, 'props', ['title', 'back', 'target', 'query']), (0, _defineProperty3.default)(_replace$props$props$, 'methods', {
+	    goBack: function goBack() {
+	        var self = this;
+	        if (self.target) {
+	            self.$route.router.go({ 'name': self.target, query: self.query });
+	        } else {
 	            history.go(-1);
 	        }
 	    }
-	};
+	}), _replace$props$props$);
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 69 */
+/* 92 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	
+	var _defineProperty = __webpack_require__(93);
+	
+	var _defineProperty2 = _interopRequireDefault(_defineProperty);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (obj, key, value) {
+	  if (key in obj) {
+	    (0, _defineProperty2.default)(obj, key, {
+	      value: value,
+	      enumerable: true,
+	      configurable: true,
+	      writable: true
+	    });
+	  } else {
+	    obj[key] = value;
+	  }
+	
+	  return obj;
+	};
+
+/***/ },
+/* 93 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(94), __esModule: true };
+
+/***/ },
+/* 94 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(95);
+	var $Object = __webpack_require__(46).Object;
+	module.exports = function defineProperty(it, key, desc){
+	  return $Object.defineProperty(it, key, desc);
+	};
+
+/***/ },
+/* 95 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(45);
+	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	$export($export.S + $export.F * !__webpack_require__(54), 'Object', {defineProperty: __webpack_require__(50).f});
+
+/***/ },
+/* 96 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<header class=\"bar bar-nav\">\n    <a class=\"icon icon-left pull-left\" v-if=\"back\" @click=\"goBack\"></a>\n    <h1 class=\"title\">{{title}}</h1>\n</header>\n";
 
 /***/ },
-/* 70 */
+/* 97 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-msg\">\n    <header-bar :title=\"title\"></header-bar>\n    <ul class=\"scenefilter clearfix\">\n        <li @click=\"showMsgList(true)\">\n            <span :class=\"{'cur': isOrder}\">订单邀请</span>\n        </li>\n        <li @click=\"showMsgList(false)\">\n            <span :class=\"{'cur': !isOrder}\">消息</span>\n        </li>\n    </ul>\n    <div class=\"content showHeader showTab showFooter\">\n    \n        <div class=\"item order\"\n             v-if=\"isOrder\"\n             v-for=\"order in formData.order\"\n             v-link=\"{name: 'userWorkAcceptDetail', query:{order_id:order.order_id} }\"\n        >\n            <div class=\"timeout\" v-if=\"order.status == 3\"></div>\n            <span class=\"tag\">{{order.scene_name}}</span>\n            <header class=\"clearfix\">\n                <div class=\"photoWrap\">\n                    <img :src=\"order.head_img_url\">\n                </div>\n                <div class=\"textWrap\">\n                    <div class=\"header\">\n                        {{order.create_name}}\n                        <span>{{order.create_time}}</span>\n                    </div>\n                    <div class=\"text\">\n                        {{order.detail}}\n                    </div>\n                </div>\n            </header>\n            <footer>\n                <div class=\"unit\">报酬：<span>{{order.unit}}</span></div>\n                <div class=\"time\">时间：<span>{{order.start_time}}  {{order.end_time}}</span></div>\n                <div class=\"position\">任务位置：<span>{{order.workplace}}</span></div>\n            </footer>\n        </div>\n        \n        <div class=\"item msg\" v-if=\"!isOrder\" v-for=\"msg in formData.msg\" @click=\"goMsg(msg.type, msg.id)\">\n            <div class=\"photoWrap\">\n                <img :src=\"msg.head_img_url\">\n            </div>\n            <div class=\"textWrap\">\n                <div class=\"name\" v-if=\"msg.type == 3\">系统</div>\n                <div class=\"name\" v-else>{{msg.nick_name}}</div>\n                <div class=\"text\">{{msg.content}} </div>\n                <span class=\"time\">{{msg.create_time}}</span>\n            </div>\n        </div>\n        \n    </div>\n</div>\n";
 
 /***/ },
-/* 71 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(72)
-	__vue_script__ = __webpack_require__(74)
+	__webpack_require__(99)
+	__vue_script__ = __webpack_require__(101)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/msg/system.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(75)
+	  console.warn("[vue-loader] src\\views\\msg\\system.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(102)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14603,7 +15297,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/msg/system.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\msg\\system.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14612,14 +15306,14 @@
 	})()}
 
 /***/ },
-/* 72 */
+/* 99 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 73 */,
-/* 74 */
+/* 100 */,
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14676,30 +15370,30 @@
 	
 	    methods: {},
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 75 */
+/* 102 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-msg-system\" transition=\"page\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader\">\n    \n        <div class=\"systemTitle\">阿斯顿发达</div>\n        <div class=\"systemContent\">adsfasdfa</div>\n      \n    </div>\n</div>\n";
 
 /***/ },
-/* 76 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(77)
-	__vue_script__ = __webpack_require__(79)
+	__webpack_require__(104)
+	__vue_script__ = __webpack_require__(106)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/msg/comment.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(80)
+	  console.warn("[vue-loader] src\\views\\msg\\comment.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(107)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14709,7 +15403,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/msg/comment.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\msg\\comment.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14718,14 +15412,14 @@
 	})()}
 
 /***/ },
-/* 77 */
+/* 104 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 78 */,
-/* 79 */
+/* 105 */,
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14885,30 +15579,30 @@
 	
 	    methods: {},
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 80 */
+/* 107 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-msg-comment\" transition=\"page\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader\">\n        <div class=\"userWrap\">\n            <div class=\"photoWrap\">\n                <img :src=\"formData.head_img_url\">\n            </div>\n            <div class=\"name\">{{formData.nick_name}}</div>\n        </div>\n        <div class=\"orderContent\">\n            <div class=\"header\">订单需求说明</div>\n            <div class=\"main\">{{formData.order_content}}</div>\n        </div>\n        <div class=\"commentContent clearfix\">\n            <div class=\"typeWrap\">\n                <i class=\"ico {{typeCls[formData.type-1]}}\"></i>\n                <div>{{typeTex[formData.type-1]}}</div>\n            </div>\n            <div class=\"main\">\n                <i class=\"arrow\"></i>\n                {{formData.content}}\n            </div>\n        </div>\n    </div>\n    <span\n        class=\"ui-btn ui-btn-big\"\n    >\n        互评\n    </span>\n</div>\n";
 
 /***/ },
-/* 81 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(82)
-	__vue_script__ = __webpack_require__(84)
+	__webpack_require__(109)
+	__vue_script__ = __webpack_require__(111)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/msg/message.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(85)
+	  console.warn("[vue-loader] src\\views\\msg\\message.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(112)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -14918,7 +15612,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/msg/message.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\msg\\message.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14927,14 +15621,14 @@
 	})()}
 
 /***/ },
-/* 82 */
+/* 109 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 83 */,
-/* 84 */
+/* 110 */,
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15121,30 +15815,30 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 85 */
+/* 112 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-msg-message\" transition=\"page\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n    \n        <div class=\"item clearfix\" v-for=\"item in formData\">\n            <div class=\"time\" v-if=\"item.create_time\"><span>{{item.create_time}}</span></div>\n            <div class=\"main\" :class=\"{isMe: item.isMe == 1}\">\n                <div class=\"photoWrap\">\n                    <img :src=\"item.head_img_url\">\n                </div>\n                <div class=\"textWrap\">\n                    <div class=\"name\">{{item.nick_name}}</div>\n                    <div class=\"text\">\n                        {{item.content}}\n                        <i></i>\n                    </div>\n                </div>\n            </div>\n        </div>\n      \n    </div>\n    <div class=\"formWrap\">\n        <input v-model=\"content\" placeholder=\"留言或回复内容\"/>\n        <span @click=\"send\">发送</span>\n    </div>\n</div>\n";
 
 /***/ },
-/* 86 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(87)
-	__vue_script__ = __webpack_require__(89)
+	__webpack_require__(114)
+	__vue_script__ = __webpack_require__(116)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/msg/order.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(90)
+	  console.warn("[vue-loader] src\\views\\msg\\order.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(117)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -15154,7 +15848,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/msg/order.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\msg\\order.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15163,14 +15857,14 @@
 	})()}
 
 /***/ },
-/* 87 */
+/* 114 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 88 */,
-/* 89 */
+/* 115 */,
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15212,30 +15906,30 @@
 	
 	    methods: {},
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 90 */
+/* 117 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-msg-me\" transition=\"page\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader\">\n    \n        阿斯顿发达\n      \n    </div>\n</div>\n";
 
 /***/ },
-/* 91 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(92)
-	__vue_script__ = __webpack_require__(94)
+	__webpack_require__(119)
+	__vue_script__ = __webpack_require__(121)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(100)
+	  console.warn("[vue-loader] src\\views\\scene.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(127)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -15245,7 +15939,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\scene.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15254,14 +15948,14 @@
 	})()}
 
 /***/ },
-/* 92 */
+/* 119 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 93 */,
-/* 94 */
+/* 120 */,
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15399,29 +16093,22 @@
 	//
 	// <template>
 	//     <div transition="page" class="page-scene page-current pullRreshwrap">
-	//         <header-bar :title="title" :back="true"></header-bar>
+	//         <header-bar :title="title" :back="true" target="home"></header-bar>
 	//         <ul class="scenefilter clearfix">
-	//             <li @click="showFilter(1)">
+	//             <li @click="filterSchool">
 	//                 <span>学校<i class="icon icon-down" :class="{'icon-up':filterType == 1}"></i></span>
 	//             </li>
-	//             <li @click="showFilter(2)">
+	//             <li @click="filterSex">
 	//                 <span>性别<i class="icon icon-down" :class="{'icon-up':filterType == 2}"></i></span>
 	//             </li>
-	//             <li @click="showFilter(3)">
+	//             <li @click="filterSort">
 	//                 <span>排序<i class="icon icon-down" :class="{'icon-up':filterType == 3}"></i></span>
 	//             </li>
 	//         </ul>
-	//         <div class="scenefilterList" v-show="isShowFilter">
-	//             <div class="content">
-	//                 <ul>
-	//                     <li @click="filter"><i class="icon icon-yixuan"></i>asdfasdf</li>
-	//                 </ul>
-	//             </div>
-	//         </div>
 	//         <div class="content showHeader showTab showFooter">
 	//             <pull-refresh @on-scroll-lodding="getData">
-	//                 <div class="item" v-for="item in formData">
-	//                     <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': scene_name, 'scene_id': scene_id}}">
+	//                 <div class="item" v-for="item in dataList">
+	//                     <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': formData.scene_name, 'scene_id': formData.scene_id}}">
 	//                         <div class="pull-left photoWrap">
 	//                             <img :src="item.head_img_url">
 	//                         </div>
@@ -15465,7 +16152,7 @@
 	//         </div>
 	//         <span
 	//             class="ui-btn ui-btn-big"
-	//             v-link="{ name: 'sceneOneKeyOrder' }"
+	//             v-link="{name:'sceneOneKeyOrder', query:formData}"
 	//         >
 	//             一键预约
 	//         </span>
@@ -15479,32 +16166,31 @@
 	            title: null,
 	            filterType: 0,
 	            isShowFilter: false,
-	            formData: [],
-	            scene_name: '',
-	            scene_id: '',
-	            data: {
-	                currentPage: 0
+	            dataList: [],
+	            formData: {
+	                scene_name: '',
+	                scene_id: '',
+	                currentPage: 1,
+	                school_id: '',
+	                sex: '',
+	                sort: '',
+	                form: 'scene'
 	            }
 	        };
 	    },
-	    /*scene_id:
-	    city_id:
-	    school_id:
-	    sex:
-	    sort: 1
-	    */
 	
 	    route: {
 	        data: function data(transition) {
 	            var self = this,
 	                query = transition.to.query;
 	
+	            $.extend(self.formData, query);
+	
 	            self.title = query.scene_name;
-	            self.scene_id = query.scene_id;
-	            self.scene_name = query.scene_name;
 	        },
 	        deactivate: function deactivate() {
-	            this.filterType = 0;
+	            var self = this;
+	            self.formData.currentPage = 1;
 	        }
 	    },
 	    methods: {
@@ -15513,33 +16199,40 @@
 	            self.filterType = type;
 	            self.isShowFilter = true;
 	        },
-	        filter: function filter() {
+	        filterSort: function filterSort() {
 	            var self = this;
-	            self.isShowFilter = false;
+	            self.$route.router.go({ 'name': 'selectSort', query: self.formData });
+	        },
+	        filterSchool: function filterSchool() {
+	            var self = this;
+	            self.$route.router.go({ 'name': 'selectSchool', query: self.formData });
+	        },
+	        filterSex: function filterSex() {
+	            var self = this;
+	            self.$route.router.go({ 'name': 'selectSex', query: self.formData });
 	        },
 	        getData: function getData(index, callback) {
 	            var self = this;
-	            self.data.currentPage = index;
+	            self.formData.currentPage = index;
 	            $.ajax({
 	                url: "/soytime/server/list",
 	                type: 'POST',
-	                data: self.data,
+	                data: self.formData,
 	                dataType: 'json',
 	                success: function success(data) {
 	                    var arr = data.result,
 	                        len = arr.length;
 	                    for (var i = 0; i < len; i++) {
-	                        self.formData.push(arr[i]);
+	                        self.dataList.push(arr[i]);
 	                    }
-	                    //self.formData = self.formData.concat(data.result);
 	                    callback && callback();
 	                }
 	            });
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'pullRefresh': __webpack_require__(95)
+	        'headerBar': __webpack_require__(88),
+	        'pullRefresh': __webpack_require__(122)
 	    }
 	};
 	// </script>
@@ -15547,17 +16240,17 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 95 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(96)
-	__vue_script__ = __webpack_require__(98)
+	__webpack_require__(123)
+	__vue_script__ = __webpack_require__(125)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/pullRefresh.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(99)
+	  console.warn("[vue-loader] src\\components\\pullRefresh.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(126)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -15567,7 +16260,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/pullRefresh.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\pullRefresh.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15576,14 +16269,14 @@
 	})()}
 
 /***/ },
-/* 96 */
+/* 123 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 97 */,
-/* 98 */
+/* 124 */,
+/* 125 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -15603,7 +16296,7 @@
 	    props: {
 	        index: {
 	            type: Number,
-	            default: 0
+	            default: 1
 	        },
 	        callback: {
 	            type: Function
@@ -15710,29 +16403,29 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 99 */
+/* 126 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"pull-refresh\">\n    <slot></slot>\n</div>\n<div class=\"pull-lodding\" v-if=\"scroll && index\"></div>\n";
 
 /***/ },
-/* 100 */
+/* 127 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div transition=\"page\" class=\"page-scene page-current pullRreshwrap\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <ul class=\"scenefilter clearfix\">\n        <li @click=\"showFilter(1)\">\n            <span>学校<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 1}\"></i></span>\n        </li>\n        <li @click=\"showFilter(2)\">\n            <span>性别<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 2}\"></i></span>\n        </li>\n        <li @click=\"showFilter(3)\">\n            <span>排序<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 3}\"></i></span>\n        </li>\n    </ul>\n    <div class=\"scenefilterList\" v-show=\"isShowFilter\">\n        <div class=\"content\">\n            <ul>\n                <li @click=\"filter\"><i class=\"icon icon-yixuan\"></i>asdfasdf</li>\n            </ul>\n        </div>\n    </div>\n    <div class=\"content showHeader showTab showFooter\">\n        <pull-refresh @on-scroll-lodding=\"getData\">\n            <div class=\"item\" v-for=\"item in formData\">\n                <header class=\"clearfix\" v-link=\"{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': scene_name, 'scene_id': scene_id}}\">\n                    <div class=\"pull-left photoWrap\">\n                        <img :src=\"item.head_img_url\">\n                    </div>\n                    <div class=\"pull-left nameWrap\">\n                        <div class=\"name\">\n                            <i class=\"icon\"\n                                :class=\"{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}\"\n                            ></i>\n                            {{item.nickname}}\n                        </div>\n                        <div class=\"school clearfix\">\n                            {{item.school_name}}\n                        </div>\n                    </div>\n                    <i class=\"icon icon-jiantouyou pull-right\"></i>\n                </header>\n                <div class=\"main\">\n                    <div class=\"text\">{{item.detail}}</div>\n                    <div class=\"imgWrap clearfix\">\n                        <div class=\"img\" v-for=\"subItem in item.skillImgs\">\n                            <img :src=\"subItem.img_url\">\n                        </div>\n                    </div>\n                </div>\n                <ul class=\"userScore clearfix\">\n                    <li>\n                        <i class=\"icon icon-aixin-copy\"></i>\n                        <em>{{item.collectCount}}</em>\n                    </li>\n                    <li>\n                        <i class=\"icon icon-liuyan\"></i>\n                        <em>{{item.appraiseCount}}</em>\n                    </li>\n                    <li>\n                        <i class=\"icon icon-yanjing\"></i>\n                        <em>{{item.viewCount}}</em>\n                    </li>\n                </ul>\n            </div>\n        </pull-refresh>\n    </div>\n    <span \n        class=\"ui-btn ui-btn-big\"\n        v-link=\"{ name: 'sceneOneKeyOrder' }\"\n    >\n        一键预约\n    </span>\n</div>\n";
+	module.exports = "\n<div transition=\"page\" class=\"page-scene page-current pullRreshwrap\">\n    <header-bar :title=\"title\" :back=\"true\" target=\"home\"></header-bar>\n    <ul class=\"scenefilter clearfix\">\n        <li @click=\"filterSchool\">\n            <span>学校<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 1}\"></i></span>\n        </li>\n        <li @click=\"filterSex\">\n            <span>性别<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 2}\"></i></span>\n        </li>\n        <li @click=\"filterSort\">\n            <span>排序<i class=\"icon icon-down\" :class=\"{'icon-up':filterType == 3}\"></i></span>\n        </li>\n    </ul>\n    <div class=\"content showHeader showTab showFooter\">\n        <pull-refresh @on-scroll-lodding=\"getData\">\n            <div class=\"item\" v-for=\"item in dataList\">\n                <header class=\"clearfix\" v-link=\"{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': formData.scene_name, 'scene_id': formData.scene_id}}\">\n                    <div class=\"pull-left photoWrap\">\n                        <img :src=\"item.head_img_url\">\n                    </div>\n                    <div class=\"pull-left nameWrap\">\n                        <div class=\"name\">\n                            <i class=\"icon\"\n                                :class=\"{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}\"\n                            ></i>\n                            {{item.nickname}}\n                        </div>\n                        <div class=\"school clearfix\">\n                            {{item.school_name}}\n                        </div>\n                    </div>\n                    <i class=\"icon icon-jiantouyou pull-right\"></i>\n                </header>\n                <div class=\"main\">\n                    <div class=\"text\">{{item.detail}}</div>\n                    <div class=\"imgWrap clearfix\">\n                        <div class=\"img\" v-for=\"subItem in item.skillImgs\">\n                            <img :src=\"subItem.img_url\">\n                        </div>\n                    </div>\n                </div>\n                <ul class=\"userScore clearfix\">\n                    <li>\n                        <i class=\"icon icon-aixin-copy\"></i>\n                        <em>{{item.collectCount}}</em>\n                    </li>\n                    <li>\n                        <i class=\"icon icon-liuyan\"></i>\n                        <em>{{item.appraiseCount}}</em>\n                    </li>\n                    <li>\n                        <i class=\"icon icon-yanjing\"></i>\n                        <em>{{item.viewCount}}</em>\n                    </li>\n                </ul>\n            </div>\n        </pull-refresh>\n    </div>\n    <span \n        class=\"ui-btn ui-btn-big\"\n        v-link=\"{name:'sceneOneKeyOrder', query:formData}\"\n    >\n        一键预约\n    </span>\n</div>\n";
 
 /***/ },
-/* 101 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(102)
-	__vue_script__ = __webpack_require__(104)
+	__webpack_require__(129)
+	__vue_script__ = __webpack_require__(131)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene/detail.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(112)
+	  console.warn("[vue-loader] src\\views\\scene\\detail.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(139)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -15742,7 +16435,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene/detail.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\scene\\detail.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15751,14 +16444,14 @@
 	})()}
 
 /***/ },
-/* 102 */
+/* 129 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 103 */,
-/* 104 */
+/* 130 */,
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16095,8 +16788,8 @@
 	    },
 	    ready: function ready() {},
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'timeConf': __webpack_require__(105)
+	        'headerBar': __webpack_require__(88),
+	        'timeConf': __webpack_require__(132)
 	    }
 	};
 	// </script>
@@ -16104,17 +16797,17 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 105 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(106)
-	__vue_script__ = __webpack_require__(109)
+	__webpack_require__(133)
+	__vue_script__ = __webpack_require__(136)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/timeConf.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(111)
+	  console.warn("[vue-loader] src\\components\\timeConf.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(138)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -16124,7 +16817,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/timeConf.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\timeConf.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16133,15 +16826,15 @@
 	})()}
 
 /***/ },
-/* 106 */
+/* 133 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 107 */,
-/* 108 */,
-/* 109 */
+/* 134 */,
+/* 135 */,
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16150,7 +16843,7 @@
 	    value: true
 	});
 	
-	var _utils = __webpack_require__(110);
+	var _utils = __webpack_require__(137);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -16252,7 +16945,7 @@
 	// <script>
 
 /***/ },
-/* 110 */
+/* 137 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16341,29 +17034,29 @@
 	};
 
 /***/ },
-/* 111 */
+/* 138 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"timeConf\">\n    <table>\n        <tr>\n            <td>星期</td>\n            <td>一</td>\n            <td>二</td>\n            <td>三</td>\n            <td>四</td>\n            <td>五</td>\n            <td>六</td>\n            <td>日</td>\n        </tr>\n        <tr v-for=\"item of 3\">\n            <td v-for=\"subItem of 8\" @click=\"setAccount( subItem +''+ (item+1) )\">\n                <span v-if=\"item == 0 && subItem == 0\">上午</span>\n                <span v-if=\"item == 1 && subItem == 0\">下午</span>\n                <span v-if=\"item == 2 && subItem == 0\">晚上</span>\n                <span class=\"icon iconWrap\" v-if=\"subItem != 0\">\n                    <i class=\"icon icon-xuanzhong\" v-if=\"item | timerCur subItem timerArr\"></i>\n                </span>\n            </td>\n        </tr>\n    </table>\n</div>\n";
 
 /***/ },
-/* 112 */
+/* 139 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-scene-detail page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeaderNopading showFooter\">\n        <div class=\"userHeader\">\n            <img src=\"/dist/defaultImg/serverDefault.jpg\" v-if=\"!formData.photo_url\" />\n            <img :src=\"formData.photo_url\" v-else />\n            <div class=\"userWrap\">\n                <div class=\"btn\">\n                    <div class=\"radius\" v-if=\"!formData.photo_url\">\n                        <img :src=\"formData.head_img_url\" />\n                    </div>\n                </div>\n                <div class=\"name\">{{formData.usernick}}</div>\n            </div>\n            <div class=\"collection clearfix\">\n                <i class=\"ico ico-aixin\"></i>\n                <span>5人已收藏</span>\n            </div>\n        </div>\n        \n        <div class=\"userContent\">\n            <div class=\"userInfo\">\n                <span class=\"school\">\n                    <i class=\"ico ico-renzheng\"></i>\n                    {{formData.school_name}}\n                </span>\n                <div class=\"workplace\">{{formData.workplace}} 周边</div>\n            </div>\n            \n            <div class=\"userService clearfix\">\n                <i>我的服务：</i>\n                <span v-for=\"item in sceneList\" v-if=\"item | sceneCur sceneArr\">{{item.scene_name}}</span>\n            </div>\n            \n            <div class=\"block\">\n                <header>介绍服务</header>\n                <div class=\"main\">\n                    {{formData.detail}}\n                </div>\n            </div>\n            \n            <div class=\"block\">\n                <header>工作时间</header>\n                <div class=\"main\">\n                    <time-conf :timer=\"formData.timeConf\" :is-radio=\"true\"></time-conf>\n                </div>\n            </div>\n            \n            <div class=\"block\" v-if=\"formData.orderAppraise\">\n                <header>客户评价</header>\n                <div class=\"main\">\n                    <div class=\"appraiseContent\">\n                        {{formData.orderAppraise.content}}\n                    </div>\n                    <div class=\"appraiseCount\">\n                        <div class=\"ui-floatCenter\">\n                            <div class=\"user ui-sl-floatCenter clearfix\">\n                                <div class=\"img ui-floatCenter-item\">\n                                    <img :src=\"formData.orderAppraise.head_img_url\" />\n                                </div>\n                                <div class=\"nameWrap ui-floatCenter-item\">\n                                    <div class=\"name\">{{formData.orderAppraise.from_name}}</div>\n                                    <div class=\"time\">{{formData.orderAppraise.create_time}}</div>\n                                </div>\n                            </div>\n                        </div>\n                        <span class=\"btn\" v-link=\"{ name: 'sceneAppraise', query:{user_id: formData.user_id} }\">\n                            查看{{formData.orderAppraise.appraise_count}}条评价\n                        </span>\n                    </div>\n                </div>\n            </div>\n        </div>\n        \n    </div>\n    <span \n        class=\"ui-btn ui-btn-big\"\n        v-link=\"{ name: 'sceneInviteOrder', query:query}\"\n    >\n        约TA\n    </span>\n</div>\n";
 
 /***/ },
-/* 113 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(114)
-	__vue_script__ = __webpack_require__(116)
+	__webpack_require__(141)
+	__vue_script__ = __webpack_require__(143)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene/reserve.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(117)
+	  console.warn("[vue-loader] src\\views\\scene\\reserve.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(144)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -16373,7 +17066,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene/reserve.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\scene\\reserve.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16382,14 +17075,14 @@
 	})()}
 
 /***/ },
-/* 114 */
+/* 141 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 115 */,
-/* 116 */
+/* 142 */,
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16450,8 +17143,8 @@
 	    },
 	    ready: function ready() {},
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'timeConf': __webpack_require__(105)
+	        'headerBar': __webpack_require__(88),
+	        'timeConf': __webpack_require__(132)
 	    }
 	};
 	// </script>
@@ -16459,23 +17152,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 117 */
+/* 144 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div transition=\"page\" class=\"page-scene-detail page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        <header>\n            林小兔\n            5人已收藏\n            厦门大学\n            厦门\n            我的服务：地推 酒店服务 话务员 物流 家教\n        </header>\n        介绍服务\n        工作时间\n        <time-conf :timer=\"formData.timeConf\"></time-conf>\n        客户评价\n        马小跳6080\n        2016-2-22\n        查看5条评论\n    </div>\n    <span \n            class=\"ui-btn ui-btn-big\"\n        >\n        约TA\n    </span>\n</div>\n";
 
 /***/ },
-/* 118 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(119)
-	__vue_script__ = __webpack_require__(121)
+	__webpack_require__(146)
+	__vue_script__ = __webpack_require__(148)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene/appraise.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(122)
+	  console.warn("[vue-loader] src\\views\\scene\\appraise.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(149)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -16485,7 +17178,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene/appraise.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\scene\\appraise.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16494,14 +17187,14 @@
 	})()}
 
 /***/ },
-/* 119 */
+/* 146 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 120 */,
-/* 121 */
+/* 147 */,
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16674,7 +17367,7 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
@@ -16682,23 +17375,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 122 */
+/* 149 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div transition=\"page\" class=\"page-scene-appraise page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader\">\n        <div class=\"filter\">\n            <span @click=\"setType(0)\" :class=\"{'cur': type == 0}\">全部({{formData.count.allCount}})</span>\n            <span @click=\"setType(1)\" :class=\"{'cur': type == 1}\">好评({{formData.count.goodCount}})</span>\n            <span @click=\"setType(2)\" :class=\"{'cur': type == 2}\">中评({{formData.count.cenCount}})</span>\n            <span @click=\"setType(3)\" :class=\"{'cur': type == 3}\">差评({{formData.count.poolCount}})</span>\n        </div>\n        <div class=\"block\" v-for=\"item in formData.appraises\">\n            <div class=\"user clearfix\">\n                <div class=\"img\">\n                    <img :src=\"item.head_img_url\" />\n                </div>\n                <div class=\"nameWrap\">\n                    <div class=\"name\">{{item.from_name}}</div>\n                    <div class=\"time\">{{item.create_time}}</div>\n                </div>\n                <div class=\"type\">\n                    <i class=\"ico {{typeIconArr[item.type-1]}}\"></i>\n                    <div>{{typeArr[item.type-1]}}</div>\n                </div>\n            </div>\n            <div class=\"main\">\n                {{item.content}}\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 123 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(124)
-	__vue_script__ = __webpack_require__(126)
+	__webpack_require__(151)
+	__vue_script__ = __webpack_require__(153)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene/inviteOrder.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(132)
+	  console.warn("[vue-loader] src\\views\\scene\\inviteOrder.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(159)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -16708,7 +17401,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene/inviteOrder.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\scene\\inviteOrder.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16717,194 +17410,198 @@
 	})()}
 
 /***/ },
-/* 124 */
+/* 151 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 125 */,
-/* 126 */
+/* 152 */,
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+		value: true
 	});
 	
-	var _utils = __webpack_require__(110);
+	var _utils = __webpack_require__(137);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	    data: function data() {
-	        return {
-	            indexData: indexData,
-	            title: '预约',
-	            formData: {
-	                scene_name: '',
-	                photo_url: '',
-	                head_img_url: '',
-	                usernick: '',
-	                nickname: '',
-	                school_name: '',
-	                school_id: '',
-	                sex: '男',
-	                height: '',
-	                scene_id: '',
-	                start_time: '',
-	                end_time: '',
-	                period_times: '',
-	                detail: '',
-	                salary: '',
-	                unit: '时',
-	                number: '',
-	                pay_way: '',
-	                welfares: '',
-	                comp_addr: '',
-	                comp_longitude: '',
-	                comp_latitude: '',
-	                workplace: '',
-	                work_longitude: '',
-	                work_latitude: '',
-	                auto_select: '1',
-	                form: 'onekeyOrder'
-	            },
-	            unitTextArr: ['时', '日', '周', '月', '次'],
-	            payTextArr: ['酱油平台支付', '现金支付', '线上支付'],
-	            isShow: false,
-	            actionsheet: {
-	                menu1: '酱油支付平台',
-	                menu2: '现金支付',
-	                menu3: '线上支付'
-	            },
-	            tempPeriodArr: []
-	        };
-	    },
+		data: function data() {
+			return {
+				indexData: indexData,
+				title: '预约',
+				formData: {
+					scene_name: '',
+					photo_url: '',
+					head_img_url: '',
+					usernick: '',
+					nickname: '',
+					school_name: '',
+					school_id: '',
+					sex: '男',
+					height: '',
+					scene_id: '',
+					start_time: '',
+					end_time: '',
+					period_times: '',
+					detail: '',
+					salary: '',
+					unit: '时',
+					number: '',
+					pay_way: '',
+					welfares: '',
+					comp_addr: '',
+					comp_longitude: '',
+					comp_latitude: '',
+					workplace: '',
+					work_longitude: '',
+					work_latitude: '',
+					auto_select: '1',
+					form: 'inviteOrder'
+				},
+				unitTextArr: ['时', '日', '周', '月', '次'],
+				payTextArr: ['酱油平台支付', '现金支付', '线上支付'],
+				isShow: false,
+				actionsheet: {
+					menu1: '酱油支付平台',
+					menu2: '现金支付',
+					menu3: '线上支付'
+				},
+				tempPeriodArr: []
+			};
+		},
 	
-	    route: {
-	        data: function data(transition) {
-	            var self = this,
-	                query = transition.to.query;
+		route: {
+			data: function data(transition) {
+				var self = this,
+				    query = transition.to.query;
 	
-	            $.extend(self.formData, query);
+				$.extend(self.formData, query);
+			}
+		},
+		ready: function ready() {
+			var self = this;
 	
-	            console.log(query);
-	        }
-	    },
-	    ready: function ready() {
-	        var self = this;
+			self.$store.state.getScrollerTime('#start', 0);
+			self.$store.state.getScrollerTime('#end', 0);
 	
-	        self.$store.state.getScrollerTime('#start', 0);
-	        self.$store.state.getScrollerTime('#end', 0);
+			self.splitPeriod();
+		},
 	
-	        self.splitPeriod();
-	    },
+		watch: {
+			tempPeriodArr: function tempPeriodArr() {
+				var self = this;
+				self.$store.state.getScrollerTime('.period_start', 1);
+				self.$store.state.getScrollerTime('.period_end', 1);
+				self.joinPeriod();
+			}
+		},
+		methods: {
+			setUnit: function setUnit(unit) {
+				var self = this;
+				self.formData.unit = unit;
+			},
+			setPayWay: function setPayWay(key) {
+				var self = this;
+				self.isShow = false;
+				switch (key) {
+					case 'menu1':
+						self.formData.pay_way = 1;
+						break;
+					case 'menu2':
+						self.formData.pay_way = 2;
+						break;
+					case 'menu1':
+						self.formData.pay_way = 3;
+						break;
+				}
+			},
+			showActionsheet: function showActionsheet() {
+				this.isShow = true;
+			},
+			splitPeriod: function splitPeriod() {
+				var self = this,
+				    temArr = [];
 	
-	    watch: {
-	        tempPeriodArr: function tempPeriodArr() {
-	            var self = this;
-	            self.$store.state.getScrollerTime('.period_start', 1);
-	            self.$store.state.getScrollerTime('.period_end', 1);
-	            self.joinPeriod();
-	        }
-	    },
-	    methods: {
-	        setUnit: function setUnit(unit) {
-	            var self = this;
-	            self.formData.unit = unit;
-	        },
-	        setPayWay: function setPayWay(key) {
-	            var self = this;
-	            self.isShow = false;
-	            switch (key) {
-	                case 'menu1':
-	                    self.formData.pay_way = 1;
-	                    break;
-	                case 'menu2':
-	                    self.formData.pay_way = 2;
-	                    break;
-	                case 'menu1':
-	                    self.formData.pay_way = 3;
-	                    break;
-	            }
-	        },
-	        showActionsheet: function showActionsheet() {
-	            this.isShow = true;
-	        },
-	        splitPeriod: function splitPeriod() {
-	            var self = this,
-	                temArr = [];
+				temArr = self.formData.period_times ? self.formData.period_times.split(',') : [];
 	
-	            temArr = self.formData.period_times ? self.formData.period_times.split(',') : [];
+				for (var i = 0, len = temArr.length; i < len; i++) {
+					temArr[i] = temArr[i].split('-');
+				}
 	
-	            for (var i = 0, len = temArr.length; i < len; i++) {
-	                temArr[i] = temArr[i].split('-');
-	            }
+				self.tempPeriodArr = temArr;
+			},
+			joinPeriod: function joinPeriod() {
+				var self = this,
+				    len = self.tempPeriodArr.length,
+				    tmp = [],
+				    start = $('.period_start'),
+				    end = $('.period_end');
 	
-	            self.tempPeriodArr = temArr;
-	        },
-	        joinPeriod: function joinPeriod() {
-	            var self = this,
-	                len = self.tempPeriodArr.length,
-	                tmp = [],
-	                start = $('.period_start'),
-	                end = $('.period_end');
+				for (var i = 0; i < len; i++) {
+					var startVal = start.eq(i).val(),
+					    endVal = end.eq(i).val();
+					if (startVal && endVal) {
+						tmp[i] = startVal + '-' + endVal;
+					}
+				}
 	
-	            for (var i = 0; i < len; i++) {
-	                var startVal = start.eq(i).val(),
-	                    endVal = end.eq(i).val();
-	                if (startVal && endVal) {
-	                    tmp[i] = startVal + '-' + endVal;
-	                }
-	            }
+				self.formData.period_times = tmp.join(',');
+			},
+			addPeriod: function addPeriod() {
+				var self = this;
+				self.tempPeriodArr.push([]);
+			},
+			removePeriod: function removePeriod(i) {
+				var self = this;
+				self.tempPeriodArr.splice(i, 1);
+			},
+			switch: function _switch() {
+				var self = this;
+				if (self.formData.auto_select == 1) {
+					self.formData.auto_select = 0;
+				} else {
+					self.formData.auto_select = 1;
+				}
+			},
+			setAddress: function setAddress(type) {
+				var self = this;
+				self.formData.type = type;
+				self.formData.pageType = 1;
+				self.$route.router.go({ name: 'sceneAddress', query: self.formData });
+			},
+			save: function save() {
+				var self = this;
 	
-	            self.formData.period_times = tmp.join(',');
-	        },
-	        addPeriod: function addPeriod() {
-	            var self = this;
-	            self.tempPeriodArr.push([]);
-	        },
-	        removePeriod: function removePeriod(i) {
-	            var self = this;
-	            self.tempPeriodArr.splice(i, 1);
-	        },
-	        switch: function _switch() {
-	            var self = this;
-	            if (self.formData.auto_select == 1) {
-	                self.formData.auto_select = 0;
-	            } else {
-	                self.formData.auto_select = 1;
-	            }
-	        },
-	        save: function save() {
-	            var self = this;
+				console.log(self.formData.period_times);
+				return;
 	
-	            console.log(self.formData.period_times);
-	            return;
-	
-	            $.ajax({
-	                url: "/soytime/appraise/list",
-	                type: 'POST',
-	                dataType: 'json',
-	                data: {
-	                    to_id: self.toId,
-	                    currentPage: self.currentPage,
-	                    type: self.type
-	                },
-	                success: function success(data) {
-	                    //self.formData = data.result
-	                }
-	            });
-	        }
-	    },
-	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'actionsheet': __webpack_require__(127)
-	    }
+				$.ajax({
+					url: "/soytime/appraise/list",
+					type: 'POST',
+					dataType: 'json',
+					data: {
+						to_id: self.toId,
+						currentPage: self.currentPage,
+						type: self.type
+					},
+					success: function success(data) {
+						//self.formData = data.result
+					}
+				});
+			}
+		},
+		components: {
+			'headerBar': __webpack_require__(88),
+			'actionsheet': __webpack_require__(154)
+		}
 	};
 	// </script>
 
@@ -17033,7 +17730,7 @@
 	//
 	// <template>
 	//     <div class="page-scene-inviteOrder page-current">
-	//         <header-bar :title="title" :back="true"></header-bar>
+	//         <header-bar :title="title" :back="true" target="scene"></header-bar>
 	//         <div class="content showHeader showFooter">
 	//
 	//             <div class="userWrap">
@@ -17109,11 +17806,11 @@
 	//             <div class="block clearfix">
 	//                 <div class="item clearfix">
 	//                     <span>公司地址</span>
-	//                     <input type="text" placeholder="请填写详细地址">
+	//                     <input type="text" placeholder="请填写详细地址" v-model="formData.comp_addr" @click="setAddress(0)">
 	//                 </div>
 	//                 <div class="clearfix">
 	//                     <span>服务位置</span>
-	//                     <input type="text" placeholder="请输入准确位置">
+	//                     <input type="text" placeholder="请输入准确位置" v-model="formData.workplace" @click="setAddress(1)">
 	//                 </div>
 	//             </div>
 	//
@@ -17131,17 +17828,17 @@
 	// <script>
 
 /***/ },
-/* 127 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(128)
-	__vue_script__ = __webpack_require__(130)
+	__webpack_require__(155)
+	__vue_script__ = __webpack_require__(157)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/actionsheet/index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(131)
+	  console.warn("[vue-loader] src\\components\\actionsheet\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(158)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -17151,7 +17848,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/actionsheet/index.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\actionsheet\\index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17160,14 +17857,14 @@
 	})()}
 
 /***/ },
-/* 128 */
+/* 155 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 129 */,
-/* 130 */
+/* 156 */,
+/* 157 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17321,29 +18018,29 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 131 */
+/* 158 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"actionsheet_wrap\">\n  <div class=\"weui_mask_transition\" :class=\"{'weui_fade_toggle': show}\" :style=\"{display: show ? 'block' : 'none'}\" @click=\"show=false\"></div>\n  <div class=\"weui_actionsheet\" :class=\"{'weui_actionsheet_toggle': show}\">\n    <div class=\"weui_actionsheet_menu\">\n      <div class=\"weui_actionsheet_cell\" v-for=\"(key, text) in menus\" @click=\"dispatchEvent('menu-click', key)\">\n        {{{text}}}\n      </div>\n      <div class=\"vux-actionsheet-gap\" v-if=\"showCancel\"></div>\n      <div class=\"weui_actionsheet_cell vux-actionsheet-cancel\" @click=\"dispatchEvent('menu-click', 'cancel')\" v-if=\"showCancel\">{{cancelText}}</div>\n    </div>\n  </div>\n</div>\n";
 
 /***/ },
-/* 132 */
+/* 159 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-scene-inviteOrder page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n\n        <div class=\"userWrap\">\n            <div class=\"btn\">\n                <div class=\"radius\">\n                    <img :src=\"formData.head_img_url\" v-if=\"!formData.photo_url\" />\n                    <img :src=\"formData.photo_url\" v-else />\n                </div>\n            </div>\n            <div class=\"name\">{{formData.usernick}}</div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <span class=\"pull-left\">任务类型</span>\n            <span class=\"pull-right\">{{formData.scene_name}}</span>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <div class=\"half\">\n                    <span>开始时间</span>\n                    <input type=\"text\" id=\"start\" v-model=\"formData.start_time\" mobiscroll-datetime=\"settings\">\n                </div>\n                <div class=\"half\">\n                    <span>结束时间</span>\n                    <input type=\"text\" id=\"end\" v-model=\"formData.end_time\" mobiscroll-datetime=\"settings\">\n                </div>\n            </div>\n            <div class=\"item clearfix timeWrap\" v-for=\"period in tempPeriodArr\" v-if=\"tempPeriodArr.length\">\n                <span>时段：</span>\n                <input type=\"text\" value=\"{{period[0]}}\" class=\"period_start\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i>-</i>\n                <input type=\"text\" value=\"{{period[1]}}\" class=\"period_end\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i class=\"ico ico-close\" @click=\"removePeriod($index)\"></i>\n            </div>\n            <div class=\"item clearfix timeWrap\" v-if=\"!tempPeriodArr.length\">\n                <span>时段：</span>\n                <input type=\"text\" class=\"period_start\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i>-</i>\n                <input type=\"text\" class=\"period_end\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n            </div>\n            <div @click=\"addPeriod\">\n                <i class=\"ico ico-anonymous\"></i>添加时间段\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <textarea placeholder=\"请详细填写你的需求任务\"></textarea>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <div class=\"half\">\n                    <span>报酬</span>\n                    <input type=\"text\" placeholder=\"输入金额\">\n                </div>\n                <div class=\"half unit\">\n                    <span v-for=\"unit in unitTextArr\"\n                          :class=\"{'cur': unit == formData.unit}\"\n                          @click=\"setUnit(unit)\"\n                    >\n                        {{unit}}\n                    </span>\n                </div>\n            </div>\n            <div class=\"clearfix payWay\" @click=\"showActionsheet\">\n                <span>支付方式</span>\n                <span class=\"pull-right\" v-if=\"formData.pay_way\">{{payTextArr[formData.pay_way-1]}}</span>\n                <span class=\"pull-right ico ico-jiantouyou\" v-else></span>\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <span>公司地址</span>\n                <input type=\"text\" placeholder=\"请填写详细地址\">\n            </div>\n            <div class=\"clearfix\">\n                <span>服务位置</span>\n                <input type=\"text\" placeholder=\"请输入准确位置\">\n            </div>\n        </div>\n\n    </div>\n    <span\n        class=\"ui-btn ui-btn-big\"\n        @click=\"save\"\n    >\n        下单\n    </span>\n\n</div>\n";
+	module.exports = "\n<div class=\"page-scene-inviteOrder page-current\">\n    <header-bar :title=\"title\" :back=\"true\" target=\"scene\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n\n        <div class=\"userWrap\">\n            <div class=\"btn\">\n                <div class=\"radius\">\n                    <img :src=\"formData.head_img_url\" v-if=\"!formData.photo_url\" />\n                    <img :src=\"formData.photo_url\" v-else />\n                </div>\n            </div>\n            <div class=\"name\">{{formData.usernick}}</div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <span class=\"pull-left\">任务类型</span>\n            <span class=\"pull-right\">{{formData.scene_name}}</span>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <div class=\"half\">\n                    <span>开始时间</span>\n                    <input type=\"text\" id=\"start\" v-model=\"formData.start_time\" mobiscroll-datetime=\"settings\">\n                </div>\n                <div class=\"half\">\n                    <span>结束时间</span>\n                    <input type=\"text\" id=\"end\" v-model=\"formData.end_time\" mobiscroll-datetime=\"settings\">\n                </div>\n            </div>\n            <div class=\"item clearfix timeWrap\" v-for=\"period in tempPeriodArr\" v-if=\"tempPeriodArr.length\">\n                <span>时段：</span>\n                <input type=\"text\" value=\"{{period[0]}}\" class=\"period_start\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i>-</i>\n                <input type=\"text\" value=\"{{period[1]}}\" class=\"period_end\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i class=\"ico ico-close\" @click=\"removePeriod($index)\"></i>\n            </div>\n            <div class=\"item clearfix timeWrap\" v-if=\"!tempPeriodArr.length\">\n                <span>时段：</span>\n                <input type=\"text\" class=\"period_start\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i>-</i>\n                <input type=\"text\" class=\"period_end\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n            </div>\n            <div @click=\"addPeriod\">\n                <i class=\"ico ico-anonymous\"></i>添加时间段\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <textarea placeholder=\"请详细填写你的需求任务\"></textarea>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <div class=\"half\">\n                    <span>报酬</span>\n                    <input type=\"text\" placeholder=\"输入金额\">\n                </div>\n                <div class=\"half unit\">\n                    <span v-for=\"unit in unitTextArr\"\n                          :class=\"{'cur': unit == formData.unit}\"\n                          @click=\"setUnit(unit)\"\n                    >\n                        {{unit}}\n                    </span>\n                </div>\n            </div>\n            <div class=\"clearfix payWay\" @click=\"showActionsheet\">\n                <span>支付方式</span>\n                <span class=\"pull-right\" v-if=\"formData.pay_way\">{{payTextArr[formData.pay_way-1]}}</span>\n                <span class=\"pull-right ico ico-jiantouyou\" v-else></span>\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <span>公司地址</span>\n                <input type=\"text\" placeholder=\"请填写详细地址\" v-model=\"formData.comp_addr\" @click=\"setAddress(0)\">\n            </div>\n            <div class=\"clearfix\">\n                <span>服务位置</span>\n                <input type=\"text\" placeholder=\"请输入准确位置\" v-model=\"formData.workplace\" @click=\"setAddress(1)\">\n            </div>\n        </div>\n\n    </div>\n    <span\n        class=\"ui-btn ui-btn-big\"\n        @click=\"save\"\n    >\n        下单\n    </span>\n\n</div>\n";
 
 /***/ },
-/* 133 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(134)
-	__vue_script__ = __webpack_require__(136)
+	__webpack_require__(161)
+	__vue_script__ = __webpack_require__(163)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene/oneKeyOrder.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(147)
+	  console.warn("[vue-loader] src\\views\\scene\\oneKeyOrder.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(174)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -17353,7 +18050,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene/oneKeyOrder.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\scene\\oneKeyOrder.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17362,14 +18059,14 @@
 	})()}
 
 /***/ },
-/* 134 */
+/* 161 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 135 */,
-/* 136 */
+/* 162 */,
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17378,7 +18075,7 @@
 	    value: true
 	});
 	
-	var _utils = __webpack_require__(110);
+	var _utils = __webpack_require__(137);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -17560,29 +18257,22 @@
 	        save: function save() {
 	            var self = this;
 	
-	            console.log(self.formData.period_times);
-	            return;
-	
 	            $.ajax({
-	                url: "/soytime/appraise/list",
+	                url: "/soytime/order/inviteOrder",
 	                type: 'POST',
 	                dataType: 'json',
-	                data: {
-	                    to_id: self.toId,
-	                    currentPage: self.currentPage,
-	                    type: self.type
-	                },
+	                data: self.formData,
 	                success: function success(data) {
-	                    //self.formData = data.result
+	                    self.$route.router.go({ name: 'sceneOrderSuccess', query: data.result.order_id });
 	                }
 	            });
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'sceneType': __webpack_require__(137),
-	        'welfares': __webpack_require__(142),
-	        'actionsheet': __webpack_require__(127)
+	        'headerBar': __webpack_require__(88),
+	        'sceneType': __webpack_require__(164),
+	        'welfares': __webpack_require__(169),
+	        'actionsheet': __webpack_require__(154)
 	    }
 	};
 	// </script>
@@ -17707,7 +18397,7 @@
 	//
 	// <template>
 	//     <div class="page-scene-oneKeyOrder page-current">
-	//         <header-bar :title="title" :back="true"></header-bar>
+	//         <header-bar :title="title" :back="true" target="scene"></header-bar>
 	//         <div class="content showHeader showFooter">
 	//             <div class="block clearfix">
 	//                 <span>雇主名</span>
@@ -17850,17 +18540,17 @@
 	// <script>
 
 /***/ },
-/* 137 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(138)
-	__vue_script__ = __webpack_require__(140)
+	__webpack_require__(165)
+	__vue_script__ = __webpack_require__(167)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/sceneType.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(141)
+	  console.warn("[vue-loader] src\\components\\sceneType.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(168)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -17870,7 +18560,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/sceneType.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\sceneType.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17879,14 +18569,14 @@
 	})()}
 
 /***/ },
-/* 138 */
+/* 165 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 139 */,
-/* 140 */
+/* 166 */,
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17895,7 +18585,7 @@
 	    value: true
 	});
 	
-	var _utils = __webpack_require__(110);
+	var _utils = __webpack_require__(137);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -17990,23 +18680,23 @@
 	// <script>
 
 /***/ },
-/* 141 */
+/* 168 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<ul class=\"sceneType clearfix\">\n    <li v-for=\"item in sceneList\" @click=\"setScene(item.scene_id)\">\n\n        <span class=\"cur\" v-if=\"item | sceneCur sceneArr\">\n            {{item.scene_name}}\n        </span>\n        <span v-else>\n            {{item.scene_name}}\n        </span>\n        \n    </li>\n</ul>\n";
 
 /***/ },
-/* 142 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(143)
-	__vue_script__ = __webpack_require__(145)
+	__webpack_require__(170)
+	__vue_script__ = __webpack_require__(172)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/welfares.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(146)
+	  console.warn("[vue-loader] src\\components\\welfares.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(173)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -18016,7 +18706,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/welfares.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\welfares.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -18025,14 +18715,14 @@
 	})()}
 
 /***/ },
-/* 143 */
+/* 170 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 144 */,
-/* 145 */
+/* 171 */,
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18041,7 +18731,7 @@
 	    value: true
 	});
 	
-	var _utils = __webpack_require__(110);
+	var _utils = __webpack_require__(137);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -18128,29 +18818,29 @@
 	// <script>
 
 /***/ },
-/* 146 */
+/* 173 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<ul class=\"welfareType clearfix\">\n    <li v-for=\"item in welfares\" @click=\"setwelfare(item.welfare_id)\">\n\n        <span class=\"cur\" v-if=\"item | welfareCur welfareArr\">\n            {{item.welfare_name}}\n        </span>\n        <span v-else>\n            {{item.welfare_name}}\n        </span>\n\n    </li>\n</ul>\n";
 
 /***/ },
-/* 147 */
+/* 174 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-scene-oneKeyOrder page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        <div class=\"block clearfix\">\n            <span>雇主名</span>\n            <input type=\"text\" placeholder=\"请输入公司名字\">\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item\">\n                <span>选择类型</span>\n            </div>\n            <scene-type \n                :scene-list=\"indexData.sceneList\"\n                :scene-ids.sync=\"formData.sceneId\"\n                :is-radio=\"true\"\n            ></scene-type>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <div class=\"half\">\n                    <span>开始时间</span>\n                    <input type=\"text\" id=\"start\" v-model=\"formData.start_time\" mobiscroll-datetime=\"settings\">\n                </div>\n                <div class=\"half\">\n                    <span>结束时间</span>\n                    <input type=\"text\" id=\"end\" v-model=\"formData.end_time\" mobiscroll-datetime=\"settings\">\n                </div>\n            </div>\n            <div class=\"item clearfix timeWrap\" v-for=\"period in tempPeriodArr\" v-if=\"tempPeriodArr.length\">\n                <span>时段：</span>\n                <input type=\"text\" value=\"{{period[0]}}\" class=\"period_start\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i>-</i>\n                <input type=\"text\" value=\"{{period[1]}}\" class=\"period_end\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i class=\"ico ico-close\" @click=\"removePeriod($index)\"></i>\n            </div>\n            <div class=\"item clearfix timeWrap\" v-if=\"!tempPeriodArr.length\">\n                <span>时段：</span>\n                <input type=\"text\" class=\"period_start\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i>-</i>\n                <input type=\"text\" class=\"period_end\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n            </div>\n            <div @click=\"addPeriod\">\n                <i class=\"ico ico-anonymous\"></i>添加时间段\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\" @click=\"selectSchool\">\n                <span class=\"pull-left\">学校</span>\n                <span class=\"pull-right\" v-if=\"formData.school_name\">{{formData.school_name}}</span>\n                <span class=\"pull-right ico ico-jiantouyou\" v-else></span>\n            </div>\n            <div class=\"clearfix\">\n                <div class=\"half sex\">\n                    <span class=\"pull-left\">性别</span>\n                    <span class=\"pull-right\">\n                        <i class=\"ico ico-xingbienan3\" :class=\"{'cur':formData.sex == '男'}\" @click=\"setSex('男')\"></i>\n                        <i class=\"ico ico-xingbienv4\" :class=\"{'cur':formData.sex == '女'}\" @click=\"setSex('女')\"></i>\n                    </span>\n                </div>\n                <div class=\"half\">\n                    <span>身高</span>\n                    <input type=\"text\" placeholder=\"不限\">\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"block clearfix\">\n            <span>预约人数</span>\n            <input type=\"text\" placeholder=\"输入预约人数\">\n        </div>\n\n        <div class=\"block clearfix\">\n            <textarea placeholder=\"请详细填写你的需求任务\"></textarea>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <div class=\"half\">\n                    <span>报酬</span>\n                    <input type=\"text\" placeholder=\"输入金额\">\n                </div>\n                <div class=\"half unit\">\n                    <span v-for=\"unit in unitTextArr\"\n                          :class=\"{'cur': unit == formData.unit}\"\n                          @click=\"setUnit(unit)\"\n                    >\n                        {{unit}}\n                    </span>\n                </div>\n            </div>\n            <div class=\"clearfix payWay\" @click=\"showActionsheet\">\n                <span>支付方式</span>\n                <span class=\"pull-right\" v-if=\"formData.pay_way\">{{payTextArr[formData.pay_way-1]}}</span>\n                <span class=\"pull-right ico ico-jiantouyou\" v-else></span>\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <span>特别福利</span>\n            </div>\n            <welfares\n                    :welfares=\"welfares\"\n                    :welfares-ids.sync=\"formData.welfares\"\n            ></welfares>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <span>公司地址</span>\n                <input type=\"text\" placeholder=\"请填写详细地址\" v-model=\"formData.comp_addr\" @click=\"setAddress(0)\">\n            </div>\n            <div class=\"clearfix\">\n                <span>服务位置</span>\n                <input type=\"text\" placeholder=\"请输入准确位置\" v-model=\"formData.workplace\" @click=\"setAddress(1)\">\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <span class=\"pull-left\">报名半小时后自动确定人选</span>\n            <span\n                class=\"pull-right switch ico\"\n                :class=\"{'ico-open': formData.auto_select == 1, 'ico-close3': formData.auto_select == 0}\"\n                @click=\"switch\"\n            ></span>\n        </div>\n    </div>\n    <actionsheet :show.sync=\"isShow\" :menus=\"actionsheet\" @menu-click=\"setPayWay\"></actionsheet>\n    <span\n        class=\"ui-btn ui-btn-big\"\n        @click=\"save\"\n    >\n        下单\n    </span>\n\n</div>\n";
+	module.exports = "\n<div class=\"page-scene-oneKeyOrder page-current\">\n    <header-bar :title=\"title\" :back=\"true\" target=\"scene\"></header-bar>\n    <div class=\"content showHeader showFooter\">\n        <div class=\"block clearfix\">\n            <span>雇主名</span>\n            <input type=\"text\" placeholder=\"请输入公司名字\">\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item\">\n                <span>选择类型</span>\n            </div>\n            <scene-type \n                :scene-list=\"indexData.sceneList\"\n                :scene-ids.sync=\"formData.sceneId\"\n                :is-radio=\"true\"\n            ></scene-type>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <div class=\"half\">\n                    <span>开始时间</span>\n                    <input type=\"text\" id=\"start\" v-model=\"formData.start_time\" mobiscroll-datetime=\"settings\">\n                </div>\n                <div class=\"half\">\n                    <span>结束时间</span>\n                    <input type=\"text\" id=\"end\" v-model=\"formData.end_time\" mobiscroll-datetime=\"settings\">\n                </div>\n            </div>\n            <div class=\"item clearfix timeWrap\" v-for=\"period in tempPeriodArr\" v-if=\"tempPeriodArr.length\">\n                <span>时段：</span>\n                <input type=\"text\" value=\"{{period[0]}}\" class=\"period_start\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i>-</i>\n                <input type=\"text\" value=\"{{period[1]}}\" class=\"period_end\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i class=\"ico ico-close\" @click=\"removePeriod($index)\"></i>\n            </div>\n            <div class=\"item clearfix timeWrap\" v-if=\"!tempPeriodArr.length\">\n                <span>时段：</span>\n                <input type=\"text\" class=\"period_start\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n                <i>-</i>\n                <input type=\"text\" class=\"period_end\" mobiscroll-datetime=\"settings\" placeholder=\"请选择\">\n            </div>\n            <div @click=\"addPeriod\">\n                <i class=\"ico ico-anonymous\"></i>添加时间段\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\" @click=\"selectSchool\">\n                <span class=\"pull-left\">学校</span>\n                <span class=\"pull-right\" v-if=\"formData.school_name\">{{formData.school_name}}</span>\n                <span class=\"pull-right ico ico-jiantouyou\" v-else></span>\n            </div>\n            <div class=\"clearfix\">\n                <div class=\"half sex\">\n                    <span class=\"pull-left\">性别</span>\n                    <span class=\"pull-right\">\n                        <i class=\"ico ico-xingbienan3\" :class=\"{'cur':formData.sex == '男'}\" @click=\"setSex('男')\"></i>\n                        <i class=\"ico ico-xingbienv4\" :class=\"{'cur':formData.sex == '女'}\" @click=\"setSex('女')\"></i>\n                    </span>\n                </div>\n                <div class=\"half\">\n                    <span>身高</span>\n                    <input type=\"text\" placeholder=\"不限\">\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"block clearfix\">\n            <span>预约人数</span>\n            <input type=\"text\" placeholder=\"输入预约人数\">\n        </div>\n\n        <div class=\"block clearfix\">\n            <textarea placeholder=\"请详细填写你的需求任务\"></textarea>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <div class=\"half\">\n                    <span>报酬</span>\n                    <input type=\"text\" placeholder=\"输入金额\">\n                </div>\n                <div class=\"half unit\">\n                    <span v-for=\"unit in unitTextArr\"\n                          :class=\"{'cur': unit == formData.unit}\"\n                          @click=\"setUnit(unit)\"\n                    >\n                        {{unit}}\n                    </span>\n                </div>\n            </div>\n            <div class=\"clearfix payWay\" @click=\"showActionsheet\">\n                <span>支付方式</span>\n                <span class=\"pull-right\" v-if=\"formData.pay_way\">{{payTextArr[formData.pay_way-1]}}</span>\n                <span class=\"pull-right ico ico-jiantouyou\" v-else></span>\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <span>特别福利</span>\n            </div>\n            <welfares\n                    :welfares=\"welfares\"\n                    :welfares-ids.sync=\"formData.welfares\"\n            ></welfares>\n        </div>\n\n        <div class=\"block clearfix\">\n            <div class=\"item clearfix\">\n                <span>公司地址</span>\n                <input type=\"text\" placeholder=\"请填写详细地址\" v-model=\"formData.comp_addr\" @click=\"setAddress(0)\">\n            </div>\n            <div class=\"clearfix\">\n                <span>服务位置</span>\n                <input type=\"text\" placeholder=\"请输入准确位置\" v-model=\"formData.workplace\" @click=\"setAddress(1)\">\n            </div>\n        </div>\n\n        <div class=\"block clearfix\">\n            <span class=\"pull-left\">报名半小时后自动确定人选</span>\n            <span\n                class=\"pull-right switch ico\"\n                :class=\"{'ico-open': formData.auto_select == 1, 'ico-close3': formData.auto_select == 0}\"\n                @click=\"switch\"\n            ></span>\n        </div>\n    </div>\n    <actionsheet :show.sync=\"isShow\" :menus=\"actionsheet\" @menu-click=\"setPayWay\"></actionsheet>\n    <span\n        class=\"ui-btn ui-btn-big\"\n        @click=\"save\"\n    >\n        下单\n    </span>\n\n</div>\n";
 
 /***/ },
-/* 148 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(149)
-	__vue_script__ = __webpack_require__(151)
+	__webpack_require__(176)
+	__vue_script__ = __webpack_require__(178)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene/orderSuccess.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(157)
+	  console.warn("[vue-loader] src\\views\\scene\\orderSuccess.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(184)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -18160,7 +18850,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene/orderSuccess.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\scene\\orderSuccess.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -18169,14 +18859,14 @@
 	})()}
 
 /***/ },
-/* 149 */
+/* 176 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 150 */,
-/* 151 */
+/* 177 */,
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18377,9 +19067,9 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'timeConf': __webpack_require__(105),
-	        'confirm': __webpack_require__(152)
+	        'headerBar': __webpack_require__(88),
+	        'timeConf': __webpack_require__(132),
+	        'confirm': __webpack_require__(179)
 	    }
 	};
 	// </script>
@@ -18387,17 +19077,17 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 152 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(153)
-	__vue_script__ = __webpack_require__(155)
+	__webpack_require__(180)
+	__vue_script__ = __webpack_require__(182)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/confirm/index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(156)
+	  console.warn("[vue-loader] src\\components\\confirm\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(183)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -18407,7 +19097,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/confirm/index.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\confirm\\index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -18416,14 +19106,14 @@
 	})()}
 
 /***/ },
-/* 153 */
+/* 180 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 154 */,
-/* 155 */
+/* 181 */,
+/* 182 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -18598,29 +19288,29 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 156 */
+/* 183 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"weui_dialog_confirm\" v-show=\"show\">\n  <div class=\"weui_mask\"></div>\n  <div class=\"weui_dialog\">\n    <div class=\"weui_dialog_hd\"><strong class=\"weui_dialog_title\">{{title}}</strong></div>\n    <div class=\"weui_dialog_bd\"><slot></slot></div>\n    <div class=\"weui_dialog_ft\">\n      <a href=\"javascript:;\" class=\"weui_btn_dialog default\" @click=\"onCancel\">{{cancelText}}</a>\n      <a href=\"javascript:;\" class=\"weui_btn_dialog primary\" @click=\"onConfirm\">{{confirmText}}</a>\n    </div>\n  </div>\n</div>\n";
 
 /***/ },
-/* 157 */
+/* 184 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div transition=\"page\" class=\"page-scene-orderSuccess page-current\">\n    <div class=\"content  showFooter\">\n        <div class=\"header\">下单成功!</div>\n        <div class=\"subHeader\">需求人数2人</div>\n        <span class=\"jump\">跳过</span>\n        <div class=\"imgWrap\">\n            <img src=\"/dist/img/orderSucess.png\">\n        </div>\n        <div class=\"userList\">\n            <div class=\"text\">\n                <p>系统已为您推送 203 人</p>\n                <p>已报名人数3人</p>\n            </div>\n            <div class=\"list\">\n                <header>剩余选择人数：2人</header>\n                <div class=\"item clearfix\">\n                    <span class=\"ico ico-xuan\"></span>\n                    <span class=\"img\"><img src=\"/dist/img/orderSucess.png\" alt=\"\"></span>\n                    <span class=\"name\">林小兔</span>\n                    <span class=\"ico ico-dianhua3\" @click=\"getPhone(formData.name)\"></span>\n                </div>\n            </div>\n        </div>\n        <!--\n        <div class=\"text\">\n            <p>\n                系统已为您推送 203 人，请耐心等待...\n            </p>\n            <p>\n                已报名人数0人\n            </p>\n            <p>\n                若30分钟内订单没有响应，系统将关闭订单\n            </p>\n        </div>\n        -->\n    </div>\n    <span class=\"showOrderDetail\">\n        查看订单详情\n    </span>\n</div>\n\n<confirm :show.sync=\"isShowConfirm\" @on-confirm=\"confirm\">\n    <div class=\"page-scene-orderSuccess-formWrap\">\n        是否要获取{{confirmName}}的联系方式？\n    </div>\n</confirm>\n";
 
 /***/ },
-/* 158 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(159)
-	__vue_script__ = __webpack_require__(161)
+	__webpack_require__(186)
+	__vue_script__ = __webpack_require__(188)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/scene/address.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(167)
+	  console.warn("[vue-loader] src\\views\\scene\\address.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(194)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -18630,7 +19320,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/scene/address.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\scene\\address.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -18639,14 +19329,14 @@
 	})()}
 
 /***/ },
-/* 159 */
+/* 186 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 160 */,
-/* 161 */
+/* 187 */,
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -18851,9 +19541,9 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'confirm': __webpack_require__(152),
-	        'toast': __webpack_require__(162)
+	        'headerBar': __webpack_require__(88),
+	        'confirm': __webpack_require__(179),
+	        'toast': __webpack_require__(189)
 	    }
 	};
 	// </script>
@@ -18861,17 +19551,17 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 162 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(163)
-	__vue_script__ = __webpack_require__(165)
+	__webpack_require__(190)
+	__vue_script__ = __webpack_require__(192)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/toast/index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(166)
+	  console.warn("[vue-loader] src\\components\\toast\\index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(193)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -18881,7 +19571,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/toast/index.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\toast\\index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -18890,14 +19580,14 @@
 	})()}
 
 /***/ },
-/* 163 */
+/* 190 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 164 */,
-/* 165 */
+/* 191 */,
+/* 192 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -18979,29 +19669,29 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 166 */
+/* 193 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div id=\"toast\" v-show=\"show\">\n  <div class=\"weui_mask_transparent\"></div>\n    <div class=\"weui_toast\" :class=\"{'weui_toast_forbidden': type == 'warn', 'weui_toast_cancel': type == 'cancel'}\">\n      <i class=\"weui_icon_toast\"></i>\n      <p class=\"weui_toast_content\"><slot></slot></p>\n  </div>\n</div>\n";
 
 /***/ },
-/* 167 */
+/* 194 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div transition=\"page\" class=\"page-scene-address page-current\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div class=\"content showHeader\">\n        <div class=\"header\">\n            <input type=\"text\" v-model=\"addressText\" placeholder=\"如：厦门市思明区中山路\">\n            <span class=\"btn\" @click=\"addAddress\">新增位置</span>\n        </div>\n        <div class=\"main\">\n            <div class=\"tit\">历史位置:</div>\n            <div class=\"item clearfix\" v-for=\"item in addressData\">\n                <span class=\"pull-left\">{{item.address}}</span>\n                <div class=\"pull-right\">\n                    <span @click=\"setAddress($index)\">\n                        <span class=\"ico ico-yixuan\"></span>\n                        <span>选择地址</span>\n                    </span>\n                    <span class=\"ico ico-shanchu\" @click=\"removeAddress($index)\"></span>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n<confirm :show.sync=\"isShowConfirm\" @on-confirm=\"confirm\">\n    确认删除该地址?\n</confirm>\n<toast :show.sync=\"isShowToast\" :time=\"500000\">{{toastText}}</toast>\n";
 
 /***/ },
-/* 168 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(169)
-	__vue_script__ = __webpack_require__(171)
+	__webpack_require__(196)
+	__vue_script__ = __webpack_require__(198)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(172)
+	  console.warn("[vue-loader] src\\views\\user.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(199)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -19011,7 +19701,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -19020,14 +19710,14 @@
 	})()}
 
 /***/ },
-/* 169 */
+/* 196 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 170 */,
-/* 171 */
+/* 197 */,
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19240,30 +19930,30 @@
 			}
 		},
 		components: {
-			'headerBar': __webpack_require__(65)
+			'headerBar': __webpack_require__(88)
 		}
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 172 */
+/* 199 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n    \n        <div class=\"userHeader clearfix\">\n            <div class=\"userWrap clearfix\">\n                <div class=\"pull-left photoWrap\">\n                    <img :src=\"formData.head_img_url\">\n                </div>\n                <div class=\"pull-left nameWrap\">\n                    <div class=\"name\">{{formData.nickname}}</div>\n                    <div \n                        class=\"auth clearfix\"\n                        v-link=\"{name: 'auth'}\" \n                        v-if=\"formData.sutdent_auth == 0 || formData.sutdent_auth == 3\"\n                    >\n                        <i class=\"icon icon-anquanbaozhang pull-left\"></i>\n                        <span class=\"pull-left\" v-if=\"formData.sutdent_auth == 0\">未认证，点此认证！</span>\n                        <span class=\"pull-left\" v-if=\"formData.sutdent_auth == 3\">认证失败，点此重新认证！</span>\n                    </div>\n                    <div\n                        class=\"auth clearfix\"\n                        v-if=\"formData.sutdent_auth == 1\"\n                    >\n                        <i class=\"icon icon-anquanbaozhang2 pull-left\"></i>\n                        <span class=\"pull-left\">认证成功</span>\n                    </div>\n                    <div\n                        class=\"auth clearfix\"\n                        v-if=\"formData.sutdent_auth == 2\"\n                    >\n                        <i class=\"icon icon-anquanbaozhang pull-left\"></i>\n                        <span class=\"pull-left\">认证中，请耐心等待</span>\n                    </div>\n                </div>\n            </div>\n            <ul class=\"userScore clearfix\">\n                <li>\n                    <i class=\"icon icon-xiaolian pull-left\"></i>\n                    <span class=\"pull-left\">好评</span>\n                    <em class=\"pull-left\">{{formData.goodCount}}</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-cry pull-left\"></i>\n                    <span class=\"pull-left\">中评</span>\n                    <em class=\"pull-left\">{{formData.cenCount}}</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-kulian pull-left\"></i>\n                    <span class=\"pull-left\">差评</span>\n                    <em class=\"pull-left\">{{formData.poolCount}}</em>\n                </li>\n                <li>\n                    <i class=\"icon icon-aixin pull-left\"></i>\n                    <span class=\"pull-left\">收藏</span>\n                    <em class=\"pull-left\">{{formData.collectCount}}</em>\n                </li>\n            </ul>\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userMoney'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">我的余额</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userSetting'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">设置</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userWorkServer'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">发布服务</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userWorkPublish'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">发单任务</div>\n                    </div>\n                </li>\n                <li class=\"item-content item-link\" v-link=\"{name: 'userWorkAccept'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">接单任务</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\" v-link=\"{name: 'service'}\">\n                    <div class=\"item-inner\">\n                        <div class=\"item-title\">在线客服</div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 173 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(174)
-	__vue_script__ = __webpack_require__(176)
+	__webpack_require__(201)
+	__vue_script__ = __webpack_require__(203)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/setting.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(182)
+	  console.warn("[vue-loader] src\\views\\user\\setting.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(209)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -19273,7 +19963,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/setting.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\setting.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -19282,14 +19972,14 @@
 	})()}
 
 /***/ },
-/* 174 */
+/* 201 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 175 */,
-/* 176 */
+/* 202 */,
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19470,26 +20160,26 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'timeConf': __webpack_require__(105),
-	        'bindMobile': __webpack_require__(177)
+	        'headerBar': __webpack_require__(88),
+	        'timeConf': __webpack_require__(132),
+	        'bindMobile': __webpack_require__(204)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 177 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(178)
-	__vue_script__ = __webpack_require__(180)
+	__webpack_require__(205)
+	__vue_script__ = __webpack_require__(207)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/bindMobile.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(181)
+	  console.warn("[vue-loader] src\\components\\bindMobile.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(208)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -19499,7 +20189,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/bindMobile.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\bindMobile.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -19508,14 +20198,14 @@
 	})()}
 
 /***/ },
-/* 178 */
+/* 205 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 179 */,
-/* 180 */
+/* 206 */,
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19778,36 +20468,36 @@
 	        }
 	    },
 	    components: {
-	        'confirm': __webpack_require__(152)
+	        'confirm': __webpack_require__(179)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 181 */
+/* 208 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div class=\"item clearfix\" @click=\"showMobile\">\n        <span class=\"pull-left\">手机号</span>\n        <span class=\"pull-right\">{{mobile}}</span>\n    </div>\n    <confirm :show.sync=\"isShowConfirm\" @on-confirm=\"confirm\">\n        <div class=\"page-user-formWrap\">\n            <div class=\"mobileWrap clearfix\">\n                <label class=\"pull-left\">手机</label>\n                <input class=\"pull-left\" type=\"text\" id=\"mobile\" placeholder=\"手机号\" v-model=\"mobile\" />\n            </div>\n            <div class=\"codeWrap clearfix\">\n                <label class=\"pull-left\">验证码</label>\n                <input class=\"pull-left\" type=\"text\" id=\"code\" placeholder=\"验证码\"  />\n                <span class=\"pull-right\" id=\"getCode\">\n                    <span id=\"getCodeText\">获取验证码</span>\n                    <span id=\"getCodeTime\"></span>\n                </span>\n            </div>\n        </div>\n    </confirm>\n    <script type=\"text/html\" id=\"toastWrap\">\n        <span class=\"toastWrap\">\n            <span id=\"toast\" class=\"toast\">\n                [[content]]\n            </span>\n        </span>\n    </script>\n\t<script type=\"text/html\" id=\"mobileWrap\">\n        <div class=\"page-user-formWrap\">\n            <div class=\"mobileWrap clearfix\">\n                <label class=\"pull-left\">手机</label>\n                <input class=\"pull-left\" type=\"text\" id=\"mobile\" placeholder=\"手机号\" v-model=\"mobile\" />\n            </div>\n            <div class=\"codeWrap clearfix\">\n                <label class=\"pull-left\">验证码</label>\n                <input class=\"pull-left\" type=\"text\" id=\"code\" placeholder=\"验证码\"  />\n                <span class=\"pull-right\" id=\"getCode\">\n                    <span id=\"getCodeText\">获取验证码</span>\n                    <span id=\"getCodeTime\"></span>\n                </span>\n            </div>\n        </div>\n\t</script>\n";
 
 /***/ },
-/* 182 */
+/* 209 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user page-user-setting\" transition=\"page\">\n\n    <header-bar :title=\"title\" back=\"true\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        \n        <div class=\"block\">\n            <div class=\"clearfix\">\n                <div class=\"pull-left photoName\">头像</div>\n                <div class=\"pull-right photoWrap\">\n                    <img :src=\"formData.head_img_url\">\n                </div>\n            </div>\n            <div class=\"clearfix\">\n                <div class=\"pull-left\">姓名 </div>\n                <div class=\"pull-right\">\n                    <input type=\"text\" v-model=\"formData.nickname\" />\n                </div>\n            </div>\n            <div class=\"clearfix\">\n                <div class=\"pull-left\">性别</div>\n                <div class=\"pull-right\">{{formData.sex}}</div>\n            </div>\n            <div class=\"clearfix\">\n                <div class=\"pull-left\">生日</div>\n                <div class=\"pull-right\">\n                    <input type=\"text\" id=\"datetime-picker\" v-model=\"formData.birthday\" mobiscroll-datetime=\"settings\" />\n                </div>\n            </div>\n            <div class=\"clearfix\">\n                <div class=\"pull-left\">身高 </div>\n                <div class=\"pull-right\">\n                    <input type=\"text\" v-model=\"formData.height\" />\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"block\">\n            <bind-mobile :mobile.sync=\"formData.mobile\"></bind-mobile>\n            <div class=\"clearfix\">\n                <div class=\"pull-left\">邮箱</div>\n                <div class=\"pull-right\">\n                    <input type=\"text\" v-model=\"formData.email\" />\n                </div>\n            </div>\n            <div class=\"clearfix\">\n                <div class=\"pull-left\">QQ</div>\n                <div class=\"pull-right\">\n                    <input type=\"text\" v-model=\"formData.qq\" />\n                </div>\n            </div>\n        </div>\n        \n        <div class=\"block\">\n            <div class=\"clearfix\">\n                <div class=\"pull-left\">订单接送提醒</div>\n                <div class=\"pull-right\">\n                    <label class=\"label-switch\">\n                        <input type=\"checkbox\" v-model=\"formData.open\" >\n                        <div class=\"checkbox\"></div>\n                    </label>\n                </div>\n            </div>\n            <time-conf :timer.sync=\"formData.timeConf\"></time-conf>\n        </div>\n        \n    </div>\n    <span \n        class=\"ui-btn ui-btn-big\"\n        @click=\"save\"\n    >\n        保存\n    </span>\n</div>\n";
 
 /***/ },
-/* 183 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(184)
-	__vue_script__ = __webpack_require__(187)
+	__webpack_require__(211)
+	__vue_script__ = __webpack_require__(214)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/money.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(188)
+	  console.warn("[vue-loader] src\\views\\user\\money.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(215)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -19817,7 +20507,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/money.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\money.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -19826,15 +20516,15 @@
 	})()}
 
 /***/ },
-/* 184 */
+/* 211 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 185 */,
-/* 186 */,
-/* 187 */
+/* 212 */,
+/* 213 */,
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19964,7 +20654,7 @@
 	        return {
 	            title: '我的余额',
 	            userInfo: {},
-	            currentPage: 0,
+	            currentPage: 1,
 	            typeText: ['充值', '取现', '下单', '接单', '接单红包', '分享红包', '转账'],
 	            formData: {
 	                balance: 0,
@@ -20013,8 +20703,8 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'pullRefresh': __webpack_require__(95)
+	        'headerBar': __webpack_require__(88),
+	        'pullRefresh': __webpack_require__(122)
 	    }
 	};
 	// </script>
@@ -20031,23 +20721,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 188 */
+/* 215 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user page-user-money pullRreshwrap\" transition=\"page\">\n    <header-bar :title=\"title\" back=\"true\"></header-bar>\n    <div class=\"content showHeaderNopading\">\n        <div class=\"moneyHeader\">\n            <header>\n                <span><i>账户余额</i>{{formData.balance}}</span>\n            </header>\n            <footer class=\"clearfix\">\n                <div></div>\n                <span>转入</span>\n                <span>转出</span>\n            </footer>\n        </div>\n        <div class=\"moneyList\">\n            <header>交易记录</header>\n            <pull-refresh @on-scroll-lodding=\"getData\">\n                <li class=\"item clearfix\" v-for=\"tradeRecord in formData.tradeRecord\">\n                    {{typeText[ tradeRecord.type - 1]}}\n                    {{tradeRecord.create_time}}\n                    {{tradeRecord.amount}}元\n                </li>\n            </pull-refresh>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 189 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(190)
-	__vue_script__ = __webpack_require__(192)
+	__webpack_require__(217)
+	__vue_script__ = __webpack_require__(219)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/server.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(193)
+	  console.warn("[vue-loader] src\\views\\user\\work\\server.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(220)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -20057,7 +20747,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/server.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\work\\server.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -20066,14 +20756,14 @@
 	})()}
 
 /***/ },
-/* 190 */
+/* 217 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 191 */,
-/* 192 */
+/* 218 */,
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20257,32 +20947,32 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'timeConf': __webpack_require__(105),
-	        'sceneType': __webpack_require__(137)
+	        'headerBar': __webpack_require__(88),
+	        'timeConf': __webpack_require__(132),
+	        'sceneType': __webpack_require__(164)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 193 */
+/* 220 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user-work-server\">\n    <header-bar :title=\"title\" back=\"true\"></header-bar>\n    \n    <div class=\"content showHeaderNopading showFooter\">\n\n        <div class=\"userHeader\">\n            <img src=\"/dist/defaultImg/serverDefault.jpg\" v-if=\"!formData.photo_url\" />\n            <img :src=\"formData.photo_url\" v-else />\n            <div class=\"userWrap\">\n                <div class=\"btn\">\n                    <div class=\"radius\"></div>\n                    <div class=\"ico ico-anonymous\"></div>\n                    <div class=\"text\">添加照片</div>\n                </div>\n                <div class=\"name\">{{formData.usernick}}</div>\n            </div>\n        </div>\n    \n        <div class=\"block\">\n            <div class=\"header\">请选择工作类别(可多选)</div>\n            <scene-type \n                :scene-list=\"indexData.sceneList\"\n                :scene-ids.sync=\"formData.sceneIds\"\n            ></scene-type>\n        </div>\n        \n        <div class=\"block\">\n            <div class=\"header\">个人描述</div>\n            <textarea placeholder=\"请填写您的服务描述！\">{{formData.detail}}</textarea>\n        </div>\n        \n        <div class=\"block\">\n            <div class=\"header\">上传照片</div>\n            <ul class=\"clearfix\">\n                <li class=\"skillImgs\" v-for=\"item in skillImgs\">\n                    <img :src=\"item.img_url\" />\n                </li>\n                <li v-if=\"skillImgs.length >= 3\">\n                    增加照片\n                </li>\n            </ul>\n        </div>\n        \n        <div class=\"block\">\n            <div class=\"header\">工作区域(选择)</div>\n        </div>\n        \n        <div class=\"block\">\n            <div class=\"header\">工作时间</div>\n            <time-conf :timer.sync=\"formData.timeConf\"></time-conf>\n        </div>\n    </div>\n    \n    <span \n        class=\"ui-btn ui-btn-big\"\n    >\n        发布\n    </span>\n    \n</div>\n";
 
 /***/ },
-/* 194 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(195)
-	__vue_script__ = __webpack_require__(197)
+	__webpack_require__(222)
+	__vue_script__ = __webpack_require__(224)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/publish.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(198)
+	  console.warn("[vue-loader] src\\views\\user\\work\\publish.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(225)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -20292,7 +20982,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/publish.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\work\\publish.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -20301,14 +20991,14 @@
 	})()}
 
 /***/ },
-/* 195 */
+/* 222 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 196 */,
-/* 197 */
+/* 223 */,
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20631,32 +21321,32 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'pullRefresh': __webpack_require__(95),
-	        'confirm': __webpack_require__(152)
+	        'headerBar': __webpack_require__(88),
+	        'pullRefresh': __webpack_require__(122),
+	        'confirm': __webpack_require__(179)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 198 */
+/* 225 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user-work-publish pullRreshwrap\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n\n    <ul class=\"filter clearfix\">\n        <li @click=\"setTag(1)\">\n            <span :class=\"{'cur':tag == 1}\">最近订单</span>\n        </li>\n        <li @click=\"setTag(2)\">\n            <span :class=\"{'cur':tag == 2}\">历史订单</span>\n        </li>\n        <li @click=\"setTag(3)\">\n            <span :class=\"{'cur':tag == 3}\">待评价</span>\n        </li>\n    </ul>\n\n    <div class=\"content showHeader showTab\">\n        <pull-refresh @on-scroll-lodding=\"getData\">\n            <div class=\"item\" v-for=\"(index,item) in formData\">\n                <span class=\"tag\">{{item.scene_name}}</span>\n                <header class=\"clearfix\" v-link=\"{ name: 'userWorkPublishDetail', query:formData }\">\n                    2016-2-22 12:30\n                    <div class=\"status\">{{ statusText[item.status] }}</div>\n                </header>\n                <section class=\"clearfix\">\n                    <div v-if=\"item.orderRespon\">\n                        <div class=\"commit clearfix\">\n                            <a href=\"tel:{{item.orderRespon.mobile}}\" class=\"ico ico-dianhua3\"></a>\n                            <span v-if=\"item.orderRespon.is_appraise\">评价</span>\n                        </div>\n                        <div>指定接单人：{{item.orderRespon.nickname}}</div>\n                    </div>\n                    <div>{{item.detail}} </div>\n                    <div class=\"number\">预定人数：{{item.number}}人</div>\n                    <div class=\"address\">工作地点：{{item.workplace}}</div>\n                </section>\n                <footer v-if=\"item.orderResponses\">\n                    <div class=\"textWrap\">\n                        <div>报名人数：{{resultResponse.responseCount}}人&nbsp;&nbsp;已选{{resultResponse.selectedCount}}人，剩余{{resultResponse.restCount}}人可选</div>\n                        <div class=\"mark\">报名者，请获取一个人的联系方式</div>\n                    </div>\n                    <ul class=\"userList\">\n                        <li class=\"clearfix\" v-for=\"(subIndex,subItem) in item.orderResponses\">\n                            <div class=\"nameWrap\" @click=\"getMobile(item, subItem, index, subIndex)\">\n                                <i class=\"ico ico-xuan\" :class=\"{'cur': subItem.is_checked == 1}\"></i>\n                                <span class=\"name\">{{subItem.nickname}}</span>\n                            </div>\n                            <div class=\"commit\">\n                                <a v-if=\"subItem.is_checked == 1\" href=\"tel:{{subItem.mobile}}\" class=\"ico ico-dianhua3\"></a>\n                                <span>评价</span>\n                            </div>\n                        </li>\n                    </ul>\n\n                </footer>\n            </div>\n        </pull-refresh>\n    </div>\n</div>\n<confirm :show.sync=\"isShowConfirm\" @on-confirm=\"confirm\">\n    <div class=\"page-scene-orderSuccess-formWrap\">\n        是否要获取{{confirmName}}的联系方式？\n    </div>\n</confirm>\n";
 
 /***/ },
-/* 199 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(200)
-	__vue_script__ = __webpack_require__(202)
+	__webpack_require__(227)
+	__vue_script__ = __webpack_require__(229)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/publishDetail.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(203)
+	  console.warn("[vue-loader] src\\views\\user\\work\\publishDetail.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(230)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -20666,7 +21356,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/publishDetail.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\work\\publishDetail.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -20675,14 +21365,14 @@
 	})()}
 
 /***/ },
-/* 200 */
+/* 227 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 201 */,
-/* 202 */
+/* 228 */,
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20891,30 +21581,30 @@
 	    },
 	    methods: {},
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 203 */
+/* 230 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user-work-publishDetail\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n\n    <div class=\"content showHeader\">\n        <div class=\"header clearfix\">\n            <header>{{formData.scene_name}}</header>\n            <section>\n                <ul>\n                    <li class=\"clearfix\">\n                        <span class=\"label\">公司地址：</span>\n                        <span class=\"field\">{{formData.workplace}}</span>\n                    </li>\n                    <li class=\"clearfix\">\n                        <span class=\"label\">工作任务：</span>\n                        <span class=\"field\">{{formData.scene_name}}</span>\n                    </li>\n                    <li class=\"clearfix\">\n                        <span class=\"label\">需要人数：</span>\n                        <span class=\"field\">{{formData.number}}人<i>(指定{{formData.stu_name}})</i><span>\n                    </li>\n                    <li class=\"clearfix\">\n                        <span class=\"label\">工作时间：</span>\n                        <span class=\"field\">{{formData.start_time}}-{{formData.end_time}}</span>\n                    </li>\n                    <li class=\"clearfix\">\n                        <span class=\"label\">时间段：</span>\n                        <span class=\"field\">{{formData.period_times}}</span>\n                    </li>\n                </ul>\n                <div>50元/天</div>\n            </section>\n            <footer>\n                <div>工作内容：</div>\n                <div>{{formData.detail}}</div>\n            </footer>\n        </div>\n        <div class=\"item clearfix\" v-for=\"item in formData.orderResponses\">\n             <header class=\"clearfix\">\n                <div class=\"pull-left photoWrap\">\n                    <img :src=\"item.head_img_url\">\n                </div>\n                <div class=\"pull-left nameWrap\">\n                    <div class=\"name\">\n                        <i class=\"icon\"\n                           :class=\"{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}\"\n                        ></i>\n                        {{item.usernick}}\n                    </div>\n                    <div class=\"school clearfix\">\n                        {{item.school_name}}\n                    </div>\n                </div>\n                <i class=\"ico ico-dianhua pull-right\"></i>\n            </header>\n            <section>\n                辅导孩子完成家庭作业，并且进行课外辅导！让孩子在理解能力跟读题能力有所提高！\n            </section>\n            <footer class=\"clearfix\">\n                <span class=\"no\">拒绝</span>\n                <span class=\"yes\">约TA</span>\n                <span class=\"pass\">已约</span>\n            </footer>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 204 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(205)
-	__vue_script__ = __webpack_require__(207)
+	__webpack_require__(232)
+	__vue_script__ = __webpack_require__(234)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/accept.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(208)
+	  console.warn("[vue-loader] src\\views\\user\\work\\accept.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(235)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -20924,7 +21614,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/accept.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\work\\accept.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -20933,14 +21623,14 @@
 	})()}
 
 /***/ },
-/* 205 */
+/* 232 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 206 */,
-/* 207 */
+/* 233 */,
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21090,31 +21780,31 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65),
-	        'pullRefresh': __webpack_require__(95)
+	        'headerBar': __webpack_require__(88),
+	        'pullRefresh': __webpack_require__(122)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 208 */
+/* 235 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user-work-accept pullRreshwrap\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n\n    <div class=\"content showHeader\">\n        <pull-refresh @on-scroll-lodding=\"getData\">\n            <div class=\"item\" v-for=\"item in formData\">\n                <header class=\"clearfix\" v-link=\"{name: 'userWorkAcceptDetail', query: {'order_id': item.order_id}}\">\n                    <div class=\"photoWrap\">\n                        <img :src=\"item.head_img_url\">\n                    </div>\n                    <div class=\"textWrap\">\n                        <div class=\"header clearfix\">\n                            <span class=\"name\">{{item.scene_name}}</span>\n                            <span class=\"time pull-right\">{{item.create_time}}</span>\n                        </div>\n                        <div class=\"text\">{{item.detail}}</div>\n                    </div>\n                </header>\n                <div class=\"info\">\n                    <div class=\"salary clearfix\">\n                        <div class=\"pull-left\">报酬: {{item.salary}}元/{{item.unit}}</div>\n                        <div class=\"pull-right\">\n                            <i class=\"btn\">评价</i>\n                            <i class=\"btn disable\">已评价</i>\n                        </div>\n                    </div>\n                    <div>\n                        时间: <span>{{item.start_time}} {{item.end_time}} {{item.period_times}}</span>\n                    </div>\n                    <div>\n                        服务位置: <span>{{item.workplace}}</span>\n                    </div>\n                </div>\n            </div>\n        </pull-refresh>\n    </div>\n</div>\n";
 
 /***/ },
-/* 209 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(210)
-	__vue_script__ = __webpack_require__(215)
+	__webpack_require__(237)
+	__vue_script__ = __webpack_require__(242)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/acceptDetail.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(216)
+	  console.warn("[vue-loader] src\\views\\user\\work\\acceptDetail.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(243)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -21124,7 +21814,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/acceptDetail.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\work\\acceptDetail.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -21133,17 +21823,17 @@
 	})()}
 
 /***/ },
-/* 210 */
+/* 237 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21477,30 +22167,30 @@
 	    },
 	    methods: {},
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 216 */
+/* 243 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user-work-acceptDetail\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n\n    <div class=\"content showHeader\">\n        <div class=\"header\">\n            <i class=\"headerIcon\"></i>\n            <header>{{formData.scene_name}}</header>\n            <section>\n                <div><i class=\"ico ico-calendar\"></i>{{formData.start_time}} - {{formData.end_time}}</div>\n                <div><i class=\"ico ico-time\"></i>{{formData.period_times}}</div>\n                <div><i class=\"ico ico-everyone\"></i>共{{formData.number}}人</div>\n                <div><i class=\"ico ico-calendar\"></i>{{formData.salary}}元/{{formData.unit}}</div>\n                <div><i class=\"ico ico-zuobiao\"></i>{{formData.comp_addr}}</div>\n            </section>\n        </div>\n        <div class=\"map\" v-link=\"{name: 'userWorkAcceptBus', query: queryObj}\">\n            <div>\n                <i class=\"ico ico-bus\"></i>\n                <span>公交路线</span>\n            </div>\n            <i class=\"ico ico-bofang\"></i>\n        </div>\n        <div class=\"detail\">\n            <i class=\"detailIcon\"></i>\n            {{formData.detail}}\n        </div>\n        <div class=\"user clearfix\">\n            <div class=\"pull-left\">\n                <div class=\"photoWrap\">\n                    <img :src=\"formData.head_img_url\">\n                </div>\n                <div class=\"name\">\n                    {{formData.clientAppraise.creator_name}}\n                </div>\n            </div>\n            <div class=\"pull-right\">\n                <div class=\"appraise\">\n                    <div class=\"goodCount\"><span>{{formData.clientAppraise.goodCount}}</span><i>好评</i></div>\n                    <div class=\"cenCount\"><span>{{formData.clientAppraise.cenCount}}</span><i>中评</i></div>\n                    <div class=\"poolCount\"><span>{{formData.clientAppraise.poolCount}}</span><i>差评</i></div>\n                </div>\n                <a href=\"tel:{{formData.clientAppraise.mobile}}\" class=\"ico ico-dianhua2\"></a>\n            </div>\n        </div>\n        <div class=\"list\">\n            <header class=\"clearfix\">\n                <span class=\"pull-left\">目前已有{{formData.response.length}}人报名</span>\n                <span class=\"pull-right\">差评3次，酱油将无法推送服务</span>\n            </header>\n            <div class=\"clearfix\">\n                <div class=\"photoWrap\" v-for=\"item in formData.response\">\n                    <img :src=\"item.head_img_url\">\n                </div>\n            </div>\n        </div>\n    </div>\n    <footer class=\"footer\">\n        <span class=\"text\">报名可领取红包哦!!!</span>\n        <ul class=\"clearfix\">\n            <li class=\"btn no\"><span>拒绝</span></li>\n            <li class=\"btn yes\"><span>报名</span></li>\n        </ul>\n    </footer>\n</div>\n";
 
 /***/ },
-/* 217 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(218)
-	__vue_script__ = __webpack_require__(220)
+	__webpack_require__(245)
+	__vue_script__ = __webpack_require__(247)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/acceptAppraise.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(221)
+	  console.warn("[vue-loader] src\\views\\user\\work\\acceptAppraise.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(248)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -21510,7 +22200,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/acceptAppraise.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\work\\acceptAppraise.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -21519,14 +22209,14 @@
 	})()}
 
 /***/ },
-/* 218 */
+/* 245 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 219 */,
-/* 220 */
+/* 246 */,
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21656,30 +22346,30 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 221 */
+/* 248 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user-work-acceptAppraise\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n\n    <div class=\"content showHeader\">\n        <div class=\"tagWrap clearfix\">\n            <div class=\"tag\" @click=\"setType(1)\">\n                <i class=\"ico ico-xiaolian\"></i>\n                <span :class=\"{'cur': formData.type == 1}\">好评</span>\n            </div>\n            <div class=\"tag\" @click=\"setType(2)\">\n                <i class=\"ico ico-cry\"></i>\n                <span :class=\"{'cur': formData.type == 2}\">中评</span>\n            </div>\n            <div class=\"tag\" @click=\"setType(3)\">\n                <i class=\"ico ico-kulian\"></i>\n                <span :class=\"{'cur': formData.type == 3}\">差评</span>\n            </div>\n        </div>\n        <textarea placeholder=\"请输入您要评价的内容\" v-model=\"formData.content\"></textarea>\n    </div>\n    <div class=\"ui-btn ui-btn-big\" @click=\"save\">提交</div>\n</div>\n";
 
 /***/ },
-/* 222 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(223)
-	__vue_script__ = __webpack_require__(225)
+	__webpack_require__(250)
+	__vue_script__ = __webpack_require__(252)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/work/acceptBus.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(226)
+	  console.warn("[vue-loader] src\\views\\user\\work\\acceptBus.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(253)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -21689,7 +22379,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/work/acceptBus.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\work\\acceptBus.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -21698,14 +22388,14 @@
 	})()}
 
 /***/ },
-/* 223 */
+/* 250 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 224 */,
-/* 225 */
+/* 251 */,
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21813,7 +22503,7 @@
 	        AMap.service(["AMap.Transfer"], function () {
 	            var transOptions = {
 	                map: map,
-	                city: '厦门', //此处显示用户当前位置
+	                city: returnCitySN.cname, //此处显示用户当前位置
 	                panel: 'panel',
 	                //cityd:'乌鲁木齐',
 	                policy: AMap.TransferPolicy.LEAST_TIME
@@ -21837,30 +22527,30 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 226 */
+/* 253 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-user-work-acceptBus\">\n    <header-bar :title=\"title\" :back=\"true\"></header-bar>\n    <div id=\"amapWrap\" class=\"content\"></div>\n    <div id=\"panelWrap\">\n        <div id=\"panelBtn\" @click=\"switch\">\n            <div class=\"ico\" :class=\"{'ico-down':isShow, 'ico-up': !isShow}\"></div>\n        </div>\n        <div id=\"panelBg\" v-show=\"isShow\">\n            <div id=\"panel\"></div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 227 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(228)
-	__vue_script__ = __webpack_require__(230)
+	__webpack_require__(255)
+	__vue_script__ = __webpack_require__(257)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/service.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(231)
+	  console.warn("[vue-loader] src\\views\\service.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(258)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -21870,7 +22560,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/service.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\service.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -21879,14 +22569,14 @@
 	})()}
 
 /***/ },
-/* 228 */
+/* 255 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 229 */,
-/* 230 */
+/* 256 */,
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22001,30 +22691,30 @@
 	    },
 	
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 231 */
+/* 258 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.342329645762220.16343254037201405xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
+	module.exports = "\n<div class=\"page-user\">\n    <header-bar :title=\"title\"></header-bar>\n    \n    <div class=\"content showHeader showFooter\">\n        <a external v-link=\"\">edit</a>\n\n\n        <div class=\"card-header\">\n            <img src=\"xxxHTMLLINKxxx0.29221163224428890.6575140752829611xxx\">\n            名字\n\n            未认证，点此认证！\n            \n            好评   1\n            中评\n            差评   1\n            收藏\n        </div>\n\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userMoney'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">我的余额</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userSetting'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">设置</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkServer'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发布服务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkPublish'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">发单任务</div>\n                        </div>\n                    </a>\n                </li>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'userWorkAccept'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">接单任务</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"list-block\">\n            <ul>\n                <li class=\"item-content item-link\">\n                    <a external v-link=\"{name: 'service'}\">\n                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n                        <div class=\"item-inner\">\n                            <div class=\"item-title\">在线客服</div>\n                        </div>\n                    </a>\n                </li>\n            </ul>\n        </div>\n        <router-view></router-view>\n    </div>\n</div>\n";
 
 /***/ },
-/* 232 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(233)
-	__vue_script__ = __webpack_require__(235)
+	__webpack_require__(260)
+	__vue_script__ = __webpack_require__(262)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/step1.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(236)
+	  console.warn("[vue-loader] src\\views\\user\\auth\\step1.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(263)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -22034,7 +22724,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step1.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\auth\\step1.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -22043,14 +22733,14 @@
 	})()}
 
 /***/ },
-/* 233 */
+/* 260 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 234 */,
-/* 235 */
+/* 261 */,
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22200,10 +22890,7 @@
 	//                     <span class="pull-left">您的学校</span>
 	//                     <span class="pull-right">{{formData.school_name}}</span>
 	//                 </div>
-	//                 <div class="item clearfix" @click="showMobile">
-	//                     <span class="pull-left">手机号</span>
-	//                     <span class="pull-right">{{formData.mobile}}</span>
-	//                 </div>
+	// 				<bind-mobile :mobile.sync="formData.mobile"></bind-mobile>
 	//             </div>
 	//         </div>
 	//         <span
@@ -22214,30 +22901,6 @@
 	//             下一步
 	//         </span>
 	//     </div>
-	//
-	//     <script type="text/html" id="toastWrap">
-	//         <span class="toastWrap">
-	//             <span id="toast" class="toast">
-	//                 [[content]]
-	//             </span>
-	//         </span>
-	//     </script>
-	// 	<script type="text/html" id="moblieWrap">
-	//         <div class="page-user-formWrap">
-	//             <div class="moblieWrap clearfix">
-	//                 <label class="pull-left">手机</label>
-	//                 <input class="pull-left" type="number" id="mobile" pattern="[0-9]*" mobile placeholder="手机号" />
-	//             </div>
-	//             <div class="codeWrap clearfix">
-	//                 <label class="pull-left">验证码</label>
-	//                 <input class="pull-left" type="number" id="code" pattern="[0-9]*" mobile placeholder="验证码"  />
-	//                 <span class="pull-right" id="getCode">
-	//                     <span id="getCodeText">获取验证码</span>
-	//                     <span id="getCodeTime"></span>
-	//                 </span>
-	//             </div>
-	//             </div>
-	// 	</script>
 	//
 	// </template>
 	//
@@ -22263,183 +22926,56 @@
 	
 	            if (query.city_id) {
 	                $.extend(self.formData, query);
-	                //self.formData.city_id     = query.city_id ? query.city_id : self.formData.city_id;
-	                //self.formData.city_name   = query.city_name ? query.city_name : self.formData.city_name;
-	                //self.formData.school_id   = query.school_id ? query.school_id : self.formData.school_id;
-	                //self.formData.school_name = query.school_name ? query.school_name : self.formData.school_name;
 	            } else {
-	                    //$.showPreloader('数据加载中...');
-	                    $.ajax({
-	                        url: "/soytime/ca/caInfo",
-	                        type: 'POST',
-	                        dataType: 'json',
-	                        success: function success(data) {
-	                            var result = data.result,
-	                                status = result.sutdent_auth;
+	                //$.showPreloader('数据加载中...');
+	                $.ajax({
+	                    url: "/soytime/ca/caInfo",
+	                    type: 'POST',
+	                    dataType: 'json',
+	                    success: function success(data) {
+	                        var result = data.result,
+	                            status = result.sutdent_auth;
 	
-	                            //$.hidePreloader();
+	                        //$.hidePreloader();
 	
-	                            // 0：未认证，1：已认证，2：认证中，3：认证失败
-	                            if (status == 1) {
-	                                self.$route.router.go('/auth/success');
-	                                return;
-	                            } else if (status == 2) {
-	                                self.$route.router.go('/auth/checking');
-	                                return;
-	                            } else if (status == 3) {
-	                                //$.alert(result.explain,'认证失败');
-	                            }
-	
-	                            $.extend(self.formData, result);
-	                        },
-	                        error: function error() {
-	                            //$.hidePreloader();
-	                            $.toast('网络不给力，请重新尝试！');
+	                        // 0：未认证，1：已认证，2：认证中，3：认证失败
+	                        if (status == 1) {
+	                            self.$route.router.go({ name: 'authSuccess', query: self.formData });
+	                            return;
+	                        } else if (status == 2) {
+	                            self.$route.router.go({ name: 'authChecking', query: self.formData });
+	                            return;
+	                        } else if (status == 3) {
+	                            //$.alert(result.explain,'认证失败');
 	                        }
-	                    });
-	                }
+	
+	                        $.extend(self.formData, result);
+	                    },
+	                    error: function error() {
+	                        //$.hidePreloader();
+	                        //$.toast('网络不给力，请重新尝试！');
+	                    }
+	                });
+	            }
 	        }
-	    },
-	    components: {
-	        'headerBar': __webpack_require__(65)
 	    },
 	    methods: {
 	        goAuth: function goAuth() {
 	            var self = this;
-	            self.$route.router.go('/auth/step2?' + $.param(self.formData));
+	            self.$route.router.go({ name: 'authStep2', query: self.formData });
 	        },
 	        selectCity: function selectCity() {
 	            var self = this;
-	            self.$route.router.go('/auth/selectCity?' + $.param(self.formData));
+	            self.$route.router.go({ name: 'selectCity', query: self.formData });
 	        },
 	        selectSchool: function selectSchool() {
 	            var self = this;
-	            self.$route.router.go('/auth/selectSchool?' + $.param(self.formData));
-	        },
-	        showMobile: function showMobile() {
-	            var self = this,
-	                reg = /\[\[content\]\]/g,
-	                toastHtml = $('#toastWrap').html(),
-	                toast = function toast(content) {
-	                var formWrap = $('.page-user-formWrap'),
-	                    html = toastHtml.replace(reg, content),
-	                    toastObj = $('#toast');
-	                if (!toastObj.length) {
-	                    formWrap.append(html);
-	                } else {
-	                    toastObj.html(content);
-	                }
-	                setTimeout(function () {
-	                    formWrap.find('.toastWrap').remove();
-	                }, 2000);
-	            };
-	
-	            $.modal({
-	                text: $('#moblieWrap').html(),
-	                buttons: [{
-	                    text: '取消',
-	                    onClick: function onClick() {
-	                        //$.alert('You clicked second button!')
-	                    }
-	                }, {
-	                    text: '确定',
-	                    close: false,
-	                    onClick: function onClick() {
-	                        var that = $(this);
-	                        if (that.hasClass('disable')) {
-	                            return;
-	                        }
-	
-	                        var mobile = $('#mobile').val(),
-	                            code = $('#code').val(),
-	                            obj = {
-	                            mobile: mobile,
-	                            code: code
-	                        };
-	                        if (!/1[34578]{1}\d{9}$/.test(mobile) || !code) {
-	                            that.removeClass('disable');
-	                            toast('请填写正确的信息！');
-	                            return;
-	                        } else {
-	                            that.addClass('disable');
-	                        }
-	
-	                        $.ajax({
-	                            url: "/soytime/account/saveMobile",
-	                            type: 'POST',
-	                            data: obj,
-	                            dataType: 'json',
-	                            success: function success(data) {
-	                                if (data.success) {
-	                                    self.formData.mobile = mobile;
-	                                    //$.extend(self.formData, obj);
-	                                    $.closeModal();
-	                                } else {
-	                                    toast(data.result);
-	                                }
-	                            },
-	                            error: function error() {
-	                                toast('网络不给力，请重新尝试！');
-	                            }
-	                        });
-	                    }
-	                }]
-	            });
-	
-	            $('body').on('click', '#getCode', function () {
-	                var mobile = $('#mobile').val(),
-	                    getCodeBtn = $('#getCode'),
-	                    getCodeText = $('#getCodeText'),
-	                    getCodeTime = $('#getCodeTime'),
-	                    that = $(this);
-	
-	                if (that.hasClass('disable')) {
-	                    return;
-	                }
-	
-	                if (!/1[34578]{1}\d{9}$/.test(mobile)) {
-	                    toast('请填写正确的手机号');
-	                    that.removeClass('disable');
-	                    return;
-	                } else {
-	                    that.addClass('disable');
-	                }
-	
-	                $.ajax({
-	                    url: "/soytime/account/getMobileCode",
-	                    type: 'POST',
-	                    data: {
-	                        mobile: mobile
-	                    },
-	                    dataType: 'json',
-	                    success: function success(data) {
-	                        if (data.success) {
-	                            (function () {
-	                                var i = 60,
-	                                    timer = null;
-	                                getCodeText.html('重新获取');
-	                                getCodeTime.html('(60)');
-	                                timer = setInterval(function () {
-	                                    getCodeTime.html('(' + --i + ')');
-	                                    console.log(i);
-	                                    if (i === 0) {
-	                                        clearInterval(timer);
-	                                        that.removeClass('disable');
-	                                        getCodeTime.html('');
-	                                    };
-	                                }, 1000);
-	                            })();
-	                        } else {
-	                            that.removeClass('disable');
-	                            toast(data.result);
-	                        }
-	                    },
-	                    error: function error() {
-	                        $.showPreloader('网络不给力，请重新尝试！');
-	                    }
-	                });
-	            });
+	            self.$route.router.go({ name: 'selectSchool', query: self.formData });
 	        }
+	    },
+	    components: {
+	        'headerBar': __webpack_require__(88),
+	        'bindMobile': __webpack_require__(204)
 	    }
 	};
 
@@ -22454,23 +22990,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 236 */
+/* 263 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"page-authStep1\">\n        <header-bar :title=\"title\" :back=\"true\"></header-bar>\n        <div class=\"content showHeader\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item cur\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item clearfix\" @click=\"selectCity\">\n                    <span class=\"pull-left\">您的城市</span>\n                    <span class=\"pull-right\">{{formData.city_name}}</span>\n                </div>\n                <div class=\"item clearfix\" @click=\"selectSchool\" v-if=\"formData.city_id\">\n                    <span class=\"pull-left\">您的学校</span>\n                    <span class=\"pull-right\">{{formData.school_name}}</span>\n                </div>\n                <div class=\"item clearfix\" @click=\"showMobile\">\n                    <span class=\"pull-left\">手机号</span>\n                    <span class=\"pull-right\">{{formData.mobile}}</span>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"formData.city_id && formData.school_id && formData.mobile\" \n            @click=\"goAuth\"\n        >\n            下一步\n        </span>\n    </div>\n    \n    <script type=\"text/html\" id=\"toastWrap\">\n        <span class=\"toastWrap\">\n            <span id=\"toast\" class=\"toast\">\n                [[content]]\n            </span>\n        </span>\n    </script>\n\t<script type=\"text/html\" id=\"moblieWrap\">\n        <div class=\"page-user-formWrap\">\n            <div class=\"moblieWrap clearfix\">\n                <label class=\"pull-left\">手机</label>\n                <input class=\"pull-left\" type=\"number\" id=\"mobile\" pattern=\"[0-9]*\" mobile placeholder=\"手机号\" />\n            </div>\n            <div class=\"codeWrap clearfix\">\n                <label class=\"pull-left\">验证码</label>\n                <input class=\"pull-left\" type=\"number\" id=\"code\" pattern=\"[0-9]*\" mobile placeholder=\"验证码\"  />\n                <span class=\"pull-right\" id=\"getCode\">\n                    <span id=\"getCodeText\">获取验证码</span>\n                    <span id=\"getCodeTime\"></span>\n                </span>\n            </div>\n            </div>\n\t</script>\n    \n";
+	module.exports = "\n    <div class=\"page-authStep1\">\n        <header-bar :title=\"title\" :back=\"true\"></header-bar>\n        <div class=\"content showHeader\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item cur\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item clearfix\" @click=\"selectCity\">\n                    <span class=\"pull-left\">您的城市</span>\n                    <span class=\"pull-right\">{{formData.city_name}}</span>\n                </div>\n                <div class=\"item clearfix\" @click=\"selectSchool\" v-if=\"formData.city_id\">\n                    <span class=\"pull-left\">您的学校</span>\n                    <span class=\"pull-right\">{{formData.school_name}}</span>\n                </div>\n\t\t\t\t<bind-mobile :mobile.sync=\"formData.mobile\"></bind-mobile>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"formData.city_id && formData.school_id && formData.mobile\" \n            @click=\"goAuth\"\n        >\n            下一步\n        </span>\n    </div>\n    \n";
 
 /***/ },
-/* 237 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(238)
-	__vue_script__ = __webpack_require__(240)
+	__webpack_require__(265)
+	__vue_script__ = __webpack_require__(267)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/selectCity.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(241)
+	  console.warn("[vue-loader] src\\views\\user\\auth\\selectMap.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(268)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -22480,7 +23016,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectCity.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\auth\\selectMap.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -22489,385 +23025,14 @@
 	})()}
 
 /***/ },
-/* 238 */
+/* 265 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 239 */,
-/* 240 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	// <style lang="less">
-	// .page-selectCity{
-	//     @import '../../../less/lib/mixins.less';
-	//     height:100%;
-	//     background:#fff;
-	//     .bar{
-	//         background:#fff;
-	//         /*
-	//         &:after{
-	//             background:none;
-	//         }
-	//         */
-	//     }
-	//     .list{
-	//         li{
-	//             border-bottom:1px solid #dedede;
-	//             .rem(font-size, 24);
-	//             .rem(height, 68);
-	//             .rem(line-height, 68);
-	//             .rem(padding, 0, 26);
-	//             .rem(border-bottom-width, 2);
-	//         }
-	//     }
-	//     #abc{
-	//         position:absolute;
-	//         bottom:0.2rem;
-	//         right:0.2rem;
-	//         line-height: 0.8rem;
-	//         font-size: 0.5rem;
-	//     }
-	// }
-	// </style>
-	//
-	// <template>
-	//     <div class="page-selectCity" transition="page" >
-	//
-	//         <div class="bar">
-	//             <div class="searchbar">
-	//                 <a class="searchbar-cancel">取消</a>
-	//                 <div class="search-input">
-	//                     <label class="icon icon-search" for="search"></label>
-	//                     <input type="text" id='search' v-model="keyword" placeholder='输入关键字...'/>
-	//                 </div>
-	//             </div>
-	//         </div>
-	//
-	//         <div class="content showHeader">
-	//             <ul class="list" v-if="!tmpData.length">
-	// 				<li v-for="item in indexData.areaList" @click="goAuth(item)">
-	//                     {{item.city_name}}
-	//                 </li>
-	//             </ul>
-	//             <ul class="list" v-else="tmpData.length">
-	//                 <li v-for="item in tmpData" @click="goAuth(item)">
-	//                     {{item.city_name}}
-	//                 </li>
-	//             </ul>
-	//         </div>
-	//     </div>
-	//
-	// </template>
-	//
-	// <script>
-	/*
-	<ul id="abc">
-	            <li>A</li>
-	            <li>B</li>
-	            <li>C</li>
-	            <li>D</li>
-	            <li>E</li>
-	            <li>F</li>
-	            <li>G</li>
-	            <li>H</li>
-	            <li>I</li>
-	            <li>J</li>
-	            <li>K</li>
-	            <li>L</li>
-	            <li>M</li>
-	            <li>N</li>
-	            <li>O</li>
-	            <li>P</li>
-	            <li>Q</li>
-	            <li>R</li>
-	            <li>S</li>
-	            <li>T</li>
-	            <li>U</li>
-	            <li>V</li>
-	            <li>W</li>
-	            <li>X</li>
-	            <li>Y</li>
-	            <li>Z</li>
-	        </ul>
-	
-	*/
-	
-	exports.default = {
-	    data: function data() {
-	        return {
-	            keyword: '',
-	            tmpData: [],
-	            indexData: indexData,
-	            formData: {
-	                city_id: null,
-	                city_name: null
-	            }
-	        };
-	    },
-	
-	    route: {
-	        data: function data(transition) {
-	            var self = this,
-	                query = transition.to.query;
-	
-	            $.extend(self.formData, query);
-	        }
-	    },
-	    watch: {
-	        keyword: function keyword() {
-	            var self = this;
-	            self.tmpData = self.filteData(self.keyword);
-	        }
-	    },
-	    methods: {
-	        goAuth: function goAuth(item) {
-	            var self = this;
-	            self.formData.city_id = item.city_id;
-	            self.formData.city_name = item.city_name;
-	            self.$route.router.go('/auth?' + $.param(self.formData));
-	        },
-	        filteData: function filteData(keyword) {
-	            var self = this,
-	                allData = self.indexData.areaList,
-	                len = allData.length,
-	                data = [];
-	
-	            for (var i = 0; i < len; i++) {
-	                var item = allData[i],
-	                    reg = new RegExp(keyword),
-	                    str = item.first_name + item.city_name + item.short_name + 'ç' + item.first_name;
-	
-	                if (reg.test(str)) {
-	                    data.push(item);
-	                }
-	            }
-	
-	            return data;
-	        }
-	    }
-	};
-	// </script>
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-
-	/* generated by vue-loader */
-
-/***/ },
-/* 241 */
-/***/ function(module, exports) {
-
-	module.exports = "\n    <div class=\"page-selectCity\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"text\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content showHeader\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in indexData.areaList\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n                <li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n        </div>\n    </div>\n\n";
-
-/***/ },
-/* 242 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(243)
-	__vue_script__ = __webpack_require__(245)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/selectSchool.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(246)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectSchool.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 243 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 244 */,
-/* 245 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	// <style lang="less">
-	//
-	// </style>
-	//
-	// <template>
-	//     <div id="area" class="page-selectCity page-selectSchool" transition="page" >
-	//
-	//         <div class="bar">
-	//             <div class="searchbar">
-	//                 <a class="searchbar-cancel">取消</a>
-	//                 <div class="search-input">
-	//                     <label class="icon icon-search" for="search"></label>
-	//                     <input type="text" id='search' v-model="keyword" placeholder='输入关键字...'/>
-	//                 </div>
-	//             </div>
-	//         </div>
-	//
-	//         <div class="content showHeader">
-	//             <ul class="list" v-if="!tmpData.length">
-	// 				<li v-for="item in schoolList" @click="goAuth(item)">
-	//                     {{item.school_name}}
-	//                 </li>
-	//             </ul>
-	//             <ul class="list" v-else="tmpData.length">
-	// 				<li v-for="item in tmpData" @click="goAuth(item)">
-	//                     {{item.school_name}}
-	//                 </li>
-	//             </ul>
-	//         </div>
-	//
-	//     </div>
-	// </template>
-	//
-	// <script>
-	exports.default = {
-	    data: function data() {
-	        return {
-	            keyword: '',
-	            tmpData: [],
-	            schoolList: null,
-	            indexData: indexData,
-	            formData: {
-	                city_id: null,
-	                city_name: null,
-	                school_id: null,
-	                school_name: null
-	            }
-	        };
-	    },
-	
-	    watch: {
-	        keyword: function keyword() {
-	            this.tmpData = this.filteData(this.keyword);
-	        }
-	    },
-	    route: {
-	        data: function data(transition) {
-	            var self = this,
-	                query = transition.to.query;
-	
-	            $.extend(self.formData, query);
-	
-	            $.ajax({
-	                url: "/soytime/data/loadSchool",
-	                type: 'POST',
-	                dataType: 'json',
-	                data: self.formData,
-	                success: function success(data) {
-	                    self.schoolList = data.result;
-	                }
-	            });
-	
-	            transition.next();
-	        }
-	    },
-	    methods: {
-	        goAuth: function goAuth(item) {
-	            var self = this;
-	            self.formData.school_id = item.school_id;
-	            self.formData.school_name = item.school_name;
-	
-	            if (self.formData.form == 'onekeyOrder') {
-	                self.$route.router.go({ 'name': 'sceneOneKeyOrder', query: self.formData });
-	            } else {
-	                self.$route.router.go({ 'name': 'auth', query: self.formData });
-	            }
-	        },
-	        filteData: function filteData(keyword) {
-	            var self = this,
-	                allData = self.indexData.schoolList,
-	                len = allData.length,
-	                data = [];
-	
-	            for (var i = 0; i < len; i++) {
-	                var item = allData[i];
-	                var str = item.school_id + item.school_name;
-	                if (str.indexOf(keyword) !== -1) {
-	                    data.push(item);
-	                }
-	            }
-	
-	            return data;
-	        }
-	    }
-	};
-	// </script>
-	/* generated by vue-loader */
-
-/***/ },
-/* 246 */
-/***/ function(module, exports) {
-
-	module.exports = "\n    <div id=\"area\" class=\"page-selectCity page-selectSchool\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"text\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content showHeader\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in schoolList\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n\t\t\t\t<li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n        </div>\n\n    </div>\n";
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(248)
-	__vue_script__ = __webpack_require__(250)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/selectMap.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(251)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/selectMap.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 248 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 249 */,
-/* 250 */
+/* 266 */,
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23048,30 +23213,30 @@
 	    },
 	
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    }
 	};
 	// </script>
 	/* generated by vue-loader */
 
 /***/ },
-/* 251 */
+/* 268 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div transition=\"page\" class=\"page-selectMap page-current\">\n        <header-bar :title=\"title\" :back=\"true\"></header-bar>\n        <div id=\"amapWrap\" class=\"content\"></div>\n\t\t<div id=\"panel\"></div>\n    </div>\n";
 
 /***/ },
-/* 252 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(253)
-	__vue_script__ = __webpack_require__(256)
+	__webpack_require__(270)
+	__vue_script__ = __webpack_require__(273)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/step2.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(257)
+	  console.warn("[vue-loader] src\\views\\user\\auth\\step2.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(274)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -23081,7 +23246,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step2.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\auth\\step2.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23090,15 +23255,15 @@
 	})()}
 
 /***/ },
-/* 253 */
+/* 270 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 254 */,
-/* 255 */,
-/* 256 */
+/* 271 */,
+/* 272 */,
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23208,7 +23373,7 @@
 	        }
 	    },
 	    components: {
-	        'headerBar': __webpack_require__(65)
+	        'headerBar': __webpack_require__(88)
 	    },
 	    methods: {
 	        goAuth: function goAuth() {
@@ -23236,23 +23401,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 257 */
+/* 274 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div class=\"page-authStep1 page-authStep2\">\n        <header-bar :title=\"title\" :back=\"true\"></header-bar>\n        <div class=\"content showHeader\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item\"><span>1</span>请填写基本信息</span>\n                <span class=\"item cur\"><span>2</span>上传证照</span>\n                <span class=\"item\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item clearfix\" @click=\"getPersionPic\">\n                    <span class=\"pull-left\">个人照片</span>\n                    <span class=\"pull-right\" v-if=\"tmpUrlData.auth_head_url\">\n                        <img :src=\"tmpUrlData.auth_head_url\" />\n                    </span>\n                    <span class=\"pull-right addPhoto\" v-else=\"!tmpUrlData.auth_head_url\">\n                        <i class=\"icon icon-anonymous2\"></i>\n                    </span>\n                </div>\n                <div class=\"item clearfix\" @click=\"getStudentPic\">\n                    <span class=\"pull-left\">学生证</span>\n                    <span class=\"pull-right\" v-if=\"tmpUrlData.auth_student_card_url\">\n                        <img :src=\"tmpUrlData.auth_student_card_url\" />\n                    </span>\n                    <span class=\"pull-right addPhoto\" v-else=\"!tmpUrlData.auth_student_card_url\">\n                        <i class=\"icon icon-anonymous2\"></i>\n                    </span>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"tmpUrlData.auth_head_url && tmpUrlData.auth_student_card_url\" \n            @click=\"goAuth\"\n        >\n            下一步\n        </span>\n    </div>\n";
 
 /***/ },
-/* 258 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(259)
-	__vue_script__ = __webpack_require__(261)
+	__webpack_require__(276)
+	__vue_script__ = __webpack_require__(278)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/step3.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(262)
+	  console.warn("[vue-loader] src\\views\\user\\auth\\step3.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(279)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -23262,7 +23427,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/step3.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\auth\\step3.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23271,14 +23436,14 @@
 	})()}
 
 /***/ },
-/* 259 */
+/* 276 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 260 */,
-/* 261 */
+/* 277 */,
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23370,9 +23535,9 @@
 	        }
 	    },
 	    components: {
-	        'timeConf': __webpack_require__(105),
-	        'sceneType': __webpack_require__(137),
-	        'headerBar': __webpack_require__(65)
+	        'timeConf': __webpack_require__(132),
+	        'sceneType': __webpack_require__(164),
+	        'headerBar': __webpack_require__(88)
 	    },
 	    methods: {
 	        getMap: function getMap() {
@@ -23406,23 +23571,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 262 */
+/* 279 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <div class=\"page-authStep1 page-authStep3\">\n        <header-bar :title=\"title\" :back=\"true\"></header-bar>\n        <div class=\"content showHeader\" :class=\"{showFooter: (formData.sceneIds && formData.timeConf && formData.longitude)}\">\n            <div class=\"stepTitle\">申请认证</div>\n            <div class=\"ui-floatCenter\">\n                <div class=\"ui-sl-floatCenter\">\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang\"></i>\n                    <i class=\"ui-floatCenter-item icon link\"></i>\n                    <i class=\"ui-floatCenter-item icon icon-anquanbaozhang icon-anquanbaozhang2\"></i>\n                </div>\n\t\t\t</div>\n            <div class=\"stepText\">将在一个工作日内审核完成!</div>\n            <div class=\"progress\">\n                <span class=\"item\"><span>1</span>请填写基本信息</span>\n                <span class=\"item\"><span>2</span>上传证照</span>\n                <span class=\"item cur\"><span>3</span>服务设置</span>\n            </div>\n            <div class=\"params\">\n                <div class=\"item\">\n                    <div class=\"itemTitle\">请选择工作类别(可多选)</div>\n                    <scene-type \n                        :scene-list=\"indexData.sceneList\"\n                        :scene-ids.sync=\"formData.sceneIds\"\n                    ></scene-type>\n                </div>\n                <div class=\"item clearfix\" @click=\"getMap\">\n                    <span class=\"pull-left\">\n                        工作区域(选择)\n                    </span>\n                    <span class=\"pull-right\">{{formData.workplace}}</span>\n                </div>\n                <div class=\"item\">\n                    <div class=\"itemTitle\">工作时间(可多选 ）</div>\n                    <time-conf :timer.sync=\"formData.timeConf\"></time-conf>\n                </div>\n            </div>\n        </div>\n        <span \n            class=\"ui-btn ui-btn-big\"\n            v-if=\"(formData.sceneIds && formData.timeConf && formData.longitude)\"\n            @click=\"submit\"\n        >\n            下一步\n        </span>\n    </div>\n";
 
 /***/ },
-/* 263 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(264)
-	__vue_script__ = __webpack_require__(266)
+	__webpack_require__(281)
+	__vue_script__ = __webpack_require__(283)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/checking.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(267)
+	  console.warn("[vue-loader] src\\views\\user\\auth\\checking.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(284)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -23432,7 +23597,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/checking.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\auth\\checking.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23441,14 +23606,14 @@
 	})()}
 
 /***/ },
-/* 264 */
+/* 281 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 265 */,
-/* 266 */
+/* 282 */,
+/* 283 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23497,23 +23662,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 267 */
+/* 284 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-checking\">\n    <h2>等待是</h2>\n    <div>\n        <p>酱油已收到您的认证信息！</p>\n        <p>将在一个工作日内帮您完成认证。</p>\n    </div>\n</div>\n";
 
 /***/ },
-/* 268 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(269)
-	__vue_script__ = __webpack_require__(271)
+	__webpack_require__(286)
+	__vue_script__ = __webpack_require__(288)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/views/user/auth/success.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(272)
+	  console.warn("[vue-loader] src\\views\\user\\auth\\success.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(289)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -23523,7 +23688,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/views/user/auth/success.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\user\\auth\\success.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23532,14 +23697,14 @@
 	})()}
 
 /***/ },
-/* 269 */
+/* 286 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 270 */,
-/* 271 */
+/* 287 */,
+/* 288 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23588,22 +23753,395 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 272 */
+/* 289 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"page-success\">\n    <h2>开心是</h2>\n    <div>\n        <p>恭喜您！</p>\n        <p>成功通过认证，可以开始穿衣服了！亲</p>\n    </div>\n</div>\n";
 
 /***/ },
-/* 273 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(274)
+	__webpack_require__(291)
+	__vue_script__ = __webpack_require__(293)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\views\\common\\selectCity.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(294)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\common\\selectCity.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 291 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 292 */,
+/* 293 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <style lang="less">
+	// @import '../../less/lib/mixins.less';
+	// .page-selectCity{
+	//     height:100%;
+	//     background:#fff;
+	//     .bar{
+	//         background:#fff;
+	//         /*
+	//         &:after{
+	//             background:none;
+	//         }
+	//         */
+	//     }
+	//     .list{
+	//         li{
+	//             border-bottom:1px solid #dedede;
+	//             .rem(font-size, 24);
+	//             .rem(height, 68);
+	//             .rem(line-height, 68);
+	//             .rem(padding, 0, 26);
+	//             .rem(border-bottom-width, 2);
+	//         }
+	//     }
+	//     #abc{
+	//         position:absolute;
+	//         bottom:0.2rem;
+	//         right:0.2rem;
+	//         line-height: 0.8rem;
+	//         font-size: 0.5rem;
+	//     }
+	// }
+	// </style>
+	//
+	// <template>
+	//     <div class="page-selectCity" transition="page" >
+	//
+	//         <div class="bar">
+	//             <div class="searchbar">
+	//                 <a class="searchbar-cancel">取消</a>
+	//                 <div class="search-input">
+	//                     <label class="icon icon-search" for="search"></label>
+	//                     <input type="text" id='search' v-model="keyword" placeholder='输入关键字...'/>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//
+	//         <div class="content showHeader">
+	//             <ul class="list" v-if="!tmpData.length">
+	// 				<li v-for="item in indexData.areaList" @click="goAuth(item)">
+	//                     {{item.city_name}}
+	//                 </li>
+	//             </ul>
+	//             <ul class="list" v-else="tmpData.length">
+	//                 <li v-for="item in tmpData" @click="goAuth(item)">
+	//                     {{item.city_name}}
+	//                 </li>
+	//             </ul>
+	//         </div>
+	//     </div>
+	//
+	// </template>
+	//
+	// <script>
+	/*
+	<ul id="abc">
+	            <li>A</li>
+	            <li>B</li>
+	            <li>C</li>
+	            <li>D</li>
+	            <li>E</li>
+	            <li>F</li>
+	            <li>G</li>
+	            <li>H</li>
+	            <li>I</li>
+	            <li>J</li>
+	            <li>K</li>
+	            <li>L</li>
+	            <li>M</li>
+	            <li>N</li>
+	            <li>O</li>
+	            <li>P</li>
+	            <li>Q</li>
+	            <li>R</li>
+	            <li>S</li>
+	            <li>T</li>
+	            <li>U</li>
+	            <li>V</li>
+	            <li>W</li>
+	            <li>X</li>
+	            <li>Y</li>
+	            <li>Z</li>
+	        </ul>
+	
+	*/
+	
+	exports.default = {
+	    data: function data() {
+	        return {
+	            keyword: '',
+	            tmpData: [],
+	            indexData: indexData,
+	            formData: {
+	                city_id: null,
+	                city_name: null
+	            }
+	        };
+	    },
+	
+	    route: {
+	        data: function data(transition) {
+	            var self = this,
+	                query = transition.to.query;
+	
+	            $.extend(self.formData, query);
+	        }
+	    },
+	    watch: {
+	        keyword: function keyword() {
+	            var self = this;
+	            self.tmpData = self.filteData(self.keyword);
+	        }
+	    },
+	    methods: {
+	        goAuth: function goAuth(item) {
+	            var self = this;
+	            self.formData.city_id = item.city_id;
+	            self.formData.city_name = item.city_name;
+	            self.$route.router.go({ name: 'auth', query: self.formData });
+	            //self.$route.router.go('/auth?' + $.param( self.formData ) );
+	        },
+	        filteData: function filteData(keyword) {
+	            var self = this,
+	                allData = self.indexData.areaList,
+	                len = allData.length,
+	                data = [];
+	
+	            for (var i = 0; i < len; i++) {
+	                var item = allData[i],
+	                    reg = new RegExp(keyword),
+	                    str = item.first_name + item.city_name + item.short_name + 'ç' + item.first_name;
+	
+	                if (reg.test(str)) {
+	                    data.push(item);
+	                }
+	            }
+	
+	            return data;
+	        }
+	    }
+	};
+	// </script>
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	/* generated by vue-loader */
+
+/***/ },
+/* 294 */
+/***/ function(module, exports) {
+
+	module.exports = "\n    <div class=\"page-selectCity\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"text\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content showHeader\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in indexData.areaList\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n                <li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.city_name}}\n                </li>\n            </ul>\n        </div>\n    </div>\n\n";
+
+/***/ },
+/* 295 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(296)
 	__vue_script__ = __webpack_require__(298)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/App.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src\\views\\common\\selectSchool.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(299)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\common\\selectSchool.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 296 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 297 */,
+/* 298 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <style lang="less">
+	//
+	// </style>
+	//
+	// <template>
+	//     <div id="area" class="page-selectCity page-selectSchool" transition="page" >
+	//
+	//         <div class="bar">
+	//             <div class="searchbar">
+	//                 <a class="searchbar-cancel">取消</a>
+	//                 <div class="search-input">
+	//                     <label class="icon icon-search" for="search"></label>
+	//                     <input type="text" id='search' v-model="keyword" placeholder='输入关键字...'/>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//
+	//         <div class="content showHeader">
+	//             <ul class="list" v-if="!tmpData.length">
+	// 				<li v-for="item in schoolList" @click="goAuth(item)">
+	//                     {{item.school_name}}
+	//                 </li>
+	//             </ul>
+	//             <ul class="list" v-else="tmpData.length">
+	// 				<li v-for="item in tmpData" @click="goAuth(item)">
+	//                     {{item.school_name}}
+	//                 </li>
+	//             </ul>
+	//         </div>
+	//
+	//     </div>
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            keyword: '',
+	            tmpData: [],
+	            schoolList: null,
+	            formData: {
+	                city_id: null,
+	                city_name: null,
+	                school_id: null,
+	                school_name: null
+	            }
+	        };
+	    },
+	
+	    watch: {
+	        keyword: function keyword() {
+	            this.tmpData = this.filteData(this.keyword);
+	        }
+	    },
+	    route: {
+	        data: function data(transition) {
+	            var self = this,
+	                query = transition.to.query;
+	
+	            $.extend(self.formData, query);
+	
+	            $.ajax({
+	                url: "/soytime/data/loadSchool",
+	                type: 'POST',
+	                dataType: 'json',
+	                data: self.formData,
+	                success: function success(data) {
+	                    self.schoolList = data.result;
+	                }
+	            });
+	
+	            transition.next();
+	        }
+	    },
+	    methods: {
+	        goAuth: function goAuth(item) {
+	            var self = this;
+	            self.formData.school_id = item.school_id;
+	            self.formData.school_name = item.school_name;
+	
+	            if (self.formData.form == 'onekeyOrder') {
+	                self.$route.router.go({ 'name': 'sceneOneKeyOrder', query: self.formData });
+	            } else if (self.formData.form == 'scene') {
+	                self.$route.router.go({ 'name': 'scene', query: self.formData });
+	            } else {
+	                self.$route.router.go({ 'name': 'auth', query: self.formData });
+	            }
+	        },
+	        filteData: function filteData(keyword) {
+	            var self = this,
+	                allData = self.schoolList,
+	                len = allData.length,
+	                data = [];
+	
+	            for (var i = 0; i < len; i++) {
+	                var item = allData[i];
+	                var str = item.school_id + item.school_name;
+	                if (str.indexOf(keyword) !== -1) {
+	                    data.push(item);
+	                }
+	            }
+	
+	            return data;
+	        }
+	    }
+	};
+	// </script>
+	/* generated by vue-loader */
+
+/***/ },
+/* 299 */
+/***/ function(module, exports) {
+
+	module.exports = "\n    <div id=\"area\" class=\"page-selectCity page-selectSchool\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"text\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content showHeader\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in schoolList\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n\t\t\t\t<li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n        </div>\n\n    </div>\n";
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(301)
+	__vue_script__ = __webpack_require__(303)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\views\\common\\selectSex.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(304)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -23614,7 +24152,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/App.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\common\\selectSex.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23623,36 +24161,356 @@
 	})()}
 
 /***/ },
-/* 274 */
+/* 301 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */,
-/* 293 */,
-/* 294 */,
-/* 295 */,
-/* 296 */,
-/* 297 */,
-/* 298 */
+/* 302 */,
+/* 303 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <style lang="less">
+	//
+	// </style>
+	//
+	// <template>
+	//     <div id="area" class="page-selectCity page-selectSchool" transition="page" >
+	//
+	//         <div class="bar">
+	//             <div class="searchbar">
+	//                 <a class="searchbar-cancel">取消</a>
+	//                 <div class="search-input">
+	//                     <label class="icon icon-search" for="search"></label>
+	//                     <input type="text" id='search' v-model="keyword" placeholder='输入关键字...'/>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//
+	//         <div class="content showHeader">
+	//             <ul class="list" v-if="!tmpData.length">
+	// 				<li v-for="item in schoolList" @click="goAuth(item)">
+	//                     {{item.school_name}}
+	//                 </li>
+	//             </ul>
+	//             <ul class="list" v-else="tmpData.length">
+	// 				<li v-for="item in tmpData" @click="goAuth(item)">
+	//                     {{item.school_name}}
+	//                 </li>
+	//             </ul>
+	//         </div>
+	//
+	//     </div>
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            keyword: '',
+	            tmpData: [],
+	            schoolList: null,
+	            formData: {
+	                city_id: null,
+	                city_name: null,
+	                school_id: null,
+	                school_name: null
+	            }
+	        };
+	    },
+	
+	    watch: {
+	        keyword: function keyword() {
+	            this.tmpData = this.filteData(this.keyword);
+	        }
+	    },
+	    route: {
+	        data: function data(transition) {
+	            var self = this,
+	                query = transition.to.query;
+	
+	            $.extend(self.formData, query);
+	
+	            $.ajax({
+	                url: "/soytime/data/loadSchool",
+	                type: 'POST',
+	                dataType: 'json',
+	                data: self.formData,
+	                success: function success(data) {
+	                    self.schoolList = data.result;
+	                }
+	            });
+	
+	            transition.next();
+	        }
+	    },
+	    methods: {
+	        goAuth: function goAuth(item) {
+	            var self = this;
+	            self.formData.school_id = item.school_id;
+	            self.formData.school_name = item.school_name;
+	
+	            if (self.formData.form == 'onekeyOrder') {
+	                self.$route.router.go({ 'name': 'sceneOneKeyOrder', query: self.formData });
+	            } else if (self.formData.form == 'scene') {
+	                self.$route.router.go({ 'name': 'scene', query: self.formData });
+	            } else {
+	                self.$route.router.go({ 'name': 'auth', query: self.formData });
+	            }
+	        },
+	        filteData: function filteData(keyword) {
+	            var self = this,
+	                allData = self.schoolList,
+	                len = allData.length,
+	                data = [];
+	
+	            for (var i = 0; i < len; i++) {
+	                var item = allData[i];
+	                var str = item.school_id + item.school_name;
+	                if (str.indexOf(keyword) !== -1) {
+	                    data.push(item);
+	                }
+	            }
+	
+	            return data;
+	        }
+	    }
+	};
+	// </script>
+	/* generated by vue-loader */
+
+/***/ },
+/* 304 */
+/***/ function(module, exports) {
+
+	module.exports = "\n    <div id=\"area\" class=\"page-selectCity page-selectSchool\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"text\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content showHeader\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in schoolList\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n\t\t\t\t<li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n        </div>\n\n    </div>\n";
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(306)
+	__vue_script__ = __webpack_require__(308)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\views\\common\\selectSort.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(309)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\views\\common\\selectSort.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 306 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 307 */,
+/* 308 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	// <style lang="less">
+	//
+	// </style>
+	//
+	// <template>
+	//     <div id="area" class="page-selectCity page-selectSchool" transition="page" >
+	//
+	//         <div class="bar">
+	//             <div class="searchbar">
+	//                 <a class="searchbar-cancel">取消</a>
+	//                 <div class="search-input">
+	//                     <label class="icon icon-search" for="search"></label>
+	//                     <input type="text" id='search' v-model="keyword" placeholder='输入关键字...'/>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//
+	//         <div class="content showHeader">
+	//             <ul class="list" v-if="!tmpData.length">
+	// 				<li v-for="item in schoolList" @click="goAuth(item)">
+	//                     {{item.school_name}}
+	//                 </li>
+	//             </ul>
+	//             <ul class="list" v-else="tmpData.length">
+	// 				<li v-for="item in tmpData" @click="goAuth(item)">
+	//                     {{item.school_name}}
+	//                 </li>
+	//             </ul>
+	//         </div>
+	//
+	//     </div>
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	    data: function data() {
+	        return {
+	            keyword: '',
+	            tmpData: [],
+	            schoolList: null,
+	            formData: {
+	                city_id: null,
+	                city_name: null,
+	                school_id: null,
+	                school_name: null
+	            }
+	        };
+	    },
+	
+	    watch: {
+	        keyword: function keyword() {
+	            this.tmpData = this.filteData(this.keyword);
+	        }
+	    },
+	    route: {
+	        data: function data(transition) {
+	            var self = this,
+	                query = transition.to.query;
+	
+	            $.extend(self.formData, query);
+	
+	            $.ajax({
+	                url: "/soytime/data/loadSchool",
+	                type: 'POST',
+	                dataType: 'json',
+	                data: self.formData,
+	                success: function success(data) {
+	                    self.schoolList = data.result;
+	                }
+	            });
+	
+	            transition.next();
+	        }
+	    },
+	    methods: {
+	        goAuth: function goAuth(item) {
+	            var self = this;
+	            self.formData.school_id = item.school_id;
+	            self.formData.school_name = item.school_name;
+	
+	            if (self.formData.form == 'onekeyOrder') {
+	                self.$route.router.go({ 'name': 'sceneOneKeyOrder', query: self.formData });
+	            } else if (self.formData.form == 'scene') {
+	                self.$route.router.go({ 'name': 'scene', query: self.formData });
+	            } else {
+	                self.$route.router.go({ 'name': 'auth', query: self.formData });
+	            }
+	        },
+	        filteData: function filteData(keyword) {
+	            var self = this,
+	                allData = self.schoolList,
+	                len = allData.length,
+	                data = [];
+	
+	            for (var i = 0; i < len; i++) {
+	                var item = allData[i];
+	                var str = item.school_id + item.school_name;
+	                if (str.indexOf(keyword) !== -1) {
+	                    data.push(item);
+	                }
+	            }
+	
+	            return data;
+	        }
+	    }
+	};
+	// </script>
+	/* generated by vue-loader */
+
+/***/ },
+/* 309 */
+/***/ function(module, exports) {
+
+	module.exports = "\n    <div id=\"area\" class=\"page-selectCity page-selectSchool\" transition=\"page\" >\n\n        <div class=\"bar\">\n            <div class=\"searchbar\">\n                <a class=\"searchbar-cancel\">取消</a>\n                <div class=\"search-input\">\n                    <label class=\"icon icon-search\" for=\"search\"></label>\n                    <input type=\"text\" id='search' v-model=\"keyword\" placeholder='输入关键字...'/>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"content showHeader\">\n            <ul class=\"list\" v-if=\"!tmpData.length\">\n\t\t\t\t<li v-for=\"item in schoolList\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n            <ul class=\"list\" v-else=\"tmpData.length\">\n\t\t\t\t<li v-for=\"item in tmpData\" @click=\"goAuth(item)\">\n                    {{item.school_name}}\n                </li>\n            </ul>\n        </div>\n\n    </div>\n";
+
+/***/ },
+/* 310 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(311)
+	__vue_script__ = __webpack_require__(335)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src\\App.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(341)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\App.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 311 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */,
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23680,8 +24538,8 @@
 	    },
 	
 	    components: {
-	        'vnFooter': __webpack_require__(299),
-	        'vnHeader': __webpack_require__(65)
+	        'vnFooter': __webpack_require__(336),
+	        'vnHeader': __webpack_require__(88)
 	    }
 	};
 	// </script>
@@ -23689,17 +24547,17 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 299 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(300)
-	__vue_script__ = __webpack_require__(302)
+	__webpack_require__(337)
+	__vue_script__ = __webpack_require__(339)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/footer.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(303)
+	  console.warn("[vue-loader] src\\components\\footer.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(340)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -23709,7 +24567,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhujianxin/Documents/vue/vue-demo-webpack/src/components/footer.vue"
+	  var id = "E:\\personal\\vue-demo-webpack\\src\\components\\footer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -23718,14 +24576,14 @@
 	})()}
 
 /***/ },
-/* 300 */
+/* 337 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 301 */,
-/* 302 */
+/* 338 */,
+/* 339 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23771,19 +24629,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 303 */
+/* 340 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<nav class=\"bar bar-tab\">\n    <a class=\"tab-item\" external v-link=\"{ name: 'home', activeClass: 'active'}\">\n        <span class=\"icon icon-home\"></span>\n        <span class=\"tab-label\">首页</span>\n    </a>\n    <a class=\"tab-item\" external  v-link=\"{ name: 'msg', activeClass: 'active' }\">\n        <span class=\"icon icon-message\"></span>\n        <span class=\"tab-label\">消息</span>\n    </a>\n    <a class=\"tab-item\" external v-link=\"{ name: 'user', activeClass: 'active' }\">\n        <span class=\"icon icon-me\"></span>\n        <span class=\"tab-label\">我的{{currentView}}</span>\n    </a>\n</nav>\n";
 
 /***/ },
-/* 304 */
+/* 341 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n<router-view keep-alive></router-view>\n<vn-footer v-if=\"isShowTab\"></vn-footer>\n\n";
 
 /***/ },
-/* 305 */
+/* 342 */
 /***/ function(module, exports) {
 
 	"use strict";

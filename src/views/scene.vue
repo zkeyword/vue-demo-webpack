@@ -128,29 +128,22 @@
 
 <template>
     <div transition="page" class="page-scene page-current pullRreshwrap">
-        <header-bar :title="title" :back="true"></header-bar>
+        <header-bar :title="title" :back="true" target="home"></header-bar>
         <ul class="scenefilter clearfix">
-            <li @click="showFilter(1)">
+            <li @click="filterSchool">
                 <span>学校<i class="icon icon-down" :class="{'icon-up':filterType == 1}"></i></span>
             </li>
-            <li @click="showFilter(2)">
+            <li @click="filterSex">
                 <span>性别<i class="icon icon-down" :class="{'icon-up':filterType == 2}"></i></span>
             </li>
-            <li @click="showFilter(3)">
+            <li @click="filterSort">
                 <span>排序<i class="icon icon-down" :class="{'icon-up':filterType == 3}"></i></span>
             </li>
         </ul>
-        <div class="scenefilterList" v-show="isShowFilter">
-            <div class="content">
-                <ul>
-                    <li @click="filter"><i class="icon icon-yixuan"></i>asdfasdf</li>
-                </ul>
-            </div>
-        </div>
         <div class="content showHeader showTab showFooter">
             <pull-refresh @on-scroll-lodding="getData">
-                <div class="item" v-for="item in formData">
-                    <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': scene_name, 'scene_id': scene_id}}">
+                <div class="item" v-for="item in dataList">
+                    <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': formData.scene_name, 'scene_id': formData.scene_id}}">
                         <div class="pull-left photoWrap">
                             <img :src="item.head_img_url">
                         </div>
@@ -194,7 +187,7 @@
         </div>
         <span 
             class="ui-btn ui-btn-big"
-            v-link="{ name: 'sceneOneKeyOrder' }"
+            v-link="{name:'sceneOneKeyOrder', query:formData}"
         >
             一键预约
         </span>
@@ -208,17 +201,15 @@ export default {
             title: null,
             filterType: 0,
             isShowFilter: false,
-            formData: [],
-            scene_name: '',
-            scene_id: '',
-            data:{
-                currentPage: 0,
-                /*scene_id:
-                city_id:
-                school_id:
-                sex:
-                sort: 1
-                */
+            dataList: [],
+            formData:{
+				scene_name: '',
+				scene_id: '',
+                currentPage: 1,
+                school_id: '',
+                sex: '',
+                sort: '',
+                form: 'scene'
             }
         }
     },
@@ -226,40 +217,48 @@ export default {
         data (transition){
             let self  = this,
                 query = transition.to.query;
-                
-            self.title = query.scene_name;
-            self.scene_id = query.scene_id;
-            self.scene_name = query.scene_name;
+
+			$.extend(self.formData, query);
+			
+			self.title = query.scene_name;
         },
         deactivate(){
-            this.filterType = 0;
+			let self = this;
+			self.formData.currentPage = 1;
         }  
     },
     methods:{
         showFilter(type){
             let self = this;
-            self.filterType = type;
+            self.filterType   = type;
             self.isShowFilter = true;
         },
-        filter(){
+        filterSort(){
             let self = this;
-            self.isShowFilter = false;
+            self.$route.router.go({'name':'selectSort', query: self.formData });
+        },
+		filterSchool(){
+            let self = this;
+            self.$route.router.go({'name':'selectSchool', query: self.formData });
+        },
+		filterSex(){
+            let self = this;
+            self.$route.router.go({'name':'selectSex', query: self.formData });
         },
         getData(index, callback){
             let self = this;
-            self.data.currentPage = index;
+            self.formData.currentPage = index;
             $.ajax({
                 url: "/soytime/server/list",
                 type:'POST',
-                data:self.data,
+                data:self.formData,
                 dataType: 'json',
                 success: ((data)=>{
                     let arr = data.result,
                         len = arr.length;
                     for(let i = 0; i<len; i++){
-                        self.formData.push(arr[i]);
+                        self.dataList.push(arr[i]);
                     }
-                    //self.formData = self.formData.concat(data.result);
                     callback && callback();
                 })
             });

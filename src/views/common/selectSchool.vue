@@ -38,7 +38,6 @@ export default {
             keyword:'',
             tmpData: [],
             schoolList: null,
-            indexData: indexData,
             formData: {
                 city_id: null,
                 city_name: null,
@@ -80,14 +79,15 @@ export default {
 
             if( self.formData.form == 'onekeyOrder' ){
                 self.$route.router.go({'name':'sceneOneKeyOrder', query: self.formData });
+            }else if( self.formData.form == 'scene' ){
+                self.$route.router.go({'name':'scene', query: self.formData});
             }else{
                 self.$route.router.go({'name':'auth', query: self.formData});
             }
-
         },
         filteData (keyword) {
             let self    = this,
-                allData = self.indexData.schoolList,
+                allData = self.schoolList,
                 len     = allData.length,
                 data    = [];
 

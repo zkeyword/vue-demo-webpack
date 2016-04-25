@@ -120,7 +120,7 @@ export default {
 		return {
 			title: '我的余额',
 			userInfo: {},
-            currentPage: 0,
+            currentPage: 1,
             typeText: ['充值','取现', '下单', '接单', '接单红包','分享红包', '转账'],
 			formData: {
                 balance: 0,

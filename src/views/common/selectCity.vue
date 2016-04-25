@@ -1,6 +1,6 @@
 <style lang="less">
+@import '../../less/lib/mixins.less';
 .page-selectCity{
-    @import '../../../less/lib/mixins.less';
     height:100%;
     background:#fff;
     .bar{
@@ -124,7 +124,8 @@ export default {
             let self = this;
             self.formData.city_id   = item.city_id;
             self.formData.city_name = item.city_name;
-            self.$route.router.go('/auth?' + $.param( self.formData ) );
+			self.$route.router.go({name:'auth', query: self.formData});
+            //self.$route.router.go('/auth?' + $.param( self.formData ) );
         },
         filteData (keyword) {
             let self    = this,

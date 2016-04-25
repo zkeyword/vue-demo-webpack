@@ -97,7 +97,7 @@
             AMap.service(["AMap.Transfer"], function() {
                 let transOptions = {
                         map: map,
-                        city: '厦门',	//此处显示用户当前位置
+                        city: returnCitySN.cname,	//此处显示用户当前位置
                         panel: 'panel',
                         //cityd:'乌鲁木齐',
                         policy: AMap.TransferPolicy.LEAST_TIME

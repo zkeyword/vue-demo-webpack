@@ -119,14 +119,6 @@ export default (router)=>{
 	    	name: 'auth',
 	        component: require('./views/user/auth/step1')
 	    },
-		'/auth/selectCity': {
-        	name: 'selectCity',
-            component: require('./views/user/auth/selectCity')
-        },
-		'/auth/selectSchool': {
-        	name: 'selectSchool',
-            component: require('./views/user/auth/selectSchool')
-        },
         '/auth/selectMap': {
         	name: 'selectMap',
             component: require('./views/user/auth/selectMap')
@@ -146,6 +138,24 @@ export default (router)=>{
         '/auth/success': {
             name: 'authSuccess',
             component: require('./views/user/auth/success')
-        }
+        },
+		
+		/* 公用页面 */
+		'/common/selectCity': {
+	    	name: 'selectCity',
+	        component: require('./views/common/selectCity')
+	    },
+		'/common/selectSchool': {
+	    	name: 'selectSchool',
+	        component: require('./views/common/selectSchool')
+	    },
+		'/common/selectSex': {
+	    	name: 'selectSex',
+	        component: require('./views/common/selectSex')
+	    },
+		'/common/selectSort': {
+	    	name: 'selectSort',
+	        component: require('./views/common/selectSort')
+	    },
 	})
 }

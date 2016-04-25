@@ -122,7 +122,7 @@
 
 <template>
     <div class="page-scene-inviteOrder page-current">
-        <header-bar :title="title" :back="true"></header-bar>
+        <header-bar :title="title" :back="true" target="scene"></header-bar>
         <div class="content showHeader showFooter">
 
             <div class="userWrap">
@@ -270,8 +270,6 @@
 					query = transition.to.query
 
 				$.extend(self.formData, query);
-
-				console.log( query )
 			}
 		},
 		ready(){
@@ -367,20 +365,13 @@
 			save(){
 				let self = this;
 
-				console.log( self.formData.period_times );
-				return;
-
 				$.ajax({
-					url: "/soytime/appraise/list",
-						type:'POST',
-						dataType: 'json',
-						data:{
-							to_id: self.toId,
-							currentPage: self.currentPage,
-							type: self.type
-						},
-						success: (data)=>{
-						//self.formData = data.result
+					url: "/soytime/order/inviteOrder",
+					type:'POST',
+					dataType: 'json',
+					data:self.formData,
+					success: (data)=>{
+						self.$route.router.go({name: 'sceneOrderSuccess', query: data.result.order_id});
 					}
 				});
 			}

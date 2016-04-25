@@ -10,7 +10,7 @@
         props: {
             index:{
                 type: Number,
-                default: 0
+                default: 1
             },
             callback: {
                 type: Function

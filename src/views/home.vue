@@ -103,7 +103,7 @@
             </div>
             <div class="sceneWrap">
                 <div class="sceneItem" :class="{'red': index % 4 == 2 || index % 4 == 1 }" v-for="(index, scene) in sceneList">
-                    <a external v-link="{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name} }">
+                    <a external v-link="{ name: 'scene', query:{scene_id: scene.scene_id, scene_name: scene.scene_name, city_id: cityId} }">
                        <i class="icon sceneIcon icon-home{{scene.id}}"></i>
                        <span class="first">{{scene.scene_name}}</span>
                        <span class="last">{{scene.scene_detail}}</span>
@@ -120,8 +120,17 @@ export default {
         return {
             list: indexData.slides,
             systemMsg: indexData.systemMsg,
-            sceneList: indexData.sceneList
+            sceneList: indexData.sceneList,
+			cityId: ''
         };
+    },
+	route:{
+        data (transition){
+            let self  = this,
+                query = transition.to.query;
+			
+			self.cityId = returnCitySN.cid;
+        }
     },
     components:{
         'swiper': require('../components/swiper/index'),

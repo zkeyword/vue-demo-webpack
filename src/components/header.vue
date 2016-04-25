@@ -12,10 +12,30 @@
 <script>
     export default {
         replace:true,
-        props: ['title', 'back'],
+		props: {
+			title: {
+				type: String
+			},
+			back: {
+				type: Boolean
+			},
+            target:{
+                type: String
+            },
+            query: {
+                type: Object,
+				default: {}
+            }
+        },
+        props: ['title', 'back', 'target', 'query'],
         methods:{
             goBack(){
-                history.go(-1)
+				let self = this;
+				if( self.target ){
+					self.$route.router.go({'name': self.target, query: self.query });
+				}else{
+					history.go(-1)
+				}
             }
         }
     }
