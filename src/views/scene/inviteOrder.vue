@@ -198,11 +198,11 @@
             <div class="block clearfix">
                 <div class="item clearfix">
                     <span>公司地址</span>
-                    <input type="text" placeholder="请填写详细地址">
+                    <input type="text" placeholder="请填写详细地址" v-model="formData.comp_addr" @click="setAddress(0)">
                 </div>
                 <div class="clearfix">
                     <span>服务位置</span>
-                    <input type="text" placeholder="请输入准确位置">
+                    <input type="text" placeholder="请输入准确位置" v-model="formData.workplace" @click="setAddress(1)">
                 </div>
             </div>
 
@@ -221,167 +221,173 @@
     import utils from '../../lib/utils';
     export default {
         data(){
-        return {
-            indexData: indexData,
-            title: '预约',
-            formData: {
-                scene_name: '',
-                photo_url: '',
-                head_img_url: '',
-                usernick: '',
-                nickname:'',
-                school_name: '',
-                school_id:'',
-                sex:'男',
-                height:'',
-                scene_id:'',
-                start_time:'',
-                end_time:'',
-                period_times:'',
-                detail:'',
-                salary:'',
-                unit:'时',
-                number:'',
-                pay_way:'',
-                welfares:'',
-                comp_addr:'',
-                comp_longitude:'',
-                comp_latitude:'',
-                workplace:'',
-                work_longitude:'',
-                work_latitude:'',
-                auto_select:'1',
-                form: 'onekeyOrder'
-            },
-            unitTextArr:['时','日','周','月','次'],
-            payTextArr:['酱油平台支付','现金支付','线上支付'],
-            isShow: false,
-            actionsheet: {
-                menu1: '酱油支付平台',
-                menu2: '现金支付',
-                menu3: '线上支付'
-            },
-            tempPeriodArr: []
-        }
-    },
-    route:{
-        data (transition){
-            let self  = this,
-                query = transition.to.query
+			return {
+				indexData: indexData,
+				title: '预约',
+				formData: {
+					scene_name: '',
+					photo_url: '',
+					head_img_url: '',
+					usernick: '',
+					nickname:'',
+					school_name: '',
+					school_id:'',
+					sex:'男',
+					height:'',
+					scene_id:'',
+					start_time:'',
+					end_time:'',
+					period_times:'',
+					detail:'',
+					salary:'',
+					unit:'时',
+					number:'',
+					pay_way:'',
+					welfares:'',
+					comp_addr:'',
+					comp_longitude:'',
+					comp_latitude:'',
+					workplace:'',
+					work_longitude:'',
+					work_latitude:'',
+					auto_select:'1',
+					form: 'inviteOrder'
+				},
+				unitTextArr:['时','日','周','月','次'],
+				payTextArr:['酱油平台支付','现金支付','线上支付'],
+				isShow: false,
+				actionsheet: {
+					menu1: '酱油支付平台',
+					menu2: '现金支付',
+					menu3: '线上支付'
+				},
+				tempPeriodArr: []
+			}
+		},
+		route:{
+			data (transition){
+				let self  = this,
+					query = transition.to.query
 
-            $.extend(self.formData, query);
+				$.extend(self.formData, query);
 
-            console.log( query )
-        }
-    },
-    ready(){
-        let self = this;
+				console.log( query )
+			}
+		},
+		ready(){
+			let self = this;
 
-        self.$store.state.getScrollerTime('#start', 0);
-        self.$store.state.getScrollerTime('#end', 0);
+			self.$store.state.getScrollerTime('#start', 0);
+			self.$store.state.getScrollerTime('#end', 0);
 
-        self.splitPeriod();
-    },
-    watch:{
-        tempPeriodArr(){
-            let self = this;
-            self.$store.state.getScrollerTime('.period_start', 1);
-            self.$store.state.getScrollerTime('.period_end', 1);
-            self.joinPeriod();
-        }
-    },
-    methods:{
-        setUnit(unit){
-            let self = this;
-            self.formData.unit = unit;
-        },
-        setPayWay(key){
-            let self = this;
-            self.isShow = false;
-            switch (key){
-                case 'menu1':
-                    self.formData.pay_way = 1
-                    break;
-                case 'menu2':
-                    self.formData.pay_way = 2
-                    break;
-                case 'menu1':
-                    self.formData.pay_way = 3
-                    break;
-            }
-        },
-        showActionsheet(){
-            this.isShow = true;
-        },
-        splitPeriod(){
-            let self   = this,
-                temArr = [];
+			self.splitPeriod();
+		},
+		watch:{
+			tempPeriodArr(){
+				let self = this;
+				self.$store.state.getScrollerTime('.period_start', 1);
+				self.$store.state.getScrollerTime('.period_end', 1);
+				self.joinPeriod();
+			}
+		},
+		methods:{
+			setUnit(unit){
+				let self = this;
+				self.formData.unit = unit;
+			},
+			setPayWay(key){
+				let self = this;
+				self.isShow = false;
+				switch (key){
+					case 'menu1':
+						self.formData.pay_way = 1
+						break;
+					case 'menu2':
+						self.formData.pay_way = 2
+						break;
+					case 'menu1':
+						self.formData.pay_way = 3
+						break;
+				}
+			},
+			showActionsheet(){
+				this.isShow = true;
+			},
+			splitPeriod(){
+				let self   = this,
+					temArr = [];
 
-            temArr = self.formData.period_times ? self.formData.period_times.split(',') : [];
+				temArr = self.formData.period_times ? self.formData.period_times.split(',') : [];
 
-            for(let i = 0, len = temArr.length; i<len; i++){
-                temArr[i] = temArr[i].split('-');
-            }
+				for(let i = 0, len = temArr.length; i<len; i++){
+					temArr[i] = temArr[i].split('-');
+				}
 
-            self.tempPeriodArr = temArr;
-        },
-        joinPeriod(){
-            let self  = this,
-                len   = self.tempPeriodArr.length,
-                tmp   = [],
-                start = $('.period_start'),
-                end   = $('.period_end');
+				self.tempPeriodArr = temArr;
+			},
+			joinPeriod(){
+				let self  = this,
+					len   = self.tempPeriodArr.length,
+					tmp   = [],
+					start = $('.period_start'),
+					end   = $('.period_end');
 
-            for(let i = 0; i<len; i++){
-                let startVal = start.eq(i).val(),
-                    endVal   = end.eq(i).val();
-                if(startVal && endVal){
-                    tmp[i] = startVal + '-' + endVal;
-                }
-            }
+				for(let i = 0; i<len; i++){
+					let startVal = start.eq(i).val(),
+						endVal   = end.eq(i).val();
+					if(startVal && endVal){
+						tmp[i] = startVal + '-' + endVal;
+					}
+				}
 
-            self.formData.period_times = tmp.join(',')
-        },
-        addPeriod(){
-            let self = this;
-            self.tempPeriodArr.push([]);
-        },
-        removePeriod(i){
-            let self = this;
-            self.tempPeriodArr.splice(i, 1);
-        },
-        switch(){
-            let self = this;
-            if( self.formData.auto_select == 1 ){
-                self.formData.auto_select = 0;
-            }else{
-                self.formData.auto_select = 1;
-            }
-        },
-        save(){
-            let self = this;
+				self.formData.period_times = tmp.join(',')
+			},
+			addPeriod(){
+				let self = this;
+				self.tempPeriodArr.push([]);
+			},
+			removePeriod(i){
+				let self = this;
+				self.tempPeriodArr.splice(i, 1);
+			},
+			switch(){
+				let self = this;
+				if( self.formData.auto_select == 1 ){
+					self.formData.auto_select = 0;
+				}else{
+					self.formData.auto_select = 1;
+				}
+			},
+			setAddress(type){
+				let self = this;
+				self.formData.type     = type;
+				self.formData.pageType = 1;
+				self.$route.router.go({name: 'sceneAddress', query: self.formData});
+			},
+			save(){
+				let self = this;
 
-            console.log( self.formData.period_times );
-            return;
+				console.log( self.formData.period_times );
+				return;
 
-            $.ajax({
-                url: "/soytime/appraise/list",
-                    type:'POST',
-                    dataType: 'json',
-                    data:{
-                        to_id: self.toId,
-                        currentPage: self.currentPage,
-                        type: self.type
-                    },
-                    success: (data)=>{
-                    //self.formData = data.result
-                }
-            });
-        }
-    },
-    components: {
-        'headerBar': require('../../components/header.vue'),
-        'actionsheet': require('../../components/actionsheet')
-    }
+				$.ajax({
+					url: "/soytime/appraise/list",
+						type:'POST',
+						dataType: 'json',
+						data:{
+							to_id: self.toId,
+							currentPage: self.currentPage,
+							type: self.type
+						},
+						success: (data)=>{
+						//self.formData = data.result
+					}
+				});
+			}
+		},
+		components: {
+			'headerBar': require('../../components/header.vue'),
+			'actionsheet': require('../../components/actionsheet')
+		}
     }
 </script>
