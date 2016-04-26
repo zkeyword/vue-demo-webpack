@@ -96,6 +96,7 @@
 							</div>
 						</div>
 					</div>
+                    <div class="lodding" v-show="busy && !noData"></div>
 				</div>
 			</div>
         </div>
@@ -107,6 +108,7 @@
         data() {
             return {
                 title: '发单任务',
+                noData: false,
 				busy: false,
 				dataList: [],
                 formData:{
@@ -130,26 +132,38 @@
 			}
         },
         methods:{
-			loadMore(){
-				let self = this;
-				self.busy = true;
-				$.ajax({
-					url: "/soytime/order/receiveList",
-					type:'POST',
-					data: self.formData,
-					dataType: 'json',
-					success: ((data)=>{
-						if( !data.success ) return;
-						let arr = data.result,
-							len = arr.length;
-						for(let i = 0; i<len; i++){
-							self.dataList.push(arr[i]);
-						}
-						self.formData.currentPage ++;
-						self.busy = false;
-					})
-				});
-			}
+            loadMore(){
+                let self = this;
+                if( self.noData ) return;
+                $.ajax({
+                    url: "/soytime/order/receiveList",
+                    type:'POST',
+                    data: self.formData,
+                    dataType: 'json',
+                    beforeSend:(()=>{
+                        self.busy = true;
+                    }),
+                    success: ((data)=>{
+                        let arr = data.result,
+                            len = arr.length;
+
+                        self.busy = false;
+
+                        if( !len || !data.success ){
+                            self.noData = true;
+                            return;
+                        }else if( len < 10 ){
+                            self.noData = true;
+                        }
+
+                        for(let i = 0; i<len; i++){
+                            self.dataList.push(arr[i]);
+                        }
+
+                        self.formData.currentPage ++;
+                    })
+                });
+            }
         },
         components: {
             'headerBar': require('../../../components/header.vue')

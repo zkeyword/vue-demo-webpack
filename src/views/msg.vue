@@ -211,8 +211,8 @@
 							<span class="time">{{msg.create_time}}</span>
 						</div>
 					</div>
-					
-					<div class="lodding" v-show="busy"></div>
+
+                    <div class="lodding" v-show="busy && !noData"></div>
 				</div>
 			</div>
         </div>
@@ -227,6 +227,7 @@ export default {
             title: '消息',
             isOrder: true,
 			url: '',
+            noData: false,
 			busy: false,
             dataList: [],
 			formData:{
@@ -278,21 +279,33 @@ export default {
         },
         loadMore(){
             let self = this;
-			self.busy = true;
+            if( self.noData ) return;
             $.ajax({
                 url: self.url,
                 type:'POST',
                 data:self.formData,
                 dataType: 'json',
+                beforeSend:(()=>{
+                    self.busy = true;
+                }),
                 success: ((data)=>{
-					if( !data.success ) return;
                     let arr = data.result,
                         len = arr.length;
+
+                    self.busy = false;
+
+                    if( !len || !data.success ){
+                        self.noData = true;
+                        return;
+                    }else if( len < 10 ){
+                        self.noData = true;
+                    }
+
                     for(let i = 0; i<len; i++){
                         self.dataList.push(arr[i]);
                     }
-					self.formData.currentPage ++;
-					self.busy = false;
+
+                    self.formData.currentPage ++;
                 })
             });
         }

@@ -187,7 +187,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="lodding" v-show="busy && !noData"></div>
+                    <div class="lodding" v-show="busy && !noData"></div>
 				</div>
 			</div>
         </div>
@@ -207,6 +207,7 @@ export default {
     data(){
         return {
             title: null,
+            noData: false,
             busy: false,
 			noData: false,
             dataList: [],
@@ -255,25 +256,33 @@ export default {
         },
         loadMore(){
             let self = this;
-			if( !self.noData ) self.busy = true;
+            if( self.noData ) return;
             $.ajax({
                 url: "/soytime/server/list",
                 type:'POST',
                 data:self.formData,
                 dataType: 'json',
+                beforeSend:(()=>{
+                    self.busy = true;
+                }),
                 success: ((data)=>{
                     let arr = data.result,
                         len = arr.length;
-					if( !len ){
-						self.noData = true;
-						self.busy = false;
-						return;
-					}
+
+                    self.busy = false;
+
+                    if( !len || !data.success ){
+                        self.noData = true;
+                        return;
+                    }else if( len < 10 ){
+                        self.noData = true;
+                    }
+
                     for(let i = 0; i<len; i++){
                         self.dataList.push(arr[i]);
                     }
-					self.formData.currentPage ++;
-					self.busy = false;
+
+                    self.formData.currentPage ++;
                 })
             });
         }

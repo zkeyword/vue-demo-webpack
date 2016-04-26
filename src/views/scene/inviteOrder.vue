@@ -151,18 +151,12 @@
                         <input type="text" id="end" v-model="formData.end_time" mobiscroll-datetime="settings">
                     </div>
                 </div>
-                <div class="item clearfix timeWrap" v-for="period in tempPeriodArr" v-if="tempPeriodArr.length">
+                <div class="item clearfix timeWrap" v-for="period in tempPeriodArr">
                     <span>时段：</span>
                     <input type="text" value="{{period[0]}}" class="period_start" mobiscroll-datetime="settings" placeholder="请选择">
                     <i>-</i>
                     <input type="text" value="{{period[1]}}" class="period_end" mobiscroll-datetime="settings" placeholder="请选择">
                     <i class="ico ico-close" @click="removePeriod($index)"></i>
-                </div>
-                <div class="item clearfix timeWrap" v-if="!tempPeriodArr.length">
-                    <span>时段：</span>
-                    <input type="text" class="period_start" mobiscroll-datetime="settings" placeholder="请选择">
-                    <i>-</i>
-                    <input type="text" class="period_end" mobiscroll-datetime="settings" placeholder="请选择">
                 </div>
                 <div @click="addPeriod">
                     <i class="ico ico-anonymous"></i>添加时间段
@@ -281,6 +275,7 @@
 			self.$store.state.getScrollerTime('#end', 0);
 
 			self.splitPeriod();
+            self.addPeriod();
 		},
 		watch:{
 			tempPeriodArr(){

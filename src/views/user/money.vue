@@ -91,7 +91,7 @@
         <header-bar :title="title" back="true"></header-bar>
         <div class="content showHeaderNopading">
 			<div id="wrapper">
-				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="40">
+				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
 					<div class="moneyHeader">
 						<header>
 							<span><i>账户余额</i>{{formData.balance}}</span>
@@ -112,6 +112,7 @@
 							</li>
 						</ul>
 					</div>
+                    <div class="lodding" v-show="busy && !noData"></div>
 				</div>
             </div>
         </div>
@@ -126,6 +127,7 @@ export default {
 			userInfo: {},
             currentPage: 1,
             typeText: ['充值','取现', '下单', '接单', '接单红包','分享红包', '转账'],
+            noData: false,
 			busy: false,
             dataList: [],
 			formData: {
@@ -155,21 +157,33 @@ export default {
     methods:{
         loadMore(){
             let self = this;
-			self.busy = true;
+            if( self.noData ) return;
             $.ajax({
                 url: "/soytime/account/tradeRecord",
                 type:'POST',
                 data:self.formData,
                 dataType: 'json',
+                beforeSend:(()=>{
+                    self.busy = true;
+                }),
                 success: ((data)=>{
-					if( !data.success ) return;
                     let arr = data.result,
                         len = arr.length;
+
+                    self.busy = false;
+
+                    if( !len || !data.success ){
+                        self.noData = true;
+                        return;
+                    }else if( len < 10 ){
+                        self.noData = true;
+                    }
+
                     for(let i = 0; i<len; i++){
                         self.dataList.push(arr[i]);
                     }
-					self.formData.currentPage ++;
-					self.busy = false;
+
+                    self.formData.currentPage ++;
                 })
             });
         }

@@ -182,34 +182,33 @@ export default {
         },
         loadMore(){
             let self = this;
-			if( !self.noData ) 
-				self.busy = true;
-			else
-				return;
+			if( self.noData ) return;
             $.ajax({
                 url: "/soytime/appraise/list",
                 type:'POST',
                 data:self.formData,
                 dataType: 'json',
+                beforeSend:(()=>{
+                    self.busy = true;
+                }),
                 success: ((data)=>{
-					if( !data.success ) return;
                     let arr = data.result,
                         len = arr.length;
-					if( !len ){
+
+                    self.busy = false;
+
+					if( !len || !data.success ){
 						self.noData = true;
-						self.busy = false;
-						return;
-					}
+                        return;
+					}else if( len < 10 ){
+                        self.noData = true;
+                    }
+
                     for(let i = 0; i<len; i++){
                         self.dataList.push(arr[i]);
                     }
-                    
-                    if(len < 10 ){
-                    	self.noData = true;
-                    }
-                    
+
 					self.formData.currentPage ++;
-					self.busy = false;
                 })
             });
         }

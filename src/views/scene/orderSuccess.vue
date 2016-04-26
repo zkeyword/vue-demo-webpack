@@ -30,6 +30,11 @@
                 height:100%;
                 width:100%;
             }
+            -webkit-transform-origin: 50%;
+            transform-origin: 50%;
+            -webkit-animation: preloader-spin 1s steps(12, end) infinite;
+            animation: preloader-spin 1s steps(12, end) infinite;
+            border-radius:100%;
         }
 
         .text{

@@ -1,118 +1,118 @@
 <style lang="less">
-@import '../../less/lib/mixins.less';
-.page-scene-oneKeyOrder{
-    
-    .block{
-        background:#fff;
-        border:1px solid #dedede;
-        .rem(border-width, 2);
-        .border-radius(8);
-        .rem(padding, 10);
-        .rem(margin-bottom, 20);
-        .rem(font-size, 30);
+    @import '../../less/lib/mixins.less';
+    .page-scene-oneKeyOrder{
 
-        input{
-            border:0 none;
-            float:right;
-            text-align: right;
-            .rem(height, 44);
-            .rem(line-height, 44);
-        }
+        .block{
+            background:#fff;
+            border:1px solid #dedede;
+            .rem(border-width, 2);
+            .border-radius(8);
+            .rem(padding, 10);
+            .rem(margin-bottom, 20);
+            .rem(font-size, 30);
 
-        textarea{
-            border: 0 none;
-            width:100%;
-            float: left;
-            .rem(height, 150);
-        }
-
-        .item{
-            border-bottom:1px solid #dedede;
-            .rem(border-bottom-width, 2);
-            .rem(padding-bottom, 10);
-            .rem(margin-bottom, 10);
-        }
-
-        .half{
-            width:50%;
-            float:left;
             input{
-                width:50%;
-            }
-            .time{
-                .rem(padding, 0, 10, 0, 0);
+                border:0 none;
                 float:right;
-            }
-        }
-
-        .sex{
-            .ico{
+                text-align: right;
                 .rem(height, 44);
                 .rem(line-height, 44);
-                .rem(width, 44);
-                .rem(font-size, 40);
-                .rem(margin-right, 10);
-                overflow: hidden;
-                color:#b2b2b2;
-                float:left;
-                &.cur{
-                     color: #ff946e;
-                }
             }
-        }
 
-        .unit{
-            span{
-                .rem(width, 44);
-                .border-radius(44);
-                .rem(font-size, 24);
-                .rem(margin, 0, 0, 0, 10);
-                background:#b2b2b2;
-                text-align: center;
-                color:#fff;
-                &.cur{
-                    background: #ff946e;
-                }
-            }
-        }
-
-        span{
-            display: inline-block;
-            .rem(height, 44);
-            .rem(line-height, 44);
-        }
-
-        .ico-jiantouyou{color:#b2b2b2}
-
-        .switch{
-            .rem(font-size, 50);
-            &.ico-open{color:#ff946e;}
-            &.ico-close3{color: #b2b2b2;}
-        }
-
-        .timeWrap{
-            span{
+            textarea{
+                border: 0 none;
+                width:100%;
                 float: left;
+                .rem(height, 150);
             }
-            input{
-                .rem(width, 100);
-                float:left;
-                text-align:center
+
+            .item{
+                border-bottom:1px solid #dedede;
+                .rem(border-bottom-width, 2);
+                .rem(padding-bottom, 10);
+                .rem(margin-bottom, 10);
             }
-            i{
+
+            .half{
+                width:50%;
                 float:left;
+                input{
+                    width:50%;
+                }
+                .time{
+                    .rem(padding, 0, 10, 0, 0);
+                    float:right;
+                }
             }
-            .ico{
-                float:left;
+
+            .sex{
+                .ico{
+                    .rem(height, 44);
+                    .rem(line-height, 44);
+                    .rem(width, 44);
+                    .rem(font-size, 40);
+                    .rem(margin-right, 10);
+                    overflow: hidden;
+                    color:#b2b2b2;
+                    float:left;
+                    &.cur{
+                        color: #ff946e;
+                    }
+                }
+            }
+
+            .unit{
+                span{
+                    .rem(width, 44);
+                    .border-radius(44);
+                    .rem(font-size, 24);
+                    .rem(margin, 0, 0, 0, 10);
+                    background:#b2b2b2;
+                    text-align: center;
+                    color:#fff;
+                    &.cur{
+                        background: #ff946e;
+                    }
+                }
+            }
+
+            span{
+                display: inline-block;
                 .rem(height, 44);
                 .rem(line-height, 44);
-                .rem(padding-left, 10);
-                .rem(font-size, 40);
             }
-        }
 
+            .ico-jiantouyou{color:#b2b2b2}
+
+            .switch{
+                .rem(font-size, 50);
+                &.ico-open{color:#ff946e;}
+                &.ico-close3{color: #b2b2b2;}
+            }
+
+            .timeWrap{
+                span{
+                    float: left;
+                }
+                input{
+                .rem(width, 100);
+                    float:left;
+                    text-align:center
+                }
+                i{
+                    float:left;
+                }
+                .ico{
+                    float:left;
+                    .rem(height, 44);
+                    .rem(line-height, 44);
+                    .rem(padding-left, 10);
+                    .rem(font-size, 40);
+                }
+            }
+
+        }
     }
-}
 </style>
 
 <template>
@@ -121,17 +121,17 @@
         <div class="content showHeader showFooter">
             <div class="block clearfix">
                 <span>雇主名</span>
-                <input type="text" placeholder="请输入公司名字">
+                <input type="text" placeholder="请输入公司名字" v-model="formData.creator_name">
             </div>
 
             <div class="block clearfix">
                 <div class="item">
                     <span>选择类型</span>
                 </div>
-                <scene-type 
-                    :scene-list="indexData.sceneList"
-                    :scene-ids.sync="formData.sceneId"
-                    :is-radio="true"
+                <scene-type
+                        :scene-list="indexData.sceneList"
+                        :scene-ids.sync="formData.sceneId"
+                        :is-radio="true"
                 ></scene-type>
             </div>
 
@@ -146,18 +146,12 @@
                         <input type="text" id="end" v-model="formData.end_time" mobiscroll-datetime="settings">
                     </div>
                 </div>
-                <div class="item clearfix timeWrap" v-for="period in tempPeriodArr" v-if="tempPeriodArr.length">
+                <div class="item clearfix timeWrap" v-for="period in tempPeriodArr">
                     <span>时段：</span>
                     <input type="text" value="{{period[0]}}" class="period_start" mobiscroll-datetime="settings" placeholder="请选择">
                     <i>-</i>
                     <input type="text" value="{{period[1]}}" class="period_end" mobiscroll-datetime="settings" placeholder="请选择">
-                    <i class="ico ico-close" @click="removePeriod($index)"></i>
-                </div>
-                <div class="item clearfix timeWrap" v-if="!tempPeriodArr.length">
-                    <span>时段：</span>
-                    <input type="text" class="period_start" mobiscroll-datetime="settings" placeholder="请选择">
-                    <i>-</i>
-                    <input type="text" class="period_end" mobiscroll-datetime="settings" placeholder="请选择">
+                    <i class="ico ico-close" @click="removePeriod($index)" v-if="$index"></i>
                 </div>
                 <div @click="addPeriod">
                     <i class="ico ico-anonymous"></i>添加时间段
@@ -180,25 +174,25 @@
                     </div>
                     <div class="half">
                         <span>身高</span>
-                        <input  type="number" pattern="[0-9]*" placeholder="不限">
+                        <input  type="number" pattern="[0-9]*" placeholder="不限" v-model="formData.heights">
                     </div>
                 </div>
             </div>
-            
+
             <div class="block clearfix">
                 <span>预约人数</span>
-                <input  type="number" pattern="[0-9]*" placeholder="输入预约人数">
+                <input  type="number" pattern="[0-9]*" placeholder="输入预约人数" v-model="formData.number">
             </div>
 
             <div class="block clearfix">
-                <textarea placeholder="请详细填写你的需求任务"></textarea>
+                <textarea placeholder="请详细填写你的需求任务" v-model="formData.detail"></textarea>
             </div>
 
             <div class="block clearfix">
                 <div class="item clearfix">
                     <div class="half">
                         <span>报酬</span>
-                        <input type="number" pattern="[0-9]*" placeholder="输入金额">
+                        <input type="number" pattern="[0-9]*" placeholder="输入金额" v-model="formData.salary">
                     </div>
                     <div class="half unit">
                         <span v-for="unit in unitTextArr"
@@ -240,17 +234,17 @@
             <div class="block clearfix">
                 <span class="pull-left">报名半小时后自动确定人选</span>
                 <span
-                    class="pull-right switch ico"
-                    :class="{'ico-open': formData.auto_select == 1, 'ico-close3': formData.auto_select == 0}"
-                    @click="switch"
+                        class="pull-right switch ico"
+                        :class="{'ico-open': formData.auto_select == 1, 'ico-close3': formData.auto_select == 0}"
+                        @click="switch"
                 ></span>
             </div>
         </div>
         <actionsheet :show.sync="isShow" :menus="actionsheet" @menu-click="setPayWay"></actionsheet>
-        <alert :show.sync="showAlert" title="null">提交失败!</alert>
+        <alert :show.sync="showAlert" title="">{{alertText}}</alert>
         <span
-            class="ui-btn ui-btn-big"
-            @click="save"
+                class="ui-btn ui-btn-big"
+                @click="save"
         >
             下单
         </span>
@@ -309,6 +303,7 @@ export default {
             ],
             isShow: false,
             showAlert: false,
+            alertText: '',
             actionsheet: {
                 menu1: '酱油支付平台',
                 menu2: '现金支付',
@@ -323,15 +318,16 @@ export default {
                 query = transition.to.query
 
             $.extend(self.formData, query);
+
         }
     },
     ready(){
         let self = this;
 
         self.$store.state.getScrollerTime('#start', 0);
-        self.$store.state.getScrollerTime('#end', 0);
-
+        self.$store.state.getScrollerTime('#end', 0, self.formData.start_time);
         self.splitPeriod();
+        self.addPeriod();
     },
     watch:{
         tempPeriodArr(){
@@ -410,7 +406,7 @@ export default {
                 }
             }
 
-            self.formData.period_times = tmp.join(',')
+            self.formData.period_times = tmp.join(',');
         },
         addPeriod(){
             let self = this;
@@ -437,6 +433,47 @@ export default {
         save(){
             let self = this;
 
+
+
+            self.joinPeriod();
+
+            let tempPeriodArr  = self.formData.period_times.split(',');
+
+            for(let i = 0, len = tempPeriodArr.length; i<len; i++){
+                let item = tempPeriodArr[i],
+                    arr  = item.split('-');
+                if( !arr[0] || !arr[1] ){
+                    self.showAlert = true;
+                    self.alertText = '时间段不能为空!';
+                    return;
+                }
+                console.log( (new Date('2016-01-01 '+arr[0])).valueOf() , (new Date('2016-01-01 '+arr[1])).valueOf() )
+                if( (new Date('2016-01-01 '+arr[0])).valueOf() >= (new Date('2016-01-01 '+arr[1])).valueOf() ){
+                    self.showAlert = true;
+                    self.alertText = '开始时间段不能小于等于结束时间端!';
+                    return;
+                }
+            }
+
+
+            if( !self.formData.start_time ){
+                self.showAlert = true;
+                self.alertText = '开始时间不能为空!';
+                return;
+            }
+
+            if( !self.formData.end_time ){
+                self.showAlert = true;
+                self.alertText = '开始时间不能为空!';
+                return;
+            }
+
+            if( (new Date(self.formData.start_time)).valueOf() >= (new Date(self.formData.end_time)).valueOf() ){
+                self.showAlert = true;
+                self.alertText = '开始时间不能小于等于结束时间!';
+                return;
+            }
+
             $.ajax({
                 url: "/soytime/order/oneKeyOrder",
                 type:'POST',
@@ -445,6 +482,7 @@ export default {
                 success: (data)=>{
                     if( !data.success ){
                         self.showAlert = true;
+                        self.alertText = '提交失败!';
                     }else{
                         self.$route.router.go({name: 'sceneOrderSuccess', query: {order_id: data.result.order_id}});
                     }

@@ -215,6 +215,7 @@
 							</ul>
 						</footer>
 					</div>
+                    <div class="lodding" v-show="busy && !noData"></div>
 				</div>
             </div>
         </div>
@@ -233,6 +234,7 @@ export default {
 			title: '发单任务',
             indexData: indexData,
 			userInfo: {},
+            noData: false,
 			busy: false,
             dataList: [],
 			formData: {
@@ -266,24 +268,37 @@ export default {
 		},
         loadMore(){
             let self = this;
-			self.busy = true;
+            if( self.noData ) return;
             $.ajax({
                 url: "/soytime/order/demandList",
                 type:'POST',
-                data: self.formData,
+                data:self.formData,
                 dataType: 'json',
+                beforeSend:(()=>{
+                    self.busy = true;
+                }),
                 success: ((data)=>{
-					if( !data.success ) return;
                     let arr = data.result,
                         len = arr.length;
+
+                    self.busy = false;
+
+                    if( !len || !data.success ){
+                        self.noData = true;
+                        return;
+                    }else if( len < 10 ){
+                        self.noData = true;
+                    }
+
                     for(let i = 0; i<len; i++){
                         self.dataList.push(arr[i]);
                     }
-					self.formData.currentPage ++;
-					self.busy = false;
+
+                    self.formData.currentPage ++;
                 })
             });
         },
+
         confirm(){
             let self = this;
             self.isShowConfirm = false;
