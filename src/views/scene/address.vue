@@ -120,13 +120,23 @@
         },
         methods:{
             addAddress(){
-                let self = this,
-                    map  = new AMap.Map("container", {
-                        resizeEnable: true
-                    });
-
+            	
+            	let self = this,
+            	map  = new AMap.Map("container", {
+                    resizeEnable: true
+                });
+            	
+                if(self.addressText == null){
+                	return;
+                }
+                self.addressText = self.addressText.replace(" ", "")
+                if(self.addressText.length<6){
+                	alert("请输入详细地址哦");
+                	return;
+                }
+            	
                 self.isShowToast = true;
-
+				
                 map.plugin('AMap.Geocoder', function () {
                     let geocoder = new AMap.Geocoder({
                         radius: 1000
@@ -145,6 +155,7 @@
                                 },
                                 success: ((data)=>{
                                     self.addressData.unshift(data.result);
+                                    self.addressText = null;
                                     self.isShowToast = false;
                                 })
                             });

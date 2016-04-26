@@ -84,33 +84,38 @@
 </style>
 
 <template>
-    <div transition="page" class="page-scene-appraise page-current">
+    <div transition="page" class="page-scene-appraise">
         <header-bar :title="title" :back="true"></header-bar>
         <div class="content showHeader">
-            <div class="filter">
-                <span @click="setType(0)" :class="{'cur': type == 0}">全部({{formData.count.allCount}})</span>
-                <span @click="setType(1)" :class="{'cur': type == 1}">好评({{formData.count.goodCount}})</span>
-                <span @click="setType(2)" :class="{'cur': type == 2}">中评({{formData.count.cenCount}})</span>
-                <span @click="setType(3)" :class="{'cur': type == 3}">差评({{formData.count.poolCount}})</span>
-            </div>
-            <div class="block" v-for="item in formData.appraises">
-                <div class="user clearfix">
-                    <div class="img">
-                        <img :src="item.head_img_url" />
-                    </div>
-                    <div class="nameWrap">
-                        <div class="name">{{item.from_name}}</div>
-                        <div class="time">{{item.create_time}}</div>
-                    </div>
-                    <div class="type">
-                        <i class="ico {{typeIconArr[item.type-1]}}"></i>
-                        <div>{{typeArr[item.type-1]}}</div>
-                    </div>
-                </div>
-                <div class="main">
-                    {{item.content}}
-                </div>
-            </div>
+			<div id="wrapper">
+				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="40">
+					<div class="filter">
+						<span @click="setType(0)" :class="{'cur': formData.type == 0}">全部({{count.all}})</span>
+						<span @click="setType(1)" :class="{'cur': formData.type == 1}">好评({{count.good}})</span>
+						<span @click="setType(2)" :class="{'cur': formData.type == 2}">中评({{count.cen}})</span>
+						<span @click="setType(3)" :class="{'cur': formData.type == 3}">差评({{count.pool}})</span>
+					</div>
+					<div class="block" v-for="item in dataList">
+						<div class="user clearfix">
+							<div class="img">
+								<img :src="item.head_img_url" />
+							</div>
+							<div class="nameWrap">
+								<div class="name">{{item.from_name}}</div>
+								<div class="time">{{item.create_time}}</div>
+							</div>
+							<div class="type">
+								<i class="ico {{typeIconArr[item.type-1]}}"></i>
+								<div>{{typeArr[item.type-1]}}</div>
+							</div>
+						</div>
+						<div class="main">
+							{{item.content}}
+						</div>
+					</div>
+					<div class="lodding" v-show="busy && !noData"></div>
+				</div>
+			</div>
         </div>
     </div>
 </template>
@@ -120,12 +125,22 @@ export default {
     data(){
         return {
             title: '评价',
-            formData: {},
-            type:0,
+			noData: false,
+			busy: false,
+            dataList: [],
+            formData: {
+				currentPage: 1,
+				to_id: '',
+				type:0
+			},
+			count : {
+				all: 0,
+				good: 0,
+				cen: 0,
+				pool: 0
+			},
             typeArr: ['好评', '中评', '差评'],
-            typeIconArr: ['ico-xiaolian','ico-cry','ico-kulian'],
-            toId: null,
-            currentPage: 1
+            typeIconArr: ['ico-xiaolian','ico-cry','ico-kulian']
         }
     },
     route:{
@@ -133,31 +148,61 @@ export default {
             let self  = this,
                 query = transition.to.query;
                 
-            self.toId = query.to_id;
-            self.getList();
-        }  
+            $.extend(self.formData, query);
+			
+			self.getCount();
+
+            if( !self.busy ) self.loadMore();
+        },
+        deactivate(){
+			let self = this;
+			self.formData.currentPage = 1;
+        }
     },
     methods:{
+		getCount(){
+			let self = this;
+			$.ajax({
+                url: "/soytime/appraise/staAppraise",
+                type:'POST',
+                dataType: 'json',
+                data: self.formData,
+                success: (data)=>{
+                    self.count = data.result;
+                }
+            });
+		},
         setType(type){
             let self = this;
             
-            self.type = type;
-            self.getList();
+            self.formData.type = type;
+			self.formData.currentPage = 1;
+			self.dataList = [];
+            if( !self.busy ) self.loadMore();
         },
-        getList(){
+        loadMore(){
             let self = this;
+			if( !self.noData ) self.busy = true;
             $.ajax({
                 url: "/soytime/appraise/list",
                 type:'POST',
+                data:self.formData,
                 dataType: 'json',
-                data:{
-                    to_id: self.toId,
-                    currentPage: self.currentPage,
-                    type: self.type
-                },
-                success: (data)=>{
-                    self.formData = data.result
-                }
+                success: ((data)=>{
+					if( !data.success ) return;
+                    let arr = data.result,
+                        len = arr.length;
+					if( !len ){
+						self.noData = true;
+						self.busy = false;
+						return;
+					}
+                    for(let i = 0; i<len; i++){
+                        self.dataList.push(arr[i]);
+                    }
+					self.formData.currentPage ++;
+					self.busy = false;
+                })
             });
         }
     },

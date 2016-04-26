@@ -358,6 +358,19 @@ app.post('/soytime/appraise/appraiseOrder', function (req, res) {
     res.send( JSON.stringify(data, null, 4) );
 });
 
+app.post('/soytime/appraise/staAppraise', function (req, res) {
+    var Random = Mock.Random,
+        data   = Mock.mock({
+            success: '1',
+            result: '@integer(60, 1000)'
+        });
+
+    res.send( JSON.stringify(data, null, 4) );
+});
+
+
+ 
+
 /* 查看场景下的学生列表 */
 app.post('/soytime/server/list', function (req, res) {
 	var Random = Mock.Random,

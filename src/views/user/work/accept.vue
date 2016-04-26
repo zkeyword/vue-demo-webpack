@@ -121,6 +121,8 @@
                     query    = transition.to.query;
 
                 $.extend(self.formData, query);
+				
+				if( !self.busy ) self.loadMore();
             },
 			deactivate(){
 				let self = this;
@@ -137,6 +139,7 @@
 					data: self.formData,
 					dataType: 'json',
 					success: ((data)=>{
+						if( !data.success ) return;
 						let arr = data.result,
 							len = arr.length;
 						for(let i = 0; i<len; i++){

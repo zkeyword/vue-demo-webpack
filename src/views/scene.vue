@@ -133,13 +133,13 @@
         <header-bar :title="title" :back="true" target="home"></header-bar>
         <ul class="scenefilter clearfix">
             <li @click="filterSchool">
-                <span>学校<i class="icon icon-down" :class="{'icon-up':filterType == 1}"></i></span>
+                <span>学校<i class="icon icon-down" :class="{'icon-up':formData.school_id}"></i></span>
             </li>
             <li @click="filterSex">
-                <span>性别<i class="icon icon-down" :class="{'icon-up':filterType == 2}"></i></span>
+                <span>性别<i class="icon icon-down" :class="{'icon-up':formData.sex}"></i></span>
             </li>
             <li @click="filterSort">
-                <span>排序<i class="icon icon-down" :class="{'icon-up':filterType == 3}"></i></span>
+                <span>排序<i class="icon icon-down" :class="{'icon-up':formData.sort}"></i></span>
             </li>
         </ul>
 
@@ -187,7 +187,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="lodding" v-show="busy"></div>
+					<div class="lodding" v-show="busy && !noData"></div>
 				</div>
 			</div>
         </div>
@@ -207,9 +207,8 @@ export default {
     data(){
         return {
             title: null,
-            filterType: 0,
-            isShowFilter: false,
             busy: false,
+			noData: false,
             dataList: [],
             formData:{
 				scene_name: '',
@@ -230,18 +229,18 @@ export default {
 			$.extend(self.formData, query);
 			
 			self.title = query.scene_name;
+
+			if( !self.busy ) self.loadMore();
         },
         deactivate(){
 			let self = this;
 			self.formData.currentPage = 1;
+			self.formData.school_id   = '';
+			self.formData.sex         = '';
+			self.formData.sort        = '';
         }
     },
     methods:{
-        showFilter(type){
-            let self = this;
-            self.filterType   = type;
-            self.isShowFilter = true;
-        },
         filterSort(){
             let self = this;
             self.$route.router.go({'name':'selectSort', query: self.formData });
@@ -256,7 +255,7 @@ export default {
         },
         loadMore(){
             let self = this;
-			self.busy = true;
+			if( !self.noData ) self.busy = true;
             $.ajax({
                 url: "/soytime/server/list",
                 type:'POST',
@@ -265,6 +264,11 @@ export default {
                 success: ((data)=>{
                     let arr = data.result,
                         len = arr.length;
+					if( !len ){
+						self.noData = true;
+						self.busy = false;
+						return;
+					}
                     for(let i = 0; i<len; i++){
                         self.dataList.push(arr[i]);
                     }

@@ -217,7 +217,7 @@
                             <img :src="formData.head_img_url" />
                         </div>
                     </div>
-                    <div class="name">{{formData.usernick}}</div>
+                    <div class="name">{{formData.stu_nickname}}</div>
                 </div>
                 <div class="collection clearfix">
                     <i class="ico ico-aixin"></i>
@@ -271,7 +271,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <span class="btn" v-link="{ name: 'sceneAppraise', query:{user_id: formData.user_id} }">
+                            <span class="btn" v-link="{ name: 'sceneAppraise', query:{to_id: formData.user_id} }">
                                 查看{{formData.appraise_count}}条评价
                             </span>
                         </div>
