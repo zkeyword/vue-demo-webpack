@@ -180,14 +180,14 @@
                     </div>
                     <div class="half">
                         <span>身高</span>
-                        <input type="text" placeholder="不限">
+                        <input  type="number" pattern="[0-9]*" placeholder="不限">
                     </div>
                 </div>
             </div>
             
             <div class="block clearfix">
                 <span>预约人数</span>
-                <input type="text" placeholder="输入预约人数">
+                <input  type="number" pattern="[0-9]*" placeholder="输入预约人数">
             </div>
 
             <div class="block clearfix">
@@ -198,7 +198,7 @@
                 <div class="item clearfix">
                     <div class="half">
                         <span>报酬</span>
-                        <input type="text" placeholder="输入金额">
+                        <input type="number" pattern="[0-9]*" placeholder="输入金额">
                     </div>
                     <div class="half unit">
                         <span v-for="unit in unitTextArr"

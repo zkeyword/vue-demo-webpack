@@ -160,62 +160,63 @@
 </style>
 
 <template>
-    <div class="page-user-work-publish pullRreshwrap">
+    <div class="page-user-work-publish">
         <header-bar :title="title" :back="true"></header-bar>
 
         <ul class="filter clearfix">
             <li @click="setTag(1)">
-                <span :class="{'cur':tag == 1}">最近订单</span>
+                <span :class="{'cur':formData.tag == 1}">最近订单</span>
             </li>
             <li @click="setTag(2)">
-                <span :class="{'cur':tag == 2}">历史订单</span>
+                <span :class="{'cur':formData.tag == 2}">历史订单</span>
             </li>
             <li @click="setTag(3)">
-                <span :class="{'cur':tag == 3}">待评价</span>
+                <span :class="{'cur':formData.tag == 3}">待评价</span>
             </li>
         </ul>
 
         <div class="content showHeader showTab">
-            <pull-refresh @on-scroll-lodding="getData">
-                <div class="item" v-for="(index,item) in formData">
-                    <span class="tag">{{item.scene_name}}</span>
-                    <header class="clearfix" v-link="{ name: 'userWorkPublishDetail', query:formData }">
-                        2016-2-22 12:30
-                        <div class="status">{{ statusText[item.status] }}</div>
-                    </header>
-                    <section class="clearfix">
-                        <div v-if="item.orderRespon">
-                            <div class="commit clearfix">
-                                <a href="tel:{{item.orderRespon.mobile}}" class="ico ico-dianhua3"></a>
-                                <span v-if="item.orderRespon.is_appraise">评价</span>
-                            </div>
-                            <div>指定接单人：{{item.orderRespon.nickname}}</div>
-                        </div>
-                        <div>{{item.detail}} </div>
-                        <div class="number">预定人数：{{item.number}}人</div>
-                        <div class="address">工作地点：{{item.workplace}}</div>
-                    </section>
-                    <footer v-if="item.orderResponses">
-                        <div class="textWrap">
-                            <div>报名人数：{{resultResponse.responseCount}}人&nbsp;&nbsp;已选{{resultResponse.selectedCount}}人，剩余{{resultResponse.restCount}}人可选</div>
-                            <div class="mark">报名者，请获取一个人的联系方式</div>
-                        </div>
-                        <ul class="userList">
-                            <li class="clearfix" v-for="(subIndex,subItem) in item.orderResponses">
-                                <div class="nameWrap" @click="getMobile(item, subItem, index, subIndex)">
-                                    <i class="ico ico-xuan" :class="{'cur': subItem.is_checked == 1}"></i>
-                                    <span class="name">{{subItem.nickname}}</span>
-                                </div>
-                                <div class="commit">
-                                    <a v-if="subItem.is_checked == 1" href="tel:{{subItem.mobile}}" class="ico ico-dianhua3"></a>
-                                    <span>评价</span>
-                                </div>
-                            </li>
-                        </ul>
-
-                    </footer>
-                </div>
-            </pull-refresh>
+            <div id="wrapper">
+				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="40">
+					<div class="item" v-for="(index,item) in dataList">
+						<span class="tag">{{item.scene_name}}</span>
+						<header class="clearfix" v-link="{ name: 'userWorkPublishDetail', query:item }">
+							{{item.create_time}}
+							<div class="status">{{ statusText[item.status] }}</div>
+						</header>
+						<section class="clearfix">
+							<div v-if="item.orderRespon">
+								<div class="commit clearfix">
+									<a href="tel:{{item.orderRespon.mobile}}" class="ico ico-dianhua3"></a>
+									<span v-if="item.orderRespon.is_appraise">评价</span>
+								</div>
+								<div>指定接单人：{{item.orderRespon.nickname}}</div>
+							</div>
+							<div>{{item.detail}} </div>
+							<div class="number">预定人数：{{item.number}}人</div>
+							<div class="address">工作地点：{{item.workplace}}</div>
+						</section>
+						<footer v-if="item.orderResponses">
+							<div class="textWrap">
+								<div>报名人数：{{resultResponse.responseCount}}人&nbsp;&nbsp;已选{{resultResponse.selectedCount}}人，剩余{{resultResponse.restCount}}人可选</div>
+								<div class="mark">报名者，请获取一个人的联系方式</div>
+							</div>
+							<ul class="userList">
+								<li class="clearfix" v-for="(subIndex,subItem) in item.orderResponses">
+									<div class="nameWrap" @click="getMobile(item, subItem, index, subIndex)">
+										<i class="ico ico-xuan" :class="{'cur': subItem.is_checked == 1}"></i>
+										<span class="name">{{subItem.nickname}}</span>
+									</div>
+									<div class="commit">
+										<a v-if="subItem.is_checked == 1" href="tel:{{subItem.mobile}}" class="ico ico-dianhua3"></a>
+										<span>评价</span>
+									</div>
+								</li>
+							</ul>
+						</footer>
+					</div>
+				</div>
+            </div>
         </div>
     </div>
     <confirm :show.sync="isShowConfirm" @on-confirm="confirm">
@@ -232,9 +233,12 @@ export default {
 			title: '发单任务',
             indexData: indexData,
 			userInfo: {},
-			formData: [],
-			currentPage: 0,
-			tag: 1,
+			busy: false,
+            dataList: [],
+			formData: {
+				currentPage: 0,
+				tag: 1,
+			},
             isShowConfirm: false,
             confirmData:{},
             statusText:['报名中','报名结束','报名成功','被拒绝','过期']
@@ -246,36 +250,36 @@ export default {
 				query    = transition.to.query;
 
 			$.extend(self.formData, query);
-		}
-	},
-    watch:{
-        tag(){
-            let self = this;
-            self.formData = [];
-            self.getData(1);
+		},
+        deactivate(){
+			let self = this;
+			self.formData.currentPage = 1;
         }
-    },
+	},
 	methods:{
         setTag(tag){
-            this.tag = tag;
+			let self = this;
+            self.formData.tag = tag;
+			self.formData.currentPage = 1;
+			self.dataList = [];
+			if( !self.busy ) self.loadMore();
 		},
-        getData(index, callback){
+        loadMore(){
             let self = this;
+			self.busy = true;
             $.ajax({
                 url: "/soytime/order/demandList",
                 type:'POST',
-                data:{
-                    tag: self.tag,
-                    currentPage: index
-                },
+                data: self.formData,
                 dataType: 'json',
                 success: ((data)=>{
                     let arr = data.result,
                         len = arr.length;
                     for(let i = 0; i<len; i++){
-                        self.formData.push(arr[i]);
+                        self.dataList.push(arr[i]);
                     }
-                    callback && callback();
+					self.formData.currentPage ++;
+					self.busy = false;
                 })
             });
         },
@@ -292,8 +296,8 @@ export default {
                 },
                 dataType: 'json',
                 success: ((data)=>{
-                    //self.formData[self.confirmData.index].resultResponse.restCount = data.remainCount;
-                    let orderResponses = self.formData[self.confirmData.index].orderResponses[self.confirmData.subIndex];
+                    //self.dataList[self.confirmData.index].resultResponse.restCount = data.remainCount;
+                    let orderResponses = self.dataList[self.confirmData.index].orderResponses[self.confirmData.subIndex];
                     orderResponses.mobile = data.result.mobile;
                     orderResponses.is_checked = 1;
                 })
@@ -313,7 +317,6 @@ export default {
 	},
 	components: {
 		'headerBar': require('../../../components/header.vue'),
-        'pullRefresh': require('../../../components/pullRefresh.vue'),
         'confirm': require('../../../components/confirm')
 	}
 }

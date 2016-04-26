@@ -125,39 +125,6 @@
         }
     }
 }
-
-#wrapper {
-    padding-top: 5rem;
-    padding-bottom: 2.45rem;
-    width: 100%;
-    height:100%;
-    overflow: hidden;
-}
-
-#scroller {
-    position: absolute;
-    z-index: 1;
-    padding-left: 0.65rem;
-    padding-right: 0.65rem;
-    width:100%;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-text-size-adjust: none;
-	-moz-text-size-adjust: none;
-	-ms-text-size-adjust: none;
-	-o-text-size-adjust: none;
-	text-size-adjust: none;
-}
-
     
 </style>
 
@@ -176,50 +143,53 @@
             </li>
         </ul>
 
-        <div id="wrapper">
-            <ul id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-                <li class="item clearfix" v-for="item in dataList">
-                    <header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': formData.scene_name, 'scene_id': formData.scene_id}}">
-                        <div class="pull-left photoWrap">
-                            <img :src="item.head_img_url">
-                        </div>
-                        <div class="pull-left nameWrap">
-                            <div class="name">
-                                <i class="icon"
-                                   :class="{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}"
-                                ></i>
-                                {{item.nickname}}
-                            </div>
-                            <div class="school clearfix">
-                                {{item.school_name}}
-                            </div>
-                        </div>
-                        <i class="icon icon-jiantouyou pull-right"></i>
-                    </header>
-                    <div class="main">
-                        <div class="text">{{item.detail}}</div>
-                        <div class="imgWrap clearfix">
-                            <div class="img" v-for="subItem in item.serverImgs">
-                                <img :src="subItem.img_url">
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="userScore clearfix">
-                        <li>
-                            <i class="icon icon-aixin-copy"></i>
-                            <em>{{item.collectCount}}</em>
-                        </li>
-                        <li>
-                            <i class="icon icon-liuyan"></i>
-                            <em>{{item.appraiseCount}}</em>
-                        </li>
-                        <li>
-                            <i class="icon icon-yanjing"></i>
-                            <em>{{item.viewCount}}</em>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="content showHeader showTab showFooter">
+			<div id="wrapper">
+				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="40">
+					<div class="item clearfix" v-for="item in dataList">
+						<header class="clearfix" v-link="{name: 'sceneDetail', query: {'user_id': item.user_id, 'scene_name': formData.scene_name, 'scene_id': formData.scene_id}}">
+							<div class="pull-left photoWrap">
+								<img :src="item.head_img_url">
+							</div>
+							<div class="pull-left nameWrap">
+								<div class="name">
+									<i class="icon"
+									   :class="{'icon-xingbienan2': item.sex == 1, 'icon-xingbienv2': item.sex == 2}"
+									></i>
+									{{item.nickname}}
+								</div>
+								<div class="school clearfix">
+									{{item.school_name}}
+								</div>
+							</div>
+							<i class="icon icon-jiantouyou pull-right"></i>
+						</header>
+						<div class="main">
+							<div class="text">{{item.detail}}</div>
+							<div class="imgWrap clearfix">
+								<div class="img" v-for="subItem in item.serverImgs">
+									<img :src="subItem.img_url">
+								</div>
+							</div>
+						</div>
+						<ul class="userScore clearfix">
+							<li>
+								<i class="icon icon-aixin-copy"></i>
+								<em>{{item.collectCount}}</em>
+							</li>
+							<li>
+								<i class="icon icon-liuyan"></i>
+								<em>{{item.appraiseCount}}</em>
+							</li>
+							<li>
+								<i class="icon icon-yanjing"></i>
+								<em>{{item.viewCount}}</em>
+							</li>
+						</ul>
+					</div>
+					<div class="lodding" v-show="busy"></div>
+				</div>
+			</div>
         </div>
 
         <span
@@ -233,8 +203,6 @@
 </template>
 
 <script>
-import IScroll from 'iscroll/build/iscroll-infinite';
-
 export default {
     data(){
         return {
@@ -266,26 +234,7 @@ export default {
         deactivate(){
 			let self = this;
 			self.formData.currentPage = 1;
-            self.dataList = [];
-        }  
-    },
-	ready(){
-		let self = this;
-//		var myScroll = new IScroll('#wrapper',{
-//            mouseWheel: true,
-//            scrollbars: true,
-//			cacheSize: 1000
-//		});
-//		self.loadMore();
-//		myScroll.on('scrollEnd', function(){
-//			console.log( this.directionY, this.y )
-//			if( this.directionY >= 0 ){
-//				self.loadMore(()=>{
-//                    myScroll.refresh();
-//                });
-//			}
-//		});
-//        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+        }
     },
     methods:{
         showFilter(type){
@@ -305,7 +254,7 @@ export default {
             let self = this;
             self.$route.router.go({'name':'selectSex', query: self.formData });
         },
-        loadMore(callback){
+        loadMore(){
             let self = this;
 			self.busy = true;
             $.ajax({
@@ -321,14 +270,12 @@ export default {
                     }
 					self.formData.currentPage ++;
 					self.busy = false;
-					callback && callback();
                 })
             });
         }
     },
     components: {
-        'headerBar': require('../components/header.vue'),
-        'pullRefresh': require('../components/pullRefresh.vue')
+        'headerBar': require('../components/header.vue')
     }
 }
 </script>

@@ -209,7 +209,7 @@
         <header-bar :title="title" :back="true"></header-bar>
         <div class="content showHeaderNopading showFooter">
             <div class="userHeader">
-                <img src="/dist/defaultImg/serverDefault.jpg" v-if="!formData.photo_url" />
+                <img src="../../img/serverDefault.jpg" v-if="!formData.photo_url" />
                 <img :src="formData.photo_url" v-else />
                 <div class="userWrap">
                     <div class="btn">
@@ -272,7 +272,7 @@
                                 </div>
                             </div>
                             <span class="btn" v-link="{ name: 'sceneAppraise', query:{user_id: formData.user_id} }">
-                                查看{{formData.orderAppraise.appraise_count}}条评价
+                                查看{{formData.appraise_count}}条评价
                             </span>
                         </div>
                     </div>
@@ -308,7 +308,7 @@ export default {
             $.ajax({
                 url: '/soytime/server/stuInfo',
                 type: 'POST',
-                data:'scene_id'+query.scene_id+"&user_id="+query.user_id,
+                data:'scene_id='+query.scene_id+"&user_id="+query.user_id,
                 dataType: 'json',
                 success: ((data)=>{
                     self.formData = data.result;

@@ -36,10 +36,16 @@ module.exports = {
 			}
             ,*/
             { 
-                test: /\.(woff|woff2|eot|ttf|svg|png|jpg|gif)(\?.*$|$)/,
+                test: /\.(png|jpg|gif)(\?.*$|$)/,
                 exclude: '/\/dist/',
 				loader: 'url-loader?name=img/[hash:8].[name].[ext]' + version
-            }
+            },
+			{
+                //剥离图片
+                test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/,  
+                exclude: '/\/dist/',
+				loader: 'file-loader?name=img/[hash:8].[name].[ext]' + version
+			}
             /*
 			{
                 //剥离图片
@@ -83,5 +89,18 @@ if( isProduction ){
         new webpack.optimize.OccurenceOrderPlugin()
     ]);
 }else{
+	module.exports.plugins = (module.exports.plugins).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.OccurenceOrderPlugin()
+    ]);
 	module.exports.devtool = '#source-map'
 }

@@ -170,47 +170,51 @@
             </li>
         </ul>
         <div class="content showHeader showTab showFooter">
-        
-            <div class="item order"
-                 v-if="isOrder"
-                 v-for="order in formData.order"
-                 v-link="{name: 'userWorkAcceptDetail', query:{order_id:order.order_id} }"
-            >
-                <div class="timeout" v-if="order.status == 3"></div>
-                <span class="tag">{{order.scene_name}}</span>
-                <header class="clearfix">
-                    <div class="photoWrap">
-                        <img :src="order.head_img_url">
-                    </div>
-                    <div class="textWrap">
-                        <div class="header">
-                            {{order.create_name}}
-                            <span>{{order.create_time}}</span>
-                        </div>
-                        <div class="text">
-                            {{order.detail}}
-                        </div>
-                    </div>
-                </header>
-                <footer>
-                    <div class="unit">报酬：<span>{{order.unit}}</span></div>
-                    <div class="time">时间：<span>{{order.start_time}}  {{order.end_time}}</span></div>
-                    <div class="position">任务位置：<span>{{order.workplace}}</span></div>
-                </footer>
-            </div>
-            
-            <div class="item msg" v-if="!isOrder" v-for="msg in formData.msg" @click="goMsg(msg.type, msg.id)">
-                <div class="photoWrap">
-                    <img :src="msg.head_img_url">
-                </div>
-                <div class="textWrap">
-                    <div class="name" v-if="msg.type == 3">系统</div>
-                    <div class="name" v-else>{{msg.nick_name}}</div>
-                    <div class="text">{{msg.content}} </div>
-                    <span class="time">{{msg.create_time}}</span>
-                </div>
-            </div>
-            
+			<div id="wrapper">
+				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="40">
+					<div class="item order"
+						 v-if="isOrder"
+						 v-for="order in dataList"
+						 v-link="{name: 'userWorkAcceptDetail', query:{order_id:order.order_id} }"
+					>
+						<div class="timeout" v-if="order.status == 3"></div>
+						<span class="tag">{{order.scene_name}}</span>
+						<header class="clearfix">
+							<div class="photoWrap">
+								<img :src="order.head_img_url">
+							</div>
+							<div class="textWrap">
+								<div class="header">
+									{{order.create_name}}
+									<span>{{order.create_time}}</span>
+								</div>
+								<div class="text">
+									{{order.detail}}
+								</div>
+							</div>
+						</header>
+						<footer>
+							<div class="unit">报酬：<span>{{order.unit}}</span></div>
+							<div class="time">时间：<span>{{order.start_time}}  {{order.end_time}}</span></div>
+							<div class="position">任务位置：<span>{{order.workplace}}</span></div>
+						</footer>
+					</div>
+				
+					<div class="item msg" v-if="!isOrder" v-for="msg in dataList" @click="goMsg(msg.type, msg.id)">
+						<div class="photoWrap">
+							<img :src="msg.head_img_url">
+						</div>
+						<div class="textWrap">
+							<div class="name" v-if="msg.type == 3">系统</div>
+							<div class="name" v-else>{{msg.nick_name}}</div>
+							<div class="text">{{msg.content}} </div>
+							<span class="time">{{msg.create_time}}</span>
+						</div>
+					</div>
+					
+					<div class="lodding" v-show="busy"></div>
+				</div>
+			</div>
         </div>
     </div>
 </template>
@@ -222,43 +226,39 @@ export default {
         return {
             title: '消息',
             isOrder: true,
-            formData: {
-                order: {},
-                msg: {}
-            }
+			url: '',
+			busy: false,
+            dataList: [],
+			formData:{
+				currentPage: 1
+			}
         }
     },
     route: {
         data (transition){
             let self = this;
-            $.ajax({
-                url: "/soytime/msg/orderInviteList",
-                type:'POST',
-                dataType: 'json',
-                success: ((data)=>{
-                    self.formData.order = data.result;
-                })
-            });
-            $.ajax({
-                url: "/soytime/msg/list",
-                type:'POST',
-                dataType: 'json',
-                success: ((data)=>{
-                    self.formData.msg = data.result;
-                })
-            });
+			
+            self.showMsgList( self.isOrder );
         },
         deactivate(){
-            this.isOrder = true;
+			let self = this;
+            self.isOrder = true;
+			self.formData.currentPage = 1;
         }
     },
-    ready(){
-        let self = this;
-
-    },
     methods:{
-        showMsgList(arg){
-            this.isOrder = arg;
+        showMsgList(isOrder){
+			let self = this;
+			self.isOrder  = isOrder;
+			self.dataList = [];
+			self.formData.currentPage = 1;
+			
+			if( isOrder ){
+				self.url = '/soytime/msg/orderInviteList';
+			}else{
+				self.url = '/soytime/msg/list';
+			}
+			if( !self.busy ) self.loadMore();
         },
         goMsg(type, id){
             let self = this;
@@ -275,6 +275,25 @@ export default {
                     break;
             }
             
+        },
+        loadMore(){
+            let self = this;
+			self.busy = true;
+            $.ajax({
+                url: self.url,
+                type:'POST',
+                data:self.formData,
+                dataType: 'json',
+                success: ((data)=>{
+                    let arr = data.result,
+                        len = arr.length;
+                    for(let i = 0; i<len; i++){
+                        self.dataList.push(arr[i]);
+                    }
+					self.formData.currentPage ++;
+					self.busy = false;
+                })
+            });
         }
     },
     components: {

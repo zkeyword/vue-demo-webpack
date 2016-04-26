@@ -72,7 +72,7 @@
             .rem(padding, 0, 30);
         }
         
-        .pull-refresh{
+        ul{
             .rem(margin, 0, 30);
             color:#888;
         }
@@ -87,28 +87,32 @@
 </style>
 
 <template>
-    <div class="page-user page-user-money pullRreshwrap" transition="page">
+    <div class="page-user page-user-money" transition="page">
         <header-bar :title="title" back="true"></header-bar>
         <div class="content showHeaderNopading">
-            <div class="moneyHeader">
-                <header>
-                    <span><i>账户余额</i>{{formData.balance}}</span>
-                </header>
-                <footer class="clearfix">
-                    <div></div>
-                    <span>转入</span>
-                    <span>转出</span>
-                </footer>
-            </div>
-            <div class="moneyList">
-                <header>交易记录</header>
-                <pull-refresh @on-scroll-lodding="getData">
-                    <li class="item clearfix" v-for="tradeRecord in formData.tradeRecord">
-                        {{typeText[ tradeRecord.type - 1]}}
-                        {{tradeRecord.create_time}}
-                        {{tradeRecord.amount}}元
-                    </li>
-                </pull-refresh>
+			<div id="wrapper">
+				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="40">
+					<div class="moneyHeader">
+						<header>
+							<span><i>账户余额</i>{{formData.balance}}</span>
+						</header>
+						<footer class="clearfix">
+							<div></div>
+							<span>转入</span>
+							<span>转出</span>
+						</footer>
+					</div>
+					<div class="moneyList">
+						<header>交易记录</header>
+						<ul>
+							<li class="item clearfix" v-for="tradeRecord in dataList">
+								{{typeText[ tradeRecord.type - 1]}}
+								{{tradeRecord.create_time}}
+								{{tradeRecord.amount}}元
+							</li>
+						</ul>
+					</div>
+				</div>
             </div>
         </div>
     </div>
@@ -122,9 +126,11 @@ export default {
 			userInfo: {},
             currentPage: 1,
             typeText: ['充值','取现', '下单', '接单', '接单红包','分享红包', '转账'],
+			busy: false,
+            dataList: [],
 			formData: {
                 balance: 0,
-                tradeRecord: []
+				currentPage: 1,
             }
 		}
 	},
@@ -138,42 +144,37 @@ export default {
                 dataType: 'json',
                 success: (data)=>{
                     $.extend(self.formData, data.result);
-                },
-                error: ()=>{
-                    $.toast('网络不给力，请重新尝试！');
                 }
             });
 		},
         deactivate(){
             let self = this;
-            self.formData.tradeRecord = [];
+			self.formData.currentPage = 1;
         }
     },
     methods:{
-        getData(index, callback){
+        loadMore(){
             let self = this;
+			self.busy = true;
             $.ajax({
                 url: "/soytime/account/tradeRecord",
                 type:'POST',
-                data:{
-                    currentPage: index
-                },
+                data:self.formData,
                 dataType: 'json',
                 success: ((data)=>{
                     let arr = data.result,
                         len = arr.length;
                     for(let i = 0; i<len; i++){
-                        self.formData.tradeRecord.push(arr[i]);
+                        self.dataList.push(arr[i]);
                     }
-                    //self.formData = self.formData.concat(data.result);
-                    callback && callback();
+					self.formData.currentPage ++;
+					self.busy = false;
                 })
             });
         }
     },
 	components: {
-        'headerBar': require('../../components/header.vue'),
-        'pullRefresh': require('../../components/pullRefresh.vue')
+        'headerBar': require('../../components/header.vue')
 	}
 }
 </script>

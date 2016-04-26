@@ -61,41 +61,43 @@
 </style>
 
 <template>
-    <div class="page-user-work-accept pullRreshwrap">
+    <div class="page-user-work-accept">
         <header-bar :title="title" :back="true"></header-bar>
 
         <div class="content showHeader">
-            <pull-refresh @on-scroll-lodding="getData">
-                <div class="item" v-for="item in formData">
-                    <header class="clearfix" v-link="{name: 'userWorkAcceptDetail', query: {'order_id': item.order_id}}">
-                        <div class="photoWrap">
-                            <img :src="item.head_img_url">
-                        </div>
-                        <div class="textWrap">
-                            <div class="header clearfix">
-                                <span class="name">{{item.scene_name}}</span>
-                                <span class="time pull-right">{{item.create_time}}</span>
-                            </div>
-                            <div class="text">{{item.detail}}</div>
-                        </div>
-                    </header>
-                    <div class="info">
-                        <div class="salary clearfix">
-                            <div class="pull-left">报酬: {{item.salary}}元/{{item.unit}}</div>
-                            <div class="pull-right">
-                                <i class="btn">评价</i>
-                                <i class="btn disable">已评价</i>
-                            </div>
-                        </div>
-                        <div>
-                            时间: <span>{{item.start_time}} {{item.end_time}} {{item.period_times}}</span>
-                        </div>
-                        <div>
-                            服务位置: <span>{{item.workplace}}</span>
-                        </div>
-                    </div>
-                </div>
-            </pull-refresh>
+            <div id="wrapper">
+				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="40">
+					<div class="item" v-for="item in dataList">
+						<header class="clearfix" v-link="{name: 'userWorkAcceptDetail', query: {'order_id': item.order_id}}">
+							<div class="photoWrap">
+								<img :src="item.head_img_url">
+							</div>
+							<div class="textWrap">
+								<div class="header clearfix">
+									<span class="name">{{item.scene_name}}</span>
+									<span class="time pull-right">{{item.create_time}}</span>
+								</div>
+								<div class="text">{{item.detail}}</div>
+							</div>
+						</header>
+						<div class="info">
+							<div class="salary clearfix">
+								<div class="pull-left">报酬: {{item.salary}}元/{{item.unit}}</div>
+								<div class="pull-right">
+									<i class="btn">评价</i>
+									<i class="btn disable">已评价</i>
+								</div>
+							</div>
+							<div>
+								时间: <span>{{item.start_time}} {{item.end_time}} {{item.period_times}}</span>
+							</div>
+							<div>
+								服务位置: <span>{{item.workplace}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
         </div>
     </div>
 </template>
@@ -105,7 +107,11 @@
         data() {
             return {
                 title: '发单任务',
-                formData:[],
+				busy: false,
+				dataList: [],
+                formData:{
+					currentPage: 1
+				},
                 appraiseText:['评价','已评价']
             }
         },
@@ -115,32 +121,35 @@
                     query    = transition.to.query;
 
                 $.extend(self.formData, query);
-            }
+            },
+			deactivate(){
+				let self = this;
+				self.formData.currentPage = 1;
+			}
         },
         methods:{
-            getData(index, callback){
-                let self = this;
-                $.ajax({
-                    url: "/soytime/order/receiveList",
-                    type:'POST',
-                    data:{
-                        currentPage: index
-                    },
-                    dataType: 'json',
-                    success: ((data)=>{
-                        let arr = data.result,
-                            len = arr.length;
-                        for(let i = 0; i<len; i++){
-                            self.formData.push(arr[i]);
-                        }
-                        callback && callback();
-                    })
-                });
-            }
+			loadMore(){
+				let self = this;
+				self.busy = true;
+				$.ajax({
+					url: "/soytime/order/receiveList",
+					type:'POST',
+					data: self.formData,
+					dataType: 'json',
+					success: ((data)=>{
+						let arr = data.result,
+							len = arr.length;
+						for(let i = 0; i<len; i++){
+							self.dataList.push(arr[i]);
+						}
+						self.formData.currentPage ++;
+						self.busy = false;
+					})
+				});
+			}
         },
         components: {
-            'headerBar': require('../../../components/header.vue'),
-            'pullRefresh': require('../../../components/pullRefresh.vue')
+            'headerBar': require('../../../components/header.vue')
         }
     }
 </script>
