@@ -152,7 +152,6 @@ export default {
 			
 			self.getCount();
 
-            if( !self.busy ) self.loadMore();
         },
         deactivate(){
 			let self = this;
@@ -177,12 +176,16 @@ export default {
             
             self.formData.type = type;
 			self.formData.currentPage = 1;
+			self.noData = false;
 			self.dataList = [];
             if( !self.busy ) self.loadMore();
         },
         loadMore(){
             let self = this;
-			if( !self.noData ) self.busy = true;
+			if( !self.noData ) 
+				self.busy = true;
+			else
+				return;
             $.ajax({
                 url: "/soytime/appraise/list",
                 type:'POST',
@@ -200,6 +203,11 @@ export default {
                     for(let i = 0; i<len; i++){
                         self.dataList.push(arr[i]);
                     }
+                    
+                    if(len < 10 ){
+                    	self.noData = true;
+                    }
+                    
 					self.formData.currentPage ++;
 					self.busy = false;
                 })
