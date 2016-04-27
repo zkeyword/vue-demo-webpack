@@ -264,7 +264,9 @@ export default {
             self.formData.tag = tag;
 			self.formData.currentPage = 1;
 			self.dataList = [];
-			if( !self.busy ) self.loadMore();
+			self.noData = false
+			self.busy = false;
+			self.loadMore();
 		},
         loadMore(){
             let self = this;

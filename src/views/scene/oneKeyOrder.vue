@@ -130,7 +130,7 @@
                 </div>
                 <scene-type
                         :scene-list="indexData.sceneList"
-                        :scene-ids.sync="formData.sceneId"
+                        :scene-ids.sync="formData.scene_id"
                         :is-radio="true"
                 ></scene-type>
             </div>
@@ -432,8 +432,6 @@ export default {
         },
         save(){
             let self = this;
-
-
 
             self.joinPeriod();
 

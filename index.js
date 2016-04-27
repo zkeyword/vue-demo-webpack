@@ -185,7 +185,7 @@ app.post('/soytime/order/demandList', function (req, res) {
     var Random = Mock.Random,
         data   = Mock.mock({
             success: '1',
-            'result|2': [
+            'result|10': [
                 {
                     order_id: '@integer(60, 1000)',
                     scene_name: '@integer(60, 1000)',

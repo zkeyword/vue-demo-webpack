@@ -27,7 +27,14 @@
                 border:0 none;
                 text-align:right;
             }
+			
+			.switch{
+				.rem(font-size, 50);
+				&.ico-open{color:#ff946e;}
+				&.ico-close3{color: #b2b2b2;}
+			}
         }
+
     }
     
     .photoName{
@@ -105,12 +112,11 @@
             <div class="block">
                 <div class="clearfix">
                     <div class="pull-left">订单接送提醒</div>
-                    <div class="pull-right">
-                        <label class="label-switch">
-                            <input type="checkbox" v-model="formData.open" >
-                            <div class="checkbox"></div>
-                        </label>
-                    </div>
+                    <span
+                        class="pull-right switch ico"
+                        :class="{'ico-open': formData.open == 1, 'ico-close3': formData.open == 0}"
+                        @click="switch"
+					></span>
                 </div>
                 <time-conf :timer.sync="formData.timeConf"></time-conf>
             </div>
@@ -167,7 +173,15 @@
                        // $.toast('网络不给力，请尝试重新提交！');
                     }
                 });
-            }
+            },
+			switch(){
+				let self = this;
+				if( self.formData.open == 1 ){
+					self.formData.open = 0;
+				}else{
+					self.formData.open = 1;
+				}
+			}
         },
         components: {
             'headerBar': require('../../components/header.vue'),

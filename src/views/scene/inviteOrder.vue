@@ -273,7 +273,6 @@
 
 			self.$store.state.getScrollerTime('#start', 0);
 			self.$store.state.getScrollerTime('#end', 0);
-
 			self.splitPeriod();
             self.addPeriod();
 		},
@@ -361,6 +360,45 @@
 			},
 			save(){
 				let self = this;
+				
+				self.joinPeriod();
+
+				let tempPeriodArr  = self.formData.period_times.split(',');
+
+				for(let i = 0, len = tempPeriodArr.length; i<len; i++){
+					let item = tempPeriodArr[i],
+						arr  = item.split('-');
+					if( !arr[0] || !arr[1] ){
+						self.showAlert = true;
+						self.alertText = '时间段不能为空!';
+						return;
+					}
+					console.log( (new Date('2016-01-01 '+arr[0])).valueOf() , (new Date('2016-01-01 '+arr[1])).valueOf() )
+					if( (new Date('2016-01-01 '+arr[0])).valueOf() >= (new Date('2016-01-01 '+arr[1])).valueOf() ){
+						self.showAlert = true;
+						self.alertText = '开始时间段不能小于等于结束时间端!';
+						return;
+					}
+				}
+
+
+				if( !self.formData.start_time ){
+					self.showAlert = true;
+					self.alertText = '开始时间不能为空!';
+					return;
+				}
+
+				if( !self.formData.end_time ){
+					self.showAlert = true;
+					self.alertText = '开始时间不能为空!';
+					return;
+				}
+
+				if( (new Date(self.formData.start_time)).valueOf() >= (new Date(self.formData.end_time)).valueOf() ){
+					self.showAlert = true;
+					self.alertText = '开始时间不能小于等于结束时间!';
+					return;
+				}
 
 				$.ajax({
 					url: "/soytime/order/inviteOrder",
