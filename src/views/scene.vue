@@ -198,6 +198,8 @@
         >
             一键预约
         </span>
+		
+		<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
 
     </div>
 </template>
@@ -211,6 +213,8 @@ export default {
             busy: false,
 			noData: false,
             dataList: [],
+			isShowToast: false,
+			toastText: '没有数据了！',
             formData:{
 				scene_name: '',
 				scene_id: '',
@@ -239,6 +243,9 @@ export default {
 			self.formData.school_id   = '';
 			self.formData.sex         = '';
 			self.formData.sort        = '';
+			self.dataList             = [];
+			self.busy                 = false;
+			self.noData               = false;
         }
     },
     methods:{
@@ -272,9 +279,11 @@ export default {
                     self.busy = false;
 
                     if( !len || !data.success ){
+						self.isShowToast = true;
                         self.noData = true;
                         return;
                     }else if( len < 10 ){
+						self.isShowToast = true;
                         self.noData = true;
                     }
 
@@ -288,7 +297,8 @@ export default {
         }
     },
     components: {
-        'headerBar': require('../components/header.vue')
+        'headerBar': require('../components/header.vue'),
+		'toast': require('../components/toast')
     }
 }
 </script>

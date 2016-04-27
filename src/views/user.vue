@@ -57,7 +57,7 @@
                         font-style:normal;
                     }
                     span{
-                        .rem(margin, 0, 8);
+                        .rem(margin, 0, 8, 0, 0);
                     }
                     .ico{
                         .rem(font-size, 40);
@@ -122,22 +122,22 @@
                     <li>
                         <i class="ico ico-xiaolian"></i>
                         <div class="clearfix">
-                            <span class="pull-left">好评</span>
-                            <em class="pull-left">{{formData.goodCount}}</em>
+                            <span>好评</span>
+                            <em>{{formData.goodCount}}</em>
                         </div>
                     </li>
                     <li>
                         <i class="ico ico-cry"></i>
                         <div class="clearfix">
-                            <span class="pull-left">中评</span>
-                            <em class="pull-left">{{formData.cenCount}}</em>
+                            <span>中评</span>
+                            <em>{{formData.cenCount}}</em>
                         </div>
                     </li>
                     <li>
                         <i class="ico ico-kulian"></i>
                         <div class="clearfix">
-                            <span class="pull-left">差评</span>
-                            <em class="pull-left">{{formData.poolCount}}</em>
+                            <span>差评</span>
+                            <em>{{formData.poolCount}}</em>
                         </div>
                     </li>
                     <li>

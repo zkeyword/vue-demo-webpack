@@ -7,8 +7,9 @@
 
         <div class="content">
             <ul class="list">
-                <li @click="goScene(1)">评价最高</li>
-                <li @click="goScene(2)">距离最近</li>
+				<li @click="goScene('')"><i class="ico ico-yixuan"></i>不限</li>
+                <li @click="goScene(1)"><i class="ico ico-yixuan"></i>评价最高</li>
+                <li @click="goScene(2)"><i class="ico ico-yixuan"></i>距离最近</li>
             </ul>
         </div>
 

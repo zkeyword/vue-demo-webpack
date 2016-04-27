@@ -117,6 +117,9 @@
 				</div>
 			</div>
         </div>
+		
+		<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
+		
     </div>
 </template>
 
@@ -128,6 +131,8 @@ export default {
 			noData: false,
 			busy: false,
             dataList: [],
+			isShowToast: false,
+			toastText: '没有数据了！',
             formData: {
 				currentPage: 1,
 				to_id: '',
@@ -198,9 +203,11 @@ export default {
                     self.busy = false;
 
 					if( !len || !data.success ){
+						self.isShowToast = true;
 						self.noData = true;
                         return;
 					}else if( len < 10 ){
+						self.isShowToast = true;
                         self.noData = true;
                     }
 
@@ -214,7 +221,8 @@ export default {
         }
     },
     components: {
-        'headerBar': require('../../components/header.vue')
+        'headerBar': require('../../components/header.vue'),
+		'toast': require('../../components/toast')
     }
 }
 </script>

@@ -2,6 +2,13 @@
     @import '../less/lib/mixins.less';
     .page-home{
         background:#fff;
+		
+		.address{
+			position:absolute;
+			.rem(top, 30);
+			.rem(left, 30);
+			z-index: 2;
+		}
         
         .systemMsg{
             border-bottom:1px solid #dedede;
@@ -71,8 +78,9 @@
 </style>
 
 <template>
-    <div class="page-home page-current">
+    <div class="page-home">
         <div class="content showFooter">
+			<span class="address" v-link="{name:'selectCity', query:formData}">{{cityName}}</span>
             <swiper :list="list"></swiper>
             <div class="systemMsg">
                 <i class="ico ico-xiaolaba"></i>
@@ -101,15 +109,27 @@ export default {
             systemMsg: indexData.systemMsg,
             sceneList: indexData.sceneList,
 			cityId: '',
-            icoArr: ['ico-ditu', 'ico-university', 'ico-save', 'ico-traffic', 'ico-traffic', 'ico-women', 'ico-service', 'ico-wudao']
+			cityName: '',
+            icoArr: ['ico-ditu', 'ico-university', 'ico-save', 'ico-traffic', 'ico-traffic', 'ico-women', 'ico-service', 'ico-wudao'],
+			formData:{
+				form: 'home'
+			}
         };
     },
 	route:{
         data (transition){
-            let self  = this,
-                query = transition.to.query;
-			
-			self.cityId = returnCitySN.cid;
+            let self   = this,
+                query  = transition.to.query,
+				cityId = self.$store.state.getCookie('cityId');
+				
+			if( !cityId ){
+				self.cityId = returnCitySN.cid;
+				self.$store.state.setCookie('cityId', self.cityId, 99999);
+			}else{
+				self.cityId = cityId;
+			}
+
+			self.cityName = self.$store.state.getCityName( self.cityId );
         }
     },
     components:{

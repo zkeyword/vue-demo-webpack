@@ -47,12 +47,12 @@
         <div class="content showHeader">
             <ul class="list" v-if="!tmpData.length">
 				<li v-for="item in indexData.areaList" @click="goAuth(item)">
-                    {{item.city_name}}
+                    <i class="ico ico-yixuan"></i>{{item.city_name}}
                 </li>
             </ul>
             <ul class="list" v-else="tmpData.length">
                 <li v-for="item in tmpData" @click="goAuth(item)">
-                    {{item.city_name}}
+                    <i class="ico ico-yixuan"></i>{{item.city_name}}
                 </li>
             </ul>
         </div>
@@ -124,8 +124,14 @@ export default {
             let self = this;
             self.formData.city_id   = item.city_id;
             self.formData.city_name = item.city_name;
-			self.$route.router.go({name:'auth', query: self.formData});
-            //self.$route.router.go('/auth?' + $.param( self.formData ) );
+			
+			self.$store.state.setCookie('cityId', item.city_id, 99999);
+			
+			if( self.formData.form == 'home' ){
+                self.$route.router.go({name:'home', query: self.formData});
+            }else{
+                self.$route.router.go({name:'auth', query: self.formData});
+            }
         },
         filteData (keyword) {
             let self    = this,

@@ -136,7 +136,6 @@
         data() {
             return {
                 title: '设置',
-                tmpData: {},
                 formData: {}
             }
         },
@@ -167,10 +166,6 @@
                             //$.hidePreloader();
                             self.$route.router.go('/user');
                         }
-                    },
-                    error: ()=>{
-                        //$.hidePreloader();
-                       // $.toast('网络不给力，请尝试重新提交！');
                     }
                 });
             },

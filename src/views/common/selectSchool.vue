@@ -18,12 +18,12 @@
         <div class="content showHeader">
             <ul class="list" v-if="!tmpData.length">
 				<li v-for="item in schoolList" @click="goAuth(item)">
-                    {{item.school_name}}
+                    <i class="ico ico-yixuan"></i>{{item.school_name}}
                 </li>
             </ul>
             <ul class="list" v-else="tmpData.length">
 				<li v-for="item in tmpData" @click="goAuth(item)">
-                    {{item.school_name}}
+                    <i class="ico ico-yixuan"></i>{{item.school_name}}
                 </li>
             </ul>
         </div>

@@ -54,9 +54,34 @@ export default new Vuex.Store({
                     timeWheels: 'HHii'
                 });
             }
-        }
-	},
-	actions: {
-
+        },
+		getCityName(id){
+			let data = indexData.areaList,
+				len  = data.length;
+			for(let i = 0; i<len; i++){
+				let item = data[i]
+				if( item.city_id == id){
+					return item.city_name;
+				}
+			}
+			return ;
+		},
+		getCookie(name){
+			var r = new RegExp("(?:^|;+|\\s+)" + name + "=([^;]*)"),
+			m = document.cookie.match(r);
+			return unescape(decodeURI(!m ? "" : m[1]));
+		},
+		setCookie(name, value, hour, domain, path){
+			if( hour ){
+				var today  = new Date(),
+					expire = new Date();
+				expire.setTime(today.getTime() + 36E5 * hour);
+			}
+			document.cookie = name + "=" + escape(value) + "; " + (hour ? "expires=" + expire.toGMTString() + "; " : "") + (path ? "path=" + path + "; " : "path=/; ") + (domain ? "domain=" + domain + ";" : "");
+			return true;
+		},
+		delCookie(name, domain, path){
+			document.cookie = name + "=; expires=Mon, 26 Jul 1997 05:00:00 GMT; " + (path ? "path=" + path + "; " : "path=/; ") + (domain ? "domain=" + domain + ";" : "");
+		}
 	}
 });

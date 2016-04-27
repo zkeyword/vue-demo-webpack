@@ -7,8 +7,9 @@
 
         <div class="content">
             <ul class="list">
-				<li @click="goScene(1)">男</li>
-				<li @click="goScene(2)">女</li>
+				<li @click="goScene('')"><i class="ico ico-yixuan"></i>不限</li>
+				<li @click="goScene(1)"><i class="ico ico-yixuan"></i>男</li>
+				<li @click="goScene(2)"><i class="ico ico-yixuan"></i>女</li>
             </ul>
         </div>
 
