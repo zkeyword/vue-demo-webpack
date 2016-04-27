@@ -41,10 +41,6 @@ export default (router)=>{
 	    	name: 'sceneDetail',
 	        component: require('./views/scene/detail')
 	    },
-        '/scene/reserve': {
-	    	name: 'sceneReserve',
-	        component: require('./views/scene/reserve')
-	    },
         '/scene/appraise': {
 	    	name: 'sceneAppraise',
 	        component: require('./views/scene/appraise')

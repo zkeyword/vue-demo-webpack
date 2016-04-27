@@ -154,11 +154,10 @@ app.post('/soytime/server/myInfo', function name(req, res) {
                 usernick: '@cname',
                 sceneIds: '@cname',
                 detail: '@cname',
-                serverImgs:
-                {
+                'skillImgs|2':[{
                     id: '@cname',
                     img_url: Random.image('160x160')
-                },
+                }],
                 longitude: '@cname',
                 latitude: '@cname',
                 workplace: '@cname',

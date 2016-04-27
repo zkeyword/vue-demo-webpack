@@ -22,7 +22,7 @@
                 vertical-align:middle;
                 .border-radius(8);
                 .rem(margin-bottom, 16);
-                .rem(font-size, 24);
+                .rem(font-size, 30);
                 .rem(border-width, 2); 
                 .rem(padding, 26, 16);
             }

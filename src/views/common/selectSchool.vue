@@ -3,7 +3,7 @@
 </style>
 
 <template>
-    <div id="area" class="page-selectCity page-selectSchool" transition="page" >
+    <div id="area" class="page-selectCity page-selectSchool" transition="page">
 
         <div class="bar">
             <div class="searchbar">
@@ -16,14 +16,12 @@
         </div>
 
         <div class="content showHeader">
-            <ul class="list" v-if="!tmpData.length">
+            <ul class="list">
 				<li v-for="item in schoolList" @click="goAuth(item)">
-                    <i class="ico ico-yixuan"></i>{{item.school_name}}
-                </li>
-            </ul>
-            <ul class="list" v-else="tmpData.length">
-				<li v-for="item in tmpData" @click="goAuth(item)">
-                    <i class="ico ico-yixuan"></i>{{item.school_name}}
+                    <span class="pull-left">{{item.school_name}}</span>
+                    <i class="pull-right ico"
+                       :class="{'ico-yixuan': item.school_id == formData.school_id, 'ico-yixuan2': item.school_id != formData.school_id}"
+                    ></i>
                 </li>
             </ul>
         </div>
@@ -65,6 +63,7 @@ export default {
                 data: self.formData,
                 success: ((data)=>{
                     self.schoolList = data.result;
+                    self.tmpData    = data.result;
                 })
             });
             

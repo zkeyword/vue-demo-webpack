@@ -8,6 +8,9 @@
 			.rem(top, 30);
 			.rem(left, 30);
 			z-index: 2;
+            color:#fff;
+            .rem(font-size, 30);
+            text-shadow: 0 0 3px #999;
 		}
         
         .systemMsg{
@@ -80,7 +83,7 @@
 <template>
     <div class="page-home">
         <div class="content showFooter">
-			<span class="address" v-link="{name:'selectCity', query:formData}">{{cityName}}</span>
+			<span class="address" v-link="{name:'selectCity', query:formData}">{{cityName}}<i class="ico ico-down"></i></span>
             <swiper :list="list"></swiper>
             <div class="systemMsg">
                 <i class="ico ico-xiaolaba"></i>
@@ -121,6 +124,8 @@ export default {
             let self   = this,
                 query  = transition.to.query,
 				cityId = self.$store.state.getCookie('cityId');
+
+            $.extend(self.formData, query);
 				
 			if( !cityId ){
 				self.cityId = returnCitySN.cid;

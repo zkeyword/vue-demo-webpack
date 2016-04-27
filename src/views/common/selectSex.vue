@@ -7,9 +7,24 @@
 
         <div class="content">
             <ul class="list">
-				<li @click="goScene('')"><i class="ico ico-yixuan"></i>不限</li>
-				<li @click="goScene(1)"><i class="ico ico-yixuan"></i>男</li>
-				<li @click="goScene(2)"><i class="ico ico-yixuan"></i>女</li>
+				<li @click="goScene('')">
+                    <span class="pull-left">不限</span>
+                    <i class="pull-right ico"
+                       :class="{'ico-yixuan': formData.sex == '', 'ico-yixuan2': formData.sex != ''}"
+                    ></i>
+                </li>
+				<li @click="goScene(1)">
+                    <span class="pull-left">男</span>
+                    <i class="pull-right ico"
+                       :class="{'ico-yixuan': formData.sex == 1, 'ico-yixuan2': formData.sex != 1}"
+                    ></i>
+                </li>
+				<li @click="goScene(2)">
+                    <span class="pull-left">女</span>
+                    <i class="pull-right ico"
+                       :class="{'ico-yixuan': formData.sex == 2, 'ico-yixuan2': formData.sex != 2}"
+                    ></i>
+                </li>
             </ul>
         </div>
 
@@ -20,7 +35,9 @@
 export default {
     data (){
         return {
-            formData: {}
+            formData: {
+                sex: ''
+            }
         }
     },
     route: {

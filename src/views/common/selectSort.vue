@@ -7,9 +7,24 @@
 
         <div class="content">
             <ul class="list">
-				<li @click="goScene('')"><i class="ico ico-yixuan"></i>不限</li>
-                <li @click="goScene(1)"><i class="ico ico-yixuan"></i>评价最高</li>
-                <li @click="goScene(2)"><i class="ico ico-yixuan"></i>距离最近</li>
+                <li @click="goScene('')">
+                    <span class="pull-left">不限</span>
+                    <i class="pull-right ico"
+                       :class="{'ico-yixuan': formData.sort == '', 'ico-yixuan2': formData.sort != ''}"
+                    ></i>
+                </li>
+                <li @click="goScene(1)">
+                    <span class="pull-left">评价最高</span>
+                    <i class="pull-right ico"
+                       :class="{'ico-yixuan': formData.sort == 1, 'ico-yixuan2': formData.sort != 1}"
+                    ></i>
+                </li>
+                <li @click="goScene(2)">
+                    <span class="pull-left">距离最近</span>
+                    <i class="pull-right ico"
+                       :class="{'ico-yixuan': formData.sort == 2, 'ico-yixuan2': formData.sort != 2}"
+                    ></i>
+                </li>
             </ul>
         </div>
 
@@ -17,10 +32,12 @@
 </template>
 
 <script>
-    export default {
-        data (){
+export default {
+    data (){
         return {
-            formData: {}
+            formData: {
+                sort: ''
+            }
         }
     },
     route: {
@@ -38,5 +55,5 @@
             self.$route.router.go({'name':'scene', query: self.formData});
         }
     }
-    }
+}
 </script>

@@ -156,7 +156,7 @@
                     <input type="text" value="{{period[0]}}" class="period_start" mobiscroll-datetime="settings" placeholder="请选择">
                     <i>-</i>
                     <input type="text" value="{{period[1]}}" class="period_end" mobiscroll-datetime="settings" placeholder="请选择">
-                    <i class="ico ico-close" @click="removePeriod($index)"></i>
+                    <i class="ico ico-close" @click="removePeriod($index)" v-if="$index"></i>
                 </div>
                 <div @click="addPeriod">
                     <i class="ico ico-anonymous"></i>添加时间段

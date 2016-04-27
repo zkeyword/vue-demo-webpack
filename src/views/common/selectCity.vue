@@ -5,28 +5,38 @@
     background:#fff;
     .bar{
         background:#fff;
-        /*
-        &:after{
-            background:none;
-        }
-        */
     }
     .list{
         li{
             border-bottom:1px solid #dedede;
-            .rem(font-size, 24);
+            .rem(font-size, 30);
             .rem(height, 68);
             .rem(line-height, 68);
             .rem(padding, 0, 26);
             .rem(border-bottom-width, 2);
-        }
-    }
-    #abc{
-        position:absolute;
-        bottom:0.2rem;
-        right:0.2rem;
-        line-height: 0.8rem;
-        font-size: 0.5rem;
+
+            span{
+                display: inline-block;
+                .rem(height, 68);
+                .rem(line-height, 68);
+            }
+            .ico{
+                display: inline-block;
+                .rem(height, 68);
+                .rem(line-height, 68);
+                .rem(width, 40);
+                text-align:center;
+
+                &.ico-yixuan2{
+                     color: #b2b2b2;
+                    .rem(font-size, 40);
+                 }
+                &.ico-yixuan{
+                     color: #11cd6e;
+                    .rem(font-size, 44);
+                 }
+            }
+         }
     }
 }
 </style>
@@ -45,14 +55,12 @@
         </div>
 
         <div class="content showHeader">
-            <ul class="list" v-if="!tmpData.length">
-				<li v-for="item in indexData.areaList" @click="goAuth(item)">
-                    <i class="ico ico-yixuan"></i>{{item.city_name}}
-                </li>
-            </ul>
-            <ul class="list" v-else="tmpData.length">
-                <li v-for="item in tmpData" @click="goAuth(item)">
-                    <i class="ico ico-yixuan"></i>{{item.city_name}}
+            <ul class="list">
+				<li class="item clearfix" v-for="item in tmpData" @click="goAuth(item)">
+                    <span class="pull-left">{{item.city_name}}</span>
+                    <i class="pull-right ico"
+                       :class="{'ico-yixuan': item.city_id == formData.city_id, 'ico-yixuan2': item.city_id != formData.city_id}"
+                    ></i>
                 </li>
             </ul>
         </div>
@@ -61,38 +69,6 @@
 </template>
 
 <script>
-/*
-<ul id="abc">
-            <li>A</li>
-            <li>B</li>
-            <li>C</li>
-            <li>D</li>
-            <li>E</li>
-            <li>F</li>
-            <li>G</li>
-            <li>H</li>
-            <li>I</li>
-            <li>J</li>
-            <li>K</li>
-            <li>L</li>
-            <li>M</li>
-            <li>N</li>
-            <li>O</li>
-            <li>P</li>
-            <li>Q</li>
-            <li>R</li>
-            <li>S</li>
-            <li>T</li>
-            <li>U</li>
-            <li>V</li>
-            <li>W</li>
-            <li>X</li>
-            <li>Y</li>
-            <li>Z</li>
-        </ul>
-
-*/
-
 export default {
     data(){
         return {
@@ -110,7 +86,9 @@ export default {
             let self    = this,
                 query   = transition.to.query;
                 
-            $.extend(self.formData, query);     
+            $.extend(self.formData, query);
+
+            self.tmpData = self.indexData.areaList;
         }
     },
     watch: {
