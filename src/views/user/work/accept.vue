@@ -84,8 +84,13 @@
 							<div class="salary clearfix">
 								<div class="pull-left">报酬: {{item.salary}}元/{{item.unit}}</div>
 								<div class="pull-right">
-									<i class="btn">评价</i>
-									<i class="btn disable">已评价</i>
+									<i class="btn" 
+										v-link="{ name: 'userWorkAppraise', query:{appraise_type:'1', order_id:item.order_id, to_id: item.to_id} }" v-if="item.is_appraise"
+									>评价</i>
+									<i class="btn disable" 
+										v-link="{ name: 'userWorkAppraise', query:{appraise_type:'1', order_id:item.order_id, to_id: item.to_id} }"
+										v-if="!item.is_appraise"
+									>已评价</i>
 								</div>
 							</div>
 							<div>

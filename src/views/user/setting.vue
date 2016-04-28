@@ -129,6 +129,8 @@
             保存
         </span>
     </div>
+	<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
+	<loading :show="isShowloading" :text="loadingText"></loading>
 </template>
 
 <script>
@@ -136,6 +138,10 @@
         data() {
             return {
                 title: '设置',
+				isShowToast: false,
+				toastText: '提交失败,请重试！',
+				isShowloading: false,
+				loadingText: '提交中,请稍后!',
                 formData: {}
             }
         },
@@ -155,7 +161,7 @@
         methods:{
             save(){
                 let self = this;
-                //$.showPreloader('正在努力提交...')
+                self.isShowloading = true;
                 $.ajax({
                     url: "/soytime/account/saveSetInfo",
                     type:'POST',
@@ -163,10 +169,14 @@
                     data: self.formData,
                     success: (data)=>{
                         if( data.success ){
-                            //$.hidePreloader();
+                            self.isShowloading = false;
                             self.$route.router.go('/user');
                         }
-                    }
+                    },
+					error: ((data)=>{
+						self.isShowToast = true;
+						self.isShowloading = false;
+					})
                 });
             },
 			switch(){
@@ -181,7 +191,9 @@
         components: {
             'headerBar': require('../../components/header.vue'),
             'timeConf': require('../../components/timeConf.vue'),
-            'bindMobile': require('../../components/bindMobile.vue')
+            'bindMobile': require('../../components/bindMobile.vue'),
+			'toast': require('../../components/toast'),
+			'loading': require('../../components/loading')
         }
     }
 </script>

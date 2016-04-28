@@ -84,7 +84,8 @@ if( isProduction ){
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            }
+            },
+			minimize: true
         }),
         new webpack.optimize.OccurenceOrderPlugin()
     ]);
@@ -98,7 +99,8 @@ if( isProduction ){
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
-            }
+            },
+			minimize: true
         }),
         new webpack.optimize.OccurenceOrderPlugin()
     ]);

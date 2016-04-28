@@ -79,6 +79,10 @@ export default (router)=>{
 	    	name: 'userWorkServer',
 	        component: require('./views/user/work/server')
 	    },
+		'/user/work/appraise': {
+			name: 'userWorkAppraise',
+			component: require('./views/user/work/appraise')
+		},
         '/user/work/publish': {
 	    	name: 'userWorkPublish',
 	        component: require('./views/user/work/publish')
@@ -94,10 +98,6 @@ export default (router)=>{
 		'/user/work/acceptDetail': {
 			name: 'userWorkAcceptDetail',
 			component: require('./views/user/work/acceptDetail')
-		},
-		'/user/work/acceptAppraise': {
-			name: 'userWorkAcceptAppraise',
-			component: require('./views/user/work/acceptAppraise')
 		},
 		'/user/work/acceptBus': {
 			name: 'userWorkAcceptBus',

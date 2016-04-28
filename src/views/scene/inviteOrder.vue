@@ -184,7 +184,7 @@
                 </div>
                 <div class="clearfix payWay" @click="showActionsheet">
                     <span>支付方式</span>
-                    <span class="pull-right" v-if="formData.pay_way">{{payTextArr[formData.pay_way-1]}}</span>
+                    <span class="pull-right" v-if="formData.pay_way">{{payTextArr[formData.pay_way-2]}}</span>
                     <span class="pull-right ico ico-jiantouyou" v-else></span>
                 </div>
             </div>
@@ -249,11 +249,10 @@
 					form: 'inviteOrder'
 				},
 				unitTextArr:['时','日','周','月','次'],
-				payTextArr:['酱油平台支付','现金支付','线上支付'],
+				payTextArr:['现金支付','线上支付'],
 				isShow: false,
                 showAlert: false,
 				actionsheet: {
-					menu1: '酱油支付平台',
 					menu2: '现金支付',
 					menu3: '线上支付'
 				},
@@ -299,7 +298,7 @@
 					case 'menu2':
 						self.formData.pay_way = 2
 						break;
-					case 'menu1':
+					case 'menu3':
 						self.formData.pay_way = 3
 						break;
 				}
@@ -361,27 +360,6 @@
 			save(){
 				let self = this;
 				
-				self.joinPeriod();
-
-				let tempPeriodArr  = self.formData.period_times.split(',');
-
-				for(let i = 0, len = tempPeriodArr.length; i<len; i++){
-					let item = tempPeriodArr[i],
-						arr  = item.split('-');
-					if( !arr[0] || !arr[1] ){
-						self.showAlert = true;
-						self.alertText = '时间段不能为空!';
-						return;
-					}
-					console.log( (new Date('2016-01-01 '+arr[0])).valueOf() , (new Date('2016-01-01 '+arr[1])).valueOf() )
-					if( (new Date('2016-01-01 '+arr[0])).valueOf() >= (new Date('2016-01-01 '+arr[1])).valueOf() ){
-						self.showAlert = true;
-						self.alertText = '开始时间段不能小于等于结束时间端!';
-						return;
-					}
-				}
-
-
 				if( !self.formData.start_time ){
 					self.showAlert = true;
 					self.alertText = '开始时间不能为空!';
@@ -399,6 +377,58 @@
 					self.alertText = '开始时间不能小于等于结束时间!';
 					return;
 				}
+				
+				self.joinPeriod();
+
+				let tempPeriodArr  = self.formData.period_times.split(',');
+
+				for(let i = 0, len = tempPeriodArr.length; i<len; i++){
+					let item = tempPeriodArr[i],
+						arr  = item.split('-');
+					if( !arr[0] || !arr[1] ){
+						self.showAlert = true;
+						self.alertText = '时间段不能为空!';
+						return;
+					}
+					console.log( (new Date('2016-01-01 '+arr[0])).valueOf() , (new Date('2016-01-01 '+arr[1])).valueOf() )
+					if( (new Date('2016-01-01 '+arr[0])).valueOf() >= (new Date('2016-01-01 '+arr[1])).valueOf() ){
+						self.showAlert = true;
+						self.alertText = '开始时间段要小于结束时间段!';
+						return;
+					}
+				}
+				
+				if(!self.formData.detail || self.formData.detail.replace(" ","").length <10){
+					self.alertText = '请描述任务详情，长度不少于10字';
+					self.showAlert = true;
+					return;
+				}
+
+				let a=/^[0-9]*(\.[0-9]{1,2})?$/;
+				if(self.formData.salary == '' || !a.test(self.formData.salary)){
+					self.alertText = '金额错误';
+					self.showAlert = true;
+					return;
+				}
+				
+				if(self.formData.pay_way == ''){
+					self.alertText = '请选择支付方式';
+					self.showAlert = true;
+					return;
+				}
+				
+				// 位置
+				if(self.formData.comp_addr == ''){
+					self.alertText = '公司地址不能为空';
+					self.showAlert = true;
+					return;
+				}
+				
+				if(self.formData.workplace == ''){
+					self.alertText = '服务地址不能为空';
+					self.showAlert = true;
+					return;
+				}
 
 				$.ajax({
 					url: "/soytime/order/inviteOrder",
@@ -409,7 +439,8 @@
                         if( !data.success ){
                             self.showAlert = true;
                         }else{
-                            self.$route.router.go({name: 'sceneOrderSuccess', query: {order_id: data.result.order_id}});
+                            //self.$route.router.go({name: 'sceneOrderSuccess', query: {order_id: data.result.order_id}});
+                            self.$route.router.go({name: 'userWorkPublish', query: {}});
                         }
 					}
 				});

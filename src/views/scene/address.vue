@@ -52,6 +52,9 @@
                     }
                     .ico{
                         .rem(font-size, 40);
+						&.ico-shanchu{
+							.rem(margin-left, 20);
+						}
                     }
                 }
             }
@@ -84,7 +87,8 @@
     <confirm :show.sync="isShowConfirm" @on-confirm="confirm">
         确认删除该地址?
     </confirm>
-    <toast :show.sync="isShowToast" :time="500000">{{toastText}}</toast>
+	<loading :show="isShowloading" :text="loadingText"></loading>
+    <toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
 </template>
 
 <script>
@@ -98,7 +102,9 @@
                 removeIndex: null,
                 addressText: null,
                 isShowToast: false,
-                toastText: '请稍等!'
+                toastText: '',
+				isShowloading: false,
+				loadingText: '提交中,请稍后!'
             }
         },
         route:{
@@ -131,12 +137,12 @@
                 }
                 self.addressText = self.addressText.replace(" ", "")
                 if(self.addressText.length<6){
-                	alert("请输入详细地址哦");
+                	self.isShowToast = true;
+					self.toastText   = '请输入详细地址哦';
                 	return;
                 }
             	
-                self.isShowToast = true;
-				
+				self.isShowloading = true;
                 map.plugin('AMap.Geocoder', function () {
                     let geocoder = new AMap.Geocoder({
                         radius: 1000
@@ -156,8 +162,13 @@
                                 success: ((data)=>{
                                     self.addressData.unshift(data.result);
                                     self.addressText = null;
-                                    self.isShowToast = false;
-                                })
+									self.isShowloading = false;
+                                }),
+								error: ((data)=>{
+									self.isShowToast = true;
+									self.toastText   = '定位失败';
+									self.isShowloading = false;
+								})
                             });
                         }
                     });
@@ -207,7 +218,8 @@
         components: {
             'headerBar': require('../../components/header.vue'),
             'confirm': require('../../components/confirm'),
-            'toast': require('../../components/toast')
+            'toast': require('../../components/toast'),
+            'loading': require('../../components/loading')
         }
     }
 </script>

@@ -188,7 +188,9 @@
 							<div v-if="item.orderRespon">
 								<div class="commit clearfix">
 									<a href="tel:{{item.orderRespon.mobile}}" class="ico ico-dianhua3"></a>
-									<span v-if="item.orderRespon.is_appraise">评价</span>
+									<span v-if="item.orderRespon.is_appraise" 
+										v-link="{ name: 'userWorkAppraise', query:{appraise_type:'2', order_id:item.order_id, to_id: item.stu_id} }"
+									>评价</span>
 								</div>
 								<div>指定接单人：{{item.orderRespon.nickname}}</div>
 							</div>
@@ -209,7 +211,9 @@
 									</div>
 									<div class="commit">
 										<a v-if="subItem.is_checked == 1" href="tel:{{subItem.mobile}}" class="ico ico-dianhua3"></a>
-										<span>评价</span>
+										<span 
+											v-link="{ name: 'userWorkAppraise', query:{appraise_type:'2', order_id:item.order_id, to_id: subItem.stu_id} }"
+										>评价</span>
 									</div>
 								</li>
 							</ul>

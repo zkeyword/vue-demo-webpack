@@ -153,15 +153,21 @@
                             {{item.school_name}}
                         </div>
                     </div>
-                    <i class="ico ico-dianhua pull-right"></i>
+                    
+                    <i v-if="!item.mobile" class="ico ico-dianhua pull-right"></i>
+                    <a href="tel:item.mobile" v-if="item.mobile">
+                    	<i class="ico ico-dianhua pull-right"></i>
+                    </a>
                 </header>
                 <section>
                     {{item.skill_detail}}
                 </section>
                 <footer class="clearfix">
-                    <span class="no" v-if="item.status">拒绝</span>
-                    <span class="yes">约TA</span>
-                    <span class="pass">已约</span>
+                    <span class="no" v-if="item.is_checked == 0" @click="refuseStu($index)">拒绝</span>
+                    <span class="yes" v-if="item.is_checked == 0" @click="getStuMobile($index)">约TA</span>
+                    <span class="pass" v-if="item.status == 1 && item.is_checked == 1">已约</span>
+                    <span class="pass" v-if="item.status == 1 && item.is_checked == 2">已拒绝</span>
+                    <span class="pass" v-if="item.status == 2">学生已拒绝</span>
                 </footer>
             </div>
         </div>
@@ -173,7 +179,8 @@
         data() {
             return {
                 title: '订单详细',
-                formData: {}
+                formData: {},
+				tmpData: []
             }
         },
         route: {
@@ -192,12 +199,50 @@
                     },
                     success: ((data)=>{
                         self.formData = data.result;
+						if(self.formData.orderResponse) 
+							self.tmpData.push( self.formData.orderResponse );
+						if(self.formData.orderResponses)
+							self.tmpData = self.tmpData.concat( self.formData.orderResponses );
                     })
                 });
             }
         },
         methods:{
-
+			getStuMobile(index){
+				let self     = this,
+				orderResponse = self.tmpData[index];
+				$.ajax({
+					url: "/soytime/order/getStuMobile",
+					type:'POST',
+					dataType: 'json',
+					data:'order_id='+orderResponse.order_id+'&stu_id='+orderResponse.stu_id,
+					success: (data)=>{
+                        if( !data.success ){
+                        	alert(data.msg);
+                        }else{
+                        	self.tmpData[index].is_checked = 1;
+                        	self.tmpData[index].mobile = data.result;
+                        }
+					}
+				});
+			},
+			refuseStu(index){
+				let self     = this,
+				orderResponse = self.tmpData[index];
+				$.ajax({
+					url: "/soytime/order/refuseStu",
+					type:'POST',
+					dataType: 'json',
+					data:'order_id='+orderResponse.order_id+'&stu_id='+orderResponse.stu_id,
+					success: (data)=>{
+                        if( !data.success ){
+                        	alert(data.msg);
+                        }else{
+                        	self.tmpData[index].is_checked = 2;
+                        }
+					}
+				});
+			}
         },
         components: {
             'headerBar': require('../../../components/header.vue')

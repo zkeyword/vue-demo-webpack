@@ -1,5 +1,6 @@
 var gulp          = require('gulp'),
-	webpack       = require('webpack-stream'),
+	webpack       = require('webpack'),
+	webpackStream = require('webpack-stream'),
 	webpackConfig = require('./webpack.config'),
 	nodemon       = require('gulp-nodemon'),
 	path          = {
@@ -10,7 +11,7 @@ var gulp          = require('gulp'),
 //js
 gulp.task('js', function () {
     gulp.src(path.dev)
-        .pipe( webpack(webpackConfig) )
+        .pipe( webpackStream(webpackConfig, webpack) )
         .pipe(gulp.dest(path.dist))
 });
 
@@ -24,6 +25,6 @@ gulp.task('server', function(){
 //默认任务
 gulp.task('default', ['js',  'server'], function(){
 
-    gulp.watch(path.dev + '/**', ['js']);
+    //gulp.watch(path.dev + '/**', ['js']);
     
 });

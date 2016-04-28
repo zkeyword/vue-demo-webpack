@@ -285,6 +285,8 @@
             </ul>
         </footer>
     </div>
+	<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
+	<loading :show="isShowloading" :text="loadingText"></loading>
 </template>
 
 <script>
@@ -292,6 +294,10 @@
         data() {
             return {
                 title: '约单详情',
+				isShowToast: false,
+				toastText: '提交失败,请重试！',
+				isShowloading: false,
+				loadingText: '提交中,请稍后!',
                 formData: {},
                 queryObj: {}
             }
@@ -324,14 +330,19 @@
         methods:{
             save(){
                 let self = this;
+				self.isShowloading = true;
                 $.ajax({
                     url: "/soytime/order/agreeOrder",
                     type:'POST',
                     data:self.formData,
                     dataType: 'json',
                     success: ((data)=>{
-
-                    })
+						self.isShowloading = false;
+                    }),
+					error:(()=>{
+						self.isShowToast = true;
+						self.isShowloading = false;
+					})
                 });
             },
             back(){
@@ -339,7 +350,9 @@
             }
         },
         components: {
-            'headerBar': require('../../../components/header.vue')
+            'headerBar': require('../../../components/header.vue'),
+			'toast': require('../../../components/toast'),
+			'loading': require('../../../components/loading')
         }
     }
 </script>

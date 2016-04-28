@@ -297,7 +297,7 @@ app.post('/soytime/order/receiveList', function (req, res) {
                     end_time:'@date',
                     period_times:'@integer(60, 1000)',
                     is_checked:'@integer(60, 1000)',
-                    is_appraise:'@integer(60, 1000)',
+                    is_appraise:'@integer(0, 1)',
                 }
             ]
         });

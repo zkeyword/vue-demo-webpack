@@ -78,6 +78,8 @@ export default {
 
             if( self.formData.form == 'onekeyOrder' ){
                 self.$route.router.go({'name':'sceneOneKeyOrder', query: self.formData });
+            }else if( self.formData.form == 'inviteOrder' ){
+                self.$route.router.go({'name':'sceneInviteOrder', query: self.formData });
             }else if( self.formData.form == 'scene' ){
                 self.$route.router.go({'name':'scene', query: self.formData});
             }else{

@@ -1,6 +1,6 @@
 <style lang="less">
     @import '../../../less/lib/mixins.less';
-    .page-user-work-acceptAppraise{
+    .page-user-work-publishAppraise{
         .tagWrap{
             .rem(margin, 30, 0);
         }
@@ -39,7 +39,7 @@
                 .rem(height, 60);
                 .rem(line-height, 60);
                 .border-radius(8);
-                .cur{
+                &.cur{
                     background: #ff946e;
                 }
             }
@@ -56,7 +56,7 @@
 </style>
 
 <template>
-    <div class="page-user-work-acceptAppraise">
+    <div class="page-user-work-publishAppraise">
         <header-bar :title="title" :back="true"></header-bar>
 
         <div class="content showHeader">
@@ -78,6 +78,8 @@
         </div>
         <div class="ui-btn ui-btn-big" @click="save">提交</div>
     </div>
+	<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
+	<loading :show="isShowloading" :text="loadingText"></loading>
 </template>
 
 <script>
@@ -85,6 +87,11 @@
         data() {
             return {
                 title: '评价',
+				isShowToast: false,
+				toastText: '提交失败,请重试！',
+				isShowloading: false,
+				loadingText: '提交中,请稍后!',
+				target:'',
                 formData: {
                     appraise_type: '',
                     order_id:'',
@@ -100,7 +107,6 @@
                     query    = transition.to.query;
 
                 $.extend(self.formData, query);
-
             }
         },
         methods:{
@@ -108,19 +114,35 @@
                 this.formData.type = type;
             },
             save(){
+				let self = this;
+				self.isShowloading = true;
                 $.ajax({
                     url: "/soytime/appraise/appraiseOrder",
                     type:'POST',
                     dataType: 'json',
                     data: self.formData,
                     success: ((data)=>{
-                        self.formData = data.result;
-                    })
+						let form = self.formData.appraise_type;
+						
+						self.isShowloading = false;
+						
+						if( form == '1' ){
+							self.$route.router.go({name: 'userWorkAccept'});
+						}else if( form == '2' ){
+							self.$route.router.go({name: 'userWorkPublish'});
+						}
+                    }),
+					error: ((data)=>{
+						self.isShowToast = true;
+						self.isShowloading = false;
+					})
                 });
             }
         },
         components: {
-            'headerBar': require('../../../components/header.vue')
+            'headerBar': require('../../../components/header.vue'),
+			'toast': require('../../../components/toast'),
+			'loading': require('../../../components/loading')
         }
     }
 </script>

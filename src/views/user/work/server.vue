@@ -231,11 +231,9 @@
         >
             发布
         </span>
-
-        <toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
-        <loading :show="isShowloading" :text="loadingText"></loading>
-        
     </div>
+	<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
+	<loading :show="isShowloading" :text="loadingText"></loading>
 </template>
 
 <script>
@@ -322,7 +320,6 @@ export default {
         'sceneType': require('../../../components/sceneType.vue'),
         'toast': require('../../../components/toast'),
         'loading': require('../../../components/loading')
-
     }
 }
 </script>

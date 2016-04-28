@@ -205,7 +205,7 @@
                 </div>
                 <div class="clearfix payWay" @click="showActionsheet">
                     <span>支付方式</span>
-                    <span class="pull-right" v-if="formData.pay_way">{{payTextArr[formData.pay_way-1]}}</span>
+                    <span class="pull-right" v-if="formData.pay_way">{{payTextArr[formData.pay_way-2]}}</span>
                     <span class="pull-right ico ico-jiantouyou" v-else></span>
                 </div>
             </div>
@@ -285,7 +285,7 @@ export default {
                 form: 'onekeyOrder'
             },
             unitTextArr:['时','日','周','月','次'],
-            payTextArr:['酱油平台支付','现金支付','线上支付'],
+            payTextArr:['现金支付','线上支付'],
             welfares: [
                 {
                     welfare_id: '1',
@@ -305,7 +305,6 @@ export default {
             showAlert: false,
             alertText: '',
             actionsheet: {
-                menu1: '酱油支付平台',
                 menu2: '现金支付',
                 menu3: '线上支付'
             },
@@ -318,6 +317,7 @@ export default {
                 query = transition.to.query
 
             $.extend(self.formData, query);
+            self.formData.form = 'onekeyOrder';
 
         }
     },
@@ -371,7 +371,7 @@ export default {
                 case 'menu2':
                     self.formData.pay_way = 2
                     break;
-                case 'menu1':
+                case 'menu3':
                     self.formData.pay_way = 3
                     break;
             }
@@ -432,8 +432,45 @@ export default {
         },
         save(){
             let self = this;
+            if(typeof self.formData.creator_name == 'undefined'){
+				self.alertText = '雇主名称不能为空!';
+                self.showAlert = true;
+				return;
+			}
+            
+            if(self.formData.creator_name.replace(/\s+/g,"").length==0){
+            	self.alertText = '雇主名称不能为空!';
+                self.showAlert = true;
+				return;
+            }
+            
 
-            self.joinPeriod();
+			if(typeof self.formData.scene_id == 'undefined'){
+				self.alertText = '请选择您要的兼职场景!';
+                self.showAlert = true;
+				return;
+			}
+
+
+			if( !self.formData.start_time ){
+                self.showAlert = true;
+                self.alertText = '开始时间不能为空!';
+                return;
+            }
+
+            if( !self.formData.end_time ){
+                self.showAlert = true;
+                self.alertText = '开始时间不能为空!';
+                return;
+            }
+
+            if( (new Date(self.formData.start_time)).valueOf() > (new Date(self.formData.end_time)).valueOf() ){
+                self.showAlert = true;
+                self.alertText = '开始时间不能大于结束时间!';
+                return;
+            }
+
+			self.joinPeriod();
 
             let tempPeriodArr  = self.formData.period_times.split(',');
 
@@ -448,29 +485,42 @@ export default {
                 console.log( (new Date('2016-01-01 '+arr[0])).valueOf() , (new Date('2016-01-01 '+arr[1])).valueOf() )
                 if( (new Date('2016-01-01 '+arr[0])).valueOf() >= (new Date('2016-01-01 '+arr[1])).valueOf() ){
                     self.showAlert = true;
-                    self.alertText = '开始时间段不能小于等于结束时间端!';
+                    self.alertText = '开始时间段要小于结束时间段!';
                     return;
                 }
             }
+            
+            if(!self.formData.detail || self.formData.detail.replace(" ","").length <10){
+				self.alertText = '请描述任务详情，长度不少于10字';
+				self.showAlert = true;
+				return;
+			}
 
-
-            if( !self.formData.start_time ){
-                self.showAlert = true;
-                self.alertText = '开始时间不能为空!';
-                return;
-            }
-
-            if( !self.formData.end_time ){
-                self.showAlert = true;
-                self.alertText = '开始时间不能为空!';
-                return;
-            }
-
-            if( (new Date(self.formData.start_time)).valueOf() >= (new Date(self.formData.end_time)).valueOf() ){
-                self.showAlert = true;
-                self.alertText = '开始时间不能小于等于结束时间!';
-                return;
-            }
+			let a=/^[0-9]*(\.[0-9]{1,2})?$/;
+			if(self.formData.salary == '' || !a.test(self.formData.salary)){
+				self.alertText = '金额错误';
+				self.showAlert = true;
+				return;
+			}
+			
+			if(self.formData.pay_way == ''){
+				self.alertText = '请选择支付方式';
+				self.showAlert = true;
+				return;
+			}
+			
+			// 位置
+			if(self.formData.comp_addr == ''){
+				self.alertText = '公司地址不能为空';
+				self.showAlert = true;
+				return;
+			}
+			
+			if(self.formData.workplace == ''){
+				self.alertText = '服务地址不能为空';
+				self.showAlert = true;
+				return;
+			}
 
             $.ajax({
                 url: "/soytime/order/oneKeyOrder",
@@ -482,7 +532,8 @@ export default {
                         self.showAlert = true;
                         self.alertText = '提交失败!';
                     }else{
-                        self.$route.router.go({name: 'sceneOrderSuccess', query: {order_id: data.result.order_id}});
+                        //self.$route.router.go({name: 'sceneOrderSuccess', query: {order_id: data.result.order_id}});
+                        self.$route.router.go({name: 'userWorkPublish', query: {}});
                     }
                 }
             });

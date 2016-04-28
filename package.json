@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "HN clone with Vue.js using HN API",
   "scripts": {
-    "dev": "gulp",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "server": "node index.js",
+	"start": "webpack -w"
   },
   "devDependencies": {
     "babel-core": "*",
