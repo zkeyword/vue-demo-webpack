@@ -1,8 +1,7 @@
-node_modules
+.DS_Store
+node_modules/
+dist/
 npm-debug.log
-.idea
-.vscode
-.sublime-workspace
-.iml
-.rar
-.zip
+selenium-debug.log
+test/unit/coverage
+test/e2e/reports
