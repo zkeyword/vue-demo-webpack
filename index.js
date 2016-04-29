@@ -251,8 +251,10 @@ app.post('/soytime/order/demandDetail', function (req, res) {
                     {
                         stu_id:'@integer(60, 1000)',
                         nickname:'@integer(60, 1000)',
-                        is_checked:'@integer(60, 1000)',
-                        mobile:'@integer(60, 1000)',
+                        is_checked:'@integer(0, 2)',
+                        status: '@integer(1, 2)',
+                        mobile:'@integer(0, 1)',
+                        skill_detail: '@cname',
                         is_appraise:'@integer(60, 1000)',
                         head_img_url: Random.image('160x160'),
                         usernick: '@cname',
@@ -617,6 +619,19 @@ app.post('/soytime/msg/msgAppraise', function (req, res) {
 		});
 
 	res.send( JSON.stringify(data, null, 4) );
+});
+
+/* 红包 */
+app.post('/soytime/gift/orderGift', function (req, res) {
+    var Random = Mock.Random,
+        data   = Mock.mock({
+            success: '1',
+            'result': {
+                price:'@integer(60, 1000)'
+            }
+        });
+
+    res.send( JSON.stringify(data, null, 4) );
 });
 
 

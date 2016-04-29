@@ -199,9 +199,8 @@
                     <input type="text" placeholder="请输入准确位置" v-model="formData.workplace" @click="setAddress(1)">
                 </div>
             </div>
-
         </div>
-        <alert :show.sync="showAlert" title="null">提交失败!</alert>
+
         <span
             class="ui-btn ui-btn-big"
             @click="save"
@@ -210,6 +209,9 @@
         </span>
 
     </div>
+
+	<alert :show.sync="showAlert" title="null">提交失败!</alert>
+
 </template>
 
 <script>

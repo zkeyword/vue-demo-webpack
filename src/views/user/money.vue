@@ -22,6 +22,12 @@
                 .rem(top, -30);
                 .rem(font-size, 20);
             }
+
+            em{
+                font-style: normal;
+                min-width: 2.5rem;
+                display: inline-block;
+            }
         }
         
         footer{
@@ -74,13 +80,49 @@
         
         ul{
             .rem(margin, 0, 30);
-            color:#888;
         }
         
         .item{
             border-bottom:2px solid #dedede;
             .rem(border-bottom-width, 2);
             .rem(padding, 15, 0);
+            text-align:center;
+            .ico{
+                .rem(width, 80);
+                .rem(font-size, 50);
+                float: left;
+                &.ico-qiandai{
+                    color:#75e330;
+                 }
+                &.ico-quxian{
+                     color:#0099ff;
+                 }
+                &.ico-zhifubao{
+                     color:#0099ff;
+                 }
+                &.ico-qian{
+                     color:#75e330;
+                 }
+                &.ico-hongbao{
+                     color:#e7653d;
+                 }
+                &.ico-zhuanzhang{
+                     color:#75e330;
+                 }
+            }
+            .type{
+                float: left;
+                .rem(width, 200);
+                color: #888;
+            }
+            .time{
+                float: left;
+                color: #888;
+            }
+            .money{
+                float: right;
+                color: #333;
+            }
         }
     }
 }
@@ -94,7 +136,10 @@
 				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
 					<div class="moneyHeader">
 						<header>
-							<span><i>账户余额</i>{{formData.balance}}</span>
+							<span>
+                                <i>账户余额</i>
+                                <em>{{formData.balance}}</em>
+                            </span>
 						</header>
 						<footer class="clearfix">
 							<div></div>
@@ -106,9 +151,10 @@
 						<header>交易记录</header>
 						<ul>
 							<li class="item clearfix" v-for="tradeRecord in dataList">
-								{{typeText[ tradeRecord.type - 1]}}
-								{{tradeRecord.create_time}}
-								{{tradeRecord.amount}}元
+                                <i class="ico {{typeIcon[ tradeRecord.type - 1]}}"></i>
+								<span class="type">{{typeText[ tradeRecord.type - 1]}}</span>
+								<span class="time">{{tradeRecord.create_time}}</span>
+								<span class="money">{{tradeRecord.amount}}元</span>
 							</li>
 						</ul>
 					</div>
@@ -130,13 +176,14 @@ export default {
 			userInfo: {},
             currentPage: 1,
             typeText: ['充值','取现', '下单', '接单', '接单红包','分享红包', '转账'],
+            typeIcon:['ico-qiandai','ico-quxian','ico-zhifubao','ico-qian','ico-hongbao','ico-hongbao','ico-zhuanzhang'],
             noData: false,
 			busy: false,
             dataList: [],
 			isShowToast: false,
 			toastText: '没有数据了！',
 			formData: {
-                balance: 0,
+                balance: '0.00',
 				currentPage: 1,
             }
 		}

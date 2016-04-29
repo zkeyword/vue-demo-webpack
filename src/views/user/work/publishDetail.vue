@@ -18,8 +18,17 @@
             }
             section{
                 font-style: normal;
+                position: relative;
                 .rem(padding, 20);
                 i{color:#b2b2b2;font-style: normal}
+                .money{
+                    position: absolute;
+                    .rem(top, 16);
+                    .rem(right, 20);
+                    span{
+                        color: #ff946e;
+                    }
+                }
             }
             footer{
                 border-top:1px solid #dedede;
@@ -82,18 +91,24 @@
                 .no{
                     width: 50%;
                     float: left;
-                    color: #5e5e5e;;
+                    color: #5e5e5e;
+                    .rem(border-bottom-left-radius, 8);
                 }
                 .yes{
                     width: 50%;
                     float: left;
                     background: #11cd6e;
                     color: #fff;
+                    .rem(border-bottom-right-radius, 8);
                 }
                 .pass{
                     width: 100%;
                     background:#54c5ff;
                     color: #fff;
+                    .border-radius(8, bottom);
+                    &.disable{
+                         background: #b2b2b2;
+                     }
                 }
             }
         }
@@ -130,17 +145,17 @@
                             <span class="field">{{formData.period_times}}</span>
                         </li>
                     </ul>
-                    <div>50元/天</div>
+                    <div class="money"><span>{{formData.salary}}元</span>/{{formData.unit}}</div>
                 </section>
                 <footer>
                     <div>工作内容：</div>
                     <div>{{formData.detail}}</div>
                 </footer>
             </div>
-            <div class="item clearfix" v-for="item in formData.orderResponses">
+            <div class="item clearfix" v-for="item in tmpData">
                  <header class="clearfix">
                     <div class="pull-left photoWrap">
-                        <img :src="item.head_img_url">
+                        <img :src="item.head_img_url" />
                     </div>
                     <div class="pull-left nameWrap">
                         <div class="name">
@@ -149,29 +164,23 @@
                             ></i>
                             {{item.usernick}}
                         </div>
-                        <div class="school clearfix">
-                            {{item.school_name}}
-                        </div>
+                        <div class="school clearfix">{{item.school_name}}</div>
                     </div>
-                    
-                    <i v-if="!item.mobile" class="ico ico-dianhua pull-right"></i>
-                    <a href="tel:item.mobile" v-if="item.mobile">
-                    	<i class="ico ico-dianhua pull-right"></i>
-                    </a>
+                    <i class="ico ico-dianhua pull-right" v-if="!item.mobile" ></i>
+                    <a class="ico ico-dianhua pull-right cur" v-if="item.mobile" href="tel:item.mobile"></a>
                 </header>
-                <section>
-                    {{item.skill_detail}}
-                </section>
+                <section>{{item.skill_detail}}</section>
                 <footer class="clearfix">
-                    <span class="no" v-if="item.is_checked == 0" @click="refuseStu($index)">拒绝</span>
-                    <span class="yes" v-if="item.is_checked == 0" @click="getStuMobile($index)">约TA</span>
+                    <span class="no" v-if="item.status == 1 && item.is_checked == 0" @click="refuseStu($index)">拒绝</span>
+                    <span class="yes" v-if="item.status == 1 && item.is_checked == 0" @click="getStuMobile($index)">约TA</span>
                     <span class="pass" v-if="item.status == 1 && item.is_checked == 1">已约</span>
-                    <span class="pass" v-if="item.status == 1 && item.is_checked == 2">已拒绝</span>
-                    <span class="pass" v-if="item.status == 2">学生已拒绝</span>
+                    <span class="pass disable" v-if="item.status == 1 && item.is_checked == 2">已拒绝</span>
+                    <span class="pass disable" v-if="item.status == 2">学生已拒绝</span>
                 </footer>
             </div>
         </div>
     </div>
+    <alert :show.sync="showAlert" title="">{{alertText}}</alert>
 </template>
 
 <script>
@@ -180,7 +189,9 @@
             return {
                 title: '订单详细',
                 formData: {},
-				tmpData: []
+				tmpData: [],
+                showAlert: false,
+                alertText: '',
             }
         },
         route: {
@@ -199,12 +210,15 @@
                     },
                     success: ((data)=>{
                         self.formData = data.result;
-						if(self.formData.orderResponse) 
-							self.tmpData.push( self.formData.orderResponse );
-						if(self.formData.orderResponses)
-							self.tmpData = self.tmpData.concat( self.formData.orderResponses );
+						if(self.formData.orderResponse) self.tmpData.push( self.formData.orderResponse );
+						if(self.formData.orderResponses) self.tmpData = self.tmpData.concat( self.formData.orderResponses );
                     })
                 });
+            },
+            deactivate(){
+                let self = this;
+                self.formData = {};
+                self.tmpData  = [];
             }
         },
         methods:{
@@ -218,7 +232,8 @@
 					data:'order_id='+orderResponse.order_id+'&stu_id='+orderResponse.stu_id,
 					success: (data)=>{
                         if( !data.success ){
-                        	alert(data.msg);
+                            self.showAlert = true;
+                            self.alertText = data.msg;
                         }else{
                         	self.tmpData[index].is_checked = 1;
                         	self.tmpData[index].mobile = data.result;
@@ -245,7 +260,8 @@
 			}
         },
         components: {
-            'headerBar': require('../../../components/header.vue')
+            'headerBar': require('../../../components/header.vue'),
+            'alert': require('../../../components/alert')
         }
     }
 </script>

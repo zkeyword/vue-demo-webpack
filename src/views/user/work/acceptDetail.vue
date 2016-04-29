@@ -218,6 +218,98 @@
             }
         }
     }
+    .gitfStep{
+        .rem(width, 512);
+        .rem(height, 630);
+        .border-radius(12);
+        position: fixed;
+        z-index: 21;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        text-align: center;
+        .ico-close2{
+            position: absolute;
+            .rem(left, 10);
+            .rem(top, 10);
+            color:#333;
+        }
+    }
+    .gitfStep1{
+        background: url(../../../img/hongbao-step1.jpg);
+        background-size:100% 100%;
+        color:#fff;
+        .user{
+            .rem(margin, 30, 0, 50);
+            .imgWrap{
+                margin:0 auto;
+                .rem(height, 120);
+                .rem(width, 120);
+                img{
+                    border:5px solid #fff;
+                    .rem(border-width, 5);
+                    .border-radius(120);
+                    width:100%;
+                    height:100%;
+                }
+            }
+            .name{
+                .rem(margin, 10, 0, 0);
+                .rem(font-size, 34);
+            }
+            .detail{
+                .rem(font-size, 24);
+            }
+        }
+        .msg{
+            .rem(margin, 0, 0, 70);
+        }
+        .btn{
+            margin:0 auto;
+            .rem(height, 140);
+            .rem(width, 140);
+        }
+    }
+    .gitfStep2{
+        background: url(../../../img/hongbao-step2.jpg);
+        background-size:100% 100%;
+        .user{
+            .rem(margin, 140, 0, 0);
+            .imgWrap{
+                margin:0 auto;
+                .rem(height, 120);
+                .rem(width, 120);
+                img{
+                    width:100%;
+                    height:100%;
+                    border:5px solid #fff;
+                    .rem(border-width, 5);
+                    .border-radius(120);
+                }
+            }
+            .name{
+                .rem(margin, 10, 0, 0);
+                .rem(font-size, 34);
+            }
+            .detail{
+                .rem(font-size, 24);
+                color:#b2b2b2;
+            }
+        }
+        .msg{
+            .money{
+                span{
+                    color:#333;
+                    .rem(font-size, 90);
+                }
+            }
+            .text{
+                color:#b2b2b2;
+                .rem(font-size, 24);
+            }
+        }
+    }
 </style>
 
 <template>
@@ -285,6 +377,37 @@
             </ul>
         </footer>
     </div>
+    <div id="gift" v-show="isShowOrderGift">
+        <div class="weui_mask"></div>
+        <div class="gitfStep gitfStep1" v-if="step == 1">
+            <i class="ico ico-close2" @click="closeGift"></i>
+            <div class="user">
+                <div class="imgWrap">
+                    <img src="../../../img/system.png" alt="">
+                </div>
+                <div class="name">酱油</div>
+                <div class="detail">给你发了一个红包</div>
+            </div>
+            <div class="msg">
+                你猜红包有多大！
+            </div>
+            <div class="btn" @click="goGiftStep(2)"></div>
+        </div>
+        <div class="gitfStep gitfStep2" v-if="step == 2">
+            <i class="ico ico-close2" @click="closeGift"></i>
+            <div class="user">
+                <div class="imgWrap">
+                    <img src="../../../img/system.png" alt="">
+                </div>
+                <div class="name">酱油</div>
+                <div class="detail">给你发了一个红包</div>
+            </div>
+            <div class="msg">
+                <div class="money"><span>{{price}}</span>元</div>
+                <div class="text">零钱已存入我的余额</div>
+            </div>
+        </div>
+    </div>
 	<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
 	<loading :show="isShowloading" :text="loadingText"></loading>
 </template>
@@ -299,7 +422,10 @@
 				isShowloading: false,
 				loadingText: '提交中,请稍后!',
                 formData: {},
-                queryObj: {}
+                queryObj: {},
+                isShowOrderGift: false,
+                step: 1,
+                price: 0
             }
         },
         route: {
@@ -338,6 +464,7 @@
                     dataType: 'json',
                     success: ((data)=>{
 						self.isShowloading = false;
+                        self.isShowOrderGift = true;
                     }),
 					error:(()=>{
 						self.isShowToast = true;
@@ -346,7 +473,40 @@
                 });
             },
             back(){
-                self.$route.router.go({name: 'userWorkAccept'});
+                this.$route.router.go({name: 'userWorkAccept'});
+            },
+            goGiftStep(step){
+                let self = this;
+                if(step == 2){
+                    self.orderGift(1, self.formData.order_id, step);
+                }else{
+                    self.step = step;
+                }
+            },
+            closeGift(){
+                this.isShowOrderGift = false;
+            },
+            orderGift(type, order_id, step){
+                let self = this;
+                self.isShowloading = true;
+                $.ajax({
+                    url: "/soytime/gift/orderGift",
+                    type:'POST',
+                    data:{
+                        type: type,
+                        order_id: order_id
+                    },
+                    dataType: 'json',
+                    success: ((data)=>{
+                        self.isShowloading = false;
+                        self.step  = step;
+                        self.price = data.result.price;
+                    }),
+                    error:(()=>{
+                        self.isShowToast = true;
+                        self.isShowloading = false;
+                    })
+                });
             }
         },
         components: {

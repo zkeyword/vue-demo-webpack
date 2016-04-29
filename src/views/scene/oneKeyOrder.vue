@@ -240,8 +240,7 @@
                 ></span>
             </div>
         </div>
-        <actionsheet :show.sync="isShow" :menus="actionsheet" @menu-click="setPayWay"></actionsheet>
-        <alert :show.sync="showAlert" title="">{{alertText}}</alert>
+
         <span
                 class="ui-btn ui-btn-big"
                 @click="save"
@@ -250,6 +249,8 @@
         </span>
 
     </div>
+    <actionsheet :show.sync="isShow" :menus="actionsheet" @menu-click="setPayWay"></actionsheet>
+    <alert :show.sync="showAlert" title="">{{alertText}}</alert>
 </template>
 
 <script>
