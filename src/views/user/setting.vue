@@ -3,45 +3,45 @@
 .page-user-setting{
     .block{
         background:#fff;
-        
+
         .rem(padding, 26, 16);
         .rem(margin-bottom, 20);
-        
+
         .clearfix{
             border-bottom:2px solid #dedede;
             .rem(border-bottom-width, 2);
             .rem(padding, 20, 0);
             .rem(font-size, 30);
-            .rem(line-height, 40);            
-            
+            .rem(line-height, 40);
+
             &:first-child{
                 .rem(padding-top, 0);
             }
-            
+
             &:last-child{
                 border-bottom:0 none;
                 .rem(padding-bottom, 0);
             }
-            
+
             input{
                 border:0 none;
                 text-align:right;
             }
-			
-			.switch{
-				.rem(font-size, 50);
-				&.ico-open{color:#ff946e;}
-				&.ico-close3{color: #b2b2b2;}
-			}
+
+            .switch{
+                .rem(font-size, 50);
+                &.ico-open{color:#ff946e;}
+                &.ico-close3{color: #b2b2b2;}
+            }
         }
 
     }
-    
+
     .photoName{
         .rem(height, 120);
-        .rem(line-height, 120); 
+        .rem(line-height, 120);
     }
-    
+
     .photoWrap{
         .rem(width, 120);
         .rem(height, 120);
@@ -57,11 +57,11 @@
 
 <template>
     <div class="page-user page-user-setting" transition="page">
-    
+
         <header-bar :title="title" back="true"></header-bar>
-        
+
         <div class="content showHeader showFooter">
-            
+
             <div class="block">
                 <div class="clearfix">
                     <div class="pull-left photoName">头像</div>
@@ -75,9 +75,9 @@
                         <input type="text" v-model="formData.nickname" />
                     </div>
                 </div>
-                <div class="clearfix">
+                <div class="clearfix" @click="showActionsheet">
                     <div class="pull-left">性别</div>
-                    <div class="pull-right">{{formData.sex}}</div>
+                    <div class="pull-right">{{sexArr[formData.sex-1]}}</div>
                 </div>
                 <div class="clearfix">
                     <div class="pull-left">生日</div>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="block">
                 <bind-mobile :mobile.sync="formData.mobile"></bind-mobile>
                 <div class="clearfix">
@@ -108,7 +108,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="block">
                 <div class="clearfix">
                     <div class="pull-left">订单接送提醒</div>
@@ -116,21 +116,22 @@
                         class="pull-right switch ico"
                         :class="{'ico-open': formData.open == 1, 'ico-close3': formData.open == 0}"
                         @click="switch"
-					></span>
+					          ></span>
                 </div>
                 <time-conf :timer.sync="formData.timeConf"></time-conf>
             </div>
-            
+
         </div>
-        <span 
+        <span
             class="ui-btn ui-btn-big"
             @click="save"
         >
             保存
         </span>
     </div>
-	<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
-	<loading :show="isShowloading" :text="loadingText"></loading>
+    <toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
+    <loading :show="isShowloading" :text="loadingText"></loading>
+    <actionsheet :show.sync="isShowActionsheet" :menus="actionsheet" @menu-click="setSex"></actionsheet>
 </template>
 
 <script>
@@ -138,16 +139,22 @@
         data() {
             return {
                 title: '设置',
-				isShowToast: false,
-				toastText: '提交失败,请重试！',
-				isShowloading: false,
-				loadingText: '提交中,请稍后!',
-                formData: {}
+                isShowToast: false,
+                toastText: '提交失败,请重试！',
+                isShowloading: false,
+                loadingText: '提交中,请稍后!',
+                formData: {},
+                isShowActionsheet: false,
+                sexArr:['男','女'],
+                actionsheet: {
+                    'menu1': '男',
+                    'menu2': '女'
+                }
             }
         },
         ready(){
             let self = this;
-            
+
             $.ajax({
                 url: "/soytime/account/getSettingInfo",
                 type:'POST',
@@ -173,27 +180,43 @@
                             self.$route.router.go('/user');
                         }
                     },
-					error: ((data)=>{
-						self.isShowToast = true;
-						self.isShowloading = false;
-					})
+                    error: ((data)=>{
+                        self.isShowToast = true;
+                        self.isShowloading = false;
+                    })
                 });
             },
-			switch(){
-				let self = this;
-				if( self.formData.open == 1 ){
-					self.formData.open = 0;
-				}else{
-					self.formData.open = 1;
-				}
-			}
+            switch(){
+                let self = this;
+                if( self.formData.open == 1 ){
+                    self.formData.open = 0;
+                }else{
+                    self.formData.open = 1;
+                }
+            },
+            setSex(key){
+                let self = this;
+                self.isShowActionsheet = false;
+                switch (key){
+                  case 'menu1':
+                    self.formData.sex = 1
+                    break;
+                  case 'menu2':
+                    self.formData.sex = 2
+                    break;
+                }
+            },
+            showActionsheet(){
+                this.isShowActionsheet = true;
+            }
         },
         components: {
             'headerBar': require('../../components/header.vue'),
             'timeConf': require('../../components/timeConf.vue'),
             'bindMobile': require('../../components/bindMobile.vue'),
-			'toast': require('../../components/toast'),
-			'loading': require('../../components/loading')
+			      'toast': require('../../components/toast'),
+			      'loading': require('../../components/loading'),
+            'actionsheet': require('../../components/actionsheet'),
         }
     }
 </script>

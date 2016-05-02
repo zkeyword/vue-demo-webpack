@@ -5,41 +5,41 @@
         padding-left: 0;
         padding-right: 0;
     }
-    
+
         .userContent{
             padding-left: 0.65rem;
             padding-right: 0.65rem;
         }
-        
+
             .userHeader{
                 .rem(height, 350);
                 overflow:hidden;
                 position:relative;
                 z-index:1;
-                
+
                 img{
                     height:100%;
                 }
-                
+
                 .userWrap{
                     position:absolute;
                     left:0;
                     width:100%;
                     .rem(top, 70);
-                                
+
                     .name{
                         text-align:center;
                         .rem(font-size, 60);
                         color:#fff;
                     }
-                    
+
                     .btn{
                         .rem(width, 150);
                         .rem(height, 150);
-                        
+
                         margin:0 auto;
                         position:relative;
-                        
+
                         .radius{
                             width:100%;
                             height:100%;
@@ -53,10 +53,10 @@
                                 .border-radius(150);
                             }
                         }
-                        
+
                     }
                 }
-                
+
                 .collection{
                     position:absolute;
                     .rem(right, 20);
@@ -84,7 +84,7 @@
                     }
                 }
             }
-            
+
             .userInfo{
                 position:relative;
                 text-align:center;
@@ -102,7 +102,7 @@
                     .border-radius(50);
                     .box-shadow(0, 0, 0.2rem, #ddd);
                     .rem(font-size, 30);
-                    
+
                     .ico-renzheng{
                         color:#11cd6e;
                         transform: rotate(-30deg);
@@ -119,20 +119,30 @@
                     .rem(line-height, 64);
                 }
             }
-            
+
             .userService{
                 border:1px solid #dedede;
                 .rem(font-size, 30);
-                .rem(height, 80);
+                .rem(min-height, 80);
                 .rem(line-height, 80);
                 .rem(border-width, 2);
                 .rem(margin-bottom, 20);
                 border-left: 0 none;
                 border-right: 0 none;
-                
+                position:relative;
+
                 i{
                     float:left;
                     font-style:normal;
+                    position: absolute;
+                    top:0;
+                    left:0;
+                    .rem(height, 80);
+                    .rem(line-height, 80);
+                }
+                .sceneList{
+                    float: left;
+                    .rem(padding-left, 140);
                 }
                 span{
                     float:left;
@@ -140,7 +150,7 @@
                     .rem(margin, 0, 10, 0, 0);
                 }
             }
-            
+
             .block{
                 background:#fff;
                 border:1px solid #dedede;
@@ -166,7 +176,7 @@
                     }
                     .appraiseCount{
                         text-align:center;
-                        
+
                         .ui-floatCenter{
                             .rem(height, 90);
                         }
@@ -187,7 +197,7 @@
                                     }
                                 }
                             }
-                            
+
                         .btn{
                             display:inline-block;
                             background:#ff946e;
@@ -201,7 +211,7 @@
                 }
             }
 }
-    
+
 </style>
 
 <template>
@@ -224,7 +234,7 @@
                     <span>5人已收藏</span>
                 </div>
             </div>
-            
+
             <div class="userContent">
                 <div class="userInfo">
                     <span class="school">
@@ -233,26 +243,28 @@
                     </span>
                     <div class="workplace">{{formData.workplace}} 周边</div>
                 </div>
-                
+
                 <div class="userService clearfix">
                     <i>我的服务：</i>
-                    <span v-for="item in sceneList" v-if="item | sceneCur sceneArr">{{item.scene_name}}</span>
+                    <div class="sceneList">
+                        <span v-for="item in sceneList" v-if="item | sceneCur sceneArr">{{item.scene_name}}</span>
+                    </div>
                 </div>
-                
+
                 <div class="block">
                     <header>介绍服务</header>
                     <div class="main">
                         {{formData.detail}}
                     </div>
                 </div>
-                
+
                 <div class="block">
                     <header>工作时间</header>
                     <div class="main">
                         <time-conf :timer="formData.timeConf" :is-radio="true"></time-conf>
                     </div>
                 </div>
-                
+
                 <div class="block" v-if="formData.orderAppraise">
                     <header>客户评价</header>
                     <div class="main">
@@ -278,9 +290,9 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
-        <span 
+        <span
             class="ui-btn ui-btn-big"
             v-link="{ name: 'sceneInviteOrder', query:query}"
         >
@@ -304,7 +316,7 @@ export default {
         data (transition){
             let self  = this,
                 query = transition.to.query;
-            
+
             $.ajax({
                 url: '/soytime/server/stuInfo',
                 type: 'POST',
@@ -325,7 +337,7 @@ export default {
         }
     },
     ready: function () {
-        
+
     },
     components: {
         'headerBar': require('../../components/header.vue'),

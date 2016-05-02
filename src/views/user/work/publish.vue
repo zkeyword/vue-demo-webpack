@@ -177,57 +177,68 @@
 
         <div class="content showHeader showTab">
             <div id="wrapper">
-				<div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="40">
-					<div class="item" v-for="(index,item) in dataList">
-						<span class="tag">{{item.scene_name}}</span>
-						<header class="clearfix" v-link="{ name: 'userWorkPublishDetail', query:item }">
-							{{item.create_time}}
-							<div class="status">{{ statusText[item.status] }}</div>
-						</header>
-						<section class="clearfix">
-							<div v-if="item.orderRespon">
-								<div class="commit clearfix">
-									<a href="tel:{{item.orderRespon.mobile}}" class="ico ico-dianhua3"></a>
-									<span v-if="item.orderRespon.is_appraise" 
-										v-link="{ name: 'userWorkAppraise', query:{appraise_type:'2', order_id:item.order_id, to_id: item.stu_id} }"
-									>评价</span>
-								</div>
-								<div>指定接单人：{{item.orderRespon.nickname}}</div>
-							</div>
-							<div>{{item.detail}} </div>
-							<div class="number">预定人数：{{item.number}}人</div>
-							<div class="address">工作地点：{{item.workplace}}</div>
-						</section>
-						<footer v-if="item.orderResponses">
-							<div class="textWrap">
-								<div>报名人数：{{resultResponse.responseCount}}人&nbsp;&nbsp;已选{{resultResponse.selectedCount}}人，剩余{{resultResponse.restCount}}人可选</div>
-								<div class="mark">报名者，请获取一个人的联系方式</div>
-							</div>
-							<ul class="userList">
-								<li class="clearfix" v-for="(subIndex,subItem) in item.orderResponses">
-									<div class="nameWrap" @click="getMobile(item, subItem, index, subIndex)">
-										<i class="ico ico-xuan" :class="{'cur': subItem.is_checked == 1}"></i>
-										<span class="name">{{subItem.nickname}}</span>
-									</div>
-									<div class="commit">
-										<a v-if="subItem.is_checked == 1" href="tel:{{subItem.mobile}}" class="ico ico-dianhua3"></a>
-										<span 
-											v-link="{ name: 'userWorkAppraise', query:{appraise_type:'2', order_id:item.order_id, to_id: subItem.stu_id} }"
-										>评价</span>
-									</div>
-								</li>
-							</ul>
-						</footer>
-					</div>
-                    <div class="lodding" v-show="busy && !noData"></div>
-				</div>
+                <div id="scroller" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="40">
+                    <div class="item" v-for="(index,item) in dataList">
+                        <span class="tag">{{item.scene_name}}</span>
+                        <header class="clearfix" v-link="{ name: 'userWorkPublishDetail', query:item }">
+                            {{item.create_time}}
+                            <div class="status">
+                                {{ statusText[item.status] }}
+                            </div>
+                        </header>
+                        <section class="clearfix">
+                            <div v-if="item.orderRespon">
+                                <div class="commit clearfix">
+                                    <a href="tel:{{item.orderRespon.mobile}}" class="ico ico-dianhua3"></a>
+                                    <span v-if="item.orderRespon.is_appraise" v-link="{ name: 'userWorkAppraise', query:{appraise_type:'2', order_id:item.order_id, to_id: item.stu_id} }">评价</span>
+                                </div>
+                                <div>
+                                    指定接单人：{{item.orderRespon.nickname}}
+                                </div>
+                            </div>
+                            <div>
+                                {{item.detail}}
+                            </div>
+                            <div class="number">
+                                预定人数：{{item.number}}人
+                            </div>
+                            <div class="address">
+                                工作地点：{{item.workplace}}
+                            </div>
+                        </section>
+                        <footer v-if="item.orderResponses">
+                            <div class="textWrap">
+                                <div>
+                                    报名人数：{{resultResponse.responseCount}}人&nbsp;&nbsp;已选{{resultResponse.selectedCount}}人，剩余{{resultResponse.restCount}}人可选
+                                </div>
+                                <div class="mark">
+                                    报名者，请获取一个人的联系方式
+                                </div>
+                            </div>
+                            <ul class="userList">
+                                <li class="clearfix" v-for="(subIndex,subItem) in item.orderResponses">
+                                    <div class="nameWrap" @click="getMobile(item, subItem, index, subIndex)">
+                                        <i class="ico ico-xuan" :class="{'cur': subItem.is_checked == 1}"></i>
+                                        <span class="name">{{subItem.nickname}}</span>
+                                    </div>
+                                    <div class="commit">
+                                        <a v-if="subItem.is_checked == 1" href="tel:{{subItem.mobile}}" class="ico ico-dianhua3"></a>
+                                        <span v-link="{ name: 'userWorkAppraise', query:{appraise_type:'2', order_id:item.order_id, to_id: subItem.stu_id} }">评价</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </footer>
+                    </div>
+                    <div class="lodding" v-show="busy && !noData">
+                    </div>
+                </div>
             </div>
         </div>
-		
+
 		<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
-		
+
     </div>
-    <confirm :show.sync="isShowConfirm" @on-confirm="confirm">
+    <confirm title="" :show.sync="isShowConfirm" @on-confirm="confirm">
         <div class="page-scene-orderSuccess-formWrap">
             是否要获取{{confirmName}}的联系方式？
         </div>
@@ -237,117 +248,123 @@
 <script>
 export default {
 	data() {
-		return {
-			title: '发单任务',
-            indexData: indexData,
-			userInfo: {},
-            noData: false,
-			busy: false,
-            dataList: [],
-			isShowToast: false,
-			toastText: '没有数据了！',
-			formData: {
-				currentPage: 0,
-				tag: 1,
-			},
-            isShowConfirm: false,
-            confirmData:{},
-            statusText:['报名中','报名结束','报名成功','被拒绝','过期']
-		}
-	},
-	route: {
-		data (transition){
-			let self     = this,
-				query    = transition.to.query;
+		  return {
+          title: '发单任务',
+              indexData: indexData,
+              userInfo: {},
+              noData: false,
+              busy: false,
+              dataList: [],
+              isShowToast: false,
+              toastText: '没有数据了！',
+              formData: {
+              currentPage: 0,
+                  tag: 1,
+              },
+              isShowConfirm: false,
+              confirmData:{},
+              statusText:['报名中','报名结束','报名成功','被拒绝','过期']
+          }
+	    },
+      route: {
+          data (transition){
+              let self     = this,
+                  query    = transition.to.query;
 
-			$.extend(self.formData, query);
-		},
-        deactivate(){
-			let self = this;
-			self.formData.currentPage = 1;
-        }
-	},
-	methods:{
-        setTag(tag){
-			let self = this;
-            self.formData.tag = tag;
-			self.formData.currentPage = 1;
-			self.dataList = [];
-			self.noData = false
-			self.busy = false;
-			self.loadMore();
-		},
-        loadMore(){
-            let self = this;
-            if( self.noData ) return;
-            $.ajax({
-                url: "/soytime/order/demandList",
-                type:'POST',
-                data:self.formData,
-                dataType: 'json',
-                beforeSend:(()=>{
-                    self.busy = true;
-                }),
-                success: ((data)=>{
-                    let arr = data.result,
-                        len = arr.length;
+              $.extend(self.formData, query);
 
-                    self.busy = false;
+              if( !self.busy ) self.loadMore();
+          },
+          deactivate(){
+              let self = this;
+              self.formData.tag = 1;
+              self.formData.currentPage = 1;
+              self.dataList = [];
+              self.noData = false
+              self.busy = false;
+          }
+      },
+      methods:{
+          setTag(tag){
+              let self = this;
+              self.formData.tag = tag;
+              self.formData.currentPage = 1;
+              self.dataList = [];
+              self.noData = false
+              self.busy = false;
+              self.loadMore();
+          },
+          loadMore(){
+              let self = this;
+              if( self.noData ) return;
+              $.ajax({
+                  url: "/soytime/order/demandList",
+                  type:'POST',
+                  data:self.formData,
+                  dataType: 'json',
+                  beforeSend:(()=>{
+                      self.busy = true;
+                  }),
+                  success: ((data)=>{
+                      let arr = data.result,
+                          len = arr.length;
 
-                    if( !len || !data.success ){
-						self.isShowToast = true;
-						self.noData = true;
-                        return;
-					}else if( len < 10 ){
-						self.isShowToast = true;
-                        self.noData = true;
-                    }
+                      self.busy = false;
 
-                    for(let i = 0; i<len; i++){
-                        self.dataList.push(arr[i]);
-                    }
+                      if( !len || !data.success ){
+                          self.isShowToast = true;
+                          self.noData = true;
+                          return;
+                      }else if( len < 10 ){
+                          self.isShowToast = true;
+                          self.noData = true;
+                      }
 
-                    self.formData.currentPage ++;
-                })
-            });
-        },
+                      for(let i = 0; i<len; i++){
+                          self.dataList.push(arr[i]);
+                      }
 
-        confirm(){
-            let self = this;
-            self.isShowConfirm = false;
-            $.ajax({
-                url: "/soytime/order/getStuMobile",
-                type:'POST',
-                data:{
-                    type: self.confirmData.order_type,
-                    order_id: self.confirmData.order_id,
-                    stu_id: self.confirmData.stu_id
-                },
-                dataType: 'json',
-                success: ((data)=>{
-                    //self.dataList[self.confirmData.index].resultResponse.restCount = data.remainCount;
-                    let orderResponses = self.dataList[self.confirmData.index].orderResponses[self.confirmData.subIndex];
-                    orderResponses.mobile = data.result.mobile;
-                    orderResponses.is_checked = 1;
-                })
-            });
-        },
-        getMobile(item, subItem, index, subIndex){
-            let self = this;
-            self.isShowConfirm = true;
-            self.confirmName   = subItem.nickname;
-            self.confirmData   = {
-                item: item,
-                subItem: subItem,
-                index: index,
-                subIndex: subIndex
-            }
-        }
-	},
-	components: {
-		'headerBar': require('../../../components/header.vue'),
-        'confirm': require('../../../components/confirm'),
-		'toast': require('../../../components/toast')
-	}
+                      self.formData.currentPage ++;
+                  })
+              });
+          },
+
+          confirm(){
+              let self = this;
+              self.isShowConfirm = false;
+              $.ajax({
+                  url: "/soytime/order/getStuMobile",
+                  type:'POST',
+                  data:{
+                      type: self.confirmData.order_type,
+                      order_id: self.confirmData.order_id,
+                      stu_id: self.confirmData.stu_id
+                  },
+                  dataType: 'json',
+                  success: ((data)=>{
+                      //self.dataList[self.confirmData.index].resultResponse.restCount = data.remainCount;
+                      let orderResponses = self.dataList[self.confirmData.index].orderResponses[self.confirmData.subIndex];
+                      orderResponses.mobile = data.result.mobile;
+                      orderResponses.is_checked = 1;
+                  })
+              });
+          },
+          getMobile(item, subItem, index, subIndex){
+              let self = this;
+              self.isShowConfirm = true;
+              self.confirmName   = subItem.nickname;
+              self.confirmData   = {
+                  item: item,
+                  subItem: subItem,
+                  index: index,
+                  subIndex: subIndex
+              }
+          }
+      },
+      components: {
+          'headerBar': require('../../../components/header.vue'),
+          'confirm': require('../../../components/confirm'),
+          'toast': require('../../../components/toast')
+      }
 }
 </script>

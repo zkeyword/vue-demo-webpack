@@ -5,29 +5,29 @@
             padding-left:0;
             padding-right:0;
         }
-        
+
             .userHeader{
                 .rem(max-height, 350);
                 overflow:hidden;
                 position:relative;
-                
+
                 img{
                     width:100%;
                 }
-                
+
                 .userWrap{
                     position:absolute;
                     left:0;
                     width:100%;
                     .rem(top, 70);
-                    
+
                     .btn{
                         .rem(width, 150);
                         .rem(height, 150);
                         margin:0 auto;
                         position:relative;
                         text-align:center;
-                        
+
                         .radius{
                             width:100%;
                             height:100%;
@@ -55,7 +55,7 @@
                             color: #fff;
                         }
                     }
-                    
+
                     .name{
                         text-align:center;
                         .rem(font-size, 50);
@@ -63,17 +63,17 @@
                     }
                 }
             }
-            
+
             .block{
                 background:#fff;
                 .rem(padding, 26, 16);
                 .rem(margin, 0, 26, 20);
                 position:relative;
-                
+
                 .header{
                     .rem(font-size, 30);
                 }
-                
+
                 textarea{
                     width:100%;
                     border:0 none;
@@ -162,11 +162,11 @@
 <template>
     <div class="page-user-work-server">
         <header-bar :title="title" back="true"></header-bar>
-        
+
         <div class="content showHeaderNopading showFooter">
 
             <div class="userHeader">
-                <img src="/dist/defaultImg/serverDefault.jpg" v-if="!formData.photo_url" />
+                <img src="../../../img/serverDefault.jpg" v-if="!formData.photo_url" />
                 <img :src="formData.photo_url" v-else />
                 <div class="userWrap">
                     <div class="btn">
@@ -177,34 +177,34 @@
                     <div class="name">{{formData.usernick}}</div>
                 </div>
             </div>
-        
+
             <div class="block">
                 <div class="header">请选择工作类别(可多选)</div>
-                <scene-type 
+                <scene-type
                     :scene-list="indexData.sceneList"
                     :scene-ids.sync="formData.sceneIds"
                 ></scene-type>
             </div>
-            
+
             <div class="block">
                 <div class="header">个人描述</div>
                 <textarea placeholder="请填写您的服务描述！">{{formData.detail}}</textarea>
             </div>
-            
+
             <div class="block">
                 <div class="header">上传照片</div>
                 <ul class="clearfix">
                     <li class="serverImgs" v-for="item in formData.skillImgs">
                         <img :src="item.img_url" />
                     </li>
-                    <li class="serverImgs btn" v-if="formData.skillImgs.length <= 3">
+                    <li class="serverImgs btn" v-if="formData.skillImgs && formData.skillImgs.length <= 3">
                         <div class="btnWrap">
                             <i class="ico ico-anonymous"></i>
                         </div>
                     </li>
                 </ul>
             </div>
-            
+
             <div class="block">
                 <div class="header">工作区域(选择)</div>
                 <div class="mapWrap">
@@ -218,14 +218,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="block">
                 <div class="header">工作时间</div>
                 <time-conf :timer.sync="formData.timeConf"></time-conf>
             </div>
         </div>
-        
-        <span 
+
+        <span
             class="ui-btn ui-btn-big"
             @click="save"
         >

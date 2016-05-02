@@ -434,26 +434,26 @@ export default {
         save(){
             let self = this;
             if(typeof self.formData.creator_name == 'undefined'){
-				self.alertText = '雇主名称不能为空!';
+                self.alertText = '雇主名称不能为空!';
                 self.showAlert = true;
-				return;
-			}
-            
-            if(self.formData.creator_name.replace(/\s+/g,"").length==0){
-            	self.alertText = '雇主名称不能为空!';
-                self.showAlert = true;
-				return;
+              return;
             }
-            
 
-			if(typeof self.formData.scene_id == 'undefined'){
-				self.alertText = '请选择您要的兼职场景!';
+            if(self.formData.creator_name.replace(/\s+/g,"").length==0){
+            	  self.alertText = '雇主名称不能为空!';
                 self.showAlert = true;
-				return;
-			}
+				        return;
+            }
 
 
-			if( !self.formData.start_time ){
+            if(typeof self.formData.scene_id == 'undefined'){
+              self.alertText = '请选择您要的兼职场景!';
+                      self.showAlert = true;
+              return;
+            }
+
+
+			      if( !self.formData.start_time ){
                 self.showAlert = true;
                 self.alertText = '开始时间不能为空!';
                 return;
@@ -471,7 +471,7 @@ export default {
                 return;
             }
 
-			self.joinPeriod();
+			      self.joinPeriod();
 
             let tempPeriodArr  = self.formData.period_times.split(',');
 
@@ -490,38 +490,38 @@ export default {
                     return;
                 }
             }
-            
-            if(!self.formData.detail || self.formData.detail.replace(" ","").length <10){
-				self.alertText = '请描述任务详情，长度不少于10字';
-				self.showAlert = true;
-				return;
-			}
 
-			let a=/^[0-9]*(\.[0-9]{1,2})?$/;
-			if(self.formData.salary == '' || !a.test(self.formData.salary)){
-				self.alertText = '金额错误';
-				self.showAlert = true;
-				return;
-			}
-			
-			if(self.formData.pay_way == ''){
-				self.alertText = '请选择支付方式';
-				self.showAlert = true;
-				return;
-			}
-			
-			// 位置
-			if(self.formData.comp_addr == ''){
-				self.alertText = '公司地址不能为空';
-				self.showAlert = true;
-				return;
-			}
-			
-			if(self.formData.workplace == ''){
-				self.alertText = '服务地址不能为空';
-				self.showAlert = true;
-				return;
-			}
+            if(!self.formData.detail || self.formData.detail.replace(" ","").length <10){
+                self.alertText = '请描述任务详情，长度不少于10字';
+                self.showAlert = true;
+                return;
+			      }
+
+            let a=/^[0-9]*(\.[0-9]{1,2})?$/;
+            if(self.formData.salary == '' || !a.test(self.formData.salary)){
+              self.alertText = '金额错误';
+              self.showAlert = true;
+              return;
+            }
+
+            if(self.formData.pay_way == ''){
+              self.alertText = '请选择支付方式';
+              self.showAlert = true;
+              return;
+            }
+
+            // 位置
+            if(self.formData.comp_addr == ''){
+              self.alertText = '公司地址不能为空';
+              self.showAlert = true;
+              return;
+            }
+
+            if(self.formData.workplace == ''){
+              self.alertText = '服务地址不能为空';
+              self.showAlert = true;
+              return;
+            }
 
             $.ajax({
                 url: "/soytime/order/oneKeyOrder",

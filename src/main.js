@@ -51,7 +51,7 @@ router.afterEach(function (transition) {
 
 App.store = Store;
 
-router.start(App, '#app');
+router.start(App, 'app');
 
 //暴漏路由调试接口
 window.router = router;
