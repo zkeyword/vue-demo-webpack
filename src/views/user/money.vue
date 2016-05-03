@@ -6,7 +6,7 @@
         background:url(../../img/moneyBg.jpg) no-repeat;
         background-size:100% 100%;
         position:relative;
-        
+
         header{
             text-align:center;
             color:#fff;
@@ -29,7 +29,7 @@
                 display: inline-block;
             }
         }
-        
+
         footer{
             position:absolute;
             bottom:0;
@@ -52,7 +52,7 @@
                     border-right:1px solid #dedede;
                 }
             }
-            
+
             div{
                 background:#fff;
                 position:absolute;
@@ -67,7 +67,7 @@
     }
     .moneyList{
         background:#fff;
-        
+
         header{
             background:#fafafa;
             border-bottom:2px solid #f1f1f1;
@@ -77,11 +77,11 @@
             .rem(font-size, 30);
             .rem(padding, 0, 30);
         }
-        
+
         ul{
             .rem(margin, 0, 30);
         }
-        
+
         .item{
             border-bottom:2px solid #dedede;
             .rem(border-bottom-width, 2);
@@ -162,9 +162,9 @@
 				</div>
             </div>
         </div>
-		
+
 		<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
-		
+
     </div>
 </template>
 
@@ -191,7 +191,7 @@ export default {
 	route: {
 		data (transition){
 			let self = this;
-				
+
             $.ajax({
                 url: "/soytime/account/balance",
                 type:'POST',

@@ -3,7 +3,7 @@
 .page-user-formWrap{
     text-align:left;
     position:relative;
-    
+
     div{
         .rem(height, 80);
         .rem(line-height, 40) !important;
@@ -20,7 +20,7 @@
         .rem(border-bottom-width, 2);
     }
 
-    
+
     input{
         display:inline-block;
         border:0 none;
@@ -28,7 +28,7 @@
         text-align: left !important;
         .rem(height, 40);
         .rem(line-height, 40);
-        
+
         &#mobile{
             .rem(width, 300);
         }
@@ -36,7 +36,7 @@
             .rem(width, 150);
         }
     }
-    
+
     label{
         display:inline-block;
         .rem(height, 40);
@@ -45,7 +45,7 @@
         .rem(border-right-width, 2);
         .rem(width, 120);
     }
-    
+
     #getCode{
         background:#54c5ff;
         color:#fff;
@@ -54,7 +54,7 @@
         .rem(line-height, 40);
         .rem(padding, 0, 20);
         .border-radius(8);
-        
+
         &.disable{
             background:#b2b2b2
         }
@@ -72,7 +72,7 @@
         width:100%;
         text-align:center;
     }
-}    
+}
 </style>
 
 <template>
@@ -80,7 +80,7 @@
         <span class="pull-left">手机号</span>
         <span class="pull-right">{{mobile}}</span>
     </div>
-    <confirm :show.sync="isShowConfirm" @on-confirm="confirm">
+    <confirm :show.sync="isShowConfirm" @on-confirm="confirm" title="">
         <div class="page-user-formWrap">
             <div class="mobileWrap clearfix">
                 <label class="pull-left">手机</label>
@@ -199,11 +199,11 @@
                         getCodeText = $('#getCodeText'),
                         getCodeTime = $('#getCodeTime'),
                         that        = $(this);
-                        
+
                     if( that.hasClass('disable') ){
                         return;
                     }
-                        
+
                     if( !/1[34578]{1}\d{9}$/.test(mobile) ){
                         that.addClass('disable')
                         self.toast('请填写正确的手机号');
@@ -213,12 +213,12 @@
                         that.removeClass('disable')
                         self.isDisable = false;
                     }
-                    
+
                     $.ajax({
                         url: "/soytime/account/getMobileCode",
                         type:'POST',
                         data:{
-                            mobile: mobile  
+                            mobile: mobile
                         },
                         dataType: 'json',
                         success: (data)=>{
