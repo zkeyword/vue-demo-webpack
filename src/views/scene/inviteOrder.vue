@@ -210,7 +210,7 @@
 
     </div>
 
-	<alert :show.sync="showAlert" title="null">提交失败!</alert>
+	<alert :show.sync="showAlert" title="">提交失败!</alert>
 
 </template>
 

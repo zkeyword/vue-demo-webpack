@@ -46,7 +46,8 @@ export default {
                 city_id: null,
                 city_name: null,
                 school_id: null,
-                school_name: null
+                school_name: null,
+				form: null
             },
 			defaultData:{
 				school_id: null,
@@ -76,7 +77,7 @@ export default {
                     self.tmpData    = data.result;
                 })
             });
-            
+			
             transition.next();
         }
     },

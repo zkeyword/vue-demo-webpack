@@ -181,6 +181,9 @@
         </div>
     </div>
     <alert :show.sync="showAlert" title="">{{alertText}}</alert>
+	<confirm :show.sync="isShowConfirm" @on-confirm="confirm" title="">
+        {{confirmText}}
+    </confirm>
 </template>
 
 <script>
@@ -191,7 +194,11 @@
                 formData: {},
 				tmpData: [],
                 showAlert: false,
+				isShowConfirm: false,
                 alertText: '',
+				confirmText:'',
+				type: null,
+				index: null
             }
         },
         route: {
@@ -222,46 +229,64 @@
             }
         },
         methods:{
+			confirm(){
+				let self          = this,
+					index         = self.index,
+					orderResponse = self.tmpData[index];
+				
+				if( self.type == 1 ){
+					$.ajax({
+						url: "/soytime/order/getStuMobile",
+						type:'POST',
+						dataType: 'json',
+						data:'order_id='+orderResponse.order_id+'&stu_id='+orderResponse.stu_id,
+						success: (data)=>{
+							if( !data.success ){
+								self.showAlert = true;
+								self.alertText = data.msg;
+							}else{
+								self.tmpData[index].is_checked = 1;
+								self.tmpData[index].mobile = data.result;
+							}
+						}
+					});
+				}else{
+					$.ajax({
+						url: "/soytime/order/refuseStu",
+						type:'POST',
+						dataType: 'json',
+						data:'order_id='+orderResponse.order_id+'&stu_id='+orderResponse.stu_id,
+						success: (data)=>{
+							if( !data.success ){
+								alert(data.msg);
+							}else{
+								self.tmpData[index].is_checked = 2;
+							}
+						}
+					});
+				}
+				self.isShowConfirm = false;
+			},
 			getStuMobile(index){
-				let self     = this,
-				orderResponse = self.tmpData[index];
-				$.ajax({
-					url: "/soytime/order/getStuMobile",
-					type:'POST',
-					dataType: 'json',
-					data:'order_id='+orderResponse.order_id+'&stu_id='+orderResponse.stu_id,
-					success: (data)=>{
-                        if( !data.success ){
-                            self.showAlert = true;
-                            self.alertText = data.msg;
-                        }else{
-                        	self.tmpData[index].is_checked = 1;
-                        	self.tmpData[index].mobile = data.result;
-                        }
-					}
-				});
+				let self           = this;
+				self.index         = index;
+				self.confirmText   = "确认约TA";
+				self.isShowConfirm = true;
+				self.type          = 1;
+				console.log(self.index)
 			},
 			refuseStu(index){
-				let self     = this,
-				orderResponse = self.tmpData[index];
-				$.ajax({
-					url: "/soytime/order/refuseStu",
-					type:'POST',
-					dataType: 'json',
-					data:'order_id='+orderResponse.order_id+'&stu_id='+orderResponse.stu_id,
-					success: (data)=>{
-                        if( !data.success ){
-                        	alert(data.msg);
-                        }else{
-                        	self.tmpData[index].is_checked = 2;
-                        }
-					}
-				});
+				let self           = this;
+				self.index         = index;
+				self.confirmText   = "确认拒绝TA";
+				self.isShowConfirm = true;
+				self.type          = 2;
 			}
         },
         components: {
             'headerBar': require('../../../components/header.vue'),
-            'alert': require('../../../components/alert')
+            'alert': require('../../../components/alert'),
+			'confirm': require('../../../components/confirm')
         }
     }
 </script>

@@ -187,27 +187,27 @@
                             </div>
                         </header>
                         <section class="clearfix">
-                            <div v-if="item.orderRespon">
+                            <div v-if="item.orderResponse">
                                 <div class="commit clearfix">
-                                    <a href="tel:{{item.orderRespon.mobile}}" class="ico ico-dianhua3"></a>
-                                    <span v-if="item.orderRespon.is_appraise" v-link="{ name: 'userWorkAppraise', query:{appraise_type:'2', order_id:item.order_id, to_id: item.stu_id} }">评价</span>
+                                    <a href="tel:{{item.orderResponse.mobile}}" class="ico ico-dianhua3"></a>
+                                    <span v-if="item.orderResponse.is_appraise" v-link="{ name: 'userWorkAppraise', query:{appraise_type:'2', order_id:item.order_id, to_id: item.stu_id} }">评价</span>
                                 </div>
-                                <div>
-                                    指定接单人：{{item.orderRespon.nickname}}
+                                <div v-link="{ name: 'userWorkPublishDetail', query:item }">
+                                    指定接单人：{{item.orderResponse.nickname}}
                                 </div>
                             </div>
-                            <div>
+                            <div v-link="{ name: 'userWorkPublishDetail', query:item }">
                                 {{item.detail}}
                             </div>
-                            <div class="number">
+                            <div class="number" v-link="{ name: 'userWorkPublishDetail', query:item }">
                                 预定人数：{{item.number}}人
                             </div>
-                            <div class="address">
+                            <div class="address" v-link="{ name: 'userWorkPublishDetail', query:item }">
                                 工作地点：{{item.workplace}}
                             </div>
                         </section>
                         <footer v-if="item.orderResponses">
-                            <div class="textWrap">
+                            <div class="textWrap" v-link="{ name: 'userWorkPublishDetail', query:item }">
                                 <div>
                                     报名人数：{{resultResponse.responseCount}}人&nbsp;&nbsp;已选{{resultResponse.selectedCount}}人，剩余{{resultResponse.restCount}}人可选
                                 </div>

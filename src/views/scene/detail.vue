@@ -115,7 +115,6 @@
                 }
                 .workplace{
                     .rem(font-size, 30);
-                    .rem(height, 64);
                     .rem(line-height, 64);
                 }
             }

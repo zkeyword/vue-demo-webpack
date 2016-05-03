@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <confirm :show.sync="isShowConfirm" @on-confirm="confirm">
+    <confirm :show.sync="isShowConfirm" @on-confirm="confirm" title="">
         确认删除该地址?
     </confirm>
 	<loading :show="isShowloading" :text="loadingText"></loading>

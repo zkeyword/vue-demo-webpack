@@ -241,8 +241,8 @@ app.post('/soytime/order/demandDetail', function (req, res) {
                     {
                         stu_id:'@integer(60, 1000)',
                         nickname:'@integer(60, 1000)',
-                        is_checked:'@integer(0, 2)',
-                        status: '@integer(1, 2)',
+                        is_checked:'@integer(0, 1)',
+                        status: '@integer(1, 1)',
                         mobile:'@integer(0, 1)',
                         skill_detail: '@cname',
                         is_appraise:'@integer(60, 1000)',

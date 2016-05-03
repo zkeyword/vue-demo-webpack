@@ -143,8 +143,8 @@
                     <li>
                         <i class="ico ico-aixin"></i>
                         <div class="clearfix">
-                            <span class="pull-left">收藏</span>
-                            <em class="pull-left">{{formData.collectCount}}</em>
+                            <span>收藏</span>
+                            <em>{{formData.collectCount}}</em>
                         </div>
                     </li>
                 </ul>

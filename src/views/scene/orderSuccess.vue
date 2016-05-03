@@ -156,7 +156,7 @@
         </span>
     </div>
 
-    <confirm :show.sync="isShowConfirm" @on-confirm="confirm">
+    <confirm :show.sync="isShowConfirm" @on-confirm="confirm" title="">
         <div class="page-scene-orderSuccess-formWrap">
             是否要获取{{confirmName}}的联系方式？
         </div>
