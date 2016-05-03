@@ -17,6 +17,12 @@
 
         <div class="content showHeader">
             <ul class="list">
+				<li @click="goAuth(defaultData)" v-if="formData.form == 'scene'">
+					<span class="pull-left">不限</span>
+					<i class="pull-right ico"
+                       :class="{'ico-yixuan': '' == formData.school_id, 'ico-yixuan2': '' != formData.school_id}"
+                    ></i>
+				</li>
 				<li v-for="item in schoolList" @click="goAuth(item)">
                     <span class="pull-left">{{item.school_name}}</span>
                     <i class="pull-right ico"
@@ -41,7 +47,11 @@ export default {
                 city_name: null,
                 school_id: null,
                 school_name: null
-            }
+            },
+			defaultData:{
+				school_id: null,
+                school_name: null
+			}
         }
     },
     watch: {

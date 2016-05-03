@@ -40,7 +40,7 @@ export default new Vuex.Store({
                 display: 'modal', //显示方式
                 mode: 'scroller', //日期选择模式
                 lang:'zh',
-                startYear:currYear - 10, //开始年份
+                startYear:currYear - 20, //开始年份
                 endYear:currYear + 10 //结束年份
             };
 
