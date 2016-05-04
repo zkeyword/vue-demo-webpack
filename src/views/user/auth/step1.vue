@@ -140,7 +140,10 @@
                     <span class="pull-left">您的学校</span>
                     <span class="pull-right">{{formData.school_name}}</span>
                 </div>
-				<bind-mobile :mobile.sync="formData.mobile"></bind-mobile>
+				<div class="item clearfix" @click="showMobile">
+					<span class="pull-left">手机号</span>
+					<span class="pull-right">{{formData.mobile}}</span>
+				</div>
             </div>
         </div>
         <span 
@@ -151,7 +154,7 @@
             下一步
         </span>
     </div>
-    
+    <bind-mobile :mobile.sync="formData.mobile" :show.sync="isShowMobile"></bind-mobile>
 </template>
 
 <script>
@@ -160,12 +163,22 @@ export default {
         return {
             title: '认证',
             formData: {
+            	city_id: null,
                 city_name: null,
-                city_id: null,
                 school_id: null,
                 school_name: null,
-                mobile:null
-            }
+                mobile:null,
+                
+                auth_head_url : null,
+                auth_student_card_url :null,
+                
+                sceneIds : null,
+                timeConf :null,
+                longitude : null,
+                latitude : null,
+                workplace : null
+            },
+			isShowMobile: false
         }
     },
     route: {
@@ -184,7 +197,6 @@ export default {
                     success: (data)=>{
                         let result = data.result,
                             status = result.sutdent_auth;
-                            
                         //$.hidePreloader();
                         
                         // 0：未认证，1：已认证，2：认证中，3：认证失败
@@ -221,7 +233,10 @@ export default {
         selectSchool(){
             let self = this;
 			self.$route.router.go({name:'selectSchool', query: self.formData});
-        }
+        },
+		showMobile(){
+			this.isShowMobile = true;
+		}
     },
     components: {
         'headerBar': require('../../../components/header.vue'),

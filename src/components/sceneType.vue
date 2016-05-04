@@ -62,6 +62,7 @@
         watch:{
             sceneIds(){
                 let self = this;
+				self.sceneIds = self.sceneIds + '';
                 self.sceneArr = self.sceneIds.split('-');
             }
         },

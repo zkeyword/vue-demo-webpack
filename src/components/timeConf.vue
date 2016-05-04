@@ -73,6 +73,7 @@
         watch:{
             timer(){
                 let self = this;
+				self.timer    = self.timer + '';
                 self.timerArr = self.timer.split('-');
             }
         },

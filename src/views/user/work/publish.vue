@@ -248,86 +248,86 @@
 <script>
 export default {
 	data() {
-		  return {
-          title: '发单任务',
-              indexData: indexData,
-              userInfo: {},
-              noData: false,
-              busy: false,
-              dataList: [],
-              isShowToast: false,
-              toastText: '没有数据了！',
-              formData: {
-              currentPage: 0,
-                  tag: 1,
-              },
-              isShowConfirm: false,
-              confirmData:{},
-              statusText:['报名中','报名结束','报名成功','被拒绝','过期']
-          }
-	    },
-      route: {
-          data (transition){
-              let self     = this,
-                  query    = transition.to.query;
+		return {
+			title: '发单任务',
+			indexData: indexData,
+			userInfo: {},
+			noData: false,
+			busy: false,
+			dataList: [],
+			isShowToast: false,
+			toastText: '没有数据了！',
+			formData: {
+				currentPage: 0,
+				tag: 1,
+			},
+			isShowConfirm: false,
+			confirmData:{},
+			statusText:['报名中','报名结束','报名成功','被拒绝','过期']
+		}
+	},
+	route: {
+		data (transition){
+			let self     = this,
+				query    = transition.to.query;
 
-              $.extend(self.formData, query);
+			$.extend(self.formData, query);
 
-              if( !self.busy ) self.loadMore();
-          },
-          deactivate(){
-              let self = this;
-              self.formData.tag = 1;
-              self.formData.currentPage = 1;
-              self.dataList = [];
-              self.noData = false
-              self.busy = false;
-          }
-      },
-      methods:{
-          setTag(tag){
-              let self = this;
-              self.formData.tag = tag;
-              self.formData.currentPage = 1;
-              self.dataList = [];
-              self.noData = false
-              self.busy = false;
-              self.loadMore();
-          },
-          loadMore(){
-              let self = this;
-              if( self.noData ) return;
-              $.ajax({
-                  url: "/soytime/order/demandList",
-                  type:'POST',
-                  data:self.formData,
-                  dataType: 'json',
-                  beforeSend:(()=>{
-                      self.busy = true;
-                  }),
-                  success: ((data)=>{
-                      let arr = data.result,
-                          len = arr.length;
+			if( !self.busy ) self.loadMore();
+		},
+		deactivate(){
+			let self = this;
+			self.formData.tag = 1;
+			self.formData.currentPage = 1;
+			self.dataList = [];
+			self.noData = false
+			self.busy = false;
+		}
+	},
+	methods:{
+		setTag(tag){
+			let self = this;
+			self.formData.tag = tag;
+			self.formData.currentPage = 1;
+			self.dataList = [];
+			self.noData = false
+			self.busy = false;
+			self.loadMore();
+		},
+		loadMore(){
+				let self = this;
+				if( self.noData ) return;
+				$.ajax({
+					url: "/soytime/order/demandList",
+					type:'POST',
+					data:self.formData,
+					dataType: 'json',
+					beforeSend:(()=>{
+						self.busy = true;
+					}),
+					success: ((data)=>{
+					  let arr = data.result,
+						  len = arr.length;
 
-                      self.busy = false;
+					  self.busy = false;
 
-                      if( !len || !data.success ){
-                          self.isShowToast = true;
-                          self.noData = true;
-                          return;
-                      }else if( len < 10 ){
-                          self.isShowToast = true;
-                          self.noData = true;
-                      }
+					  if( !len || !data.success ){
+						  self.isShowToast = true;
+						  self.noData = true;
+						  return;
+					  }else if( len < 10 ){
+						  self.isShowToast = true;
+						  self.noData = true;
+					  }
 
-                      for(let i = 0; i<len; i++){
-                          self.dataList.push(arr[i]);
-                      }
+					  for(let i = 0; i<len; i++){
+						  self.dataList.push(arr[i]);
+					  }
 
-                      self.formData.currentPage ++;
-                  })
-              });
-          },
+					  self.formData.currentPage ++;
+					})
+			  });
+			},
 
           confirm(){
               let self = this;

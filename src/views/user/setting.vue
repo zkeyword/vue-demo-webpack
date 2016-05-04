@@ -94,7 +94,10 @@
             </div>
 
             <div class="block">
-                <bind-mobile :mobile.sync="formData.mobile"></bind-mobile>
+				<div class="clearfix" @click="showMobile">
+					<div class="pull-left">手机号</div>
+					<div class="pull-right">{{formData.mobile}}</div>
+				</div>
                 <div class="clearfix">
                     <div class="pull-left">邮箱</div>
                     <div class="pull-right">
@@ -132,6 +135,7 @@
     <toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
     <loading :show="isShowloading" :text="loadingText"></loading>
     <actionsheet :show.sync="isShowActionsheet" :menus="actionsheet" @menu-click="setSex"></actionsheet>
+	<bind-mobile :mobile.sync="formData.mobile" :show.sync="isShowMobile"></bind-mobile>
 </template>
 
 <script>
@@ -149,7 +153,8 @@
                 actionsheet: {
                     'menu1': '男',
                     'menu2': '女'
-                }
+                },
+				isShowMobile: false
             }
         },
         ready(){
@@ -208,15 +213,18 @@
             },
             showActionsheet(){
                 this.isShowActionsheet = true;
-            }
+            },
+			showMobile(){
+				this.isShowMobile = true;
+			}
         },
         components: {
-            'headerBar': require('../../components/header.vue'),
-            'timeConf': require('../../components/timeConf.vue'),
-            'bindMobile': require('../../components/bindMobile.vue'),
-			      'toast': require('../../components/toast'),
-			      'loading': require('../../components/loading'),
-            'actionsheet': require('../../components/actionsheet'),
+			'headerBar': require('../../components/header.vue'),
+			'timeConf': require('../../components/timeConf.vue'),
+			'bindMobile': require('../../components/bindMobile.vue'),
+			'toast': require('../../components/toast'),
+			'loading': require('../../components/loading'),
+			'actionsheet': require('../../components/actionsheet'),
         }
     }
 </script>

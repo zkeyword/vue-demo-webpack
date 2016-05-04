@@ -164,14 +164,14 @@
             </div>
 
             <div class="block clearfix">
-                <textarea placeholder="请详细填写你的需求任务"></textarea>
+                <textarea placeholder="请详细填写你的需求任务" v-model="formData.detail"></textarea>
             </div>
 
             <div class="block clearfix">
                 <div class="item clearfix">
                     <div class="half">
                         <span>报酬</span>
-                        <input type="text" placeholder="输入金额">
+                        <input type="number" pattern="[0-9]*" placeholder="输入金额" v-model="formData.salary">
                     </div>
                     <div class="half unit">
                         <span v-for="unit in unitTextArr"
@@ -209,7 +209,8 @@
         </span>
 
     </div>
-
+	
+	<actionsheet :show.sync="isShow" :menus="actionsheet" @menu-click="setPayWay"></actionsheet>
 	<alert :show.sync="showAlert" title="">提交失败!</alert>
 
 </template>
@@ -230,7 +231,6 @@
 					school_name: '',
 					school_id:'',
 					sex:'男',
-					height:'',
 					scene_id:'',
 					start_time:'',
 					end_time:'',
@@ -357,26 +357,27 @@
 				let self = this;
 				self.formData.type     = type;
 				self.formData.pageType = 1;
+				self.joinPeriod();
 				self.$route.router.go({name: 'sceneAddress', query: self.formData});
 			},
 			save(){
 				let self = this;
 				
 				if( !self.formData.start_time ){
-					self.showAlert = true;
 					self.alertText = '开始时间不能为空!';
+					self.showAlert = true;
 					return;
 				}
 
 				if( !self.formData.end_time ){
-					self.showAlert = true;
 					self.alertText = '开始时间不能为空!';
+					self.showAlert = true;
 					return;
 				}
 
-				if( (new Date(self.formData.start_time)).valueOf() >= (new Date(self.formData.end_time)).valueOf() ){
+				if( (new Date(self.formData.start_time)).valueOf() > (new Date(self.formData.end_time)).valueOf() ){
+					self.alertText = '开始时间大于结束时间!';
 					self.showAlert = true;
-					self.alertText = '开始时间不能小于等于结束时间!';
 					return;
 				}
 				
@@ -388,19 +389,19 @@
 					let item = tempPeriodArr[i],
 						arr  = item.split('-');
 					if( !arr[0] || !arr[1] ){
-						self.showAlert = true;
 						self.alertText = '时间段不能为空!';
+						self.showAlert = true;
 						return;
 					}
 					console.log( (new Date('2016-01-01 '+arr[0])).valueOf() , (new Date('2016-01-01 '+arr[1])).valueOf() )
 					if( (new Date('2016-01-01 '+arr[0])).valueOf() >= (new Date('2016-01-01 '+arr[1])).valueOf() ){
-						self.showAlert = true;
 						self.alertText = '开始时间段要小于结束时间段!';
+						self.showAlert = true;
 						return;
 					}
 				}
 				
-				if(!self.formData.detail || self.formData.detail.replace(" ","").length <10){
+				if(self.formData.detail.replace(/\s+/g,"").length <10){
 					self.alertText = '请描述任务详情，长度不少于10字';
 					self.showAlert = true;
 					return;

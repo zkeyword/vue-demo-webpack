@@ -116,7 +116,7 @@
 </style>
 
 <template>
-    <div class="page-scene-oneKeyOrder page-current">
+    <div class="page-scene-oneKeyOrder">
         <header-bar :title="title" :back="true" target="scene"></header-bar>
         <div class="content showHeader showFooter">
             <div class="block clearfix">
@@ -164,18 +164,12 @@
                     <span class="pull-right" v-if="formData.school_name">{{formData.school_name}}</span>
                     <span class="pull-right ico ico-jiantouyou" v-else></span>
                 </div>
-                <div class="clearfix">
-                    <div class="half sex">
-                        <span class="pull-left">性别</span>
-                        <span class="pull-right">
-                            <i class="ico ico-xingbienan3" :class="{'cur':formData.sex == '男'}" @click="setSex('男')"></i>
-                            <i class="ico ico-xingbienv4" :class="{'cur':formData.sex == '女'}" @click="setSex('女')"></i>
-                        </span>
-                    </div>
-                    <div class="half">
-                        <span>身高</span>
-                        <input  type="number" pattern="[0-9]*" placeholder="不限" v-model="formData.heights">
-                    </div>
+                <div class="clearfix sex">
+					<span class="pull-left">性别</span>
+					<span class="pull-right">
+						<i class="ico ico-xingbienan3" :class="{'cur':formData.sex == '男'}" @click="setSex('男')"></i>
+						<i class="ico ico-xingbienv4" :class="{'cur':formData.sex == '女'}" @click="setSex('女')"></i>
+					</span>
                 </div>
             </div>
 
@@ -215,8 +209,8 @@
                     <span>特别福利</span>
                 </div>
                 <welfares
-                        :welfares="welfares"
-                        :welfares-ids.sync="formData.welfares"
+                        :welfares-list="welfaresList"
+						:welfares-ids.sync="formData.welfares"
                 ></welfares>
             </div>
 
@@ -261,11 +255,11 @@ export default {
             indexData: indexData,
             title: '一键预约',
             formData: {
+				creator_name:'',
                 nickname:'',
                 school_name: '',
                 school_id:'',
                 sex:'男',
-                height:'',
                 scene_id:'',
                 start_time:'',
                 end_time:'',
@@ -287,19 +281,19 @@ export default {
             },
             unitTextArr:['时','日','周','月','次'],
             payTextArr:['现金支付','线上支付'],
-            welfares: [
+            welfaresList: [
                 {
-                    welfare_id: '1',
-                    welfare_name:'包餐'
+                    welfares_id: '1',
+                    welfares_name:'包餐'
                 },{
-                    welfare_id: '2',
-                    welfare_name:'打车报销'
+                    welfares_id: '2',
+                    welfares_name:'打车报销'
                 },{
-                    welfare_id: '3',
-                    welfare_name:'专车接送'
+                    welfares_id: '3',
+                    welfares_name:'专车接送'
                 },{
-                    welfare_id: '4',
-                    welfare_name:'包住'
+                    welfares_id: '4',
+                    welfares_name:'包住'
                 }
             ],
             isShow: false,
@@ -319,7 +313,6 @@ export default {
 
             $.extend(self.formData, query);
             self.formData.form = 'onekeyOrder';
-
         }
     },
     ready(){
@@ -349,18 +342,8 @@ export default {
         },
         selectSchool(){
             let self = this;
+			self.joinPeriod();
             self.$route.router.go({'name':'selectSchool', query: self.formData });
-        },
-        setWelfares(id){
-            let self   = this,
-                tmpArr = self.formData.setWelfares.split('-');
-
-            if( utils.indexOf( tmpArr, id ) > -1 ){
-                tmpArr = utils.remove( tmpArr, id );
-            }else{
-                tmpArr.push(id);
-            }
-            self.formData.setWelfares = tmpArr.join('-');
         },
         setPayWay(key){
             let self = this;
@@ -429,31 +412,33 @@ export default {
             let self = this;
             self.formData.type     = type;
             self.formData.pageType = 0;
+			self.joinPeriod();
             self.$route.router.go({name: 'sceneAddress', query: self.formData});
         },
         save(){
             let self = this;
+			
+			console.log( self.formData.welfares, self.formData.scene_id )
+			
             if(typeof self.formData.creator_name == 'undefined'){
-                self.alertText = '雇主名称不能为空!';
-                self.showAlert = true;
-              return;
+				self.alertText = '雇主名称不能为空!';
+				self.showAlert = true;
+				return;
             }
 
             if(self.formData.creator_name.replace(/\s+/g,"").length==0){
-            	  self.alertText = '雇主名称不能为空!';
-                self.showAlert = true;
-				        return;
+				self.alertText = '雇主名称不能为空!';
+				self.showAlert = true;
+				return;
             }
-
 
             if(typeof self.formData.scene_id == 'undefined'){
-              self.alertText = '请选择您要的兼职场景!';
-                      self.showAlert = true;
-              return;
+				self.alertText = '请选择您要的兼职场景!';
+				self.showAlert = true;
+				return;
             }
 
-
-			      if( !self.formData.start_time ){
+			if( !self.formData.start_time ){
                 self.showAlert = true;
                 self.alertText = '开始时间不能为空!';
                 return;
@@ -471,7 +456,7 @@ export default {
                 return;
             }
 
-			      self.joinPeriod();
+			self.joinPeriod();
 
             let tempPeriodArr  = self.formData.period_times.split(',');
 
@@ -492,35 +477,35 @@ export default {
             }
 
             if(!self.formData.detail || self.formData.detail.replace(" ","").length <10){
-                self.alertText = '请描述任务详情，长度不少于10字';
-                self.showAlert = true;
-                return;
-			      }
+				self.alertText = '请描述任务详情，长度不少于10字';
+				self.showAlert = true;
+				return;
+			}
 
             let a=/^[0-9]*(\.[0-9]{1,2})?$/;
             if(self.formData.salary == '' || !a.test(self.formData.salary)){
-              self.alertText = '金额错误';
-              self.showAlert = true;
-              return;
+				self.alertText = '金额错误';
+				self.showAlert = true;
+				return;
             }
 
             if(self.formData.pay_way == ''){
-              self.alertText = '请选择支付方式';
-              self.showAlert = true;
-              return;
+				self.alertText = '请选择支付方式';
+				self.showAlert = true;
+				return;
             }
 
             // 位置
             if(self.formData.comp_addr == ''){
-              self.alertText = '公司地址不能为空';
-              self.showAlert = true;
-              return;
+				self.alertText = '公司地址不能为空';
+				self.showAlert = true;
+				return;
             }
 
             if(self.formData.workplace == ''){
-              self.alertText = '服务地址不能为空';
-              self.showAlert = true;
-              return;
+				self.alertText = '服务地址不能为空';
+				self.showAlert = true;
+				return;
             }
 
             $.ajax({

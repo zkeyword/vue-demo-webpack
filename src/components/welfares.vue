@@ -1,6 +1,6 @@
 <style lang="less">
     @import '../less/lib/mixins.less';
-    .welfareType{
+    .welfaresType{
         li{
             float:left;
             color:#fff;
@@ -19,24 +19,24 @@
                 .rem(height, 58) !important;
                 .rem(line-height, 58) !important;
                 &.cur{
-                     background:#ff946e;
-                 }
+                    background:#ff946e
+                }
             }
         }
     }
 </style>
 
 <template>
-    <ul class="welfareType clearfix">
-        <li v-for="item in welfares" @click="setwelfare(item.welfare_id)">
+    <ul class="welfaresType clearfix">
+        <li v-for="item in welfaresList" @click="setwelfares(item.welfares_id)">
 
-            <span class="cur" v-if="item | welfareCur welfareArr">
-                {{item.welfare_name}}
+            <span class="cur" v-if="item | welfaresCur welfaresArr">
+                {{item.welfares_name}}
             </span>
             <span v-else>
-                {{item.welfare_name}}
+                {{item.welfares_name}}
             </span>
-
+            
         </li>
     </ul>
 </template>
@@ -44,35 +44,44 @@
 <script>
     import utils from '../lib/utils';
     export default {
-            replace:true,
-            props: ['welfares', 'welfareIds', 'isRadio'],
-            data(){
+        replace:true,
+        props: ['welfaresList', 'welfaresIds', 'isRadio'],
+        data(){
             return {
-                welfareArr: []
-            }
+                welfaresArr: []  
+            }  
         },
+        // ready(){
+        //     let self = this;
+            
+        //     self.$nextTick(function () {
+        //         if( !self.welfaresIds ) return;
+        //         self.welfaresArr = self.welfaresIds.split('-');
+        //     })
+        // },
         watch:{
-            welfareIds(){
+            welfaresIds(){
                 let self = this;
-                self.welfareArr = self.welfareIds.split('-');
+				self.welfaresIds = self.welfaresIds + '';
+                self.welfaresArr = self.welfaresIds.split('-');
             }
         },
         methods: {
-            setwelfare(id){
+			setwelfares(id){
                 let self = this;
                 if( !self.isRadio ){
-                    if( utils.indexOf( self.welfareArr, id ) > -1 ){
-                        self.welfareArr = utils.remove( self.welfareArr, id );
+                    if( utils.indexOf( self.welfaresArr, id ) > -1 ){
+                        self.welfaresArr = utils.remove( self.welfaresArr, id );
                     }else{
-                        self.welfareArr.push(id);
+                        self.welfaresArr.push(id);
                     }
-                    self.welfareIds = self.welfareArr.join('-');
+                    self.welfaresIds = self.welfaresArr.join('-');
                 }else{
-                    self.welfareArr = [];
-                    self.welfareArr.push(id);
-                    self.welfareIds = id;
+                    self.welfaresArr = [];
+                    self.welfaresArr.push(id);
+                    self.welfaresIds = id;
                 }
-            }
+			}
         }
     }
 </script>

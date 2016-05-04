@@ -4,7 +4,8 @@
 
 <template>
 
-    <router-view keep-alive></router-view>
+    <!--<router-view keep-alive></router-view>-->
+	<router-view></router-view>
     <vn-footer v-if="isShowTab"></vn-footer>
 
 </template>

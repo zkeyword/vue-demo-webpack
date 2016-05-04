@@ -31,7 +31,10 @@ app.post('/soytime/ca/caInfo', function (req, res) {
                 auth_head_url: '1zzz',
                 auth_student_card_url: '1zz',
                 sutdent_auth: '0',
-                explain	: '@cname'
+                explain	: '@cname',
+				longitude: '@cname',
+				latitude: '@cname',
+				workplace: '@cname'
             }
 		});
 
@@ -132,6 +135,17 @@ app.post('/soytime/account/saveSetInfo', function (req, res) {
 		});
 
 	res.send( JSON.stringify(data, null, 4) );
+});
+
+/* 获取验证码 */
+app.post('/soytime/account/getMobileCode', function (req, res) {
+    var Random = Mock.Random,
+        data   = Mock.mock({
+            success: '1',
+            result: '@integer(1000, 9999)'
+        });
+
+    res.send( JSON.stringify(data, null, 4) );
 });
 
 /* 个人服务信息 */
@@ -623,5 +637,8 @@ app.post('/soytime/gift/orderGift', function (req, res) {
 
     res.send( JSON.stringify(data, null, 4) );
 });
+
+
+
 
 module.exports = app;

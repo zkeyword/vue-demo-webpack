@@ -28,6 +28,7 @@
         text-align: left !important;
         .rem(height, 40);
         .rem(line-height, 40);
+		.rem(margin-left, 10);
 
         &#mobile{
             .rem(width, 300);
@@ -43,7 +44,7 @@
         .rem(line-height, 40);
         border-right:1px solid #dedede;
         .rem(border-right-width, 2);
-        .rem(width, 120);
+        .rem(width, 110);
     }
 
     #getCode{
@@ -76,181 +77,131 @@
 </style>
 
 <template>
-    <div class="item clearfix" @click="showMobile">
-        <span class="pull-left">手机号</span>
-        <span class="pull-right">{{mobile}}</span>
-    </div>
-    <confirm :show.sync="isShowConfirm" @on-confirm="confirm" title="">
+    <confirm :show.sync="show" @on-confirm="confirm" title="">
         <div class="page-user-formWrap">
             <div class="mobileWrap clearfix">
                 <label class="pull-left">手机</label>
-                <input class="pull-left" type="text" id="mobile" placeholder="手机号" v-model="mobile" />
+                <input class="pull-left" type="text" id="mobile" placeholder="手机号" v-model="newMobile" />
             </div>
             <div class="codeWrap clearfix">
                 <label class="pull-left">验证码</label>
-                <input class="pull-left" type="text" id="code" placeholder="验证码"  />
-                <span class="pull-right" id="getCode">
-                    <span id="getCodeText">获取验证码</span>
-                    <span id="getCodeTime"></span>
+                <input class="pull-left" type="text" id="code" placeholder="验证码" v-model="code"  />
+                <span class="pull-right" id="getCode" :class="{'disable': codeTime}">
+                    <span id="getCodeText" @click="getCode">{{codeText}}</span>
+                    <span id="getCodeTime">{{codeTime}}</span>
                 </span>
             </div>
         </div>
     </confirm>
-    <script type="text/html" id="toastWrap">
-        <span class="toastWrap">
-            <span id="toast" class="toast">
-                [[content]]
-            </span>
-        </span>
-    </script>
-	<script type="text/html" id="mobileWrap">
-        <div class="page-user-formWrap">
-            <div class="mobileWrap clearfix">
-                <label class="pull-left">手机</label>
-                <input class="pull-left" type="text" id="mobile" placeholder="手机号" v-model="mobile" />
-            </div>
-            <div class="codeWrap clearfix">
-                <label class="pull-left">验证码</label>
-                <input class="pull-left" type="text" id="code" placeholder="验证码"  />
-                <span class="pull-right" id="getCode">
-                    <span id="getCodeText">获取验证码</span>
-                    <span id="getCodeTime"></span>
-                </span>
-            </div>
-        </div>
-	</script>
+	<toast :show.sync="isShowToast" :time="1000">{{toastText}}</toast>
 </template>
 
 <script>
     export default {
         replace:true,
-        props: ['mobile'],
+        props: ['mobile', 'show'],
         data(){
             return {
-                isShowConfirm: false,
-                isDisable: false
+                isDisable: true,
+				isShowToast: false,
+				toastText: '',
+				isCodeDisable: false,
+				newMobile:'',
+				code: '',
+				codeText: '获取验证码',
+				codeTime: ''
             }
         },
         methods: {
             confirm(){
                 let self = this;
 
-                if( self.isDisable ){
-                    return;
-                }
-
-                let mobile = $('#mobile').val(),
-                    code   = $('#code').val(),
-                    obj    = {
-                        mobile: mobile,
-                        code: code
-                    };
-
-                if( !/1[34578]{1}\d{9}$/.test(mobile) || !code ){
-                    self.isDisable = false;
-                    self.toast('请填写正确的信息！');
+				if( !/1[34578]{1}\d{9}$/.test(self.newMobile) || !self.code ){
+                    self.isDisable   = true;
+					self.isShowToast = true;
+					self.toastText   = '请填写正确的信息！'
                     return;
                 }else{
-                    self.isDisable = true;
+					self.isDisable = false;
+				}
+				
+                if( self.isDisable ){
+                    return;
                 }
 
                 $.ajax({
                     url: "/soytime/account/saveMobile",
                     type:'POST',
-                    data: obj,
+                    data: {
+                        mobile: self.newMobile,
+                        code: self.code
+                    },
                     dataType: 'json',
                     success: (data)=>{
                         if( data.success ){
-                            self.mobile = mobile;
-                            self.isShowConfirm = true;
+                            self.show        = false;
+							self.isShowToast = true;
+							self.toastText   = '保存成功！';
+							self.isDisable   = false;
+							self.mobile      = self.newMobile;
                         }else{
-                            self.toast(data.result);
+							self.isShowToast = true;
+							self.toastText   = data.result;
+							self.isDisable   = true;
                         }
                     },
                     error: ()=>{
-                        self.toast('网络不给力，请重新尝试！');
+						self.isShowToast = true;
+						self.toastText   = '网络不给力，请重新尝试！';
                     }
                 });
             },
-            toast(content){
-                let reg       = /\[\[content\]\]/g,
-                    toastHtml = $('#toastWrap').html(),
-                    formWrap  = $('.page-user-formWrap'),
-                    html      = toastHtml.replace(reg, content),
-                    toastObj  = $('#toast');
-
-                if( !toastObj.length ){
-                    formWrap.append( html );
-                }else{
-                    toastObj.html(content);
-                }
-                setTimeout(()=>{
-                    formWrap.find('.toastWrap').remove();
-                },2000)
-            },
-			showMobile(){
-                let self = this;
-
-                self.isShowConfirm = true;
-
-                $('body').on('click', '#getCode', function(){
-                    let mobile      = $('#mobile').val(),
-                        getCodeBtn  = $('#getCode'),
-                        getCodeText = $('#getCodeText'),
-                        getCodeTime = $('#getCodeTime'),
-                        that        = $(this);
-
-                    if( that.hasClass('disable') ){
-                        return;
-                    }
-
-                    if( !/1[34578]{1}\d{9}$/.test(mobile) ){
-                        that.addClass('disable')
-                        self.toast('请填写正确的手机号');
-                        self.isDisable = true;
-                        return;
-                    } else {
-                        that.removeClass('disable')
-                        self.isDisable = false;
-                    }
-
-                    $.ajax({
-                        url: "/soytime/account/getMobileCode",
-                        type:'POST',
-                        data:{
-                            mobile: mobile
-                        },
-                        dataType: 'json',
-                        success: (data)=>{
-                            if( data.success ){
-                                let i     = 60,
-                                    timer = null;
-                                getCodeText.html('重新获取');
-                                getCodeTime.html('(60)');
-                                timer = setInterval(()=>{
-                                    getCodeTime.html('('+ (--i) +')');
-                                    if( i === 0 ){
-                                        clearInterval(timer);
-                                        self.isDisable = false;
-                                        that.removeClass('disable');
-                                        getCodeTime.html('');
-                                    };
-                                }, 1000)
-                            }else{
-                                self.isDisable = true;
-                                that.addClass('disable');
-                                self.toast(data.result);
-                            }
-                        },
-                        error: ()=>{
-                            self.toast('网络不给力，请重新尝试！');
-                        }
-                    });
-                });
-            }
+			getCode(){
+				let self = this;
+				if( self.isCodeDisable ) return;
+				if( !/1[34578]{1}\d{9}$/.test(self.newMobile) ){
+					self.isShowToast = true;
+					self.toastText   = '请填写正确的手机号！'
+					return;
+				}
+				$.ajax({
+					url: "/soytime/account/getMobileCode",
+					type:'POST',
+					data:{
+						mobile: self.newMobile
+					},
+					dataType: 'json',
+					success: (data)=>{
+						self.isCodeDisable = true;
+						if( data.success ){
+							let i     = 60,
+								timer = null;
+							self.codeText = '重新获取';
+							self.codeTime = '(60)';
+							timer = setInterval(()=>{
+								self.codeTime = '('+ (--i) +')';
+								if( i === 0 ){
+									clearInterval(timer);
+									self.codeTime      = '';
+									self.isCodeDisable = false;
+								};
+							}, 1000)
+						}else{
+							self.isShowToast = true;
+							self.toastText   = data.result;
+						}
+					},
+					error: ()=>{
+						self.isShowToast = true;
+						self.toastText   = '网络不给力，请重新尝试！';
+					}
+				});
+			}
         },
         components: {
-            'confirm': require('./confirm')
+            'confirm': require('./confirm'),
+			'toast': require('./toast'),
+			'loading': require('./loading')
         }
     }
 </script>

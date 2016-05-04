@@ -233,7 +233,7 @@ export default {
 
 			$.extend(self.formData, query);
 			
-			self.title = query.scene_name;
+			self.title = self.formData.scene_name;
 
 			if( !self.busy ) self.loadMore();
         },

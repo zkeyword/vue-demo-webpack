@@ -81,7 +81,22 @@ export default {
     data() {
         return {
             title: '认证',
-            formData: {},
+            formData: {
+            	city_id: null,
+                city_name: null,
+                school_id: null,
+                school_name: null,
+                mobile:null,
+                
+                auth_head_url : null,
+                auth_student_card_url :null,
+                
+                sceneIds : null,
+                timeConf :null,
+                longitude : null,
+                latitude : null,
+                workplace : null
+            },
             tmpUrlData:{}
         }
     },
@@ -104,7 +119,7 @@ export default {
     methods: {
         goAuth(){
             let self = this;
-            self.$route.router.go('/auth/step3?' + $.param( self.formData ) );
+            self.$route.router.go({'name':'authStep3', query: self.formData });
         },
         getPersionPic(){
             let self = this;

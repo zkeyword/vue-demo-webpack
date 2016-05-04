@@ -150,10 +150,20 @@ export default {
             isShowloading: false,
             loadingText: '提交中,请稍后!',
             formData: {
-                sceneIds: null,
-                timeConf: null,
-                longitude: null,
-                workplace: null
+                city_id: null,
+                city_name: null,
+                school_id: null,
+                school_name: null,
+                mobile:null,
+                
+                auth_head_url : null,
+                auth_student_card_url :null,
+                
+                sceneIds : null,
+                timeConf :null,
+                longitude : null,
+                latitude : null,
+                workplace : null
             }
         }
     },
