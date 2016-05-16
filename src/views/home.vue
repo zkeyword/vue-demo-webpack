@@ -113,7 +113,7 @@ export default {
             sceneList: indexData.sceneList,
 			cityId: '',
 			cityName: '',
-            icoArr: ['ico-ditu', 'ico-university', 'ico-save', 'ico-traffic', 'ico-traffic', 'ico-women', 'ico-service', 'ico-wudao'],
+            icoArr: ['ico-ditu', 'ico-university', 'ico-save', 'ico-traffic',  'ico-women', 'ico-service', 'ico-wudao'],
 			formData:{
 				form: 'home'
 			}

@@ -164,6 +164,8 @@
         <header-bar :title="title" back="true"></header-bar>
 
         <div class="content showHeaderNopading showFooter">
+		
+			<img id="target" src="../../../img/serverDefault.jpg" />
 
             <div class="userHeader">
                 <img src="../../../img/serverDefault.jpg" v-if="!formData.photo_url" />
@@ -260,6 +262,8 @@ export default {
                 self.formData = data.result;
             })
         });
+
+		$('#target').Jcrop();
     },
     methods:{
         getLocate(){
