@@ -2,8 +2,6 @@
   "name": "y",
   "version": "1.0.0",
   "description": "n",
-  "author": "jianxin.zhu &lt;jianxin.zhu@qeeka.com&gt;",
-  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
