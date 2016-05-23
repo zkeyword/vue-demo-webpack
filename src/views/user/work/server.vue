@@ -174,7 +174,7 @@
                     <div class="btn">
                         <div class="radius"></div>
                         <div class="ico ico-anonymous"></div>
-                        <div class="text">添加照片</div>
+                        <div class="text" @click="upload">添加照片</div>
                     </div>
                     <div class="name">{{formData.usernick}}</div>
                 </div>
@@ -316,7 +316,22 @@ export default {
 
                 }
             });
-        }
+        },
+		upload(){
+			let self = this;
+
+			self.formData.url = 'http://img4.imgtn.bdimg.com/it/u=3047710011,1274531363&fm=21&gp=0.jpg';
+	
+			self.$route.router.go({'name': 'upload', query: self.formData });
+
+
+
+			return;
+			uploadimg(1, (data)=>{
+                self.formData.auth_head_url   = data;
+                self.tmpUrlData.auth_head_url = '/soytime/file/renzheng/' + data;
+            })
+		}
     },
 	components: {
 		'headerBar': require('../../../components/header.vue'),

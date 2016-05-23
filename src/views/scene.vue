@@ -57,7 +57,7 @@
         .rem(margin-bottom, 20);
         
         header{
-            border-bottom:2px solid #dedede;
+            border-bottom:2px solid #deeeee;
             .rem(border-bottom-width, 2);
             .rem(padding, 20);
             .rem(font-size, 30);
@@ -107,7 +107,7 @@
         }
         
         .userScore{
-            border-top:2px solid #dedede;
+            border-top:2px solid #deeeee;
             .rem(border-top-width, 2);
             .rem(font-size, 24);
             color:#8e8e8e;

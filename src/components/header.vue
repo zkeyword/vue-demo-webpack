@@ -1,5 +1,7 @@
 <style lang="less">
-
+.bar-nav a{
+	color:#fff;
+}
 </style>
 
 <template>

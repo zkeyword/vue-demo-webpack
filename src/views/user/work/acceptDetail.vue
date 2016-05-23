@@ -118,7 +118,6 @@
                 .name{
                     float: left;
                     .rem(width, 90);
-                    .rem(line-height, 90);
                     .rem(font-size, 28);
                 }
             }

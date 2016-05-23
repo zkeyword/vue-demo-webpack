@@ -45,6 +45,7 @@
             </div>
         </div>
     </div>
+	<loading :show="isShowloading" :text="loadingText"></loading>
 </template>
 
 <script>
@@ -53,7 +54,11 @@
             return {
                 title: '公交路线',
                 formData: {},
-                isShow: true
+                isShow: true,
+                lng:null,
+                lat:null,
+                loadingText: '正在加载路线,请稍后!',
+           		isShowloading: false,
             }
         },
         route: {
@@ -65,51 +70,54 @@
             }
         },
         ready(){
-
-            if( !window.AMap ){
-                setTimeout(()=>{
-                    location.reload();
-                }, 15000);
-                return;
-            }
-
             let self        = this,
                 map         = new AMap.Map('amapWrap', {
                     resizeEnable: true,
                     zoom:14
                 });
-
-            AMap.service(["AMap.CitySearch"], function() { //加载地理编码
-                //实例化城市查询类
-                var citysearch = new AMap.CitySearch();
-                //自动获取用户IP，返回当前城市
-                citysearch.getLocalCity(function(status, result) {
-                    if (status === 'complete' && result.info === 'OK') {
-                        if (result && result.city && result.bounds) {
-                            var cityinfo = result.city;
-                            var citybounds = result.bounds;
-
-                        }
-                    }
-                });
-            });
-
-            AMap.service(["AMap.Transfer"], function() {
-                let transOptions = {
-                        map: map,
-                        city: returnCitySN.cname,	//此处显示用户当前位置
-                        panel: 'panel',
-                        //cityd:'乌鲁木齐',
-                        policy: AMap.TransferPolicy.LEAST_TIME
-                    },
-                    transfer    = new AMap.Transfer(transOptions),
-                    comp        = new AMap.LngLat(self.formData.comp_longitude, self.formData.comp_latitude),
-                    work        = new AMap.LngLat(self.formData.work_longitude, self.formData.work_latitude);
-                console.log( self.formData )
-                //根据起、终点坐标查询公交换乘路线
-                transfer.search(comp, work);
-            });
-
+				
+				self.isShowloading = true;
+                
+			let timeloc = setInterval(function(){
+				if(!self.lat || !self.lng){
+					//调用浏览器定位服务
+		            AMap.service(["AMap.Geolocation"], function() {
+		            	var geolocation = new AMap.Geolocation({
+		                     enableHighAccuracy: true,//是否使用高精度定位，默认:true
+		                     timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+		                     //buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+		                     //zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+		                     buttonPosition:'RB'
+		                 });
+		                 //map.addControl(geolocation);
+		                 geolocation.getCurrentPosition();
+		                 AMap.event.addListener(geolocation, 'complete', function(data){
+		                 	self.lng = data.position.getLng();
+		                 	self.lat = data.position.getLat();
+		                 });//返回定位信息
+		                 AMap.event.addListener(geolocation, 'error', function(data){
+		                 	clearInterval(timeloc);
+		                 }); 
+		            });
+				}else{
+					self.isShowloading = false;
+					AMap.service(["AMap.Transfer"], function() {
+		                let transOptions = {
+		                        map: map,
+		                        city: returnCitySN.cname,	//此处显示用户当前位置
+		                        panel: 'panel',
+		                        //cityd:'乌鲁木齐',
+		                        policy: AMap.TransferPolicy.LEAST_TIME
+		                    },
+		                    transfer    = new AMap.Transfer(transOptions),
+		                    myloaction        = new AMap.LngLat(self.lng, self.lat),
+		                    work        = new AMap.LngLat(self.formData.work_longitude, self.formData.work_latitude);
+		                //根据起、终点坐标查询公交换乘路线
+		                transfer.search(myloaction, work);
+		            });
+		            clearInterval(timeloc);
+				}
+			},2500);
         },
         methods:{
             switch(){
@@ -121,7 +129,8 @@
             }
         },
         components: {
-            'headerBar': require('../../../components/header.vue')
+            'headerBar': require('../../../components/header.vue'),
+			'loading': require('../../../components/loading')
         }
     }
 </script>

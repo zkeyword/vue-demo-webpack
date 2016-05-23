@@ -153,5 +153,9 @@ export default (router)=>{
 	    	name: 'selectSort',
 	        component: require('./views/common/selectSort')
 	    },
+		'/common/upload': {
+	    	name: 'upload',
+	        component: require('./views/common/upload')
+	    }
 	})
 }

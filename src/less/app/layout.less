@@ -2,11 +2,16 @@
 body{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background:#fff
+    background:#fff;
 }
 body,.page{background: #fafafa;color:#333}
 ul{margin:0;padding:0;}
 li{list-style:none;}
+
+	
+[class^="page"] [class^="page-"]{
+	.rem(font-size, 30);
+}
 
 /* 过渡 */
 /*
@@ -79,6 +84,7 @@ li{list-style:none;}
 
 /* 有标题栏页面 */
 .content{
+	.rem(font-size, 30);
     box-sizing: border-box;
 	-webkit-transform:translate3d(0,0,0);
 	height:100%;

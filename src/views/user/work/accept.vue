@@ -1,6 +1,7 @@
 <style lang="less">
     @import '../../../less/lib/mixins.less';
     .page-user-work-accept{
+		.rem(font-size, 30);
         .item{
             position: relative;
             background:#fff;

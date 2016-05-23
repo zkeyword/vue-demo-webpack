@@ -1,18 +1,19 @@
 {
-  "name": "y",
+  "name": "vue-demo-webpack",
   "version": "1.0.0",
   "description": "n",
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "nodemon ./build/dev-server.js --config ./build/nodemonConfig.json",
     "build": "node build/build.js",
     "test": ""
   },
   "dependencies": {
-    "vue": "^1.0.18",
     "babel-runtime": "^5.8.0",
+    "vue": "^1.0.18",
+    "vue-crop": "^1.0.1",
+    "vue-infinite-scroll": "^0.2.2",
     "vue-router": "*",
-    "vuex": "*",
-    "vue-infinite-scroll": "^0.2.2"
+    "vuex": "*"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
