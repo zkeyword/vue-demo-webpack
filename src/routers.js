@@ -3,33 +3,47 @@
 export default (router)=>{
 	router.map({
 	    '*': {
-	        component: require('./views/home')
+	        component: function (resolve) {
+				require(['./views/home'], resolve)
+			}
         },
 		'/home': {
 			name: 'home',
-	        component: require('./views/home')
+			component: function (resolve) {
+				require(['./views/home'], resolve)
+			}
 	    },
         
         /* 消息部分 */
 	    '/msg': {
 	    	name: 'msg',
-	        component: require('./views/msg')
+			component: function (resolve) {
+				require(['./views/msg'], resolve)
+			}
 	    },
         '/msg/system': {
 	    	name: 'msgSystem',
-	        component: require('./views/msg/system')
+			component: function (resolve) {
+				require(['./views/msg/system'], resolve)
+			}
 	    },
         '/msg/comment': {
 	    	name: 'msgComment',
-	        component: require('./views/msg/comment')
+			component: function (resolve) {
+				require(['./views/msg/comment'], resolve)
+			}
 	    },
         '/msg/message': {
 	    	name: 'msgMessage',
-	        component: require('./views/msg/message')
+			component: function (resolve) {
+				require(['./views/msg/message'], resolve)
+			}
 	    },
         '/msg/order': {
 	    	name: 'msgOrder',
-	        component: require('./views/msg/order')
+			component: function (resolve) {
+				require(['./views/msg/order'], resolve)
+			}
 	    },
         
         /* 场景部分 */
