@@ -1,21 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import InfiniteScroll from 'vue-infinite-scroll'
-//import VueCrop from 'vue-crop'
 
 import Store from './store/store'
 import RouterMap from './routers'
 import App from './App'
 import Filters from './filters'
-/*
-VueCrop.setOptions({
-  setSelect: [10, 10, 100, 100],
-  aspectRatio: 1,
-  bgColor: 'red'
-});
-*/
+
 Vue.use(InfiniteScroll);
-//Vue.use(VueCrop);
 Vue.use(VueRouter);
 
 //添加过滤

@@ -10,9 +10,9 @@
   "dependencies": {
     "vue": "^1.0.18",
     "babel-runtime": "^5.8.0",
-	"vue-router": "*",
+    "vue-router": "*",
     "vuex": "*",
-	"vue-infinite-scroll": "^0.2.2"
+    "vue-infinite-scroll": "^0.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -22,8 +22,8 @@
     "babel-preset-stage-2": "^6.0.0",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.23.0",
-	"less":"*",
-	"less-loader": "*",
+  	"less":"*",
+  	"less-loader": "*",
     "mockjs": "*",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.3",

@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'icomoon';
     src:
-        url('fonts/icomoon.ttf?nr16df') format('truetype'),
-        url('fonts/icomoon.woff?nr16df') format('woff'),
-        url('fonts/icomoon.svg?nr16df#icomoon') format('svg');
+        url('fonts/icomoon.ttf?jelqm7') format('truetype'),
+        url('fonts/icomoon.woff?jelqm7') format('woff'),
+        url('fonts/icomoon.svg?jelqm7#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,178 +23,70 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.ico-hongbao:before {
-    content: "\e900";
+.ico-ka:before {
+    content: "\e601";
+}
+.ico-huan:before {
+    content: "\e60c";
+}
+.ico-more:before {
+    content: "\e610";
+}
+.ico-right:before {
+    content: "\e613";
+}
+.ico-plug:before {
+    content: "\e616";
+}
+.ico-msg:before {
+    content: "\e617";
+}
+.ico-biao:before {
+    content: "\e618";
+}
+.ico-user:before {
+    content: "\e61a";
 }
 .ico-qian:before {
-    content: "\e901";
+    content: "\e61f";
+}
+.ico-naba:before {
+    content: "\e63e";
+}
+.ico-ok:before {
+    content: "\e664";
+}
+.ico-refresh:before {
+    content: "\e6a6";
 }
 .ico-qiandai:before {
-    content: "\e902";
+    content: "\e6ba";
 }
-.ico-quxian:before {
-    content: "\e903";
-}
-.ico-zhifubao:before {
-    content: "\e904";
-}
-.ico-zhuanzhang:before {
-    content: "\e905";
-}
-.ico-save:before {
-    content: "\e906";
-}
-.ico-shanchu:before {
-    content: "\e907";
-}
-.ico-aixin-copy:before {
-    content: "\e908";
-}
-.ico-close3:before {
-    content: "\e909";
-}
-.ico-aixin:before {
-    content: "\e90a";
-}
-.ico-anonymous:before {
-    content: "\e90b";
-}
-.ico-anonymous2:before {
-    content: "\e90c";
-}
-.ico-anquanbaozhang:before {
-    content: "\e90d";
-}
-.ico-close:before {
-    content: "\e90e";
-}
-.ico-close2:before {
-    content: "\e90f";
-}
-.ico-cry:before {
-    content: "\e910";
-}
-.ico-dianhua:before {
-    content: "\e911";
-}
-.ico-dianhua3:before {
-    content: "\e912";
-}
-.ico-down:before {
-    content: "\e913";
-}
-.ico-university:before {
-    content: "\e914";
-}
-.ico-traffic:before {
-    content: "\e915";
-}
-.ico-women:before {
-    content: "\e916";
-}
-.ico-service:before {
-    content: "\e917";
-}
-.ico-bus:before {
-    content: "\e918";
-}
-.ico-bofang:before {
-    content: "\e919";
-}
-.ico-dianhua2:before {
-    content: "\e91a";
-}
-.ico-ditu:before {
-    content: "\e91b";
-}
-.ico-dizhi:before {
-    content: "\e91c";
-}
-.ico-calendar:before {
-    content: "\e91d";
-}
-.ico-everyone:before {
-    content: "\e91e";
-}
-.ico-open:before {
-    content: "\e91f";
+.ico-pw:before {
+    content: "\e78d";
 }
 .ico-left:before {
-    content: "\e920";
+    content: "\f0016";
 }
-.ico-renzheng:before {
-    content: "\e921";
+.ico-print:before {
+    content: "\78";
 }
-.ico-money:before {
-    content: "\e922";
+.ico-server:before {
+    content: "\e60b";
 }
-.ico-time:before {
-    content: "\e923";
+.ico-server2:before {
+    content: "\e643";
 }
-.ico-search:before {
-    content: "\e924";
+.ico-qiandai2:before {
+    content: "\e646";
 }
-.ico-wudao:before {
-    content: "\e925";
+.ico-share:before {
+    content: "\e654";
 }
-.ico-zuobiao:before {
-    content: "\e926";
+.ico-usersetting:before {
+    content: "\e677";
 }
-.ico-jiantouyou:before {
-    content: "\e927";
-}
-.ico-kulian:before {
-    content: "\e928";
-}
-.ico-liuyan:before {
-    content: "\e929";
-}
-.ico-shouye:before {
-    content: "\e92a";
-}
-.ico-up:before {
-    content: "\e92b";
-}
-.ico-wode:before {
-    content: "\e92c";
-}
-.ico-xiaolaba:before {
-    content: "\e92d";
-}
-.ico-xiaolian:before {
-    content: "\e92e";
-}
-.ico-xiaoxi:before {
-    content: "\e92f";
-}
-.ico-xingbienan:before {
-    content: "\e930";
-}
-.ico-xingbienan3:before {
-    content: "\e931";
-}
-.ico-xingbienv:before {
-    content: "\e932";
-}
-.ico-xingbienv4:before {
-    content: "\e933";
-}
-.ico-xuan:before {
-    content: "\e934";
-}
-.ico-locate:before {
-    content: "\e935";
-}
-.ico-xuanzhong:before {
-    content: "\e936";
-}
-.ico-yanjing:before {
-    content: "\e937";
-}
-.ico-yixuan:before {
-    content: "\e938";
-}
-.ico-yixuan2:before {
-    content: "\e939";
+.ico-qianqian:before {
+    content: "\f000e";
 }
 
