@@ -34,6 +34,8 @@
 #### 目录结构
 
 	/ 根目录
+	|__ build
+	|	|__ mockData.js mock数据
 	|__ dist 压缩合并后目录
 	|__ src 开发目录
 	|	|__ components vue组件目录
